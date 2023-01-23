@@ -8,11 +8,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import JWTManager from './utils/auth.utils'
 import axios from 'axios'
 
-// Configure axios globals
-axios.defaults.baseURL = process.env.REACT_API_URL
-axios.defaults.headers.common['Authorization'] = `BEARER ${JWTManager.get()}`
-axios.defaults.headers.post['Content-Type'] = 'application/json'
-
 /* Import the apps store */
 import store from './store/store'
 
@@ -21,6 +16,11 @@ import Client from './components/Client/Client'
 
 /* Styles needed */
 import './index.css';
+
+// Configure axios globals
+axios.defaults.baseURL = process.env.REACT_API_URL
+axios.defaults.headers.common['Authorization'] = `BEARER ${JWTManager.get()}`
+axios.defaults.headers.post['Content-Type'] = 'application/json'
 
 const root = document.getElementById('root')
 ReactDOM.render(
