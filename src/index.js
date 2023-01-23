@@ -4,6 +4,15 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
+// Import JWT memory manager
+import JWTManager from './utils/auth.utils'
+import axios from 'axios'
+
+// Configure axios globals
+axios.defaults.baseURL = process.env.REACT_API_URL
+axios.defaults.headers.common['Authorization'] = `BEARER ${JWTManager.get()}`
+axios.defaults.headers.post['Content-Type'] = 'application/json'
+
 /* Import the apps store */
 import store from './store/store'
 
