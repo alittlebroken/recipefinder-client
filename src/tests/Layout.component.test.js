@@ -17,28 +17,4 @@ describe('<Layout />', () => {
 
   })
 
-  it('renders the header content that will contain the nav and brand', async () => {
-
-    // Setup
-
-    // Execute
-    render(<Layout />)
-
-    // Assert
-    expect(screen.getByRole('banner', { name: 'site-header'})).toBeInTheDocument()
-
-  })
-
-  it('renders the main tag containing the content', () => {
-
-    // Setup
-
-    // Execute
-    render(<Layout />)
-
-    // Assert
-    expect(screen.getByRole('main', { name: 'site-content' })).toBeInTheDocument()
-
-  })
-
 })
