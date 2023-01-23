@@ -1,13 +1,14 @@
+import Container from 'react-bootstrap/Container'
+
+import Header from '../Header/Header'
 
 const Layout = ({ children }) => {
     return (
         <>
-            <header aria-label='site-header'>
-
-            </header>
-            <main aria-label='site-content'>
+            <Header />
+            <Container>
                 { children }
-            </main>
+            </Container>
         </>
     )
 }
