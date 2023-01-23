@@ -29,10 +29,14 @@ const JWTMemoryManager = () => {
         return true;
     }
 
+    const refresh = () => {
+        return false;
+    }
+
     return {
         set,
         get,
-        remove
+        remove, refresh
     }
 
 }
