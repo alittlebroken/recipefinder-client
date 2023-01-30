@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.2.3",
     "bootstrap": "^5.2.3",
+    "ra-data-simple-rest": "^4.7.2",
     "react": "^17.0.2",
     "react-admin": "^4.7.1",
     "react-bootstrap": "^2.7.0",
