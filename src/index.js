@@ -3,10 +3,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { AdminSite } from './components/Admin/AdminSite/AdminSite'
 
 // Import JWT memory manager
 import JWTManager from './utils/auth.utils'
-import axios from 'axios'
 
 /* Import the apps store */
 import store from './store/store'
@@ -16,11 +16,6 @@ import Client from './components/Client/Client'
 
 /* Styles needed */
 import './index.css';
-
-// Configure axios globals
-axios.defaults.baseURL = process.env.REACT_API_URL
-axios.defaults.headers.common['Authorization'] = `BEARER ${JWTManager.get()}`
-axios.defaults.headers.post['Content-Type'] = 'application/json'
 
 const root = document.getElementById('root')
 ReactDOM.render(
@@ -33,7 +28,7 @@ ReactDOM.render(
         
 
         {/* Administration interface */}
-        <Route path='/admin/*' element={<><h2>Administration website</h2></>} />
+        <Route path='/admin/*' element={<AdminSite />} />
 
       </Routes>
     </Provider>
