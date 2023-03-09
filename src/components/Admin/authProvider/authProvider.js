@@ -1,4 +1,5 @@
 import axios from 'axios'
+import useRefresh from 'react-admin';
 
 /* Set the base URL for the axios requests */
 const BASE_URL = process.env.REACT_APP_API_URL
@@ -43,19 +44,34 @@ const authProvider = {
 
         if(status === 401 || status === 403) {
             if(message === 'Your access token has expired, please login'){
-                                
+                    
                 /* Generate the url to call */
                 const url = `${BASE_URL}/auth/refresh-token`
                 
                 /* Get a new token */
-                const res = await axios.post(url, { "action": "refresh"}, axiosOptions)
+                try{
+                    const res = await axios.post(url, { "action": "refresh"}, axiosOptions)
+                    
+                    /* check the response and if OK assign the new token */
+                    if(res.data.status === 200){
+                        localStorage.setItem("token", res.data.token)
+                        window.location.reload()
+                    } else {
+                    
+                        /* Check if the refresh token is still valid, 
+                         * if not we need to get the user to login again
+                        */
+                        if(res.data.message === 'Invalid refresh token, please login'){
+                            localStorage.removeItem("token")
+                            return Promise.reject()
+                        }
 
-                /* check the response and of OK assign the new token */
-                if(res.data.status === 200){
-                    localStorage.setItem("token", res.data.token)
-                    Promise.resolve()
-                } else {
-                    return Promise.reject();
+                    }
+
+                } catch(e) {
+                    
+                    localStorage.removeItem("token")
+                    return Promise.reject()
                 }
 
             } else {
@@ -70,16 +86,14 @@ const authProvider = {
             : Promise.reject();
     },
     logout: async () => {
-        console.log('authProvider->logout > called')
+        
         /* Contact the API to log yourself out */
 
         try {
             if(!localStorage.getItem("token")){
-                console.log('authProvider->logout > no token found, returning')
                 return Promise.resolve();
             }
 
-            console.log('authProvider->logout > calling lougout endpoint on API')
             const response = await axios.post(
                 `http://localhost:5000/auth/logout`, 
                 { "action": "logout" }, 
@@ -92,7 +106,6 @@ const authProvider = {
                 })
 
                 if(response.data.success === true){
-                    console.log('authProvider->logout > logout successfull')
                     localStorage.removeItem("token")
                 } else {
                     return Promise.reject()
@@ -100,7 +113,6 @@ const authProvider = {
 
                 return Promise.resolve()
         } catch(e) {
-            console.log(e)
             return Promise.reject()
         }
     },
@@ -109,12 +121,10 @@ const authProvider = {
     // authorization
     getPermissions: () => Promise.resolve(/* ... */),
     refreshToken: async () => {
-        console.log('authProvider->refreshToken > called')
         /* Contact the API to log yourself out */
 
         try {
             
-            console.log('authProvider->logout > calling refreshToken endpoint on API')
             const response = await axios.post(
                 `http://localhost:5000/auth/refresh-token`, 
                 { "action": "refresh-token" }, 
