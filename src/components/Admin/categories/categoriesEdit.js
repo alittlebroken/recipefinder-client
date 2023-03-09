@@ -17,7 +17,7 @@ const PageTitle = () => {
 
     /* Get the recordContext so we have access to the data displayed in the edit page */
     const record = useRecordContext()
-    return <span>Post { record ? `"${record.name}"` : '' } </span>
+    return <span>Edit { record ? `"${record.name}"` : '' } </span>
 }
 
 /* Validation functions */
