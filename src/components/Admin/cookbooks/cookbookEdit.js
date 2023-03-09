@@ -1,5 +1,5 @@
 import { 
-    DateInput, 
+    DateTimeInput, 
     Edit, 
     ReferenceInput, 
     SimpleForm, 
@@ -33,8 +33,8 @@ export const CookbookEdit = () => (
             <TextInput source="name" validate={validateName}/>
             <TextInput multiline source="description" validate={validateDescription} />
             <TextInput source="image" />
-            <DateInput source="created_at" />
-            <DateInput source="updated_at" />
+            <DateTimeInput source="created_at" />
+            <DateTimeInput source="updated_at" />
         </SimpleForm>
     </Edit>
 );
