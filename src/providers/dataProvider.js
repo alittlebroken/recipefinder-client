@@ -64,8 +64,18 @@ const dataProvider = {
             /* generate the url */
             const url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}`
             
-            /* get the response from the server */
-            const response = await axios.get(`${url}`, axiosOptions)
+            /* 
+             * If we want to extract one for categories we need to add a filter as
+             * we have no getOne route for categories
+             */
+            let response;
+            if(resource === "categories"){
+                const queryParams = { filter: JSON.stringify({ id: params.id}) }
+                response = await axios.get(`${process.env.REACT_APP_API_URL}/${resource}?${queryString.stringify(queryParams)}`, axiosOptions)
+            } else {
+                /* get the response from the server */
+                response = await axios.get(`${url}`, axiosOptions)
+            }
 
             if(response.status < 200 || response.status >= 300){
                 let { status, statusText } = response
@@ -73,8 +83,15 @@ const dataProvider = {
             }
 
             /* Extract the relevant data we need to pass back to the calling function */
-            const records = response?.data[0]
-           
+            let records;
+            /* Check what resource we are returning data for as the structure 
+             * for categories is different as it has no getOne route
+             */
+            if(resource === "categories"){
+                records = response?.data?.results[0]
+            } else {
+                records = response?.data[0]
+            }
 
             return Promise.resolve({
                 data: records
@@ -91,9 +108,6 @@ const dataProvider = {
             /* set the URL to use */
             const BASE_URL = `${process.env.REACT_APP_API_URL}/${resource}`
 
-            /* Holds each record returned by the app */
-            let records = []
-
             /* Get a list of the ids to loopthrough */
             let uri = `${BASE_URL}?${queryString.stringify({ filter: JSON.stringify({ id: params.ids})})}`
             
@@ -106,7 +120,7 @@ const dataProvider = {
                 return Promise.reject(new HttpError((res.data.results.message || statusText), status, res))
             }
 
-            /* All is OK, so retur the records */
+            /* All is OK, so return the records */
             if(res?.data?.results){
                 return Promise.resolve({
                     data: res?.data?.results
