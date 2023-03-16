@@ -2,21 +2,24 @@ import axios from 'axios'
 import queryString from 'query-string'
 import { HttpError } from 'react-admin'
 
-/* Set the headers for the URI */
-const headers = {
-    'token': localStorage.getItem("token"),
-    'Content-type': 'application/json'
-}
-
-/* generate the options for the axios request */
-const axiosOptions = {
-    withCredentials: true,
-    headers: headers
-}
+import inMemoryJWT from '../utils/auth.utils';
 
 const dataProvider = {
+
     getList:   async (resource, params) => {
         try{
+
+            /* Set the headers for the URI */
+            const headers = {
+                'token': inMemoryJWT.getToken(),
+                'Content-type': 'application/json'
+            }
+
+            /* generate the options for the axios request */
+            const axiosOptions = {
+                withCredentials: true,
+                headers: headers
+            }
 
             /* Extract params */
             const { page, perPage } = params.pagination
@@ -36,7 +39,10 @@ const dataProvider = {
             }
 
             /* get the response from the server */
-            const response = await axios.get(`${url}?${queryString.stringify(queryParams)}`, axiosOptions)
+            const response = await axios.get(
+                `${url}?${queryString.stringify(queryParams)}`, 
+                axiosOptions
+                )
 
             if(response.status < 200 || response.status >= 300){
                 let { status, statusText } = response
@@ -60,10 +66,23 @@ const dataProvider = {
     getOne: async (resource, params) => {
         try{
 
+            /* Set the headers for the URI */
+            const headers = {
+                'token': inMemoryJWT.getToken(),
+                'Content-type': 'application/json'
+            }
+
+            /* generate the options for the axios request */
+            const axiosOptions = {
+                withCredentials: true,
+                headers: headers
+            }
+
             /* Set the filter, pagination and sort options for our API */
             /* generate the url */
             const url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}`
-            
+        
+
             /* 
              * If we want to extract one for categories we need to add a filter as
              * we have no getOne route for categories
@@ -71,10 +90,14 @@ const dataProvider = {
             let response;
             if(resource === "categories"){
                 const queryParams = { filter: JSON.stringify({ id: params.id}) }
-                response = await axios.get(`${process.env.REACT_APP_API_URL}/${resource}?${queryString.stringify(queryParams)}`, axiosOptions)
+                response = await axios.get(
+                    `${process.env.REACT_APP_API_URL}/${resource}?${queryString.stringify(queryParams)}`, 
+                    axiosOptions)
             } else {
                 /* get the response from the server */
-                response = await axios.get(`${url}`, axiosOptions)
+                response = await axios.get(
+                    `${url}`, 
+                    axiosOptions)
             }
 
             if(response.status < 200 || response.status >= 300){
@@ -105,6 +128,18 @@ const dataProvider = {
     getMany: async (resource, params) => {
         try {
 
+            /* Set the headers for the URI */
+            const headers = {
+                'token': inMemoryJWT.getToken(),
+                'Content-type': 'application/json'
+            }
+
+            /* generate the options for the axios request */
+            const axiosOptions = {
+                withCredentials: true,
+                headers: headers
+            }
+
             /* set the URL to use */
             const BASE_URL = `${process.env.REACT_APP_API_URL}/${resource}`
 
@@ -112,7 +147,9 @@ const dataProvider = {
             let uri = `${BASE_URL}?${queryString.stringify({ filter: JSON.stringify({ id: params.ids})})}`
             
             /* Get the values from the API */
-            let res = await axios.get(`${uri}`, axiosOptions)
+            let res = await axios.get(
+                `${uri}`, 
+                axiosOptions)
 
             /* Check we have no problems whilst getting them */
             if(res.status < 200 || res.status >= 300){
@@ -138,6 +175,18 @@ const dataProvider = {
         
         try {
 
+            /* Set the headers for the URI */
+            const headers = {
+                'token': inMemoryJWT.getToken(),
+                'Content-type': 'application/json'
+            }
+
+            /* generate the options for the axios request */
+            const axiosOptions = {
+                withCredentials: true,
+                headers: headers
+            }
+
             /* Build up the query paremeters for the request */
             /* Create the query params object ready to be stringified to the url */
             const queryParams = {
@@ -147,15 +196,11 @@ const dataProvider = {
 
             /* set the URL to use */
             const URL = `${process.env.REACT_APP_API_URL}/${resource}?${queryString.stringify(queryParams)}`
-           
-            /* set the headers */
-            const headers = {
-                'token': localStorage.getItem("token"),
-                'Content-type': 'application/json'
-            }
 
             /* Get the record from the API */
-            const res = await axios.get(`${URL}`, { headers: headers })
+            const res = await axios.get(
+                `${URL}`, 
+                axiosOptions)
             
             if(res?.data?.results){
                 return Promise.resolve({ data: res.data.results} )
@@ -170,11 +215,26 @@ const dataProvider = {
     create:     async (resource, params) => {
         try {
 
+            /* Set the headers for the URI */
+            const headers = {
+                'token': inMemoryJWT.getToken(),
+                'Content-type': 'application/json'
+            }
+
+            /* generate the options for the axios request */
+            const axiosOptions = {
+                withCredentials: true,
+                headers: headers
+            }
+
             /* generate the url */
             const url = `${process.env.REACT_APP_API_URL}/${resource}`
 
             /* send the data to the server */
-            const res = await axios.post(url,params.data, axiosOptions)
+            const res = await axios.post(
+                url,
+                params.data, 
+                axiosOptions)
     
             /* Check we have no problems */
             if(res.status < 200 || res.status >= 300){
@@ -192,11 +252,26 @@ const dataProvider = {
     update:   async  (resource, params) => {
         try {
 
+            /* Set the headers for the URI */
+            const headers = {
+                'token': inMemoryJWT.getToken(),
+                'Content-type': 'application/json'
+            }
+
+            /* generate the options for the axios request */
+            const axiosOptions = {
+                withCredentials: true,
+                headers: headers
+            }
+
             /* generate the url */
             const url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}`
 
             /* send the data to the server */
-            const res = await axios.put(url,params.data, axiosOptions)
+            const res = await axios.put(
+                url,
+                params.data, 
+                axiosOptions)
             
             /* Check we have no problems */
             if(res.status < 200 || res.status >= 300){
@@ -216,11 +291,26 @@ const dataProvider = {
     delete:    async (resource, params) => {
        
         try {
+
+            /* Set the headers for the URI */
+            const headers = {
+                'token': inMemoryJWT.getToken(),
+                'Content-type': 'application/json'
+            }
+
+            /* generate the options for the axios request */
+            const axiosOptions = {
+                withCredentials: true,
+                headers: headers
+            }
+
         /* generate the url */
         const url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}`
 
         /* send the data to the server */
-        const res = await axios.delete(url, axiosOptions)
+        const res = await axios.delete(
+            url, 
+            axiosOptions)
         
         /* Check we have no problems */
         if(res.status < 200 || res.status >= 300){
@@ -239,13 +329,27 @@ const dataProvider = {
         
         try {
 
+            /* Set the headers for the URI */
+            const headers = {
+                'token': inMemoryJWT.getToken(),
+                'Content-type': 'application/json'
+            }
+
+            /* generate the options for the axios request */
+            const axiosOptions = {
+                withCredentials: true,
+                headers: headers
+            }
+
             params.ids.map(async id => {
 
                 /* Build the url to delete the current id */
                 let url = `${process.env.REACT_APP_API_URL}/${resource}/${id}`
 
                 /* Try and delete the selected id */
-                let res = await axios.delete(url, axiosOptions)
+                let res = await axios.delete(
+                    url, 
+                    axiosOptions)
                 
                 /* Check we have no problems */
                 if(res.status < 200 || res.status >= 300){

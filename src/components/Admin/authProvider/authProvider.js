@@ -1,16 +1,20 @@
 import axios from 'axios'
-import useRefresh from 'react-admin';
+
+import inMemoryJWT from '../../../utils/auth.utils';
 
 /* Set the base URL for the axios requests */
-const BASE_URL = process.env.REACT_APP_API_URL
+const BASEURL = process.env.REACT_APP_API_URL
 
 /* Set the options to use for the axios request */
 const axiosOptions = {
     withCredentials: true,
     headers: {
-        "token": localStorage.getItem("token")
+        'token': inMemoryJWT.getToken(),
+        'Content-type': 'application/json'
     }
 }
+
+inMemoryJWT.setRefreshTokenEndpoint(`${BASEURL}/auth/refresh-token`)
 
 const authProvider = {
     // authentication
@@ -25,14 +29,17 @@ const authProvider = {
                 password
             },
             {
-                withCredentials: true
+                withCredentials: true,
+                headers: {
+                    'Content-type': 'application/json'
+                }
             }
         )
         
         /* If we get an access token in response then for the moment
            add it to the localstorage */
         if(response.data.accessToken){
-            localStorage.setItem("token", response.data.accessToken);
+            inMemoryJWT.setToken(response.data.accessToken, 15)
         } else {
             return Promise.reject();
         }
@@ -41,76 +48,46 @@ const authProvider = {
     checkError: async (error) => {
         let status = error?.response?.status ? error.response.status : null
         let message = error?.response?.data?.message
+        let info = error?.response?.data?.info
 
         if(status === 401 || status === 403) {
-            if(message === 'Your access token has expired, please login'){
-                    
-                /* Generate the url to call */
-                const url = `${BASE_URL}/auth/refresh-token`
-                
-                /* Get a new token */
-                try{
-                    const res = await axios.post(url, { "action": "refresh"}, axiosOptions)
-                    
-                    /* check the response and if OK assign the new token */
-                    if(res.data.status === 200){
-                        localStorage.setItem("token", res.data.token)
-                        window.location.reload()
-                    } else {
-                    
-                        /* Check if the refresh token is still valid, 
-                         * if not we need to get the user to login again
-                        */
-                        if(res.data.message === 'Invalid refresh token, please login'){
-                            localStorage.removeItem("token")
-                            return Promise.reject()
-                        }
-
-                    }
-
-                } catch(e) {
-                    
-                    localStorage.removeItem("token")
-                    return Promise.reject()
-                }
-
+            
+            if(info === 'No auth token'){
+                return inMemoryJWT.waitForTokenRefresh().then(() => {
+                    return inMemoryJWT.getToken() ? Promise.resolve() : Promise.reject();
+                });
             } else {
-                console.log('authProvider->logout > ', message)
+                return Promise.reject();
             }
+            
         }
         return Promise.resolve();
     },
     checkAuth: () => {
-        return localStorage.getItem("token")
-            ? Promise.resolve()
-            : Promise.reject();
+
+        return inMemoryJWT.waitForTokenRefresh().then(() => {
+            return inMemoryJWT.getToken() ? Promise.resolve() : Promise.reject();
+        });
     },
     logout: async () => {
         
         /* Contact the API to log yourself out */
 
         try {
-            if(!localStorage.getItem("token")){
+            if(!inMemoryJWT.getToken()){
                 return Promise.resolve();
             }
 
             const response = await axios.post(
                 `http://localhost:5000/auth/logout`, 
                 { "action": "logout" }, 
-                { 
-                    headers: { 
-                        'token': `${localStorage.getItem("token")}`,
-                        'Content-type': 'application/json'
-                    },
-                    withCredentials: true
-                })
+                axiosOptions)
 
                 if(response.data.success === true){
-                    localStorage.removeItem("token")
+                    inMemoryJWT.ereaseToken()
                 } else {
                     return Promise.reject()
                 }
-
                 return Promise.resolve()
         } catch(e) {
             return Promise.reject()
@@ -119,30 +96,11 @@ const authProvider = {
     getIdentity: () => Promise.resolve(/* ... */),
     handleCallback: () => Promise.resolve(/* ... */), // for third-party authentication only
     // authorization
-    getPermissions: () => Promise.resolve(/* ... */),
-    refreshToken: async () => {
-        /* Contact the API to log yourself out */
+    getPermissions: async () => {
+        return inMemoryJWT.waitForTokenRefresh().then(() => {
+            return inMemoryJWT.getToken() ? Promise.resolve() : Promise.reject();
+        });
 
-        try {
-            
-            const response = await axios.post(
-                `http://localhost:5000/auth/refresh-token`, 
-                { "action": "refresh-token" }, 
-                { 
-                    headers: { 
-                        'token': `${localStorage.getItem("token")}`,
-                        'Content-type': 'application/json'
-                    },
-                    withCredentials: true
-                })
-
-                console.log('authProvider->refreshToken: ', response)
-
-                return Promise.resolve()
-        } catch(e) {
-            console.log(e)
-            return Promise.reject()
-        }
     },
 };
 
