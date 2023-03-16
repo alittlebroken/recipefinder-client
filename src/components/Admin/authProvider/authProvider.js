@@ -14,6 +14,8 @@ const axiosOptions = {
     }
 }
 
+const refreshRate = process.env.REACT_APP_TOKEN_REFRESH_RATE || 300
+
 inMemoryJWT.setRefreshTokenEndpoint(`${BASEURL}/auth/refresh-token`)
 
 const authProvider = {
@@ -39,7 +41,7 @@ const authProvider = {
         /* If we get an access token in response then for the moment
            add it to the localstorage */
         if(response.data.accessToken){
-            inMemoryJWT.setToken(response.data.accessToken, 15)
+            inMemoryJWT.setToken(response.data.accessToken, refreshRate)
         } else {
             return Promise.reject();
         }
