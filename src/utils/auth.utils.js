@@ -7,7 +7,7 @@ const inMemoryJWTManager = () => {
     let refreshEndpoint = '/refresh-token';
     let refreshTimeOutId;
 
-    let tokenRefreshDelay = process.env.REACT_APP_TOKEN_REFRESH_DELAY || 15
+    let tokenRefreshDelay = process.env.REACT_APP_TOKEN_REFRESH_RATE || 300
 
     const setLogoutEventName = name => logoutEventName = name;
     const setRefreshTokenEndpoint = endpoint => refreshEndpoint = endpoint;
