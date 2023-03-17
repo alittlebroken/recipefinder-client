@@ -99,7 +99,7 @@ const dataProvider = {
                     `${url}`, 
                     axiosOptions)
             }
-
+           
             if(response.status < 200 || response.status >= 300){
                 let { status, statusText } = response
                 return Promise.reject(new HttpError((response.data.results.message || statusText), status, response))
@@ -112,6 +112,8 @@ const dataProvider = {
              */
             if(resource === "categories"){
                 records = response?.data?.results[0]
+            } else if (resource === "steps") {
+                records = response?.data
             } else {
                 records = response?.data[0]
             }
