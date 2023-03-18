@@ -82,7 +82,6 @@ const dataProvider = {
             /* generate the url */
             const url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}`
         
-
             /* 
              * If we want to extract one for categories we need to add a filter as
              * we have no getOne route for categories
@@ -99,7 +98,7 @@ const dataProvider = {
                     `${url}`, 
                     axiosOptions)
             }
-           
+
             if(response.status < 200 || response.status >= 300){
                 let { status, statusText } = response
                 return Promise.reject(new HttpError((response.data.results.message || statusText), status, response))
@@ -114,6 +113,13 @@ const dataProvider = {
                 records = response?.data?.results[0]
             } else if (resource === "steps") {
                 records = response?.data
+            } else if (resource === "pantries" ) {
+                records = {
+                    id: response?.data?.results[0].pantryId,
+                    userId: response?.data?.results[0].userId,
+                    numIngredients: response?.data?.results[0].numIngredients,
+                    ingredients: response?.data?.results[0].ingredients
+                }
             } else {
                 records = response?.data[0]
             }
@@ -270,11 +276,13 @@ const dataProvider = {
             const url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}`
 
             /* send the data to the server */
-            const res = await axios.put(
+            let res;
+            res = await axios.put(
                 url,
                 params.data, 
-                axiosOptions)
-            
+                axiosOptions
+            )
+
             /* Check we have no problems */
             if(res.status < 200 || res.status >= 300){
                 let { status, statusText } = res
