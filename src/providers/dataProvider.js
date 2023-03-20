@@ -99,6 +99,7 @@ const dataProvider = {
                     axiosOptions)
             }
 
+
             if(response.status < 200 || response.status >= 300){
                 let { status, statusText } = response
                 return Promise.reject(new HttpError((response.data.results.message || statusText), status, response))
@@ -109,7 +110,7 @@ const dataProvider = {
             /* Check what resource we are returning data for as the structure 
              * for categories is different as it has no getOne route
              */
-            if(resource === "categories"){
+            if(resource === "categories" || resource === "users"){
                 records = response?.data?.results[0]
             } else if (resource === "steps") {
                 records = response?.data
