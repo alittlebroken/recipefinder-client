@@ -11,3 +11,24 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.button {
+  border: none;
+  border-radius: 7px;
+  background-color: rgb( 40, 185, 5  );
+  color: white;
+  padding: 10px;
+
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.input {
+  padding: 10px;
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background-color: rgb(  242, 244, 244  );
+}
