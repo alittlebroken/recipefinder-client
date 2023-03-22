@@ -1,4 +1,5 @@
 import axios from 'axios'
+import jwt_decode from 'jwt-decode'
 
 import inMemoryJWT from '../../../utils/auth.utils';
 
@@ -37,7 +38,7 @@ const authProvider = {
                 }
             }
         )
-        
+
         /* If we get an access token in response then for the moment
            add it to the localstorage */
         if(response.data.accessToken){
@@ -54,7 +55,7 @@ const authProvider = {
 
         if(status === 401 || status === 403) {
             
-            if(info === 'No auth token'){
+            if(info === 'No auth token' || info === 'jwt expired'){
                 return inMemoryJWT.waitForTokenRefresh().then(() => {
                     return inMemoryJWT.getToken() ? Promise.resolve() : Promise.reject();
                 });
@@ -66,7 +67,6 @@ const authProvider = {
         return Promise.resolve();
     },
     checkAuth: () => {
-
         return inMemoryJWT.waitForTokenRefresh().then(() => {
             return inMemoryJWT.getToken() ? Promise.resolve() : Promise.reject();
         });
@@ -88,6 +88,7 @@ const authProvider = {
                 if(response.data.success === true){
                     inMemoryJWT.ereaseToken()
                 } else {
+        
                     return Promise.reject()
                 }
                 return Promise.resolve()
@@ -99,6 +100,17 @@ const authProvider = {
     handleCallback: () => Promise.resolve(/* ... */), // for third-party authentication only
     // authorization
     getPermissions: async () => {
+        
+        /* Get the user details from the token */
+        const decodedToken = jwt_decode(inMemoryJWT.getToken())
+
+        /* Check to ensure that the only role to access the 
+         * admin interface is the admin role */
+        if(decodedToken.roles !== 'admin'){
+            /* log out as soon as possible */
+            return Promise.reject('Only administrators can access this site')
+        }
+
         return inMemoryJWT.waitForTokenRefresh().then(() => {
             return inMemoryJWT.getToken() ? Promise.resolve() : Promise.reject();
         });
