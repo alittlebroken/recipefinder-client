@@ -376,6 +376,47 @@ const dataProvider = {
                 return Promise.reject(e)
         }
     },
+    resetPassword: async (resource, params) => {
+
+        try{
+
+            /* Set the headers for the URI */
+            const headers = {
+                'token': inMemoryJWT.getToken(),
+                'Content-type': 'application/json'
+            }
+
+            /* generate the options for the axios request */
+            const axiosOptions = {
+                withCredentials: true,
+                headers: headers
+            }
+
+        /* generate the url */
+        const url = `${process.env.REACT_APP_API_URL}/auth/reset-password`
+
+        /* send the data to the server */
+        const res = await axios.post(
+            url,
+            {
+                userId: params.id,
+                password: params.password
+            },
+            axiosOptions)
+
+        /* Check we have no problems */
+        if(res.status < 200 || res.status >= 300){
+            let { status, statusText } = res
+            return Promise.reject(new HttpError((res.data.results.message || statusText), status, res))
+        }
+
+            return Promise.resolve(true)
+
+        } catch(e) {
+            return Promise.reject(e)
+        }
+
+    }
 }
 
 export default dataProvider
