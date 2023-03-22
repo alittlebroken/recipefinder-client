@@ -28,7 +28,7 @@ const validatePasswordsMatch = (value, allValues) => {
 }
 
 /* Validation Options */
-const validateUsername = [required(), minLength(6)]
+const validateUsername = [required(), minLength(5)]
 const validateEmail = [required(), email()]
 const validateForname = [required(), minLength(2)]
 const validateSurname = [required(), minLength(2)]
