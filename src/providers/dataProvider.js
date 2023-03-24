@@ -473,15 +473,38 @@ const dataProvider = {
 
 
     },
-    getImageData: async (file) => {
-        new Promise((resolve, reject) => {
-            const reader = new FileReader()
-            reader.onload = () => resolve(reader.result)
-            reader.onError = reject
+    loadDashboard: async () => {
 
-            reader.readAsDataURL(file.rawFile)
-        })
+        try{
+
+            /* Setup the axios request */
+            const url = `${process.env.REACT_APP_API_URL}/dashboard`
+            
+            const axiosOptions = {
+                withCrednetials: true,
+                headers: {
+                    'token': inMemoryJWT.getToken(),
+                    'Content-type': 'application/json'
+                }
+            }
+
+            /* Send the request to get the dashboard data */
+            const result = await axios.get(
+                url,
+                axiosOptions
+            )
+
+            if(!result){
+                return Promise.reject(false)
+            }
+
+            return Promise.resolve(result.data.data)
+        } catch(e) {
+            return Promise.reject()
+        }
+
     }
+    
 }
 
 
