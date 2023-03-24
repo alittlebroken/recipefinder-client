@@ -1,9 +1,10 @@
 import { 
   Admin, 
   Resource, 
-  ListGuesser, 
-  EditGuesser, 
+  CustomRoutes,
+  Login
 } from 'react-admin'
+import { Route } from "react-router-dom";
 import authProvider from  '../authProvider/authProvider'
 import dataProvider from '../../../providers/dataProvider'
 
@@ -62,9 +63,30 @@ import PantryIcon from '@mui/icons-material/Kitchen';
 import StepIcon from '@mui/icons-material/ListAlt';
 import CategoryIcon from '@mui/icons-material/Label';
 
+import { ProfileEdit } from '../Profile/profileEdit'
+
+import { CustomLayout } from './customLayout'
+
+/* Custom login page */
+const CustomLoginPage = () => {
+  return (
+      <Login
+          // A random image that changes everyday
+          backgroundImage="https://source.unsplash.com/random/1600x900/daily"
+      />
+  )
+}
+
 export const AdminSite = () => {
     return (
-        <Admin title="RecipeFinder Admin" basename="/admin" authProvider={authProvider} dataProvider={dataProvider} >
+        <Admin 
+        title="RecipeFinder Admin" 
+        basename="/admin" 
+        authProvider={authProvider} 
+        dataProvider={dataProvider} 
+        layout={CustomLayout}
+        loginPage={CustomLoginPage}
+        >
           <Resource name="users" icon={UserIcon} list={UserList} edit={UserEdit} show={UserShow} create={UserCreate} />
           <Resource name="categories" icon={CategoryIcon} list={CategoryList} edit={CategoryEdit} create={CategoryCreate} show={CategoryShow} />
           <Resource name="cookbooks" icon={CookbookIcon} list={CookbookList} edit={CookbookEdit} create={CookbookCreate} show={CookbookShow} />
@@ -72,6 +94,9 @@ export const AdminSite = () => {
           <Resource name="recipes" icon={RecipeIcon} list={RecipeList} edit={RecipeEdit} create={RecipeCreate} show={RecipeShow} />
           <Resource name="steps" icon={StepIcon} list={StepList} edit={StepEdit} show={StepShow} create={StepCreate} />
           <Resource name="pantries" icon={PantryIcon} list={PantryList} edit={PantryEdit} show={PantryShow} />
+          <CustomRoutes>
+            <Route path="/profile" element={<ProfileEdit />} />
+          </CustomRoutes>
         </Admin>
     )
 }

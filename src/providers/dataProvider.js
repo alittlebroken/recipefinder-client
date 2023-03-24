@@ -416,7 +416,74 @@ const dataProvider = {
             return Promise.reject(e)
         }
 
+    },
+    getUserProfile: async (params) => {
+
+        /* We store user profile data in localStorage */
+        const profile = localStorage.getItem("profile")
+        if(!profile){
+            return Promise.resolve({ data: {}})
+        } 
+
+        /* Extract the data from the profile */
+        const data = JSON.parse(profile)
+
+        return Promise.resolve({ data })
+
+    },
+    updateUserProfile: async ( data ) => {
+
+        try{
+
+            /* Set the headers for the URI */
+            const headers = {
+                'token': inMemoryJWT.getToken(),
+                'Content-type': 'application/json'
+            }
+
+            /* generate the options for the axios request */
+            const axiosOptions = {
+                withCredentials: true,
+                headers: headers
+            }
+
+            /* generate the url */
+            const url = `${process.env.REACT_APP_API_URL}/auth/profile`
+
+            const profile = {
+                ...data
+            }
+
+            /* Send the data to the appropriate API route */
+            const result = await axios.post(
+                url,
+                profile,
+                axiosOptions
+            )
+
+             if(result.status < 200 || result.status > 300){
+                return Promise.resolve(false)
+             }
+
+            return Promise.resolve(true)
+
+        } catch(e) {
+            return Promise.resolve(false)
+        }
+
+
+    },
+    getImageData: async (file) => {
+        new Promise((resolve, reject) => {
+            const reader = new FileReader()
+            reader.onload = () => resolve(reader.result)
+            reader.onError = reject
+
+            reader.readAsDataURL(file.rawFile)
+        })
     }
 }
+
+
 
 export default dataProvider
