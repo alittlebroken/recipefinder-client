@@ -1,0 +1,12 @@
+.imageContainer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.preview {
+    width: 45%;
+    height: 45%;
+    border-radius: 10px;
+}
