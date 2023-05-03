@@ -80,14 +80,20 @@ const dataProvider = {
 
             /* Set the filter, pagination and sort options for our API */
             /* generate the url */
-            const url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}`
+            let url
+            if(resource === 'uploads'){
+                url = `${process.env.REACT_APP_API_URL}/${resource}`
+            } else {
+                url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}`
+            }
+            
         
             /* 
              * If we want to extract one for categories we need to add a filter as
              * we have no getOne route for categories
              */
             let response;
-            if(resource === "categories"){
+            if(resource === "categories" || resource === "uploads"){
                 const queryParams = { filter: JSON.stringify({ id: params.id}) }
                 response = await axios.get(
                     `${process.env.REACT_APP_API_URL}/${resource}?${queryString.stringify(queryParams)}`, 
@@ -98,7 +104,6 @@ const dataProvider = {
                     `${url}`, 
                     axiosOptions)
             }
-
 
             if(response.status < 200 || response.status >= 300){
                 let { status, statusText } = response
@@ -121,9 +126,14 @@ const dataProvider = {
                     numIngredients: response?.data?.results[0].numIngredients,
                     ingredients: response?.data?.results[0].ingredients
                 }
+            } else if (resource === 'uploads' ){
+                console.log(response.data.results[0].src)
+                records = response.data.results[0]
             } else {
                 records = response?.data[0]
             }
+
+            console.log(records)
 
             return Promise.resolve({
                 data: records
@@ -224,10 +234,16 @@ const dataProvider = {
     create:     async (resource, params) => {
         try {
 
+            console.log('Create Data: ', params)
+
             /* Set the headers for the URI */
-            const headers = {
+            let headers = {
                 'token': inMemoryJWT.getToken(),
-                'Content-type': 'application/json'
+            }
+            if(params?.data?.images?.rawFile || params?.data?.tests?.rawFile){
+                headers['Content-type'] = 'multipart/form-data'
+            } else {
+                headers['Content-type'] = 'application/json'
             }
 
             /* generate the options for the axios request */
@@ -239,10 +255,23 @@ const dataProvider = {
             /* generate the url */
             const url = `${process.env.REACT_APP_API_URL}/${resource}`
 
+            /* Generate the payload */
+            let payload = {
+                ...params.data 
+             }
+             
+             if(params?.data?.tests?.rawFile){
+                payload.tests = params.data.tests.rawFile
+             } 
+             
+             if(params?.data?.images?.rawFile) {
+                payload.images = params.data.images.rawFile
+             }
+
             /* send the data to the server */
             const res = await axios.post(
                 url,
-                params.data, 
+                payload, 
                 axiosOptions)
     
             /* Check we have no problems */
@@ -262,9 +291,13 @@ const dataProvider = {
         try {
 
             /* Set the headers for the URI */
-            const headers = {
+            let headers = {
                 'token': inMemoryJWT.getToken(),
-                'Content-type': 'application/json'
+            }
+            if(params?.data?.images?.rawFile || params?.data?.tests?.rawFile){
+                headers['Content-type'] = 'multipart/form-data'
+            } else {
+                headers['Content-type'] = 'application/json'
             }
 
             /* generate the options for the axios request */
@@ -276,11 +309,24 @@ const dataProvider = {
             /* generate the url */
             const url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}`
 
+            /* Generate the payload */
+            let payload = {
+               ...params.data 
+            }
+            
+            if(params?.data?.tests?.rawFile){
+               payload.tests = params.data.tests.rawFile
+            } 
+            
+            if(params?.data?.images?.rawFile) {
+               payload.images = params.data.images.rawFile
+            }
+
             /* send the data to the server */
             let res;
             res = await axios.put(
                 url,
-                params.data, 
+                payload, 
                 axiosOptions
             )
 
@@ -315,21 +361,41 @@ const dataProvider = {
                 headers: headers
             }
 
-        /* generate the url */
-        const url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}`
+            /* Extract params */
+            const page = params?.pagination ? params?.pagination : 1
+            const perPage = params?.pagination ? params?.pagination : 10
+            const field = params?.sort ? params?.sort : 'id'
+            const order = params?.sort ? params?.sort : 'desc'
 
-        /* send the data to the server */
-        const res = await axios.delete(
-            url, 
-            axiosOptions)
-        
-        /* Check we have no problems */
-        if(res.status < 200 || res.status >= 300){
-            let { status, statusText } = res
-            return Promise.reject(new HttpError((res.data.results.message || statusText), status, res))
-        }
+            /* Create the query params object ready to be stringified to the url */
+            const queryParams = {
+                page: page, 
+                limit: perPage,
+                sort_by: field,
+                sort_direction: order,
+                filter: JSON.stringify({ids: params.id})
+            }
 
-        return Promise.resolve({data: {id: params.id}})
+            /* generate the url */
+            let url
+            if(resource === "uploads"){
+                url = `${process.env.REACT_APP_API_URL}/${resource}?${queryString.stringify(queryParams)}`
+            } else {
+                url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}`
+            }
+
+            /* send the data to the server */
+            const res = await axios.delete(
+                url, 
+                axiosOptions)
+            
+            /* Check we have no problems */
+            if(res.status < 200 || res.status >= 300){
+                let { status, statusText } = res
+                return Promise.reject(new HttpError((res.data.results.message || statusText), status, res))
+            }
+
+            return Promise.resolve({data: {id: params.id}})
 
 
         } catch(e) {
@@ -355,7 +421,27 @@ const dataProvider = {
             params.ids.map(async id => {
 
                 /* Build the url to delete the current id */
-                let url = `${process.env.REACT_APP_API_URL}/${resource}/${id}`
+                let url
+
+                if( resource === 'uploads'){
+
+                    /* Create the query params object ready to be stringified to the url */
+                    const queryParams = {
+                        page: 1, 
+                        limit: 10,
+                        sort_by: 'id',
+                        sort_direction: 'desc',
+                        filter: JSON.stringify({ids: id})
+                    }
+
+                    url = `${process.env.REACT_APP_API_URL}/${resource}/?${queryString.stringify(queryParams)}`
+                    
+                } else {
+
+                    url = `${process.env.REACT_APP_API_URL}/${resource}/${id}`
+
+                }
+
 
                 /* Try and delete the selected id */
                 let res = await axios.delete(
