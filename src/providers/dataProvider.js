@@ -67,7 +67,7 @@ const dataProvider = {
         try{
 
             /* Set the headers for the URI */
-            const headers = {
+            let headers = {
                 'token': inMemoryJWT.getToken(),
                 'Content-type': 'application/json'
             }
@@ -133,10 +133,40 @@ const dataProvider = {
                 records = response?.data[0]
             }
 
-            console.log(records)
+            /* Depending on the resource, get any and or all images */
+            let pictures
+            if(resource === "cookbooks"){
+                pictures = await dataProvider.getImages({ resource: "Cookbook", resourceid: params.id })
+            }
+
+            if(resource === "recipes"){
+                pictures = await dataProvider.getImages({ resource: "recipes", resourceid: params.id })
+            }
+
+            if(resource === "ingredients"){
+                pictures = await dataProvider.getImages({ resource: "Ingredients", resourceid: params.id })
+            }
+
+            /* Generate the payload containing the record data as well as the images for the resource */
+            let payload
+            payload = {
+                ...records,
+            }
+
+            if((pictures?.length >= 1 && resource === "cookbooks") || (pictures?.length >= 1 && resource === "ingredients")){
+                payload.pictures = {
+                    id: pictures[0].id,
+                    src: pictures[0].src,
+                    title: pictures[0].title
+                }
+            }
+
+            if(pictures?.length >= 1 && resource === "recipes" ){
+                payload.pictures = pictures
+            }
 
             return Promise.resolve({
-                data: records
+                data: payload
             })
 
         } catch(e) {
@@ -148,7 +178,7 @@ const dataProvider = {
         try {
 
             /* Set the headers for the URI */
-            const headers = {
+            let headers = {
                 'token': inMemoryJWT.getToken(),
                 'Content-type': 'application/json'
             }
@@ -234,8 +264,6 @@ const dataProvider = {
     create:     async (resource, params) => {
         try {
 
-            console.log('Create Data: ', params)
-
             /* Set the headers for the URI */
             let headers = {
                 'token': inMemoryJWT.getToken(),
@@ -290,6 +318,8 @@ const dataProvider = {
     update:   async  (resource, params) => {
         try {
 
+            console.log(`Update ${resource}: `, params)
+
             /* Set the headers for the URI */
             let headers = {
                 'token': inMemoryJWT.getToken(),
@@ -306,8 +336,16 @@ const dataProvider = {
                 headers: headers
             }
 
+            /* Add/Update the cookbooks image if we have any to add*/
+            if (params?.data?.tests || params?.data?.images){
+
+                /* If no existing image then we can just add the new one */
+                
+
+            }
+
             /* generate the url */
-            const url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}`
+            let url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}`
 
             /* Generate the payload */
             let payload = {
@@ -567,7 +605,7 @@ const dataProvider = {
             const url = `${process.env.REACT_APP_API_URL}/dashboard`
             
             const axiosOptions = {
-                withCrednetials: true,
+                withCredentials: true,
                 headers: {
                     'token': inMemoryJWT.getToken(),
                     'Content-type': 'application/json'
@@ -587,6 +625,55 @@ const dataProvider = {
             return Promise.resolve(result.data.data)
         } catch(e) {
             return Promise.reject()
+        }
+
+    },
+    getImages: async (params) => {
+
+        try {
+
+            /* Generate the headers for the request */
+            const axiosOptions = {
+                withCredentials: true,
+                headers: {
+                    'token': inMemoryJWT.getToken(),
+                    'Content-type': 'application/json'
+                }
+            }
+
+            /* Generate the query params */
+            const queryParams = { 
+                filter: JSON.stringify({ 
+                    resource: params.resource,
+                    resourceid: params.resourceid
+                }) 
+            }
+
+            /* Generate the url for the API resource we are interested in */
+            const uri = `${process.env.REACT_APP_API_URL}/uploads?${queryString.stringify(queryParams)}`
+
+            /* Get the data ( if any ) from the API */
+            const response = await axios.get(
+                uri,
+                axiosOptions
+            )
+
+            console.log('Response: ', response)
+
+            if(response?.data?.results){
+                return Promise.resolve(response.data.results)
+            } else {
+                return Promise.resolve([])
+            }
+
+        } catch(e) {
+            console.log(e)
+            if(e.response.data.message === 'There were no records found'){
+                return Promise.resolve([])
+            } else {
+                return Promise.reject(e)
+            }
+             
         }
 
     }
