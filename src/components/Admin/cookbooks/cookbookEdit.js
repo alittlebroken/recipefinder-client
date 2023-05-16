@@ -52,7 +52,7 @@ export const CookbookEdit = () => (
                 <ImageInput source={getFileUploadName()} label="Images" accept="image/*">
                     <ImageField source="src" label="title"/>  
                 </ImageInput>
-                <TextInput source="title" fullWidth validate={validateImageTitle}/> 
+                <TextInput label="Title" source="pictures.title" fullWidth validate={validateImageTitle}/> 
             </TabbedForm.Tab>
         </TabbedForm>
     </Edit>
