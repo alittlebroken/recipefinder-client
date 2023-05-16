@@ -2,7 +2,10 @@ import {
   Admin, 
   Resource, 
   CustomRoutes,
-  Login
+  Login,
+  ListGuesser,
+  EditGuesser,
+  ShowGuesser
 } from 'react-admin'
 import { Route } from "react-router-dom";
 import authProvider from  '../authProvider/authProvider'
@@ -54,6 +57,12 @@ import { PantryList } from '../pantries/pantryList'
 import { PantryEdit } from '../pantries/pantryEdit'
 import { PantryShow } from '../pantries/pantryShow'
 
+/* Uploads */
+import { UploadList } from '../uploads/uploadList'
+import { UploadEdit } from '../uploads/uploadEdit'
+import { UploadShow } from '../uploads/uploadShow'
+import { UploadCreate } from '../uploads/uploadCreate'
+
 /* Import icons to use for the various resources */
 import UserIcon from "@mui/icons-material/Group";
 import CookbookIcon from '@mui/icons-material/MenuBook';
@@ -62,10 +71,13 @@ import IngredientIcon from '@mui/icons-material/EggAlt';
 import PantryIcon from '@mui/icons-material/Kitchen';
 import StepIcon from '@mui/icons-material/ListAlt';
 import CategoryIcon from '@mui/icons-material/Label';
+import TopicIcon from '@mui/icons-material/Topic';
 
 import { ProfileEdit } from '../Profile/profileEdit'
 
 import { CustomLayout } from './customLayout'
+
+import { Dashboard }  from '../Dashboard/Dashboard'
 
 /* Custom login page */
 const CustomLoginPage = () => {
@@ -86,6 +98,7 @@ export const AdminSite = () => {
         dataProvider={dataProvider} 
         layout={CustomLayout}
         loginPage={CustomLoginPage}
+        dashboard={Dashboard}
         >
           <Resource name="users" icon={UserIcon} list={UserList} edit={UserEdit} show={UserShow} create={UserCreate} />
           <Resource name="categories" icon={CategoryIcon} list={CategoryList} edit={CategoryEdit} create={CategoryCreate} show={CategoryShow} />
@@ -94,6 +107,7 @@ export const AdminSite = () => {
           <Resource name="recipes" icon={RecipeIcon} list={RecipeList} edit={RecipeEdit} create={RecipeCreate} show={RecipeShow} />
           <Resource name="steps" icon={StepIcon} list={StepList} edit={StepEdit} show={StepShow} create={StepCreate} />
           <Resource name="pantries" icon={PantryIcon} list={PantryList} edit={PantryEdit} show={PantryShow} />
+          <Resource name="uploads" icon={TopicIcon} list={UploadList} edit={UploadEdit} show={UploadShow} create={UploadCreate} />
           <CustomRoutes>
             <Route path="/profile" element={<ProfileEdit />} />
           </CustomRoutes>
