@@ -14,6 +14,10 @@ import {
     Labeled
 } from 'react-admin';
 
+/* Import custom components */
+import ShowImage from '../CustomUI/ShowImage'
+import { ShowImageTitle } from '../CustomUI/ShowImageTitle'
+
 /* add custom components for displaying data */
 export const RecipeShow = () => (
     <Show>
@@ -68,6 +72,10 @@ export const RecipeShow = () => (
                         <TextField source="image" />
                     </Datagrid>
                 </ArrayField>
+            </TabbedShowLayout.Tab>
+
+            <TabbedShowLayout.Tab label="Images">
+                <ShowImage />
             </TabbedShowLayout.Tab>
 
         </TabbedShowLayout>
