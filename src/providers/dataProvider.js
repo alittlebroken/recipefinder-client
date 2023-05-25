@@ -87,7 +87,6 @@ const dataProvider = {
                 url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}`
             }
             
-        
             /* 
              * If we want to extract one for categories we need to add a filter as
              * we have no getOne route for categories
@@ -140,7 +139,7 @@ const dataProvider = {
             }
 
             if(resource === "recipes"){
-                pictures = await dataProvider.getImages({ resource: "recipes", resourceid: params.id })
+                pictures = await dataProvider.getImages({ resource: "recipe", resourceid: params.id })
             }
 
             if(resource === "ingredients"){
@@ -164,6 +163,8 @@ const dataProvider = {
             if(pictures?.length >= 1 && resource === "recipes" ){
                 payload.pictures = pictures
             }
+
+            console.log('getOne->payload: ', payload)
 
             return Promise.resolve({
                 data: payload
@@ -261,8 +262,10 @@ const dataProvider = {
             return Promise.reject(e)
         }
     },
-    create:     async (resource, params) => {
+    create:   async (resource, params) => {
         try {
+
+            console.log('Create: ', resource, params)
 
             /* Set the headers for the URI */
             let headers = {
@@ -281,20 +284,34 @@ const dataProvider = {
             }
 
             /* generate the url */
-            const url = `${process.env.REACT_APP_API_URL}/${resource}`
+            let url
+            url = `${process.env.REACT_APP_API_URL}/${resource}`
 
             /* Generate the payload */
             let payload = {
                 ...params.data 
              }
              
+             /* Upload any images */
+             let uploads = undefined
+             let uploadType = 'tests'
+
+             if(params?.data?.images?.rawFile){
+                 uploads = params.data.images.rawFile
+                 uploadType = 'images'
+             } else if (params?.data?.tests?.rawFile){
+                 uploads = params.data.tests.rawFile
+             } 
+
              if(params?.data?.tests?.rawFile){
-                payload.tests = params.data.tests.rawFile
+                payload.tests = uploads
              } 
              
              if(params?.data?.images?.rawFile) {
-                payload.images = params.data.images.rawFile
+                payload.images = uploads
              }
+
+             payload.title = params?.data?.title
 
             /* send the data to the server */
             const res = await axios.post(
@@ -308,8 +325,49 @@ const dataProvider = {
                 return Promise.reject(new HttpError((res.data.results.message || statusText), status, res))
             }
 
-            return Promise.resolve({data: {id: params.id}})
+            console.log(res)
 
+            let successFullUpload = true
+            if(uploads){
+
+                /* Generate the url */
+                url = `${process.env.REACT_APP_API_URL}/uploads`
+                
+                /* Generate the payload we need */
+                let uploadPayload = {
+                    userId: params?.data?.userId,
+                    title: params?.data?.title,
+                }
+
+                if(res?.data?.results){
+                    uploadPayload.resourceid = res?.data?.results[0]?.id
+                } else {
+                    uploadPayload.resourceid = res?.data[0]?.id
+                }
+
+                if(resource === "cookbooks"){
+                    uploadPayload.resource = 'Cookbook'
+                } else if (resource === 'ingredients'){
+                    uploadPayload.resource = 'Ingredients'
+                }
+
+                if(uploadType === "tests"){
+                    uploadPayload.tests = uploads
+                } else {
+                    uploadPayload.images = uploads
+                }
+
+                /* Send the data to the server */
+                const response = await axios.post(url, uploadPayload, axiosOptions)
+
+                if(response.status < 200 || response.status >= 300){
+                    successFullUpload = false
+                }
+                
+
+            }
+
+            return Promise.resolve({data: {id: params.id}})
 
         } catch(e) {
             return Promise.reject(e)
@@ -324,7 +382,7 @@ const dataProvider = {
             let headers = {
                 'token': inMemoryJWT.getToken(),
             }
-            if(params?.data?.images?.rawFile || params?.data?.tests?.rawFile){
+            if(params?.data?.images?.rawFile || params?.data?.images?.length >= 1 || params?.data?.tests?.rawFile || params?.data?.tests?.length >= 1){
                 headers['Content-type'] = 'multipart/form-data'
             } else {
                 headers['Content-type'] = 'application/json'
@@ -336,16 +394,67 @@ const dataProvider = {
                 headers: headers
             }
 
+            let url
+            let imageUploadResult = true
+
             /* Add/Update the cookbooks image if we have any to add*/
-            if (params?.data?.tests || params?.data?.images){
+            if (params?.data?.images?.rawFile || params?.data?.tests?.rawFile){
 
                 /* If no existing image then we can just add the new one */
-                
+                    console.log(params.data)
+                    console.log('Adding new images')
+                    /* Generate the url we need */
+                    url = `${process.env.REACT_APP_API_URL}/uploads`
 
+                    /* Create the payload to send */
+                    let imagePayload = {
+                        resourceid: parseInt(params?.data?.id),
+                        title: params?.data?.title || params?.data?.name,
+                        userid: parseInt(params?.data?.userId),
+                    }
+
+                    if(resource === "cookbooks"){
+                        imagePayload.resource = 'Cookbook'
+                    } else if( resource === "ingredients"){
+                        imagePayload.resource = 'Ingredients'
+                    } else if( resource === "recipes"){
+                        imagePayload.resource = 'recipe'
+                    }
+
+                    if(params?.data?.tests?.rawFile){
+                        imagePayload.tests = params.data.tests.rawFile
+                    } else if (params?.data?.tests?.length >= 1){
+                        //imagePayload.tests = params.data.tests
+                        imagePayload.images = []
+                        params.data.tests.map(file => {
+                            imagePayload.images.push(file.rawFile)
+                        })
+                    }
+                     
+                    if(params?.data?.images?.rawFile) {
+                        imagePayload.images = params.data.images.rawFile
+                    } else if (params?.data?.images?.length >= 1) {
+                        //imagePayload.images = params.data.images
+                        imagePayload.images = []
+                        params.data.images.map(file => {
+                            imagePayload.images.push(file.rawFile)
+                        })
+                    }
+
+                    /* Send the data to the server */
+                    const res = await axios.post(url, imagePayload, axiosOptions)
+
+                    console.log('Existing Cookbook new image upload result: ', res)
+
+                    /* Check we have no problems */
+                    if(res.status < 200 || res.status >= 300){
+                        imageUploadResult = false
+                    }
+                
             }
 
             /* generate the url */
-            let url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}`
+            url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}`
 
             /* Generate the payload */
             let payload = {
@@ -354,11 +463,17 @@ const dataProvider = {
             
             if(params?.data?.tests?.rawFile){
                payload.tests = params.data.tests.rawFile
-            } 
+            } else if (params?.data?.tests?.length >= 1) {
+                payload.tests = params.data.tests
+            }
             
             if(params?.data?.images?.rawFile) {
                payload.images = params.data.images.rawFile
+            } else if (params?.data?.images?.length >= 1){
+                payload.images = params.data.images
             }
+
+            console.log('Update: ', params.data, payload)
 
             /* send the data to the server */
             let res;
@@ -632,6 +747,8 @@ const dataProvider = {
 
         try {
 
+            console.log(params)
+
             /* Generate the headers for the request */
             const axiosOptions = {
                 withCredentials: true,
@@ -642,6 +759,8 @@ const dataProvider = {
             }
 
             /* Generate the query params */
+            let resourceName
+            
             const queryParams = { 
                 filter: JSON.stringify({ 
                     resource: params.resource,
