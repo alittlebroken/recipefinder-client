@@ -2,10 +2,8 @@ import {
     Create, 
     NumberInput, 
     TabbedForm,
-    SimpleForm,
     TextInput,
     AutocompleteInput,
-    AutocompleteArrayInput,
     ReferenceInput,
     required,
     minLength,
@@ -14,11 +12,14 @@ import {
     email,
     ArrayInput,
     SimpleFormIterator,
-    SelectInput
+    SelectInput,
+    ImageInput,
+    ImageField
 } from 'react-admin';
 
 /* Validation for the inout fields */
 const validateName = [required(), minLength(2), maxLength(255)]
+
 const validateEmail = [required(), email()]
 const validateDescription = [required(), minLength(2)]
 const validateServings = [required(), number()]
@@ -37,6 +38,13 @@ const validateCookbook = [required()]
 
 const validateCategory = [required()]
 
+const validateTitle = [required(), minLength(2)]
+
+/* Get the ENV we are for the file upload name */
+const getFileUploadName = () => {
+    return process.env.REACT_APP_ENV === 'production' ? 'images' : 'tests'
+}
+
 export const RecipeCreate = () => (
     <Create>
 
@@ -47,6 +55,7 @@ export const RecipeCreate = () => (
                 </ReferenceInput>
                 <TextInput source="name" validate={validateName} fullWidth/>
                 <TextInput source="description" multiline validate={validateDescription} fullWidth/>
+
                 <NumberInput source="servings" validate={validateServings} fullWidth/>
                 <NumberInput source="calories_per_serving" validate={validateCaloriesPerServing} fullWidth/>
                 <NumberInput source="prep_time" validate={validatePrepTime} fullWidth/>
@@ -104,6 +113,12 @@ export const RecipeCreate = () => (
                         </ReferenceInput>
                     </SimpleFormIterator>
                 </ArrayInput>
+            </TabbedForm.Tab>
+            <TabbedForm.Tab label="images">
+                <ImageInput source={getFileUploadName()} label="Images" accept="image/*">
+                    <ImageField source="src" label="title"/>  
+                </ImageInput>
+                <TextInput source="title" fullwidth validate={validateTitle}/>
             </TabbedForm.Tab>
         </TabbedForm>
 
