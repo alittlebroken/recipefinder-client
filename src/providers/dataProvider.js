@@ -349,6 +349,8 @@ const dataProvider = {
                     uploadPayload.resource = 'Cookbook'
                 } else if (resource === 'ingredients'){
                     uploadPayload.resource = 'Ingredients'
+                } else if (resource === 'recipes'){
+                    uploadPayload.resource = 'recipe'
                 }
 
                 if(uploadType === "tests"){
