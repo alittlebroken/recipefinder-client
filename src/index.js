@@ -1,17 +1,37 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+/* Packages needed */
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { AdminSite } from './components/Admin/AdminSite/AdminSite'
+
+// Import JWT memory manager
+import JWTManager from './utils/auth.utils'
+
+/* Import the apps store */
+import store from './store/store'
+
+/* Components needed */
+import Client from './components/Client/Client'
+
+/* Styles needed */
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+const root = document.getElementById('root')
+ReactDOM.render(
+  <BrowserRouter>
+    <Provider store={store}>
+      <Routes>
+
+        {/* Client interface */}
+        <Route path='/*' element={<Client />} />
+        
+
+        {/* Administration interface */}
+        <Route path='/admin/*' element={<AdminSite />} />
+
+      </Routes>
+    </Provider>
+  </BrowserRouter>,
+  root
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
