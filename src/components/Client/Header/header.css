@@ -1,0 +1,60 @@
+.header-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.5);
+    padding: 5px;
+    background-color: var(--col-header);
+}
+
+/* Brand Styling */
+
+.brand-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.brand-name {
+  font-family: var(--fnt-brand);
+  font-size: 3rem;
+  font-weight: bold;
+  color: var(--col-brand);
+}
+
+.brand-container > p { 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .9rem;
+  color:  var(--col-tertiary);
+}
+
+/* Navigation Styling */
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--col-nav-bg);
+  color: white;
+}
+
+.nav-list {
+  display: flex;
+}
+
+.nav-list > li {
+  list-style: none;
+}
+
+.nav-list > li > a {
+  text-decoration: none;
+  color: var(--col-links);
+  display: block;
+  padding: 1rem;
+  font-weight: bold;
+}
+
+.nav-list > li > a:hover {
+  color: var(--col-links-hover);
+}

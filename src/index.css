@@ -1,34 +1,69 @@
-:root {
-  font-family: 'Roboto';
-  font-size: 14px;
-}
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Hind&family=Nanum+Gothic&family=Open+Sans:wght@300;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Emilys+Candy&display=swap');
 
+/* Defaults for all elements */
 * {
   box-sizing: border-box;
-}
-
-body {
   margin: 0;
   padding: 0;
 }
 
-.button {
-  border: none;
-  border-radius: 7px;
-  background-color: rgb( 40, 185, 5  );
-  color: white;
-  padding: 10px;
+:root {
+  /* Vars for stying elements */
+  /* Colours */
+  /* Main colours */
+  --col-primary: #7C0A02;
+  --col-secondary: #B22222;
+  --col-tertiary: #E25822;
+  --col-supporting: #F1BC31;
 
-  font-weight: 600;
-  font-size: 1rem;
+  /* Elements */
+  /* --col-background: #f8f5f2/#EEF1F6; */
+  --col-background: #f7f7f7dc;
+  --col-bg-dark: #3c3c3c;
+  --col-text: #2a2a2a;
+  --col-links: var(--col-tertiary);
+  --col-links-hover: var(--col-supporting);
+  --col-headings: var(--col-tertiary);
+
+  --col-header: white;
+
+  --col-nav-bg: transparent;
+  --col-nav-brand: var(--col-primary);
+  --col-brand: #7C0A02;
+
+  --col-border: #e6e6e6;
+  /* Font Settings */
+  --fnt-text: "Open Sans";
+  --fnt-heading-1: "Emilys Candy";
+  --fnt-heading: "Montserrat";
+
+  --fnt-brand: "Emilys Candy";
+  
+  
+  --fnt-size-body: 20px;
+  --fnt-size-other: 18px;
+  
+  font-family: var(--fnt-text);
+  font-size: var(--fnt-size-body);
 }
 
-.input {
-  padding: 10px;
-  border: none;
-  border-bottom: 1px solid black;
-  outline: none;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  background-color: rgb(  242, 244, 244  );
+/* body Styles */
+body {
+  background-color: var(--col-background);
+}
+
+/* Headings */
+h1 {
+  font-family: var(--fnt-heading-1);
+  font-size: 44px;
+  color: var(--col-primary);
+}
+
+h2, h3, h4, h5, h6 {
+  font-family: var(--fnt-heading);
 }

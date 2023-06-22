@@ -1,14 +1,17 @@
 import Container from 'react-bootstrap/Container'
 
 import Header from '../Header/Header'
+import Footer from '../Footer/Footer'
+import Content from '../Content/Content'
 
 const Layout = ({ children }) => {
     return (
         <>
             <Header />
-            <Container>
+            <Content>
                 { children }
-            </Container>
+            </Content>
+            <Footer />
         </>
     )
 }
