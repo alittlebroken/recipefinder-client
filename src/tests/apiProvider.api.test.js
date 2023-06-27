@@ -389,4 +389,202 @@ describe('dataProvider', () => {
 
     })
 
+    describe('getList', () => {
+
+        afterEach(() => {
+            jest.clearAllMocks();
+        });
+
+        it('should return status 200 and a list of items from the specified resource', async () => {
+
+            // Setup
+
+                // Expected data to be returned from the method being tested
+                const expectedStatus = 200
+                const expectedSuccess = true
+                const expectedMessage = ''
+                const expectedData = [
+                    { id: 1, name: "Breakfast", created_at: "2023-06-27T12:33:00000Z", updated_at: "2023-006-27T12:33:00000Z"},
+                    { id: 2, name: "Lunch", created_at: "2023-06-28T12:33:00000Z", updated_at: "2023-006-28T12:33:00000Z"},
+                    { id: 3, name: "Dinner", created_at: "2023-06-29T12:33:00000Z", updated_at: "2023-006-29T12:33:00000Z"},
+                ]
+                const expectedParams = {page:1,limit:10,sort_by:"id",sort_direction:"asc"}
+
+                // Data being returned from Axios
+                const axiosMockData = expectedData
+                axios.get.mockResolvedValueOnce({
+                    status: 200,
+                    data: axiosMockData
+                })
+
+                // Data for the various parameters
+                const params = {
+                    pagination: {
+                        page: 1,
+                        perPage: 10
+                    },
+                    sort: {
+                        field: 'id',
+                        order: 'asc'
+                    }
+                }
+
+                // The resource we wish to access
+                const resource = 'categories'
+
+                // Options used by axios for the request
+                const axiosOptions = { headers: { "Content-type": "application/json"}}
+
+            // Execute
+            const response = await apiProvider.getList(resource, params)
+
+            // Assert
+
+            expect(axios.get).toHaveBeenCalledWith(`${process.env.REACT_APP_API_URL}/${resource}?${JSON.stringify(expectedParams)}`, axiosOptions)
+
+            expect(response.status).toBe(200)
+
+            expect(response.data).not.toBe(null)
+            const data = response.data
+            expect(Array.isArray(data)).toBe(true)
+            expect(data).toHaveLength(3)
+
+            let index = 0
+            data.forEach(category => {
+
+                expect(typeof data[index].id).toBe('number')
+                expect(data[index].id).toBe(expectedData[index].id)
+
+                expect(typeof data[index].name).toBe('string')
+                expect(data[index].name).toBe(expectedData[index].name)
+
+                expect(typeof data[index].created_at).toBe('string')
+                expect(data[index].created_at).toBe(expectedData[index].created_at)
+
+                expect(typeof data[index].updated_at).toBe('string')
+                expect(data[index].updated_at).toBe(expectedData[index].updated_at)
+
+                index += 1
+            })
+
+
+        })
+
+        it('should return status 404 if the resorce has no items to return', async () => {
+
+            // Setup
+
+                // The expected results
+                const expectedStatus = 404
+                const expectedSuccess = false
+                const expectedMessage = "There are no categories to return"
+                const expectedData = []
+                const expectedParams = {page:1,limit:10,sort_by:"id",sort_direction:"asc"}
+
+                // Resource being accessed
+                const resource = 'categories'
+
+                // Data being returned from axios
+                axios.get.mockResolvedValueOnce({
+                    status: 404,
+                    data: {
+                        status: 404,
+                        success: false,
+                        message: expectedMessage
+                    }
+                })
+
+
+                // Data for the various parameters
+                const params = {
+                    pagination: {
+                        page: 1,
+                        perPage: 10
+                    },
+                    sort: {
+                        field: 'id',
+                        order: 'asc'
+                    }
+                }
+
+                // Options used by axios for the request
+                const axiosOptions = { headers: { "Content-type": "application/json"}}
+
+            // Execute
+            const response = await  apiProvider.getList(resource, params)
+
+            // Assert
+            expect(axios.get).toHaveBeenCalledWith(`${process.env.REACT_APP_API_URL}/${resource}?${JSON.stringify(expectedParams)}`, axiosOptions)
+            expect(response.status).toBe(expectedStatus)
+
+            expect(typeof response.status).toBe('number')
+            expect(response.status).toBe(expectedStatus)
+
+            expect(typeof response.success).toBe('boolean')
+            expect(response.success).toBe(expectedSuccess)
+
+            expect(typeof response.message).toBe('string')
+            expect(response.message).toEqual(expectedMessage)
+
+        })
+
+        it('should return status 500 if the resource encounters any other error', async () => {
+
+            // Setup
+
+                // Expected return values
+                const expectedStatus = 500
+                const expectedSuccess = false
+                const expectedMessage = 'There was a problem with the resource, please try again later'
+                const expectedData = []
+                const expectedParams = {page:1,limit:10,sort_by:"id",sort_direction:"asc"}
+
+                // Resource being accessed
+                const resource = 'categories'
+
+                // Data being returned from axios
+                axios.get.mockResolvedValueOnce({
+                    status: 500,
+                    data: {
+                        status: 500,
+                        success: false,
+                        message: expectedMessage
+                    }
+                })
+
+                // params to use
+                const params = {
+                    pagination: {
+                        page: 1,
+                        perPage: 10
+                    },
+                    sort: {
+                        field: 'id',
+                        order: 'asc'
+                    }
+                }
+
+                // Options used by axios for the request
+                const axiosOptions = { headers: { "Content-type": "application/json"}}
+
+            // Execute
+            const response = await apiProvider.getList(resource, params)
+
+            // Assert
+            expect(axios.get).toHaveBeenCalledWith(`${process.env.REACT_APP_API_URL}/${resource}?${JSON.stringify(expectedParams)}`, axiosOptions)
+            expect(response.status).toBe(expectedStatus)
+
+            expect(typeof response.status).toBe('number')
+            expect(response.status).toBe(expectedStatus)
+
+            expect(typeof response.success).toBe('boolean')
+            expect(response.success).toBe(expectedSuccess)
+
+            expect(typeof response.message).toBe('string')
+            expect(response.message).toBe(expectedMessage)
+
+        })
+
+    })
+
 })  
