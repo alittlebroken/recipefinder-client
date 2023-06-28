@@ -587,4 +587,193 @@ describe('dataProvider', () => {
 
     })
 
+    describe('removeOne', () => {
+
+        afterEach(()=> {
+            jest.clearAllMocks()
+        })
+
+        it('should return status 200 and delete the requested item from the resource', async () => {
+
+            // Setup
+
+                // Resource we are accessing on the API
+                const resource = 'ingredients'
+
+                // Id used to identify the item in the specified resource
+                const id = 12
+
+                // Params to pass to the method
+                const params = { id }
+
+                // Options to pass to axios
+                const axiosOptions = { headers: { 'Content-type': 'application/json'}}
+
+                // Mock the axios return data
+                axios.delete.mockResolvedValueOnce({
+                    status: 200,
+                    data: {
+                        status: 200,
+                        success: true,
+                        message: 'Ingredient successfully removed'
+                    }
+                })
+
+                // Expected return data
+                const expectedStatus = 200
+                const expectedSuccess = true
+                const expectedMessage = 'Ingredient successfully removed'
+                const expectedUrl = `${process.env.REACT_APP_API_URL}/${resource}/${id}`
+
+            // Execute
+            const response = await apiProvider.removeOne(resource, params)
+
+            // Assert
+            expect(axios.delete).toHaveBeenCalledWith(expectedUrl, axiosOptions)
+            
+        
+            expect(typeof response.status).toBe('number')
+            expect(response.status).toBe(expectedStatus)
+
+            expect(typeof response.success).toBe('boolean')
+            expect(response.success).toBe(expectedSuccess)
+
+            expect(typeof response.message).toBe('string')
+            expect(response.message).toBe(expectedMessage)
+
+        })
+
+        it('should return status 400 if the request params are undefined', async () => {
+
+            // Setup
+
+                // Set the resource being targeted
+                const resource = 'ingredients'
+
+                // Set the identifier of the item to be removed from the specified resource
+                const id = 12
+
+                // Set the parameters to be used in the request
+                let params
+
+                // Set the options to be passed to axios
+                const axiosOptions = { headers: { "content-type": 'application.json'}}
+
+                // Set the mock return value for axios
+                axios.delete.mockResolvedValueOnce({})
+
+                // Set the return values we expect to recieve from the api
+                const expectedStatus = 400
+                const expectedSuccess = false
+                const expectedMessage = 'Undefined request parameters'
+                const expectedUrl = `${process.env.REACT_APP_API_URL}/${resource}/${id}`
+
+            // Execute
+            const response = await apiProvider.removeOne(resource, params)
+
+            // Assert
+
+            expect(typeof response.status).toBe('number')
+            expect(response.status).toBe(expectedStatus)
+
+            expect(typeof response.success).toBe('boolean')
+            expect(response.success).toBe(expectedSuccess)
+
+            expect(typeof response.message).toBe('string')
+            expect(response.message).toBe(expectedMessage)
+
+        })
+
+        it('should return status 400 if the id is missing', async () => {
+
+            // Setup
+
+                // Set the resource being targeted
+                const resource = 'ingredients'
+
+                // Set the identifier of the item to be removed from the specified resource
+                let id
+
+                // Set the parameters to be used in the request
+                const params = { id }
+
+                // Set the options to be passed to axios
+                const axiosOptions = { headers: { "content-type": 'application.json'}}
+
+                // Set the mock return value for axios
+                axios.delete.mockResolvedValueOnce({})
+
+                // Set the return values we expect to recieve from the api
+                const expectedStatus = 400
+                const expectedSuccess = false
+                const expectedMessage = 'Undefined id'
+                const expectedUrl = `${process.env.REACT_APP_API_URL}/${resource}/${id}`
+
+            // Execute
+            const response = await apiProvider.removeOne(resource, params)
+
+            // Assert
+
+            expect(typeof response.status).toBe('number')
+            expect(response.status).toBe(expectedStatus)
+
+            expect(typeof response.success).toBe('boolean')
+            expect(response.success).toBe(expectedSuccess)
+
+            expect(typeof response.message).toBe('string')
+            expect(response.message).toBe(expectedMessage)
+
+        })
+
+        it('should return status 500 if resource encounters any other issues', async () => {
+
+            // Setup
+
+                // Set the resource being targeted
+                const resource = 'ingredients'
+
+                // Set the identifier of the item to be removed from the specified resource
+                let id = 12
+
+                // Set the parameters to be used in the request
+                const params = { id }
+
+                // Set the options to be passed to axios
+                const axiosOptions = { headers: { "Content-type": 'application/json'}}
+
+                // Set the mock return value for axios
+                axios.delete.mockResolvedValueOnce({
+                    status: 500,
+                    data: {
+                        status: 500,
+                        success: false,
+                        message: 'There was a problem with the resource, please try again later'
+                    }
+                })
+
+                // Set the return values we expect to recieve from the api
+                const expectedStatus = 500
+                const expectedSuccess = false
+                const expectedMessage = 'There was a problem with the resource, please try again later'
+                const expectedUrl = `${process.env.REACT_APP_API_URL}/${resource}/${id}`
+
+            // Execute
+            const response = await apiProvider.removeOne(resource, params)
+
+            // Assert
+            expect(axios.delete).toHaveBeenCalledWith(expectedUrl, axiosOptions)
+
+            expect(typeof response.status).toBe('number')
+            expect(response.status).toBe(expectedStatus)
+
+            expect(typeof response.success).toBe('boolean')
+            expect(response.success).toBe(expectedSuccess)
+
+            expect(typeof response.message).toBe('string')
+            expect(response.message).toBe(expectedMessage)
+
+        })
+
+    })
+
 })  

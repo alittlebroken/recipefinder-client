@@ -160,6 +160,69 @@ const apiProvider = {
 
     },
 
+    removeOne: async (resource, params) => {
+
+        // Validation
+        if(!params || params === undefined){
+            return {
+                status: 400,
+                success: false,
+                message: 'Undefined request parameters'
+            }
+        }
+
+        if(!params.id || params.id === undefined){
+            return {
+                status: 400,
+                success: false,
+                message: 'Undefined id'
+            }
+        }
+
+        // Authentication
+        const { authenticate } = params.auth || false
+        const { roles } = params.auth || 'user'
+
+        // Generate the header and any options to send along with the request
+
+        // Generate the initial header for the request
+        let headers = { 'Content-type': 'application/json' }
+
+        // Add any further headers as needed
+        if(authenticate === true && authenticate !== undefined){
+            headers.token = inMemoryJWT.getToken()
+        }
+
+        // Generate the initial options
+        let axiosOptions = { headers: headers }
+
+        // Add on any further options
+        if(authenticate === true && authenticate !== undefined){
+            axiosOptions.withCredentials = true
+        }
+
+        // Set the URL to use
+        let url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}`
+
+        // Access the appropriate API and process the results
+        const response = await axios.delete(url, axiosOptions)
+
+        if(response.status >= 400){
+            return {
+                status: response.status,
+                success: response.data.success,
+                message: response.data.message
+            }
+        }
+
+        return {
+            status: response.status,
+            success: response.data.success,
+            message: response.data.message
+        }
+
+    },
+
 }
 
 export default apiProvider;
