@@ -370,7 +370,7 @@ describe('dataProvider', () => {
 
             // Execute
                 const response = await apiProvider.getOne(resource, params)
-                console.log(response)
+                
             // Assert
                 expect(response.status).toBe(500)
 
