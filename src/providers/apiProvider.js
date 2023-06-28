@@ -223,6 +223,62 @@ const apiProvider = {
 
     },
 
+    removeAll: async (resource, params) => {
+
+        // Authentication
+        const { authenticate } = params.auth || false
+        const { roles } = params.auth || 'user'
+
+        // Generate the header and any options to send along with the request
+
+        // Generate the initial header for the request
+        let headers = { 'Content-type': 'application/json' }
+
+        // Add any further headers as needed
+        if(authenticate === true && authenticate !== undefined){
+            headers.token = inMemoryJWT.getToken()
+        }
+
+        // Generate the initial options
+        let axiosOptions = { headers: headers }
+
+        // Add on any further options
+        if(authenticate === true && authenticate !== undefined){
+            axiosOptions.withCredentials = true
+        }
+
+        // Set the URL to use
+        let url = `${process.env.REACT_APP_API_URL}/${resource}`
+
+        // Access the appropriate API and process the results
+        const response = await axios.delete(url, axiosOptions)
+
+        if(response.status >= 400){
+
+            // Check if the return data is just a count of zero
+            if(response.data.count === 0){
+                return {
+                    status: 404,
+                    success: false,
+                    message: 'There are no records to delete'
+                }
+            }
+
+            return {
+                status: response.status,
+                success: response.data.success,
+                message: response.data.message
+            }
+        }
+
+        return {
+            status: response.status,
+            success: response.data.success,
+            message: response.data.message
+        }
+
+    }
+
 }
 
 export default apiProvider;

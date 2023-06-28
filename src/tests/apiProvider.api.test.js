@@ -776,4 +776,149 @@ describe('dataProvider', () => {
 
     })
 
+    describe('removeAll', () => {
+
+        afterEach(() => {
+            jest.resetAllMocks()
+        })
+
+        it('should return status 200 and remove all records for a resource', async () => {
+
+            // Setup
+
+                // Resource name
+                const resource = 'ingredients'
+
+                // Parameters to be passed to the method
+                const params = {}
+
+                // Options for Axios
+                const axiosOptions = { headers: { "Content-type": "application/json" }}
+
+                // Mock the return data from axios
+                axios.delete.mockResolvedValueOnce({
+                    status: 200,
+                    data: {
+                        status: 200,
+                        success: true,
+                        message: "All ingredients removed successfully",
+                        count: 12
+                    }
+                })
+
+                // Set the expected return values
+                const expectedStatus = 200
+                const expectedSuccess = true
+                const expectedMessage = 'All ingredients removed successfully'
+                const expectedUrl = `${process.env.REACT_APP_API_URL}/${resource}`
+
+            // Execute
+            const response = await apiProvider.removeAll(resource, params)
+
+            // Assert
+            expect(axios.delete).toHaveBeenCalledWith(expectedUrl, axiosOptions)
+
+            expect(typeof response.status).toBe('number')
+            expect(response.status).toBe(expectedStatus)
+
+            expect(typeof response.success).toBe('boolean')
+            expect(response.success).toBe(expectedSuccess)
+
+            expect(typeof response.message).toBe('string')
+            expect(response.message).toBe(expectedMessage)
+
+        })
+
+        it('should return status 404 if it finds no records to delete', async () => {
+
+            // Setup
+
+                // Resource name
+                const resource = 'ingredients'
+
+                // Parameters to be passed to the method
+                const params = {}
+
+                // Options for Axios
+                const axiosOptions = { headers: { "Content-type": "application/json" }}
+
+                // Mock the return data from axios
+                axios.delete.mockResolvedValueOnce({
+                    status: 404,
+                    data: {
+                        count: 0
+                    }
+                })
+
+                // Set the expected return values
+                const expectedStatus = 404
+                const expectedSuccess = false
+                const expectedMessage = 'There are no records to delete'
+                const expectedUrl = `${process.env.REACT_APP_API_URL}/${resource}`
+
+            // Execute
+            const response = await apiProvider.removeAll(resource, params)
+
+            // Assert
+            expect(axios.delete).toHaveBeenCalledWith(expectedUrl, axiosOptions)
+
+            expect(typeof response.status).toBe('number')
+            expect(response.status).toBe(expectedStatus)
+
+            expect(typeof response.success).toBe('boolean')
+            expect(response.success).toBe(expectedSuccess)
+
+            expect(typeof response.message).toBe('string')
+            expect(response.message).toBe(expectedMessage)
+
+        })
+
+        it('should return status 500 if there is any other problem', async () => {
+
+            // Setup
+
+                // Resource name
+                const resource = 'ingredients'
+
+                // Parameters to be passed to the method
+                const params = {}
+
+                // Options for Axios
+                const axiosOptions = { headers: { "Content-type": "application/json" }}
+
+                // Mock the return data from axios
+                axios.delete.mockResolvedValueOnce({
+                    status: 500,
+                    data: {
+                        status: 500,
+                        success: false,
+                        message: 'There was a problem with the resource, please try again later'
+                    }
+                })
+
+                // Set the expected return values
+                const expectedStatus = 500
+                const expectedSuccess = false
+                const expectedMessage = 'There was a problem with the resource, please try again later'
+                const expectedUrl = `${process.env.REACT_APP_API_URL}/${resource}`
+
+            // Execute
+            const response = await apiProvider.removeAll(resource, params)
+
+            // Assert
+            expect(axios.delete).toHaveBeenCalledWith(expectedUrl, axiosOptions)
+
+            expect(typeof response.status).toBe('number')
+            expect(response.status).toBe(expectedStatus)
+
+            expect(typeof response.success).toBe('boolean')
+            expect(response.success).toBe(expectedSuccess)
+
+            expect(typeof response.message).toBe('string')
+            expect(response.message).toBe(expectedMessage)
+
+        })
+
+    })
+
 })  
