@@ -1,6 +1,4 @@
 import axios from 'axios'
-import queryString from 'query-string'
-import { HttpError } from 'react-admin'
 
 import inMemoryJWT from '../utils/auth.utils';
 

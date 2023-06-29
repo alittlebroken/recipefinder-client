@@ -1,4 +1,3 @@
-import { isRejected } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 import apiProvider from '../providers/apiProvider'
