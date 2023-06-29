@@ -921,4 +921,262 @@ describe('dataProvider', () => {
 
     })
 
+    describe('create', () => {
+
+       afterEach(() => {
+        jest.resetAllMocks()
+       }) 
+
+       it('should return status 200 and create a new record within the resource', async () => {
+
+            // Setup
+            
+                // Resource being accessed
+                const resource = 'categories'
+
+                // Params to be sent to the resource
+                // Set the payload for this particular resource
+                const params = {
+                    payload: {
+                        name: "Snacks"
+                    }
+                }
+
+                // Set the axios options
+                const axiosOptions = { headers: {"Content-type": "application/json" }}
+
+                // Mock the axios post request reponse
+                axios.post.mockResolvedValueOnce({
+                    status: 200,
+                    data: {
+                        status: 200,
+                        success: true,
+                        message: 'Category successfully added'
+                    }
+                })
+
+                // Expected return data from the method
+                const expectedStatus = 200
+                const expectedSuccess = true
+                const expectedMessage = 'Category successfully added'
+                const expectedParams = JSON.stringify({payload: { name: "Snacks" }})
+                const expectedUrl = `${process.env.REACT_APP_API_URL}/${resource}`
+
+            // Execute
+            const response = await apiProvider.create(resource, params)
+
+            // Assert 
+            expect(axios.post).toHaveBeenCalledWith(`${expectedUrl}`, params.payload, axiosOptions)
+
+            expect(typeof response.status).toBe('number')
+            expect(response.status).toBe(expectedStatus)
+
+            expect(typeof response.success).toBe('boolean')
+            expect(response.success).toBe(expectedSuccess)
+
+            expect(typeof response.message).toBe('string')
+            expect(response.message).toBe(expectedMessage)
+
+       })
+
+       it('should return status 400 if the payload is missing', async () => {
+
+            // Setup
+            
+                // Resource being accessed
+                const resource = 'categories'
+
+                // Params to be sent to the resource
+                // Set the payload for this particular resource
+                const params = {}
+
+                // Set the axios options
+                const axiosOptions = { headers: {"Content-type": "application/json" }}
+
+                // Mock the axios post request reponse
+                axios.post.mockResolvedValueOnce({
+                    status: 400,
+                    data: {
+                        status: 400,
+                        success: false,
+                        message: 'Undefined payload'
+                    }
+                })
+
+                // Expected return data from the method
+                const expectedStatus = 400
+                const expectedSuccess = false
+                const expectedMessage = 'Undefined payload'
+
+            // Execute
+            const response = await apiProvider.create(resource, params)
+
+            // Assert 
+
+            expect(typeof response.status).toBe('number')
+            expect(response.status).toBe(expectedStatus)
+
+            expect(typeof response.success).toBe('boolean')
+            expect(response.success).toBe(expectedSuccess)
+
+            expect(typeof response.message).toBe('string')
+            expect(response.message).toBe(expectedMessage) 
+
+       })
+
+       it('should return status 400 if category name is undefined', async () => {
+
+            // Setup
+            
+                // Resource being accessed
+                const resource = 'categories'
+
+                // Params to be sent to the resource
+                // Set the payload for this particular resource
+                const params = {
+                    payload: {
+                        
+                    }
+                }
+
+                // Set the axios options
+                const axiosOptions = { headers: {"Content-type": "application/json" }}
+
+                // Mock the axios post request reponse
+                axios.post.mockResolvedValueOnce({
+                    status: 400,
+                    data: {
+                        status: 400,
+                        success: false,
+                        message: 'Undefined category name'
+                    }
+                })
+
+                // Expected return data from the method
+                const expectedStatus = 400
+                const expectedSuccess = false
+                const expectedMessage = 'Undefined category name'
+                const expectedParams = JSON.stringify({payload: { }})
+                const expectedUrl = `${process.env.REACT_APP_API_URL}/${resource}`
+
+            // Execute
+            const response = await apiProvider.create(resource, params)
+
+            // Assert
+
+            expect(typeof response.status).toBe('number')
+            expect(response.status).toBe(expectedStatus)
+
+            expect(typeof response.success).toBe('boolean')
+            expect(response.success).toBe(expectedSuccess)
+
+            expect(typeof response.message).toBe('string')
+            expect(response.message).toBe(expectedMessage)
+
+       })
+
+       it('should return status 400 if category name is of the wrong type', async () => {
+
+        // Setup
+            
+                // Resource being accessed
+                const resource = 'categories'
+
+                // Params to be sent to the resource
+                // Set the payload for this particular resource
+                const params = {
+                    payload: {
+                        name: 123
+                    }
+                }
+
+                // Set the axios options
+                const axiosOptions = { headers: {"Content-type": "application/json" }}
+
+                // Mock the axios post request reponse
+                axios.post.mockResolvedValueOnce({
+                    status: 400,
+                    data: {
+                        status: 400,
+                        success: false,
+                        message: 'Wrong format for category name'
+                    }
+                })
+
+                // Expected return data from the method
+                const expectedStatus = 400
+                const expectedSuccess = false
+                const expectedMessage = 'Wrong format for category name'
+                const expectedParams = JSON.stringify({payload: { name: "Snacks" }})
+                const expectedUrl = `${process.env.REACT_APP_API_URL}/${resource}`
+
+            // Execute
+            const response = await apiProvider.create(resource, params)
+
+            // Assert 
+
+            expect(typeof response.status).toBe('number')
+            expect(response.status).toBe(expectedStatus)
+
+            expect(typeof response.success).toBe('boolean')
+            expect(response.success).toBe(expectedSuccess)
+
+            expect(typeof response.message).toBe('string')
+            expect(response.message).toBe(expectedMessage)
+
+       })
+
+       it('should return status 500 for any other error', async () => {
+
+        // Setup
+            
+                // Resource being accessed
+                const resource = 'categories'
+
+                // Params to be sent to the resource
+                // Set the payload for this particular resource
+                const params = {
+                    payload: {
+                        name: "Snacks"
+                    }
+                }
+
+                // Set the axios options
+                const axiosOptions = { headers: {"Content-type": "application/json" }}
+
+                // Mock the axios post request reponse
+                axios.post.mockResolvedValueOnce({
+                    status: 500,
+                    data: {
+                        status: 500,
+                        success: false,
+                        message: 'There was a problem with the resource, please try again later'
+                    }
+                })
+
+                // Expected return data from the method
+                const expectedStatus = 500
+                const expectedSuccess = false
+                const expectedMessage = 'There was a problem with the resource, please try again later'
+                const expectedParams = JSON.stringify({payload: { name: "Snacks" }})
+                const expectedUrl = `${process.env.REACT_APP_API_URL}/${resource}`
+
+            // Execute
+            const response = await apiProvider.create(resource, params)
+
+            // Assert
+
+            expect(typeof response.status).toBe('number')
+            expect(response.status).toBe(expectedStatus)
+
+            expect(typeof response.success).toBe('boolean')
+            expect(response.success).toBe(expectedSuccess)
+
+            expect(typeof response.message).toBe('string')
+            expect(response.message).toBe(expectedMessage)
+
+       })
+
+    })
+
 })  
