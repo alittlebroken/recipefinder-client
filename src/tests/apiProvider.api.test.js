@@ -6,7 +6,7 @@ import apiProvider from '../providers/apiProvider'
 jest.mock('axios')
 
 
-describe('dataProvider', () => {
+describe('apiProvider', () => {
 
     afterEach(() => {
         jest.clearAllMocks();
@@ -1179,4 +1179,340 @@ describe('dataProvider', () => {
 
     })
 
-})  
+    describe('update', () => {
+
+        afterEach(() => {
+            jest.clearAllMocks()
+        })
+
+        it('should return status 200 and update the specified resources record', async () => {
+
+            // Setup
+            
+                // Resource being accessed
+                const resource = 'categories'
+
+                // Params to be sent to the resource
+
+                // Id of the record being updated
+                const id = 1265
+
+                // Set the payload for this particular resource
+                const params = {
+                    id, 
+                    payload: {
+                        name: "Gluten Free"
+                    }
+                }
+
+                // Set the axios options
+                const axiosOptions = { headers: {"Content-type": "application/json" }}
+
+                // Mock the axios post request reponse
+                axios.put.mockResolvedValueOnce({
+                    status: 200,
+                    data: {
+                        status: 200,
+                        success: true,
+                        message: 'Category successfully updated'
+                    }
+                })
+
+                // Expected return data from the method
+                const expectedStatus = 200
+                const expectedSuccess = true
+                const expectedMessage = 'Category successfully updated'
+                const expectedParams = JSON.stringify({ id: 1265})
+                const expectedUrl = `${process.env.REACT_APP_API_URL}/${resource}/${id}`
+
+                // Execute
+                const response = await apiProvider.update(resource, params)
+                
+                // Assert
+                expect(axios.put).toHaveBeenCalledWith(expectedUrl, params.payload, axiosOptions)
+
+                expect(typeof response.status).toBe('number')
+                expect(response.status).toBe(expectedStatus)
+
+                expect(typeof response.success).toBe('boolean')
+                expect(response.success).toBe(expectedSuccess)
+
+                expect(typeof response.message).toBe('string')
+                expect(response.message).toBe(expectedMessage)
+
+            })
+
+            it('should return status 400 if the request parameters are missing', async () => {
+
+                // Setup
+            
+                // Resource being accessed
+                const resource = 'categories'
+
+                // Params to be sent to the resource
+
+                // Id of the record being updated
+                const id = 1265
+
+                // Set the payload for this particular resource
+                let params
+
+                // Set the axios options
+                const axiosOptions = { headers: {"Content-type": "application/json" }}
+
+                // Mock the axios post request reponse
+                axios.put.mockResolvedValueOnce({
+                    status: 400,
+                    data: {
+                        status: 400,
+                        success: false,
+                        message: 'Undefined request parameter'
+                    }
+                })
+
+                // Expected return data from the method
+                const expectedStatus = 400
+                const expectedSuccess = false
+                const expectedMessage = 'Undefined request parameter'
+                const expectedParams = JSON.stringify({ id: 1265})
+                const expectedUrl = `${process.env.REACT_APP_API_URL}/${resource}/${id}`
+
+                // Execute
+                const response = await apiProvider.update(resource, params)
+
+                // Assert
+
+                expect(typeof response.status).toBe('number')
+                expect(response.status).toBe(expectedStatus)
+
+                expect(typeof response.success).toBe('boolean')
+                expect(response.success).toBe(expectedSuccess)
+
+                expect(typeof response.message).toBe('string')
+                expect(response.message).toBe(expectedMessage)
+
+            })
+
+            it('should return status 400 if category id is missing', async () => {
+
+                // Setup
+            
+                // Resource being accessed
+                const resource = 'categories'
+
+                // Params to be sent to the resource
+
+                // Id of the record being updated
+                let id
+
+                // Set the payload for this particular resource
+                const params = {
+                    payload: { name: "Air Fryer" }
+                }
+
+                // Set the axios options
+                const axiosOptions = { headers: {"Content-type": "application/json" }}
+
+                // Mock the axios post request reponse
+                axios.put.mockResolvedValueOnce({
+                    status: 400,
+                    data: {
+                        status: 400,
+                        success: false,
+                        message: 'Undefined category id'
+                    }
+                })
+
+                // Expected return data from the method
+                const expectedStatus = 400
+                const expectedSuccess = false
+                const expectedMessage = 'Undefined category id'
+                const expectedParams = JSON.stringify()
+                const expectedUrl = `${process.env.REACT_APP_API_URL}/${resource}/${id}`
+
+                // Execute
+                const response = await apiProvider.update(resource, params)
+
+                // Assert
+
+                expect(typeof response.status).toBe('number')
+                expect(response.status).toBe(expectedStatus)
+
+                expect(typeof response.success).toBe('boolean')
+                expect(response.success).toBe(expectedSuccess)
+
+                expect(typeof response.message).toBe('string')
+                expect(response.message).toBe(expectedMessage)
+
+            })
+
+            it('should return status 400 if the category name is missing', async () => {
+
+                // Setup
+            
+                // Resource being accessed
+                const resource = 'categories'
+
+                // Params to be sent to the resource
+
+                // Id of the record being updated
+                let id
+
+                // Set the payload for this particular resource
+                const params = {
+                    id,
+                    payload: {}
+                }
+
+                // Set the axios options
+                const axiosOptions = { headers: {"Content-type": "application/json" }}
+
+                // Mock the axios post request reponse
+                axios.put.mockResolvedValueOnce({
+                    status: 400,
+                    data: {
+                        status: 400,
+                        success: false,
+                        message: 'Undefined category name'
+                    }
+                })
+
+                // Expected return data from the method
+                const expectedStatus = 400
+                const expectedSuccess = false
+                const expectedMessage = 'Undefined category name'
+                const expectedParams = JSON.stringify()
+                const expectedUrl = `${process.env.REACT_APP_API_URL}/${resource}/${id}`
+
+                // Execute
+                const response = await apiProvider.update(resource, params)
+
+                // Assert
+
+                expect(typeof response.status).toBe('number')
+                expect(response.status).toBe(expectedStatus)
+
+                expect(typeof response.success).toBe('boolean')
+                expect(response.success).toBe(expectedSuccess)
+
+                expect(typeof response.message).toBe('string')
+                expect(response.message).toBe(expectedMessage)
+
+            })
+
+            it('should return status 400 if category name is in the wrong format', async () => {
+
+                // Setup
+            
+                // Resource being accessed
+                const resource = 'categories'
+
+                // Params to be sent to the resource
+
+                // Id of the record being updated
+                let id
+
+                // Set the payload for this particular resource
+                const params = {
+                    id,
+                    payload: {
+                        name: 12345
+                    }
+                }
+
+                // Set the axios options
+                const axiosOptions = { headers: {"Content-type": "application/json" }}
+
+                // Mock the axios post request reponse
+                axios.put.mockResolvedValueOnce({
+                    status: 400,
+                    data: {
+                        status: 400,
+                        success: false,
+                        message: 'Wrong format for category name'
+                    }
+                })
+
+                // Expected return data from the method
+                const expectedStatus = 400
+                const expectedSuccess = false
+                const expectedMessage = 'Wrong format for category name'
+                const expectedParams = JSON.stringify()
+                const expectedUrl = `${process.env.REACT_APP_API_URL}/${resource}/${id}`
+
+                // Execute
+                const response = await apiProvider.update(resource, params)
+
+                // Assert
+
+                expect(typeof response.status).toBe('number')
+                expect(response.status).toBe(expectedStatus)
+
+                expect(typeof response.success).toBe('boolean')
+                expect(response.success).toBe(expectedSuccess)
+
+                expect(typeof response.message).toBe('string')
+                expect(response.message).toBe(expectedMessage)
+
+            })
+
+            it('should return status 500 for any other problems', async () => {
+
+                // Setup
+            
+                // Resource being accessed
+                const resource = 'categories'
+
+                // Params to be sent to the resource
+
+                // Id of the record being updated
+                let id
+
+                // Set the payload for this particular resource
+                const params = {
+                    id: 1265,
+                    payload: {
+                        name: "Sweets"
+                    }
+                }
+
+                // Set the axios options
+                const axiosOptions = { headers: {"Content-type": "application/json" }}
+
+                // Mock the axios post request reponse
+                axios.put.mockResolvedValueOnce({
+                    status: 500,
+                    data: {
+                        status: 500,
+                        success: false,
+                        message: 'There was a problem with the resource, please try again later'
+                    }
+                })
+
+                // Expected return data from the method
+                const expectedStatus = 500
+                const expectedSuccess = false
+                const expectedMessage = 'There was a problem with the resource, please try again later'
+                const expectedParams = JSON.stringify()
+                const expectedUrl = `${process.env.REACT_APP_API_URL}/${resource}/${id}`
+
+                // Execute
+                const response = await apiProvider.update(resource, params)
+
+                // Assert
+
+                expect(typeof response.status).toBe('number')
+                expect(response.status).toBe(expectedStatus)
+
+                expect(typeof response.success).toBe('boolean')
+                expect(response.success).toBe(expectedSuccess)
+
+                expect(typeof response.message).toBe('string')
+                expect(response.message).toBe(expectedMessage)
+
+            })
+
+    })
+
+})
+ 
