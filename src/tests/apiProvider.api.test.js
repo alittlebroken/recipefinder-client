@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import apiProvider from '../providers/apiProvider'
+import { FilterFormBase } from 'react-admin';
 
 jest.mock('axios')
 
@@ -724,6 +725,124 @@ describe('apiProvider', () => {
 
         })
 
+        it('should return status 401 if an unlogged in user tries to access the resource', async () => {
+
+             // Setup
+
+                // Resource we are accessing on the API
+                const resource = 'ingredients'
+
+                // Id used to identify the item in the specified resource
+                const id = 12
+
+                // Params to pass to the method
+                const params = { 
+                    id,
+                    auth: {
+                        authenticate: false,
+                        roles: 'user'
+                    }
+                }
+
+                // Options to pass to axios
+                const axiosOptions = { headers: { 'Content-type': 'application/json' } }
+
+                // Mock the axios return data
+                axios.delete.mockResolvedValueOnce({
+                    status: 401,
+                    data: {
+                        status: 401,
+                        success: false,
+                        message: 'Must be logged in to access the specified route'
+                    }
+                })
+
+                // Expected return data
+                const expectedStatus = 401
+                const expectedSuccess = false
+                const expectedMessage = 'Must be logged in to access the specified route'
+                const expectedUrl = `${process.env.REACT_APP_API_URL}/${resource}/${id}`
+
+            // Execute
+            const response = await apiProvider.removeOne(resource, params)
+
+            // Assert
+            expect(axios.delete).toHaveBeenCalledWith(expectedUrl, axiosOptions)
+            
+        
+            expect(typeof response.status).toBe('number')
+            expect(response.status).toBe(expectedStatus)
+
+            expect(typeof response.success).toBe('boolean')
+            expect(response.success).toBe(expectedSuccess)
+
+            expect(typeof response.message).toBe('string')
+            expect(response.message).toBe(expectedMessage)
+
+        })
+
+        it('should return status 403 if the user is not authorised to access the resource', async () => {
+
+            // Setup
+
+                // Resource we are accessing on the API
+                const resource = 'ingredients'
+
+                // Id used to identify the item in the specified resource
+                const id = 12
+
+                // Params to pass to the method
+                const params = { 
+                    id,
+                    auth: {
+                        authenticate: true,
+                        roles: 'User'
+                    }
+                }
+
+                // Options to pass to axios
+                const axiosOptions = { 
+                    headers: { 
+                        'Content-type': 'application/json', 
+                        token: null,
+                    },
+                    withCredentials: true
+                }
+
+                // Mock the axios return data
+                axios.delete.mockResolvedValueOnce({
+                    status: 403,
+                    data: {
+                        status: 403,
+                        success: false,
+                        message: 'You are not authorized to access the specified route'
+                    }
+                })
+
+                // Expected return data
+                const expectedStatus = 403
+                const expectedSuccess = false
+                const expectedMessage = 'You are not authorized to access the specified route'
+                const expectedUrl = `${process.env.REACT_APP_API_URL}/${resource}/${id}`
+
+            // Execute
+            const response = await apiProvider.removeOne(resource, params)
+
+            // Assert
+            expect(axios.delete).toHaveBeenCalledWith(expectedUrl, axiosOptions)
+            
+        
+            expect(typeof response.status).toBe('number')
+            expect(response.status).toBe(expectedStatus)
+
+            expect(typeof response.success).toBe('boolean')
+            expect(response.success).toBe(expectedSuccess)
+
+            expect(typeof response.message).toBe('string')
+            expect(response.message).toBe(expectedMessage)
+
+        })
+
         it('should return status 500 if resource encounters any other issues', async () => {
 
             // Setup
@@ -817,6 +936,124 @@ describe('apiProvider', () => {
             // Assert
             expect(axios.delete).toHaveBeenCalledWith(expectedUrl, axiosOptions)
 
+            expect(typeof response.status).toBe('number')
+            expect(response.status).toBe(expectedStatus)
+
+            expect(typeof response.success).toBe('boolean')
+            expect(response.success).toBe(expectedSuccess)
+
+            expect(typeof response.message).toBe('string')
+            expect(response.message).toBe(expectedMessage)
+
+        })
+
+        it('should return status 401 if a non logged in user tries to access the resource', async () => {
+
+            // Setup
+
+                // Resource we are accessing on the API
+                const resource = 'ingredients'
+
+                // Id used to identify the item in the specified resource
+                const id = 12
+
+                // Params to pass to the method
+                const params = { 
+                    id,
+                    auth: {
+                        authenticate: false,
+                        roles: 'user'
+                    }
+                }
+
+                // Options to pass to axios
+                const axiosOptions = { headers: { 'Content-type': 'application/json' } }
+
+                // Mock the axios return data
+                axios.delete.mockResolvedValueOnce({
+                    status: 401,
+                    data: {
+                        status: 401,
+                        success: false,
+                        message: 'Must be logged in to access the specified route'
+                    }
+                })
+
+                // Expected return data
+                const expectedStatus = 401
+                const expectedSuccess = false
+                const expectedMessage = 'Must be logged in to access the specified route'
+                const expectedUrl = `${process.env.REACT_APP_API_URL}/${resource}`
+
+            // Execute
+            const response = await apiProvider.removeAll(resource, params)
+
+            // Assert
+            expect(axios.delete).toHaveBeenCalledWith(expectedUrl, axiosOptions)
+            
+        
+            expect(typeof response.status).toBe('number')
+            expect(response.status).toBe(expectedStatus)
+
+            expect(typeof response.success).toBe('boolean')
+            expect(response.success).toBe(expectedSuccess)
+
+            expect(typeof response.message).toBe('string')
+            expect(response.message).toBe(expectedMessage)
+
+        })
+
+        it('should return status 403 if an unauthorised user tries to access the resource', async () => {
+
+            // Setup
+
+                // Resource we are accessing on the API
+                const resource = 'ingredients'
+
+                // Id used to identify the item in the specified resource
+                const id = 12
+
+                // Params to pass to the method
+                const params = { 
+                    id,
+                    auth: {
+                        authenticate: true,
+                        roles: 'user'
+                    }
+                }
+
+                // Options to pass to axios
+                const axiosOptions = { 
+                    headers: { 
+                        'Content-type': 'application/json',
+                        token: null,
+                    }, 
+                    withCredentials: true
+                }
+
+                // Mock the axios return data
+                axios.delete.mockResolvedValueOnce({
+                    status: 403,
+                    data: {
+                        status: 403,
+                        success: false,
+                        message: 'You are not authorized to access the specified route'
+                    }
+                })
+
+                // Expected return data
+                const expectedStatus = 403
+                const expectedSuccess = false
+                const expectedMessage = 'You are not authorized to access the specified route'
+                const expectedUrl = `${process.env.REACT_APP_API_URL}/${resource}`
+
+            // Execute
+            const response = await apiProvider.removeAll(resource, params)
+
+            // Assert
+            expect(axios.delete).toHaveBeenCalledWith(expectedUrl, axiosOptions)
+            
+        
             expect(typeof response.status).toBe('number')
             expect(response.status).toBe(expectedStatus)
 
@@ -1063,6 +1300,118 @@ describe('apiProvider', () => {
 
             // Assert
 
+            expect(typeof response.status).toBe('number')
+            expect(response.status).toBe(expectedStatus)
+
+            expect(typeof response.success).toBe('boolean')
+            expect(response.success).toBe(expectedSuccess)
+
+            expect(typeof response.message).toBe('string')
+            expect(response.message).toBe(expectedMessage)
+
+       })
+
+       it('should return status 401 if a non logged in user tries to access the resource', async () => {
+
+        // Setup
+
+                // Resource we are accessing on the API
+                const resource = 'categories'
+
+                // Id used to identify the item in the specified resource
+                const id = 12
+
+                // Params to pass to the method
+                const params = { 
+                    id,
+                    auth: {
+                        authenticate: false,
+                        roles: 'user'
+                    }
+                }
+
+                // Options to pass to axios
+                const axiosOptions = { headers: { 'Content-type': 'application/json' } }
+
+                // Mock the axios return data
+                axios.delete.mockResolvedValueOnce({
+                    status: 401,
+                    data: {
+                        status: 401,
+                        success: false,
+                        message: 'Must be logged in to access the specified route'
+                    }
+                })
+
+                // Expected return data
+                const expectedStatus = 401
+                const expectedSuccess = false
+                const expectedMessage = 'Must be logged in to access the specified route'
+                const expectedUrl = `${process.env.REACT_APP_API_URL}/${resource}`
+
+            // Execute
+            const response = await apiProvider.removeAll(resource, params)
+
+            // Assert
+            expect(axios.delete).toHaveBeenCalledWith(expectedUrl, axiosOptions)
+            
+        
+            expect(typeof response.status).toBe('number')
+            expect(response.status).toBe(expectedStatus)
+
+            expect(typeof response.success).toBe('boolean')
+            expect(response.success).toBe(expectedSuccess)
+
+            expect(typeof response.message).toBe('string')
+            expect(response.message).toBe(expectedMessage)
+
+       })
+
+       it('should return status 403 if a non authorised user tries to access the resource', async () => {
+
+        // Setup
+
+                // Resource we are accessing on the API
+                const resource = 'categories'
+
+                // Id used to identify the item in the specified resource
+                const id = 12
+
+                // Params to pass to the method
+                const params = { 
+                    id,
+                    auth: {
+                        authenticate: false,
+                        roles: 'user'
+                    }
+                }
+
+                // Options to pass to axios
+                const axiosOptions = { headers: { 'Content-type': 'application/json' } }
+
+                // Mock the axios return data
+                axios.delete.mockResolvedValueOnce({
+                    status: 403,
+                    data: {
+                        status: 403,
+                        success: false,
+                        message: 'You are not authorized to access the specified route'
+                    }
+                })
+
+                // Expected return data
+                const expectedStatus = 403
+                const expectedSuccess = false
+                const expectedMessage = 'You are not authorized to access the specified route'
+                const expectedUrl = `${process.env.REACT_APP_API_URL}/${resource}`
+
+            // Execute
+            const response = await apiProvider.removeAll(resource, params)
+
+            // Assert
+            expect(axios.delete).toHaveBeenCalledWith(expectedUrl, axiosOptions)
+            
+        
             expect(typeof response.status).toBe('number')
             expect(response.status).toBe(expectedStatus)
 
@@ -1452,6 +1801,124 @@ describe('apiProvider', () => {
 
                 expect(typeof response.message).toBe('string')
                 expect(response.message).toBe(expectedMessage)
+
+            })
+
+            it('should return status 401 if a non logged in user tries to access the resource', async () => {
+
+                // Setup
+
+                // Resource we are accessing on the API
+                const resource = 'categories'
+
+                // Id used to identify the item in the specified resource
+                const id = 12
+
+                // Params to pass to the method
+                const params = { 
+                    id,
+                    auth: {
+                        authenticate: false,
+                        roles: 'user'
+                    }
+                }
+
+                // Options to pass to axios
+                const axiosOptions = { headers: { 'Content-type': 'application/json' } }
+
+                // Mock the axios return data
+                axios.delete.mockResolvedValueOnce({
+                    status: 401,
+                    data: {
+                        status: 401,
+                        success: false,
+                        message: 'Must be logged in to access the specified route'
+                    }
+                })
+
+                // Expected return data
+                const expectedStatus = 401
+                const expectedSuccess = false
+                const expectedMessage = 'Must be logged in to access the specified route'
+                const expectedUrl = `${process.env.REACT_APP_API_URL}/${resource}`
+
+            // Execute
+            const response = await apiProvider.removeAll(resource, params)
+
+            // Assert
+            expect(axios.delete).toHaveBeenCalledWith(expectedUrl, axiosOptions)
+            
+        
+            expect(typeof response.status).toBe('number')
+            expect(response.status).toBe(expectedStatus)
+
+            expect(typeof response.success).toBe('boolean')
+            expect(response.success).toBe(expectedSuccess)
+
+            expect(typeof response.message).toBe('string')
+            expect(response.message).toBe(expectedMessage)
+
+            })
+
+            it('should return status 403 if a unauthorised user tries to access the resource', async () => {
+
+                // Setup
+
+                // Resource we are accessing on the API
+                const resource = 'categories'
+
+                // Id used to identify the item in the specified resource
+                const id = 12
+
+                // Params to pass to the method
+                const params = { 
+                    id,
+                    auth: {
+                        authenticate: true,
+                        roles: 'user'
+                    }
+                }
+
+                // Options to pass to axios
+                const axiosOptions = { 
+                    headers: { 
+                        'Content-type': 'application/json',
+                        token: null,
+                    }, 
+                    withCredentials: true
+                }
+
+                // Mock the axios return data
+                axios.delete.mockResolvedValueOnce({
+                    status: 403,
+                    data: {
+                        status: 403,
+                        success: false,
+                        message: 'You are not authorized to access the specified route'
+                    }
+                })
+
+                // Expected return data
+                const expectedStatus = 403
+                const expectedSuccess = false
+                const expectedMessage = 'You are not authorized to access the specified route'
+                const expectedUrl = `${process.env.REACT_APP_API_URL}/${resource}`
+
+            // Execute
+            const response = await apiProvider.removeAll(resource, params)
+
+            // Assert
+            expect(axios.delete).toHaveBeenCalledWith(expectedUrl, axiosOptions)
+            
+        
+            expect(typeof response.status).toBe('number')
+            expect(response.status).toBe(expectedStatus)
+
+            expect(typeof response.success).toBe('boolean')
+            expect(response.success).toBe(expectedSuccess)
+
+            expect(typeof response.message).toBe('string')
+            expect(response.message).toBe(expectedMessage)
 
             })
 
