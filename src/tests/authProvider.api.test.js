@@ -2,6 +2,8 @@ import axios from 'axios';
 
 import authProvider from '../providers/authProvider'
 
+import inMemoryJWT from '../utils/auth.utils';
+
 jest.mock('axios')
 
 describe('authProvider', () => {
@@ -406,6 +408,167 @@ describe('authProvider', () => {
 
             // Assert
             //expect(axios.post).toHaveBeenCalledWith(expectedUrl, { username: userLogin, password: userPassword}, axiosOptions)
+
+            expect(typeof response.status).toBe('number')
+            expect(response.status).toBe(expectedStatus)
+
+            expect(typeof response.success).toBe('boolean')
+            expect(response.success).toBe(expectedSuccess)
+
+            expect(typeof response.message).toBe('string')
+            expect(response.message).toBe(expectedMessage)
+
+        })
+
+    })
+
+    describe('logout', () => {
+
+        afterEach(() => {
+            jest.clearAllMocks()
+        })
+
+        it('should return status 200 and logout the user', async () => {
+
+            // Setup
+
+                // Mock/Spy on the inMemoryToken
+                jest.spyOn(inMemoryJWT, 'getToken').mockImplementation(() => {
+                    return '645623452345-345345234534-345234534534'
+                })
+
+                // Mock the axios return data
+                axios.post.mockResolvedValueOnce({
+                    status: 200,
+                    data: {
+                    status: 200,
+                    success: true,
+                    message: 'Successfully logged out'
+                }})
+
+                // Options used by Axios
+                const axiosOptions = {
+                    headers: {
+                        token: '645623452345-345345234534-345234534534',
+                        "Content-type": "application/json",
+                    },
+                    withCredentials: true,
+                }
+
+                // Set the expected return values
+                const expectedStatus = 200
+                const expectedSuccess = true
+                const expectedMessage = 'Successfully logged out'
+                const expectedUrl = `${process.env.REACT_APP_API_URL}/auth/logout`
+                const expectedToken = '645623452345-345345234534-345234534534'
+
+            // Execute
+            const response = await authProvider.logout()
+
+            // Assert
+            expect(axios.post).toHaveBeenCalledWith(expectedUrl, { action: "logout" }, axiosOptions)
+
+            expect(typeof response.status).toBe('number')
+            expect(response.status).toBe(expectedStatus)
+
+            expect(typeof response.success).toBe('boolean')
+            expect(response.success).toBe(expectedSuccess)
+
+            expect(typeof response.message).toBe('string')
+            expect(response.message).toBe(expectedMessage)
+
+        })
+
+        it('should return status 404 if the refresh token is missing', async () => {
+
+            // Setup
+
+                // Mock/Spy on the inMemoryToken
+                jest.spyOn(inMemoryJWT, 'getToken').mockImplementation(() => {
+                    return '645623452345-345345234534-345234534534'
+                })
+
+                // Mock the axios return data
+                axios.post.mockResolvedValueOnce({
+                    status: 404,
+                    data: {
+                    status: 404,
+                    success: false,
+                    message: 'Missing refresh token'
+                }})
+
+                // Options used by Axios
+                const axiosOptions = {
+                    headers: {
+                        token: '645623452345-345345234534-345234534534',
+                        "Content-type": "application/json",
+                    },
+                    withCredentials: true,
+                }
+
+                // Set the expected return values
+                const expectedStatus = 404
+                const expectedSuccess = false
+                const expectedMessage = 'Missing refresh token'
+                const expectedUrl = `${process.env.REACT_APP_API_URL}/auth/logout`
+                const expectedToken = '645623452345-345345234534-345234534534'
+
+            // Execute
+            const response = await authProvider.logout()
+
+            // Assert
+            expect(axios.post).toHaveBeenCalledWith(expectedUrl, { action: "logout" }, axiosOptions)
+
+            expect(typeof response.status).toBe('number')
+            expect(response.status).toBe(expectedStatus)
+
+            expect(typeof response.success).toBe('boolean')
+            expect(response.success).toBe(expectedSuccess)
+
+            expect(typeof response.message).toBe('string')
+            expect(response.message).toBe(expectedMessage)
+
+        })
+
+        it('should return status 500 for any other issues encountered by the resource', async () => {
+
+            // Setup
+
+                 // Mock/Spy on the inMemoryToken
+                 jest.spyOn(inMemoryJWT, 'getToken').mockImplementation(() => {
+                    return '645623452345-345345234534-345234534534'
+                })
+
+                // Mock the axios return data
+                axios.post.mockResolvedValueOnce({
+                  status: 500,
+                  data: {
+                    status: 500,
+                    success: false,
+                    message: 'There was a problem with the resource, please try again later'
+                }})
+
+                // Options used by Axios
+                const axiosOptions = {
+                    headers: {
+                        token: '645623452345-345345234534-345234534534',
+                        "Content-type": "application/json",
+                    },
+                    withCredentials: true,
+                }
+
+                // Set the expected return values
+                const expectedStatus = 500
+                const expectedSuccess = false
+                const expectedMessage = 'There was a problem with the resource, please try again later'
+                const expectedUrl = `${process.env.REACT_APP_API_URL}/auth/logout`
+                const expectedToken = '645623452345-345345234534-345234534534'
+
+            // Execute
+            const response = await authProvider.logout()
+
+            // Assert
+            expect(axios.post).toHaveBeenCalledWith(expectedUrl, { action: "logout" }, axiosOptions)
 
             expect(typeof response.status).toBe('number')
             expect(response.status).toBe(expectedStatus)

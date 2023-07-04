@@ -84,6 +84,75 @@ const authProvider = {
             token:  response.data.accessToken
         }
 
+    },
+
+    logout: async () => {
+
+        try {
+
+            // If we do not have any tokens currently ( meaining we are not logged in ), just return
+            if(!inMemoryJWT.getToken()){
+                return {
+                    status: 200,
+                    success: true,
+                    message: 'Successfully logged out'
+                }
+            }
+
+            // Set the options for axios
+            const axiosOptions = {
+                withCredentials: true,
+                headers: {
+                    'token': inMemoryJWT.getToken(),
+                    'Content-type': 'application/json'
+                }
+            }
+
+            // Perform the logout
+            const response = await axios.post(
+                `${BASEURL}/auth/logout`,
+                { action: 'logout'},
+                axiosOptions
+            )
+
+     
+
+            // Check the response back
+            if(response.data.success === true){
+
+                // Erase the inMemory token
+                inMemoryJWT.ereaseToken()
+
+                return {
+                    status: 200,
+                    success: true,
+                    message: 'Successfully logged out'
+                }
+            } else {
+
+         
+
+                return {
+                    status: response.data.status,
+                    success: response.data.success,
+                    message: response.data.message
+                }
+
+            }
+
+
+
+
+        } catch(e) {
+
+            return {
+                status: 500,
+                success: false,
+                message: 'There was a problem with the resource, please try again later'
+            }
+
+        }
+
     }
 
 }
