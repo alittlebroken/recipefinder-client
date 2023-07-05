@@ -3,6 +3,8 @@ import jwt_decode from 'jwt-decode'
 
 import inMemoryJWT from '../utils/auth.utils';
 
+import { isType, isSet } from '../utils/validation'
+
 /* Set the base URL for the axios requests */
 const BASEURL = process.env.REACT_APP_API_URL
 
@@ -149,6 +151,60 @@ const authProvider = {
                 status: 500,
                 success: false,
                 message: 'There was a problem with the resource, please try again later'
+            }
+
+        }
+
+    },
+
+    register: async (payload) => {
+
+        // Perform validation of the passed in parameters
+        if(!isSet(payload.username)) { return { status: 400, success: false, message: 'Undefined username' } }
+        if(!isType(payload.username, 'string')) { return { status: 400, success: false, message: 'Wrong format for username'} }
+
+        if(!isSet(payload.email)) { return { status: 400, success: false, message: 'Undefined email' }}
+        if(!isType(payload.email, 'string')) { return { status: 400, success: false, message: 'Wrong format for email' }}
+
+        if(!isSet(payload.password)) { return { status: 400, success: false, message: 'Undefined password' } }
+        if(!isType(payload.password, 'string')) { return { status: 400, success: false, message: 'Wrong format for password' } }
+
+        if(!isSet(payload.forename)) { return { status: 400, success: false, message: 'Undefined forename' } }
+        if(!isType(payload.forename, 'string')) { return { status: 400, success: false, message: 'Wrong format for forename' } }
+
+        if(!isSet(payload.surname)) { return { status: 400, success: false, message: 'Undefined surname' } }
+        if(!isType(payload.surname, 'string')) { return { status: 400, success: false, message: 'Wrong format for surname' } }
+
+        try {
+
+            // Register the user
+            const response = await axios.post(`${BASEURL}/auth/register`, payload, unauthedAxiosOptions)
+
+            // Check for any errors
+            if(response.status >= 400){
+                return {
+                    status: response.data.status,
+                    success: response.data.success,
+                    message: response.data.message,
+                    user: response.data.user
+                }
+            }
+
+            // All is OK, return the registration details
+            return {
+                status: response.data.status,
+                success: response.data.success,
+                message: response.data.message,
+                user: response.data.user
+            }
+
+        } catch(e) {
+
+            return {
+                status: 500,
+                success: false,
+                message: 'There was a problem with the resource, please try again later',
+                user: null
             }
 
         }

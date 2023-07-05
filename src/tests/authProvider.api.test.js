@@ -583,4 +583,700 @@ describe('authProvider', () => {
 
     })
 
+    describe('register', () => {
+
+        afterEach(() => {
+            jest.clearAllMocks()
+        })
+
+        it('should return status 200 and register the user', async () => {
+
+            // Setup
+
+                // Set the data to be sent
+                const payload = {
+                    username: "newuser@company.com",
+                    email: "newuser@company.com",
+                    password: "letmein",
+                    forename: "New",
+                    surname: "User"
+                }
+
+                // Set the axios options
+                const axiosOptions = {
+                    headers: {
+                        "Content-type": "application/json"
+                    }
+                }
+
+                // Mock the Axios response
+                axios.post.mockResolvedValueOnce({
+                    status: 200,
+                    data: {
+                        status: 200,
+                        success: true,
+                        message: 'Signup successful',
+                        user: {
+                            id: 212,
+                            username: "newuser@company.com",
+                            email: "newuser@company.com",
+                            roles: "customer"
+                        }
+                    }
+                })
+
+                // Set the expected return values
+                const expectedStatus = 200
+                const expectedSuccess = true
+                const expectedMessage = 'Signup successful'
+                const expectedUser = {
+                    id: 212,
+                    username: "newuser@company.com",
+                    email: "newuser@company.com",
+                    roles: "customer"
+                }
+
+            // Execute
+            const response = await authProvider.register(payload)
+
+            // Assert
+            expect(axios.post).toHaveBeenCalledWith(`${process.env.REACT_APP_API_URL}/auth/register`, payload, axiosOptions)
+
+            expect(typeof response.status).toBe('number')
+            expect(response.status).toBe(expectedStatus)
+
+            expect(typeof response.success).toBe('boolean')
+            expect(response.success).toBe(expectedSuccess)
+
+            expect(typeof response.message).toBe('string')
+            expect(response.message).toEqual(expectedMessage)
+
+            expect(typeof response.user).toBe('object')
+            expect(response.user).toEqual(expectedUser)
+
+        })
+
+        it('should return status 400 if username is missing from the payload', async () => {
+
+            // Setup
+
+                // Set the data to be sent
+                const payload = {
+                    email: "newuser@company.com",
+                    password: "letmein",
+                    forename: "New",
+                    surname: "User"
+                }
+
+                // Set the axios options
+                const axiosOptions = {
+                    headers: {
+                        "Content-type": "application/json"
+                    }
+                }
+
+                // Mock the Axios response
+                axios.post.mockResolvedValueOnce({
+                    status: 400,
+                    data: {
+                        status: 400,
+                        success: false,
+                        message: 'Undefined username',
+                        user: null
+                    }
+                })
+
+                // Set the expected return values
+                const expectedStatus = 400
+                const expectedSuccess = false
+                const expectedMessage = 'Undefined username'
+                const expectedUser = undefined
+
+            // Execute
+            const response = await authProvider.register(payload)
+
+            // Assert
+            //expect(axios.post).toHaveBeenCalledWith(`${process.env.REACT_APP_API_URL}/auth/register`, axiosOptions)
+
+            expect(typeof response.status).toBe('number')
+            expect(response.status).toBe(expectedStatus)
+
+            expect(typeof response.success).toBe('boolean')
+            expect(response.success).toBe(expectedSuccess)
+
+            expect(typeof response.message).toBe('string')
+            expect(response.message).toEqual(expectedMessage)
+
+            expect(typeof response.user).toBe('undefined')
+            expect(response.user).toEqual(expectedUser)
+
+        })
+
+        it('should return status 400 if payload username is of the wrong type', async () => {
+
+            // Setup
+
+                // Set the data to be sent
+                const payload = {
+                    username: 12345,
+                    email: "newuser@company.com",
+                    password: "letmein",
+                    forename: "New",
+                    surname: "User"
+                }
+
+                // Set the axios options
+                const axiosOptions = {
+                    headers: {
+                        "Content-type": "application/json"
+                    }
+                }
+
+                // Mock the Axios response
+                axios.post.mockResolvedValueOnce({
+                    status: 400,
+                    data: {
+                        status: 400,
+                        success: false,
+                        message: 'Wrong format for username',
+                        user: null
+                    }
+                })
+
+                // Set the expected return values
+                const expectedStatus = 400
+                const expectedSuccess = false
+                const expectedMessage = 'Wrong format for username'
+                const expectedUser = undefined
+
+            // Execute
+            const response = await authProvider.register(payload)
+
+            // Assert
+            //expect(axios.post).toHaveBeenCalledWith(`${process.env.REACT_APP_API_URL}/auth/register`, axiosOptions)
+
+            expect(typeof response.status).toBe('number')
+            expect(response.status).toBe(expectedStatus)
+
+            expect(typeof response.success).toBe('boolean')
+            expect(response.success).toBe(expectedSuccess)
+
+            expect(typeof response.message).toBe('string')
+            expect(response.message).toEqual(expectedMessage)
+
+            expect(typeof response.user).toBe('undefined')
+            expect(response.user).toEqual(expectedUser)
+
+        })
+
+        it('should return status 400 of the payload email is missing', async () => {
+            
+            // Setup
+
+                // Set the data to be sent
+                const payload = {
+                    username: "newuser@company.com",
+                    password: "letmein",
+                    forename: "New",
+                    surname: "User"
+                }
+
+                // Set the axios options
+                const axiosOptions = {
+                    headers: {
+                        "Content-type": "application/json"
+                    }
+                }
+
+                // Mock the Axios response
+                axios.post.mockResolvedValueOnce({
+                    status: 400,
+                    data: {
+                        status: 400,
+                        success: false,
+                        message: 'Undefined email',
+                        user: null
+                    }
+                })
+
+                // Set the expected return values
+                const expectedStatus = 400
+                const expectedSuccess = false
+                const expectedMessage = 'Undefined email'
+                const expectedUser = undefined
+
+            // Execute
+            const response = await authProvider.register(payload)
+
+            // Assert
+            //expect(axios.post).toHaveBeenCalledWith(`${process.env.REACT_APP_API_URL}/auth/register`, axiosOptions)
+
+            expect(typeof response.status).toBe('number')
+            expect(response.status).toBe(expectedStatus)
+
+            expect(typeof response.success).toBe('boolean')
+            expect(response.success).toBe(expectedSuccess)
+
+            expect(typeof response.message).toBe('string')
+            expect(response.message).toEqual(expectedMessage)
+
+            expect(typeof response.user).toBe('undefined')
+            expect(response.user).toEqual(expectedUser)
+        })
+
+        it('should return status 400 if the payloads email is of the wrong format', async () => {
+
+            // Setup
+
+                // Set the data to be sent
+                const payload = {
+                    username: "newuser@company.com",
+                    email: 123456,
+                    password: "letmein",
+                    forename: "New",
+                    surname: "User"
+                }
+
+                // Set the axios options
+                const axiosOptions = {
+                    headers: {
+                        "Content-type": "application/json"
+                    }
+                }
+
+                // Mock the Axios response
+                axios.post.mockResolvedValueOnce({
+                    status: 400,
+                    data: {
+                        status: 400,
+                        success: false,
+                        message: 'Wrong format for email',
+                        user: null
+                    }
+                })
+
+                // Set the expected return values
+                const expectedStatus = 400
+                const expectedSuccess = false
+                const expectedMessage = 'Wrong format for email'
+                const expectedUser = undefined
+
+            // Execute
+            const response = await authProvider.register(payload)
+
+            // Assert
+            //expect(axios.post).toHaveBeenCalledWith(`${process.env.REACT_APP_API_URL}/auth/register`, axiosOptions)
+
+            expect(typeof response.status).toBe('number')
+            expect(response.status).toBe(expectedStatus)
+
+            expect(typeof response.success).toBe('boolean')
+            expect(response.success).toBe(expectedSuccess)
+
+            expect(typeof response.message).toBe('string')
+            expect(response.message).toEqual(expectedMessage)
+
+            expect(typeof response.user).toBe('undefined')
+            expect(response.user).toEqual(expectedUser)
+
+        })
+
+        it('should return status 400 if the payloads password is missing', async () => {
+
+            // Setup
+
+                // Set the data to be sent
+                const payload = {
+                    username: "newuser@company.com",
+                    email: "newuser@company.com",
+                    forename: "New",
+                    surname: "User"
+                }
+
+                // Set the axios options
+                const axiosOptions = {
+                    headers: {
+                        "Content-type": "application/json"
+                    }
+                }
+
+                // Mock the Axios response
+                axios.post.mockResolvedValueOnce({
+                    status: 400,
+                    data: {
+                        status: 400,
+                        success: false,
+                        message: 'Undefined password',
+                        user: null
+                    }
+                })
+
+                // Set the expected return values
+                const expectedStatus = 400
+                const expectedSuccess = false
+                const expectedMessage = 'Undefined password'
+                const expectedUser = undefined
+
+            // Execute
+            const response = await authProvider.register(payload)
+
+            // Assert
+            //expect(axios.post).toHaveBeenCalledWith(`${process.env.REACT_APP_API_URL}/auth/register`, axiosOptions)
+
+            expect(typeof response.status).toBe('number')
+            expect(response.status).toBe(expectedStatus)
+
+            expect(typeof response.success).toBe('boolean')
+            expect(response.success).toBe(expectedSuccess)
+
+            expect(typeof response.message).toBe('string')
+            expect(response.message).toEqual(expectedMessage)
+
+            expect(typeof response.user).toBe('undefined')
+            expect(response.user).toEqual(expectedUser)
+
+        })
+
+        it('should return status 400 if the payloads password is in the wrong format', async () => {
+
+            // Setup
+
+                // Set the data to be sent
+                const payload = {
+                    username: "newuser@company.com",
+                    email: "newuser@company.com",
+                    password: 123456,
+                    forename: "New",
+                    surname: "User"
+                }
+
+                // Set the axios options
+                const axiosOptions = {
+                    headers: {
+                        "Content-type": "application/json"
+                    }
+                }
+
+                // Mock the Axios response
+                axios.post.mockResolvedValueOnce({
+                    status: 400,
+                    data: {
+                        status: 400,
+                        success: false,
+                        message: 'Wrong format for password',
+                        user: null
+                    }
+                })
+
+                // Set the expected return values
+                const expectedStatus = 400
+                const expectedSuccess = false
+                const expectedMessage = 'Wrong format for password'
+                const expectedUser = undefined
+
+            // Execute
+            const response = await authProvider.register(payload)
+
+            // Assert
+            //expect(axios.post).toHaveBeenCalledWith(`${process.env.REACT_APP_API_URL}/auth/register`, axiosOptions)
+
+            expect(typeof response.status).toBe('number')
+            expect(response.status).toBe(expectedStatus)
+
+            expect(typeof response.success).toBe('boolean')
+            expect(response.success).toBe(expectedSuccess)
+
+            expect(typeof response.message).toBe('string')
+            expect(response.message).toEqual(expectedMessage)
+
+            expect(typeof response.user).toBe('undefined')
+            expect(response.user).toEqual(expectedUser)
+
+        })
+
+        it('should return status 400 if the payloads forename is missing', async () => {
+
+            // Setup
+
+                // Set the data to be sent
+                const payload = {
+                    username: "newuser@company.com",
+                    email: "newuser@company.com",
+                    password: "drunkfight",
+                    surname: "User"
+                }
+
+                // Set the axios options
+                const axiosOptions = {
+                    headers: {
+                        "Content-type": "application/json"
+                    }
+                }
+
+                // Mock the Axios response
+                axios.post.mockResolvedValueOnce({
+                    status: 400,
+                    data: {
+                        status: 400,
+                        success: false,
+                        message: 'Undefined forename',
+                        user: null
+                    }
+                })
+
+                // Set the expected return values
+                const expectedStatus = 400
+                const expectedSuccess = false
+                const expectedMessage = 'Undefined forename'
+                const expectedUser = undefined
+
+            // Execute
+            const response = await authProvider.register(payload)
+
+            // Assert
+            //expect(axios.post).toHaveBeenCalledWith(`${process.env.REACT_APP_API_URL}/auth/register`, axiosOptions)
+
+            expect(typeof response.status).toBe('number')
+            expect(response.status).toBe(expectedStatus)
+
+            expect(typeof response.success).toBe('boolean')
+            expect(response.success).toBe(expectedSuccess)
+
+            expect(typeof response.message).toBe('string')
+            expect(response.message).toEqual(expectedMessage)
+
+            expect(typeof response.user).toBe('undefined')
+            expect(response.user).toEqual(expectedUser)
+
+        })
+
+        it('should return status 400 if the payloads forename is of the wrong type', async () => {
+
+            // Setup
+
+                // Set the data to be sent
+                const payload = {
+                    username: "newuser@company.com",
+                    email: "newuser@company.com",
+                    password: "twelvebirdsstalking",
+                    forename: 123456,
+                    surname: "User"
+                }
+
+                // Set the axios options
+                const axiosOptions = {
+                    headers: {
+                        "Content-type": "application/json"
+                    }
+                }
+
+                // Mock the Axios response
+                axios.post.mockResolvedValueOnce({
+                    status: 400,
+                    data: {
+                        status: 400,
+                        success: false,
+                        message: 'Wrong format for forename',
+                        user: null
+                    }
+                })
+
+                // Set the expected return values
+                const expectedStatus = 400
+                const expectedSuccess = false
+                const expectedMessage = 'Wrong format for forename'
+                const expectedUser = undefined
+
+            // Execute
+            const response = await authProvider.register(payload)
+
+            // Assert
+            //expect(axios.post).toHaveBeenCalledWith(`${process.env.REACT_APP_API_URL}/auth/register`, axiosOptions)
+
+            expect(typeof response.status).toBe('number')
+            expect(response.status).toBe(expectedStatus)
+
+            expect(typeof response.success).toBe('boolean')
+            expect(response.success).toBe(expectedSuccess)
+
+            expect(typeof response.message).toBe('string')
+            expect(response.message).toEqual(expectedMessage)
+
+            expect(typeof response.user).toBe('undefined')
+            expect(response.user).toEqual(expectedUser)
+
+        })
+
+        it('should return status 400 if the payloads surname is missing', async () => {
+
+            // Setup
+
+                // Set the data to be sent
+                const payload = {
+                    username: "newuser@company.com",
+                    email: "newuser@company.com",
+                    password: "tightaccess",
+                    forename: "New",
+                }
+
+                // Set the axios options
+                const axiosOptions = {
+                    headers: {
+                        "Content-type": "application/json"
+                    }
+                }
+
+                // Mock the Axios response
+                axios.post.mockResolvedValueOnce({
+                    status: 400,
+                    data: {
+                        status: 400,
+                        success: false,
+                        message: 'Undefined surname',
+                        user: null
+                    }
+                })
+
+                // Set the expected return values
+                const expectedStatus = 400
+                const expectedSuccess = false
+                const expectedMessage = 'Undefined surname'
+                const expectedUser = undefined
+
+            // Execute
+            const response = await authProvider.register(payload)
+
+            // Assert
+            //expect(axios.post).toHaveBeenCalledWith(`${process.env.REACT_APP_API_URL}/auth/register`, axiosOptions)
+
+            expect(typeof response.status).toBe('number')
+            expect(response.status).toBe(expectedStatus)
+
+            expect(typeof response.success).toBe('boolean')
+            expect(response.success).toBe(expectedSuccess)
+
+            expect(typeof response.message).toBe('string')
+            expect(response.message).toEqual(expectedMessage)
+
+            expect(typeof response.user).toBe('undefined')
+            expect(response.user).toEqual(expectedUser)
+
+        })
+
+        it('should return status 400 if the payloads surname if in the wrong format', async () => {
+
+            // Setup
+
+                // Set the data to be sent
+                const payload = {
+                    username: "newuser@company.com",
+                    email: "newuser@company.com",
+                    password: "fatjuicychocolatebars",
+                    forename: "New",
+                    surname: 34562345
+                }
+
+                // Set the axios options
+                const axiosOptions = {
+                    headers: {
+                        "Content-type": "application/json"
+                    }
+                }
+
+                // Mock the Axios response
+                axios.post.mockResolvedValueOnce({
+                    status: 400,
+                    data: {
+                        status: 400,
+                        success: false,
+                        message: 'Wrong format for surname',
+                        user: null
+                    }
+                })
+
+                // Set the expected return values
+                const expectedStatus = 400
+                const expectedSuccess = false
+                const expectedMessage = 'Wrong format for surname'
+                const expectedUser = undefined
+
+            // Execute
+            const response = await authProvider.register(payload)
+
+            // Assert
+            //expect(axios.post).toHaveBeenCalledWith(`${process.env.REACT_APP_API_URL}/auth/register`, axiosOptions)
+
+            expect(typeof response.status).toBe('number')
+            expect(response.status).toBe(expectedStatus)
+
+            expect(typeof response.success).toBe('boolean')
+            expect(response.success).toBe(expectedSuccess)
+
+            expect(typeof response.message).toBe('string')
+            expect(response.message).toEqual(expectedMessage)
+
+            expect(typeof response.user).toBe('undefined')
+            expect(response.user).toEqual(expectedUser)
+
+        })
+
+        it('should return status 500 if there are any other issues', async () => {
+
+            // Setup
+
+                // Set the data to be sent
+                const payload = {
+                    username: "newuser@company.com",
+                    email: "newuser@company.com",
+                    password: "struggleuphills",
+                    forename: "New",
+                    surname: "User"
+                }
+
+                // Set the axios options
+                const axiosOptions = {
+                    headers: {
+                        "Content-type": "application/json"
+                    }
+                }
+
+                // Mock the Axios response
+                axios.post.mockResolvedValueOnce({
+                    status: 500,
+                    data: {
+                        status: 500,
+                        success: false,
+                        message: 'There was a problem with the resource, please try again later',
+                        user: null
+                    }
+                })
+
+                // Set the expected return values
+                const expectedStatus = 500
+                const expectedSuccess = false
+                const expectedMessage = 'There was a problem with the resource, please try again later'
+                const expectedUser = null
+
+            // Execute
+            const response = await authProvider.register(payload)
+
+            // Assert
+            //expect(axios.post).toHaveBeenCalledWith(`${process.env.REACT_APP_API_URL}/auth/register`, axiosOptions)
+
+            expect(typeof response.status).toBe('number')
+            expect(response.status).toBe(expectedStatus)
+
+            expect(typeof response.success).toBe('boolean')
+            expect(response.success).toBe(expectedSuccess)
+
+            expect(typeof response.message).toBe('string')
+            expect(response.message).toEqual(expectedMessage)
+
+            expect(typeof response.user).toBe('object')
+            expect(response.user).toEqual(expectedUser)
+
+        })
+
+    })
+
 })
