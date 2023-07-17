@@ -40,3 +40,8 @@ fridge or freezer and the application can then display a list of recipes you cou
 * React Admin
 * React Router
 * Axios
+
+## Guides
+
+* [Styleguide](https://alittlebroken.github.io/recipefinder-client/)
+* [Wireframes](./docs/wireframes/WIREFRAMES.md)
