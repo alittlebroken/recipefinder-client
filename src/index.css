@@ -16,7 +16,7 @@
   'opsz' 48
 }
 
-/* Defaults for all elements */
+/* Global Style Settings*/
 * {
   box-sizing: border-box;
   margin: 0;
@@ -24,57 +24,110 @@
 }
 
 :root {
-  /* Vars for stying elements */
-  /* Colours */
-  /* Main colours */
-  --col-primary: #7C0A02;
-  --col-secondary: #B22222;
-  --col-tertiary: #E25822;
-  --col-supporting: #F1BC31;
+    font-family: "Montserrat";
+    font-size: 18px;
 
-  /* Elements */
-  /* --col-background: #f8f5f2/#EEF1F6; */
-  --col-background: #f7f7f7dc;
-  --col-bg-dark: #3c3c3c;
-  --col-text: #2a2a2a;
-  --col-links: var(--col-tertiary);
-  --col-links-hover: var(--col-supporting);
-  --col-headings: var(--col-tertiary);
+    /* Colour Palletes */
+    --col-primary: #D71049;
+    --col-secondary: #FFFFFF;
+    --col-accent: #D79E10;
 
-  --col-header: white;
+    --col-bg: #f7f7f7;
+    --col-borders: #DCDCDC;
 
-  --col-nav-bg: transparent;
-  --col-nav-brand: var(--col-primary);
-  --col-brand: #7C0A02;
-
-  --col-border: #e6e6e6;
-  /* Font Settings */
-  --fnt-text: "Open Sans";
-  --fnt-heading-1: "Emilys Candy";
-  --fnt-heading: "Montserrat";
-
-  --fnt-brand: "Emilys Candy";
-  
-  
-  --fnt-size-body: 20px;
-  --fnt-size-other: 18px;
-  
-  font-family: var(--fnt-text);
-  font-size: var(--fnt-size-body);
 }
 
-/* body Styles */
 body {
-  background-color: var(--col-background);
+    background-color: var(--col-bg);
 }
 
-/* Headings */
 h1 {
-  font-family: var(--fnt-heading-1);
-  font-size: 44px;
-  color: var(--col-primary);
+    font-size: 4rem;
+    font-family: "Merriweather Sans"
 }
 
-h2, h3, h4, h5, h6 {
-  font-family: var(--fnt-heading);
+h2 {
+    font-size: 3rem;
 }
+
+h3{
+    font-size: 2rem;
+}
+
+h4{
+    font-size: 1rem;
+}
+
+a {
+  text-decoration: none;
+  font-family: inherit;
+  border-bottom: 1px solid var(--col-primary);
+}
+
+a:hover {
+  border-bottom: 3px solid var(--col-primary);
+}
+
+li { 
+  list-style: none;
+
+}
+
+li::marker {
+  content: "✽ ";
+  color: var(--col-accent);
+}
+
+/* Positioning & Layout */
+.container {
+  display: flex;
+}
+
+.centered {
+  margin: 0 auto;
+}
+
+.sp-between {
+  justify-content: space-between;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.w-75 {
+  width: 75%;
+}
+
+.w-50 {
+  width: 50%;
+}
+
+.w-33 {
+  width: 33%;
+}
+
+.w-25 {
+  width: 25%;
+}
+
+.pad-small {
+  padding: 5px;
+}
+
+.pad-medium {
+  padding: 15px;
+}
+
+.pad-large {
+  padding: 25px;
+}
+
