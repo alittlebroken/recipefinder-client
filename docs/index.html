@@ -2,10 +2,352 @@
 <html lang="en">
     <head>
         <meta charset="utf-8"> 
-        <title>RecipeFinder - Styleguide</title>
-        <link href="./index.css" type="text/css">
+        <title>recipeFinder - Styleguide</title>
+        <link rel="stylesheet" href="index.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     </head>
     <body>
 
+        <Header class="container flex-col w-100 header">
+            <span class="brand container w-100">recipeFinder</span>
+            <nav>
+                <ul class="nav-list flex-row">
+                    <li class="nav-item"><a href="#colours" class="nav-link">Colours</a></li>
+                    <li class="nav-item"><a href="#typography" class="nav-link">Typography</a></li>
+                    <li class="nav-item"><a href="#components" class="nav-link">Components</a></li>
+                </ul>
+            </nav>
+        </Header>
+        <main class="container centered w-75 flex-col">
+            <h2 class="centered">Styleguide</h2>
+
+            <section class="card card-light flex-col pad-medium">
+                <span class="card-title-large sg-under"><a id="colours"></a>Colours</span>
+                <div class="card-list" role="presentation" aria-label="list-of-cards">
+                    <div class="card flex-col w-25 card-top-round card-border-thin">
+                        <span class="sg-pri-col card-top-round">#D71049</span>
+                        <div class="card-body" role="presentation" aria-label="card-body">
+                            <h5>Primary</h5>
+                        </div>
+                    </div>
+                    <div class="card flex-col w-25 card-top-round card-border-thin">
+                        <span class="sg-sec-col card-top-round">#FFFFFF</span>
+                        <div class="card-body" role="presentation" aria-label="card-body">
+                            <h5>Secondary</h5>
+                        </div>
+                    </div>
+                    <div class="card flex-col w-25 card-top-round card-border-thin">
+                        <span class="sg-acc-col card-top-round">#D79E10</span>
+                        <div class="card-body" role="presentation" aria-label="card-body">
+                            <h5>Accent</h5>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card card-light flex-col pad-medium">
+                <span class="card-title-large sg-under"><a id="typography"></a>Typography</span>
+                <table>
+                    <tr>
+                        <td><h1>Heading 1</h1></td>
+                        <td>4rem</td>
+                        <td>Merriweather Sans</td>
+                    </tr>
+                    <tr>
+                        <td><h2>Heading 2</h2></td>
+                        <td>4rem</td>
+                        <td>Montserrat</td>
+                    </tr>
+                    <tr>
+                        <td><h3>Heading 3</h3></td>
+                        <td>4rem</td>
+                        <td>Montserrat</td>
+                    </tr>
+                    <tr>
+                        <td><h4>Heading 4</h4></td>
+                        <td>4rem</td>
+                        <td>Montserrat</td>
+                    </tr>
+                    <tr>
+                        <td>Body</td>
+                        <td>1rem</td>
+                        <td>Montserrat</td>
+                    </tr>
+                </table>
+            </section>
+
+            <section class="card card-light flex-col pad-medium">
+                <span class="card-title-large sg-under"><a id="components"></a>Components</span>
+                <span class="card-title-medium">Links</span>
+                <table>
+                    <tr>
+                        <td><a href="">Sample textual link</a></td>
+                    </tr>
+                </table>
+                <span class="card-title-medium">Buttons</span>
+                <table>
+                    <tr>
+                        <td><button class="btn">Normal Button</button></td>
+                        <td><button class="btn btn-outline">Outlined Button</button></td>
+                        <td>
+                            <button class="btn btn-circle">
+                                <span class="material-symbols-outlined">
+                                    favorite
+                                </span>
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-circle">
+                                <span class="material-symbols-outlined">
+                                    add
+                                </span>
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-circle btn-circle-outline">
+                                <span class="material-symbols-outlined">
+                                    favorite
+                                </span>
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-circle btn-circle-outline">
+                                <span class="material-symbols-outlined">
+                                    add
+                                </span>
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn">
+                                Add
+                                &nbsp;
+                                <span class="material-symbols-outlined">
+                                    add
+                                </span>
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn">
+                                Favourite
+                                &nbsp;
+                                <span class="material-symbols-outlined">
+                                    favorite
+                                </span>
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+                <span class="card-title-medium">Lists</span>
+                <table>
+                    <tr>
+                        <td>
+                            <ui>
+                                <li>List item 1</li>
+                                <li>List item 2</li>
+                            </ui>
+                        </td>
+                    </tr>
+                </table>
+
+                <span class="card-title-medium">Inputs</span>
+                <table>
+                    <tr>
+                        <td>
+                            <label for="sample_text">Input Label: </label>
+                            <input type="text" name="sample_text" class="w-75" placeholder="Enter some text">
+                        </td>
+                        <td><label>Using styles:</label> w-75</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="sample_text">Input Label: </label>
+                            <input type="text" name="sample_text" class="w-75 input-rounded" placeholder="Enter some text">
+                        </td>
+                        <td><label>Using styles:</label> w-75, input-rounded</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="sample_text">Input Label: </label>
+                            <input type="text" name="sample_text" class="w-75 input-flat" placeholder="Enter some text">
+                        </td>
+                        <td><label>Using styles:</label> w-75, input-flat</td>
+                    </tr>
+                </table>
+
+                <span class="card-title-medium">Cards</span>
+                <div role="presentation" aria-label="Card Style Guidecontainer" style="display: flex;">
+                    <div class="card card-border-thin w-25" style="height: 125px; padding: 15px;">
+                       
+                    </div>
+                    <div role="presentation" aria-label="Card information" style="display: flex; flex-direction: column; padding: 10px;">
+                        <h5>Card</h5>
+                        <h6>Using styles:</h6> card, card-border-thin, w-25
+                    </div>
+                </div>
+
+                <div role="presentation" aria-label="Card Style Guidecontainer" style="display: flex;">
+                    <div class="card card-border-thin w-25 card-rounded" style="height: 125px; padding: 15px;">
+                       
+                    </div>
+                    <div role="presentation" aria-label="Card information" style="display: flex; flex-direction: column; padding: 10px;">
+                        <h5>Card - Rounded</h5>
+                        <h6>Using styles:</h6> card, card-border-thin, w-25, card-rounded
+                    </div>
+                </div>
+
+                <div role="presentation" aria-label="Card Style Guidecontainer" style="display: flex;">
+                    <div class="card card-border-thin w-25 card-rounded card-shadow" style="height: 125px; padding: 15px;">
+                       
+                    </div>
+                    <div role="presentation" aria-label="Card information" style="display: flex; flex-direction: column; padding: 10px;">
+                        <h5>Card - Shadow</h5>
+                        <h6>Using styles:</h6> card, card-border-thin, w-25, card-rounded, card-shadow
+                    </div>
+                </div>
+
+                <div role="presentation" aria-label="Card Style Guidecontainer" style="display: flex;">
+                    <div class="card card-border-thin w-25 card-body">
+                        <h5 class="card-title-small">Card Title</h5>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eget leo purus. Nunc et nisi.
+                    </div>
+                    <div role="presentation" aria-label="Card information" style="display: flex; flex-direction: column; padding: 10px;">
+                        <h5>Card with Body</h5>
+                        <h6>Using styles:</h6> card, card-border-thin, w-25, card-body, card-title-small
+                    </div>
+                </div>
+
+                <div role="presentation" aria-label="Card Style Guidecontainer" style="display: flex;">
+                    <div class="card card-border-thin w-25 flex-col">
+                       <div class="card-header pad-medium">
+                            Card Header
+                       </div>
+                       <div class="card-body">
+                        <h5 class="card-title-small">Card Title</h5>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eget leo purus. Nunc et nisi.
+                       </div>
+                       <div class="card-footer pad-medium">
+                            Card Footer
+                       </div>
+                    </div>
+                    <div role="presentation" aria-label="Card information" style="display: flex; flex-direction: column; padding: 10px;">
+                        <h5>Card with header and footer</h5>
+                        <h6>Using styles:</h6> card, card-border-thin, w-25, card-header, card-footer, flex-col, card-body, card-title-small
+                    </div>
+                </div>
+
+                <div role="presentation" aria-label="Card Style Guidecontainer" style="display: flex;">
+                    <div class="card card-border-thin w-25 flex-col">
+                       <div class="card-actions">
+                        <button class="btn">Save</button>
+                        <button class="btn">Discuss</button>
+                       </div>
+                    </div>
+                    <div role="presentation" aria-label="Card information" style="display: flex; flex-direction: column; padding: 10px;">
+                        <h5>Card Actions</h5>
+                        <h6>Using styles:</h6> card, card-border-thin, w-25, card-actions
+                    </div>
+                </div>
+
+                <div role="presentation" aria-label="Card Style Guidecontainer" style="display: flex;">
+                    <div class="card card-border-thin flex-col">
+                        <div class="card-tags">
+                            <div class="card-tag">Dairy Free</div>
+                            <div class="card-tag">Gluten Free</div>
+                            <div class="card-tag">Dessert</div>
+                            <div class="card-tag">Snack</div>
+                        </div>
+                    </div>
+                    <div role="presentation" aria-label="Card information" style="display: flex; flex-direction: column; padding: 10px;">
+                        <h5>Card Tags</h5>
+                        <h6>Using styles:</h6> card, card-border-thin, w-25, card-tags, card-tag
+                    </div>
+                </div>
+
+                
+                <div role="presentation" aria-label="Card Style Guidecontainer" style="display: flex;">
+                    <div class="card w-25 flex-col">
+                        <img class="card-img" src="card-image.jpg">
+                    </div>
+                    <div role="presentation" aria-label="Card information" style="display: flex; flex-direction: column; padding: 10px;">
+                        <h5>Card with image</h5>
+                        <h6>Using styles:</h6> card, w-25, card-img
+                    </div>
+                </div>
+
+                <div role="presentation" aria-label="Card Style Guidecontainer" style="display: flex;">
+                    <div class="card w-25 flex-col">
+                        <img class="card-img card-img-rounded" src="card-image.jpg">
+                    </div>
+                    <div role="presentation" aria-label="Card information" style="display: flex; flex-direction: column; padding: 10px;">
+                        <h5>Card with image - Rounded</h5>
+                        <h6>Using styles:</h6> card, w-25, card-img, card-img-rounded
+                    </div>
+                </div>
+
+                <div role="presentation" aria-label="Card Style Guidecontainer" style="display: flex;">
+                    <div class="card w-25 flex-col card-border-thin">
+                        <img class="card-img" src="card-image.jpg">
+                        <div class="card-body">
+                            <h5 class="card-title-small">Card Title</h5>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eget leo purus. Nunc et nisi.
+                        </div>
+                    </div>
+                    <div role="presentation" aria-label="Card information" style="display: flex; flex-direction: column; padding: 10px;">
+                        <h5>Card with image and body</h5>
+                        <h6>Using styles:</h6> card, w-25, card-img, card-body, card-border-thin 
+                    </div>
+                </div>
+
+                <div role="presentation" aria-label="Card Style Guidecontainer" style="display: flex;">
+                    <div class="card w-25 flex-col card-overlay">
+                        <img class="card-img card-img-rounded" src="card-image.jpg">
+                        <span class="card-overlay-center">Overlay Text</span>
+                    </div>
+                    <div role="presentation" aria-label="Card information" style="display: flex; flex-direction: column; padding: 10px;">
+                        <h5>Card with image and overlayed text - Center</h5>
+                        <h6>Using styles:</h6> card, w-25, card-img, card-img-rounded, card-overlay, card-overlay-center
+                    </div>
+                </div>
+
+                <div role="presentation" aria-label="Card Style Guidecontainer" style="display: flex;">
+                    <div class="card w-25 flex-col card-overlay">
+                        <img class="card-img card-img-rounded" src="card-image.jpg">
+                        <span class="card-overlay-center-top">Overlay Text</span>
+                    </div>
+                    <div role="presentation" aria-label="Card information" style="display: flex; flex-direction: column; padding: 10px;">
+                        <h5>Card with image and overlayed text - Center Top</h5>
+                        <h6>Using styles:</h6> card, w-25, card-img, card-img-rounded, card-overlay, card-overlay-center-top
+                    </div>
+                </div>
+
+                <div role="presentation" aria-label="Card Style Guidecontainer" style="display: flex;">
+                    <div class="card w-25 flex-col card-overlay">
+                        <img class="card-img card-img-rounded" src="card-image.jpg">
+                        <span class="card-overlay-center-bottom">Overlay Text</span>
+                    </div>
+                    <div role="presentation" aria-label="Card information" style="display: flex; flex-direction: column; padding: 10px;">
+                        <h5>Card with image and overlayed text - Center Bottom</h5>
+                        <h6>Using styles:</h6> card, w-25, card-img, card-img-rounded, card-overlay, card-overlay-center-bottom
+                    </div>
+                </div>
+
+
+                <div role="presentation" aria-label="Card Style Guidecontainer" style="display: flex; flex-direction: column;">
+                    <div class="card w-100">
+                        <img class="card-img card-img-rounded-left w-33" src="card-image.jpg">
+                        <div class="card-body card-body-border-right">
+                            <h5 class="card-title-small">Card Title</h5>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eget leo purus. Nunc et nisi.
+                        </div>
+                    </div>
+                    <div role="presentation" aria-label="Card information" style="display: flex; flex-direction: column; padding: 10px;">
+                        <h5>Card with image to the left</h5>
+                        <h6>Using styles:</h6> card, w-100, w-33, card-img, card-img-rounded-left, card-title-small, card-body, card-body-border-right
+                    </div>
+                </div>
+
+            </section>
+
+        </main>
     </body>
 </html>
