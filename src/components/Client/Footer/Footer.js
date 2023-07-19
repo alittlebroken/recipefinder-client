@@ -11,18 +11,22 @@ const Footer = () => {
                     <div aria-label="footer-brandname" className="site-title-footer">
                         recipeFinder
                     </div>
-                    <div aria-label="footer-brandtagline" className="site-tagline-footer">
+                    <div aria-label="footer-brandtagline" className="site-tag-line-footer">
                         Find your favourite recipe
                     </div>
                     
                     <div aria-label="socialMediaBadges" className="footer-social-container">
                         
                         <div aria-label="facebookBadge" className="badge">
-                            <a href="https://www.facebook.com/recipefinder">f</a>
+                            <a href="https://www.facebook.com/recipefinder">
+                                <i class="fa-brands fa-square-facebook fa-2xl"></i>
+                            </a>
                         </div>
-                        
+
                         <div aria-label="instagramBadge" className="badge">
-                            <a href="https://www.instagram.com/recipe-finder">ig</a>
+                            <a href="https://www.instagram.com/recipe-finder">
+                                <i class="fa-brands fa-instagram fa-2xl"></i>
+                            </a>
                         </div>
                     
                     </div>
