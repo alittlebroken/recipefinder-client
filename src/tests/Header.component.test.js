@@ -54,9 +54,9 @@ describe('<Header />', () => {
     render(<Header />)
 
     // Assert
-    expect(screen.getByRole('brandname')).toBeInTheDocument()
-    expect(screen.getByRole('brandname')).toHaveClass('brand-name')
-    expect(screen.getByText('Recipe Finder')).toBeInTheDocument()
+    expect(screen.getByRole('generic', { name: /brand-name/i })).toBeInTheDocument()
+    expect(screen.getByRole('generic', { name: /brand-name/i })).toHaveClass('brand-name')
+    expect(screen.getByText('recipeFinder')).toBeInTheDocument()
 
   })
 
