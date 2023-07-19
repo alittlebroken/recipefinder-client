@@ -8,9 +8,12 @@ const Footer = () => {
                 
                 <div aria-label="footerbrand" className="footer-brand-container">
                     
-                    <p>
-                        Recipe Finder
-                    </p>
+                    <div aria-label="footer-brandname" className="site-title-footer">
+                        recipeFinder
+                    </div>
+                    <div aria-label="footer-brandtagline" className="site-tagline-footer">
+                        Find your favourite recipe
+                    </div>
                     
                     <div aria-label="socialMediaBadges" className="footer-social-container">
                         
