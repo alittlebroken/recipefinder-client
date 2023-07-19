@@ -1,60 +1,141 @@
+/* Main Header */
 .header-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 0 7px rgba(0, 0, 0, 0.5);
-    padding: 5px;
-    background-color: var(--col-header);
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.5);
+  background-color: var(--col-secondary);
+  height: auto;
 }
 
 /* Brand Styling */
-
 .brand-container {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px;
 }
 
 .brand-name {
-  font-family: var(--fnt-brand);
-  font-size: 3rem;
+  font-family: "Merriweather Sans";
+  font-size: 1.5rem;
   font-weight: bold;
-  color: var(--col-brand);
+  color: var(--col-primary);
 }
 
-.brand-container > p { 
+.brand-tagline {
+  font-family: "Montserrat";
+  font-size: .75rem;
+  font-weight: bold;
+  color: var(--col-accent);
+}
+
+.brand-content {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: .9rem;
-  color:  var(--col-tertiary);
+  flex-direction: column;
 }
 
-/* Navigation Styling */
+/* Nav bar */
 .nav-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: var(--col-nav-bg);
-  color: white;
+  position: relative;
+  display: none;
+  padding: 0;
+  left: -100%;
 }
 
 .nav-list {
   display: flex;
+  flex-direction: column;
+  padding: 0;
 }
 
-.nav-list > li {
-  list-style: none;
+.nav-list-item:first-child {
+  border-top: 1px solid var(--col-primary);
 }
 
-.nav-list > li > a {
+.nav-list-item:nth-last-child(-n + 1){
+  border-bottom: none;
+}
+
+.nav-list-item {
+  border-bottom: 1px solid var(--col-primary);
+}
+
+.nav-list-item::marker {
+  content: none;
+}
+
+.nav-item-link {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
   text-decoration: none;
-  color: var(--col-links);
-  display: block;
-  padding: 1rem;
-  font-weight: bold;
+  border: none;
 }
 
-.nav-list > li > a:hover {
-  color: var(--col-links-hover);
+.nav-item-link:hover {
+  color: var(--col-secondary);
+  background-color: var(--col-primary);
+}
+
+.active {
+  display: block;
+  left: 0;
+  transition: 1s;
+}
+
+/* Desktop Layout */
+@media screen and ( min-width: 960px){
+
+  .header-container {
+    padding: 10px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* Brand Styling */
+  .brand-name {
+    font-size: 2rem;
+  }
+
+  .brand-tagline {
+    font-size: 1rem;
+  }
+
+  /* Navigation styling */
+  .nav-container {
+    display: flex;
+    left: 0;
+    margin-top: 5px;
+  }
+
+  .nav-list {
+    flex-direction: row;
+  }
+
+  .nav-list-item {
+    border: none;
+    margin-left: 25px;
+    font-size: .8rem;
+    font-weight: bold;
+  }
+
+  .nav-list-item:first-child {
+    border-top: none;
+  }
+
+  .nav-burger {
+    display: none;
+  }
+
+  .nav-item-link:hover {
+    color: black;
+    border-bottom: 1px solid var(--col-primary);
+    background-color: var(--col-secondary);
+  }
+
 }
