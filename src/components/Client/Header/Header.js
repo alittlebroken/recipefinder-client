@@ -21,7 +21,7 @@ const Header = () => {
                     <div aria-label="brand-name" className="brand-name">
                         recipeFinder
                     </div>
-                    <p aria-label="brand-tagline" className="brand-tagline">Find your favourite [recipe]</p>
+                    <p aria-label="brand-tagline" className="brand-tagline">Find your favourite recipe</p>
                 </div>
                 <div role="presentation" aria-label="nav-menu-icon" className="nav-burger" onClick={handleHamburgerClick}>
                         <i class="fa-solid fa-bars"></i>
