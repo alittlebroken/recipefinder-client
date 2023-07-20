@@ -62,12 +62,11 @@ const Footer = () => {
                 <div role="presentation" aria-label="footerRecipes" className="sitemap-container">
                     <h4>Recipes</h4>
                     <ul>
-                        <li><a href="/recipes">Index</a></li>
-                        <li><a href="/recipes/vegan">Vegan Recipes</a></li>
-                        <li><a href="/recipes/dairyfree">Dairy Free Recipes</a></li>
-                        <li><a href="/recipes/quick">Quick Recipes</a></li>
-                        <li><a href="/recipes/microwave">Microwave Recipes</a></li>
-                        <li><a href="/recipes/airfryer">Air Fryer Recipes</a></li>
+                        <li><a href="/recipes/vegan">Vegan</a></li>
+                        <li><a href="/recipes/dairyfree">Dairy Free</a></li>
+                        <li><a href="/recipes/quick">Quick</a></li>
+                        <li><a href="/recipes/microwave">Microwave</a></li>
+                        <li><a href="/recipes/airfryer">Air Fryer</a></li>
                     </ul>
                 </div>
 
