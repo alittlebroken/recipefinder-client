@@ -54,13 +54,13 @@ describe('<Header />', () => {
     render(<Header />)
 
     // Assert
-    expect(screen.getByRole('brandname')).toBeInTheDocument()
-    expect(screen.getByRole('brandname')).toHaveClass('brand-name')
-    expect(screen.getByText('Recipe Finder')).toBeInTheDocument()
+    expect(screen.getByRole('generic', { name: /brand-name/i })).toBeInTheDocument()
+    expect(screen.getByRole('generic', { name: /brand-name/i })).toHaveClass('brand-name')
+    expect(screen.getByText('recipeFinder')).toBeInTheDocument()
 
   })
 
-  it('displays the brand sub text', async () => {
+  it('displays the brand tag line', async () => {
 
     // Setup
 
@@ -68,8 +68,8 @@ describe('<Header />', () => {
     render(<Header />)
 
     // Assert
-    expect(screen.getByRole('brandsubtext')).toBeInTheDocument()
-    expect(screen.getByText('Find your next favourite recipe')).toBeInTheDocument()
+    expect(screen.getByRole('generic', { name: /brand-tagline/i })).toBeInTheDocument()
+    expect(screen.getByText('Find your favourite recipe')).toBeInTheDocument()
 
   })
 
