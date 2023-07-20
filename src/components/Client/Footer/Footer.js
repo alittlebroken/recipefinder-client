@@ -72,15 +72,7 @@ const Footer = () => {
                 </div>
 
             </div>
-            <div role="presentation" aria-label="footerSearch" className="footer-search-container">
-
-                <form>
-                    <label for="find">Find</label>
-                    <input type="search" id="find" />
-                    <button>Go</button>
-                </form>
-
-            </div>
+            
         </footer>
     )
 }
