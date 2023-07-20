@@ -11,7 +11,6 @@ export const getLatestRecipes = createAsyncThunk('landingpage/getLatestRecipes',
         try{
 
             // Extract the parameters from the payload
-            const resource = payload.resource
             const params = {
                 sort: {
                     field: 'created_at',
@@ -23,7 +22,7 @@ export const getLatestRecipes = createAsyncThunk('landingpage/getLatestRecipes',
                 }
             }
 
-            return await apiProvider.getList(resource, params);
+            return await apiProvider.getList('recipes', params);
 
         } catch(error) {
             throw error;
@@ -34,12 +33,11 @@ export const getLatestRecipes = createAsyncThunk('landingpage/getLatestRecipes',
 
 /* Popular Recipes */
 const getPopularRecipes = createAsyncThunk('landingPage/getPopularRecipes', 
-    async (payload, apiThunk) => {
+    async (payload, thunkAPI) => {
 
         try {
 
             // Extract parameters from the payload
-            const resource = payload.resource
             const params = {
                 sort: {
                     field: 'rating',
@@ -51,7 +49,34 @@ const getPopularRecipes = createAsyncThunk('landingPage/getPopularRecipes',
                 }
             }
 
-            return await apiProvider.getList(resource, params)
+            return await apiProvider.getList('recipes', params)
+
+        } catch(error) {
+            throw error
+        }
+
+    }
+)
+
+/* Categories */
+const getCategories = createAsyncThunk('landingPage/getCategories', 
+    async (payload, thunkAPI) => {
+
+        try{
+
+            // Extract parameters from the payload
+            const params = {
+                sort: {
+                    field: 'rating',
+                    order: 'desc'
+                },
+                pagination: {
+                    page: 1,
+                    perPage: 6
+                }
+            }
+
+            return await apiProvider.getList('categories', params)
 
         } catch(error) {
             throw error
@@ -112,6 +137,24 @@ export const landingpageSlice = createSlice({
 
             // Store the results returned
             state.popular = results?.data
+        },
+        [getCategories.pending]: (state, action) => {
+            state.isLoading = true
+            state.hasError = false
+        },
+        [getCategories.rejected]: (state, action) => {
+            state.isLoading = false
+            state.hasError = true
+        },
+        [getCategories.fulfilled]: (state, action) => {
+            state.isLoading = false
+            state.hasError = false
+
+            // Parse the returned data
+            const results = JSON.parse(action.payload)
+
+            // Store the returned results
+            state.categories = results?.data
         }
     },
 })
@@ -119,6 +162,7 @@ export const landingpageSlice = createSlice({
 // Export selectors
 export const selectLatestRecipes = state => state.landingpage?.latest
 export const selectPopularRecipes = state => state.landingpage?.popular
+export const selectCategories = state => state.landingPage?.categories
 export const selectisLoading = state => state.landingpage?.isLoading
 export const selectHasError = state => state.landingPage?.hasError
 
