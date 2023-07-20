@@ -1,7 +1,16 @@
+/* Mobile First */
+
 .content-container {
     display: flex;
     flex-direction: column;
-
-    width: 900px;
+    width: 95%;
     margin: 0 auto;
+}
+
+/* Desktop */
+
+@media screen and (min-width: 960px) {
+    .content-container {
+        width: 80%;
+    }
 }
