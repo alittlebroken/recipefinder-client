@@ -1,73 +1,94 @@
+/* Mobile First */
+
+/* Site logo */
+.site-title-footer {
+    font-family: "Merriweather Sans";
+    font-weight: bold;
+    font-size: 2rem;
+    color: var(--col-secondary);
+}
+
+.site-tag-line-footer {
+    font-family: "Montserrat";
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--col-accent);
+}
+
+/* Main footer Container */
 .footer-container {
     display: flex;
     flex-direction: column;
     padding: 10px;
     width: 100%;
-    height: 350px;
     background-color: var(--col-primary);
     position: absolute;
     bottom: 0;
 }
 
+/* Section container */
 .footer-section-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 25px;
     margin: 0 auto;
 }
 
+/* Brand section */
 .footer-brand-container {
     display: flex;
     flex-direction: column;
     padding: 15px;
 }
 
-.footer-brand-container > p {
-    font-family: var(--fnt-brand);
-    font-size: 1.5rem;
-    color: var(--col-supporting);
-}
-
+/* Social Media icons */
 .footer-social-container {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 7px;
+    gap: 5px;
+    margin-top: 15px;
     padding: 10px;
     justify-content: space-between;
+    align-items: center;
 }
+
 
 .badge {
     display: flex;
     justify-content: center;
-    align-items: center;
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    border: 3px solid var(--col-tertiary);
-    font-weight: bold;
-    color: var(--col-supporting);
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    align-content: center;
+    color: white;
 }
 
 .badge > a {
     text-decoration: none;
+    border-bottom: none;
     color: inherit;
 }
 
 .badge:hover, .badge > a:hover {
-    color: var(--col-secondary);
-    background-color: var(--col-supporting);
+    color: var(--col-accent);
+    background-color: var(--col-primary);
+    border-bottom: none;
 }
 
+.badge > a > i {
+    font-size: 1.5rem;
+}
+
+/* Footer sitemap section styles */
 .sitemap-container {
-    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .sitemap-container > h4 {
-    font-family: var(--fnt-brand);
-    color: var(--col-supporting);
-    padding: 10px;
+    font-family: "Montserrat";
+    font-size: 1.5rem;
+    padding-bottom: 15px;
+    color: var(--col-secondary);
+    text-decoration: underline;
+    text-decoration-color: var(--col-accent);
 }
 
 .sitemap-container > ul {
@@ -76,60 +97,27 @@
     list-style: none;
 }
 
+.sitemap-container > ul > li::marker {
+    content: none;
+}
+
 .sitemap-container > ul > li > a {
     text-decoration: none;
-    color: var(--col-supporting);
-    padding: 10px;
-    font-size: 0.7rem;
-}
-
-.sitemap-container > ul > li > a:hover {
-    color: var(--col-tertiary);
-}
-
-.footer-search-container {
-    margin: 0 auto;
-    padding: 15px;
-}
-
-.footer-search-container > form {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
-
-.footer-search-container > form > label {
-    color: var(--col-supporting);
-    padding: 10px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    font-family: var(--fnt-brand);
-}
-
-.footer-search-container > form > input[type=search] {
-    padding: 10px;
-    margin-right: 5px;
-    font-family: inherit;
-    font-size: .7rem;
-    width: 400px;
-    border: 2px solid var(--col-supporting);
-    border-radius: 7px;
-    outline: none;
-}
-
-.footer-search-container > form > button {
-    padding: 7px;
-    width: 75px;
-    border: 2px solid var(--col-supporting);
-    border-radius: 7px;
-    background-color: transparent;
-    color: var(--col-supporting);
-    font-family: var(--fnt-brand);
+    color: var(--col-secondary);
     font-size: 1rem;
 }
 
-.footer-search-container > form > button:hover {
-    color: var(--col-secondary);
-    background-color: var(--col-supporting);
+.sitemap-container > ul > li > a:hover {
+    color: var(--col-accent);
+}
+
+@media screen and (min-width: 960px) {
+
+    .footer-section-container {
+        display: flex;
+        flex-direction: row;
+        gap: 50px;
+        margin: 0 auto;
+    }
+
 }
