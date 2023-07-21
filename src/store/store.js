@@ -9,7 +9,7 @@ const rootReducer = combineReducers({
 })
 
 // Creates a store with all the correct reducers and actions
-const setupStore = preloadedState => {
+export const setupStore = preloadedState => {
     return configureStore({
         reducer: rootReducer,
         preloadedState
