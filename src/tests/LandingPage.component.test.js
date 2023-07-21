@@ -29,10 +29,15 @@ describe('LandingPage Component', () => {
         store = setupStore(initialStoreState)
     })
 
-    it('', async () => {
+    it('Skeleton test', async () => {
 
-        // 
+        // render the component
+        renderWithProviders(<LandingPage />, { store })
         
+        // Asserts
+        expect(screen.getByRole('heading', { name: /latest recipes/i })).toBeInTheDocument()
+        expect(screen.getByRole('heading', { name: /popular recipes/i })).toBeIntheDocument()
+        expect(screen.getByRole('heading', { name: /categories/i })).toBeInTheDocument()
 
     })
 
