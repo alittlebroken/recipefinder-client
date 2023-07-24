@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-import { apiProvider } from '../../providers/apiProvider';
+import apiProvider from '../../providers/apiProvider';
 
 // Thunks for gathering the API data
 
