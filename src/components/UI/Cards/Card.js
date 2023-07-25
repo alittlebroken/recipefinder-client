@@ -179,4 +179,46 @@ Card.Actions = (props) => {
 
 }
 
+/* Card Tags */
+Card.Tags = (props) => {
+
+    /* Destructure the props */
+    const {
+        children,
+        classes
+    } = props
+
+    /* Setup the classes to be applied to the component */
+    let classNames = 'card-tags'
+    classNames += classes ? classes : null
+
+    return (
+        <div aria-label="card tag list" className={classNames}>
+            {children}
+        </div>
+    )
+
+}
+
+/* Card Tag */
+Card.Tag = (props) => {
+
+    /* Destructure the props */
+    const {
+        text,
+        classes
+    } = props
+
+    /* Setup the classes to be applied to the component */
+    let classNames = 'card-tag'
+    classNames += classes ? classes : null
+
+    return (
+        <div aria-label="card tag" className={classNames}>
+            {text}
+        </div>
+    )
+
+}
+
 export default Card;
