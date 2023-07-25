@@ -59,11 +59,33 @@ Card.Image = (props) => {
     return (
         <>
             <img src={source} alt={altText} title={title} className={classNames} />
-        </>
+       </>
     )
 
 }
 
+/* Card Body */
+Card.Body = (props) => {
 
+    // Destructure the props
+    const {
+        children,
+        rightBorder
+    } = props
+
+    // Generate the styles for the component
+    let classNames = 'card-body'
+
+    classNames += rightBorder ? ' card-body-border-right' : null
+
+    return (
+        <>
+            <div aria-label="card-body" className={classNames}>
+                {children}
+            </div>
+        </>
+    )
+
+}
 
 export default Card;
