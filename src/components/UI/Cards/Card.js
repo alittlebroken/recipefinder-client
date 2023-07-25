@@ -36,6 +36,27 @@ const Card = (props) => {
 
 }
 
+/* Card List  - Container for cards */
+Card.List = (props) => {
+
+    /* Destructure the props */
+    const {
+        children,
+        classes
+    } = props
+
+    /* Setup the classes to be applied to the component */
+    let classNames = 'card-list'
+    classNames += classes ? classes : null
+
+    return (
+        <div aria-label="card list" className={classNames}>
+            {children}
+        </div>
+    )
+
+}
+
 /* Image component for card */
 Card.Image = (props) => {
 
