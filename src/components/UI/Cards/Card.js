@@ -136,4 +136,26 @@ Card.Header = (props) => {
 
 }
 
+/* Card Footer */
+Card.Footer = (props) => {
+
+    /* Destructure the props passed in */
+    const { 
+        text,
+        classes
+     } = props
+
+     /* Setup the css classes to apply to the component */
+     let classNames = 'card-footer'
+
+     classNames += classes ? classes : null
+
+     return (
+        <div aria-label="card footer" classNames={classNames} >
+            {text}
+        </div>
+     )
+
+}
+
 export default Card;
