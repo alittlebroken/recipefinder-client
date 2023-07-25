@@ -88,4 +88,30 @@ Card.Body = (props) => {
 
 }
 
+/* Card Title */
+Card.Title = (props) => {
+
+    // Destructure the props
+    const {
+        text,
+        small,
+        medium,
+        large
+    } = props
+
+    // collect the styles needed
+    let classNames
+
+    classNames += small ? ' card-title-small' : null
+    classNames += medium ? ' card-title-medium' : null
+    classNames += large ? ' card-title-large' : null
+
+    return (
+        <>
+            <h5 className={classNames}>{text}</h5>
+        </>
+    )
+
+}
+
 export default Card;
