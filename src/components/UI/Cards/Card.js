@@ -58,7 +58,7 @@ Card.Image = (props) => {
 
     return (
         <>
-            <img src={source} altText={altText} title={title} className={classNames} />
+            <img src={source} alt={altText} title={title} className={classNames} />
         </>
     )
 
