@@ -33,7 +33,31 @@ describe('LatestRecipes component', () => {
         store = setupStore(initialStoreState)
     })
 
-    xit('Skeleton test', async () => {
+    it("renders the component", async () => {
+
+        // render the component
+        renderWithProviders(<LatestRecipes />, { store })
+
+        // Asserts
+        expect(screen).toBeDefined()
+        expect(screen.getByRole('heading', { name: /Latest Recipes/i })).toBeInTheDoucument()
+
+    })
+
+    it("The child component is called", async () => {
+
+        // render the component
+        renderWithProviders(<LatestRecipes />, { store })
+
+        // Asserts
+        expect(screen).toBeDefined()
+        expect(screen.getByRole('heading', { name: /Latest Recipes/i })).toBeInTheDoucument()
+
+        expect(Recipe).toHaveBeenCalled()
+
+    })
+
+    xit("Skeleton test", async () => {
 
         // render the component
         renderWithProviders(<LatestRecipes />, { store })
