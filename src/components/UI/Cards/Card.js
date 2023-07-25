@@ -50,18 +50,20 @@ Card.Image = (props) => {
     } = props
 
     // Setup the css class names to be used
-    let className = 'card-img'
+    let classNames = 'card-img'
 
-    className += rounded ? ' card-image-rounded' : null
-    className += =leftRounded ? ' card-image-rounded-left' : null
-    className += rightRounded ? ' card-image-rounded-right' : null
+    classNames += rounded ? ' card-image-rounded' : null
+    classNames += leftRounded ? ' card-image-rounded-left' : null
+    classNames += rightRounded ? ' card-image-rounded-right' : null
 
     return (
         <>
-            <img src={source} altText={altText} title={title} className={className} />
+            <img src={source} altText={altText} title={title} className={classNames} />
         </>
     )
 
 }
+
+
 
 export default Card;
