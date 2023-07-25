@@ -158,4 +158,25 @@ Card.Footer = (props) => {
 
 }
 
+/* Card Actions */
+Card.Actions = (props) => {
+
+    /* Destructure the props */
+    const {
+        children,
+        classes
+    } = props
+
+    /* Setup the css classes to apply tp the component */
+    let classNames = 'card-actions'
+    classNames += classes ? classes : null
+
+    return (
+        <div arial-label="card actions" className={classNames}>
+            {children}
+        </div>
+    )
+
+}
+
 export default Card;
