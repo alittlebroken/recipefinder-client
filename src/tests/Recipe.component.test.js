@@ -23,8 +23,17 @@ describe('Recipe component', () => {
         /* Test */
         expect(screen).toBeDefined()
 
+        const children = screen.getByRole('generic', { name: /card-container/i })
+
+        expect(within(children).getAllByRole('heading')).toHaveLength(1)
+        expect(within(children).getAllByRole('img')).toHaveLength(1)
+        expect(within(children).getAllByRole('generic', { name: /rating-star /i})).toHaveLength(5)
+        expect(within(children).getAllByRole('button')).toHaveLength(1)
+        expect(within(children).getAllByRole('paragraph')).toHaveLength(1)
+        
+
     })
 
-    
+
 
 })
