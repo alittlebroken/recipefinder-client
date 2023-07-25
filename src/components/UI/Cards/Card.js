@@ -114,4 +114,26 @@ Card.Title = (props) => {
 
 }
 
+/* Card Header */
+Card.Header = (props) => {
+
+    /* Destructure the passed in props */
+    const {
+        text,
+        classes
+    } = props
+
+    /* Construct the list of css classes to use */
+    let classNames = "card-header"
+
+    classNames += classes ? classes : null
+
+    return (
+        <div aria-label="card header" className={classNames}>
+            {text}
+        </div>
+    )
+
+}
+
 export default Card;
