@@ -1,0 +1,147 @@
+/* Card settings */
+.card-list {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.card {
+    display: flex;
+}
+
+.card-light {
+    background-color: var(--col-secondary);
+}
+
+.card-rounded {
+    border-radius: 10px;
+}
+
+.card-title-small {
+    font-family:inherit;
+    font-size: .9rem;
+    line-height: 1.5rem;
+}
+
+.card-title-medium {
+    font-size: 1.5rem;
+    font-family: inherit;
+    font-weight: bold;
+}
+
+.card-title-large {
+    font-size: 2rem;
+    font-family: inherit;
+    font-weight: bold;
+}
+
+.card-top-round {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.card-bot-round {
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.card-body {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-body-border-right {
+    border: 1px solid var(--col-borders);
+    border-left: none;
+}
+
+.card-border-thin {
+    border: 1px solid var(--col-borders);
+}
+
+.card-border-medium {
+    border: 3px solid var(--col-borders);
+}
+
+.card-border-large {
+    border: 5px solid var(--col-borders);
+}
+
+.card-shadow {
+    box-shadow: 7px 7px 12px rgb(0, 0, 0, 0.3);
+}
+
+.card-header {
+    border-bottom: 1px solid var(--col-borders);
+}
+
+.card-footer {
+    border-top: 1px solid var(--col-borders);
+}
+
+.card-actions {
+    display: flex;
+    padding: 5px;
+    gap: 5px;
+}
+
+.card-tags {
+    display: flex;
+    flex-direction: row;
+    gap: 7px;
+    padding: 5px;
+}
+.card-tag {
+    border: 2px solid var(--col-accent);
+    padding: 5px;
+    border-radius: 10px;
+    font-weight: bold;
+    color: var(--col-accent);
+}
+
+.card-img {
+    aspect-ratio: auto;
+}
+
+.card-img-rounded {
+    border-radius: 10px;
+}
+
+.card-img-rounded-left {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.card-img-rounded-right {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.card-overlay {
+    position: relative;
+}
+
+.card-overlay-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+
+.card-overlay-center-top {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%);
+    color: white;
+}
+
+.card-overlay-center-bottom {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translate(-50%);
+    color: white;
+}
