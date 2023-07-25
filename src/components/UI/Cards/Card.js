@@ -36,6 +36,32 @@ const Card = (props) => {
 
 }
 
+/* Image component for card */
+Card.Image = (props) => {
 
+    // Destructure the props
+    const {
+        source,
+        title,
+        altText,
+        rounded,
+        leftRounded,
+        rightRounded
+    } = props
+
+    // Setup the css class names to be used
+    let className = 'card-img'
+
+    className += rounded ? ' card-image-rounded' : null
+    className += =leftRounded ? ' card-image-rounded-left' : null
+    className += rightRounded ? ' card-image-rounded-right' : null
+
+    return (
+        <>
+            <img src={source} altText={altText} title={title} className={className} />
+        </>
+    )
+
+}
 
 export default Card;
