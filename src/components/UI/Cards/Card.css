@@ -10,6 +10,7 @@
 
 .card {
     display: flex;
+    flex-direction: column;
 }
 
 .card-light {
@@ -105,6 +106,7 @@
 
 .card-img {
     aspect-ratio: auto;
+    width: 100%;
 }
 
 .card-img-rounded {
