@@ -8,10 +8,12 @@ const Layout = ({ children }) => {
     return (
         <>
             <Header />
-            <Content>
-                { children }
-            </Content>
-            <Footer />
+            <div aria-label="content-footer-container" className="conterfooter-container">
+                <Content>
+                    { children }
+                </Content>
+                <Footer />
+            </div>
         </>
     )
 }
