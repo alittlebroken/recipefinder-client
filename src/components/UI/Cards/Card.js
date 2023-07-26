@@ -17,12 +17,14 @@ const Card = (props) => {
     // Apply various classes based on the props passed in
     let className = 'card'
 
-    className += rounded ? ' card-rounded' : null
-    className += shadow ? ' card-shadow' : null
-    className += thinBorder ? ' card-border-thin' : null
-    className += mediumBorder ? ' card-border-medium' : null
-    className += thickBorder ? ' card-border-thick' : null
+    className += rounded ? ' card-rounded' : ''
+    className += shadow ? ' card-shadow' : ''
+    className += thinBorder ? ' card-border-thin' : ''
+    className += mediumBorder ? ' card-border-medium' : ''
+    className += thickBorder ? ' card-border-thick' : ''
     
+    console.log(`Card Style = ${className}`)
+
     // Finally other styles here - Should be a string of class names starting with a space
     className += otherClasses
 
@@ -47,7 +49,7 @@ Card.List = (props) => {
 
     /* Setup the classes to be applied to the component */
     let classNames = 'card-list'
-    classNames += classes ? classes : null
+    classNames += classes ? classes : ''
 
     return (
         <div aria-label="card list" className={classNames}>
@@ -73,9 +75,9 @@ Card.Image = (props) => {
     // Setup the css class names to be used
     let classNames = 'card-img'
 
-    classNames += rounded ? ' card-image-rounded' : null
-    classNames += leftRounded ? ' card-image-rounded-left' : null
-    classNames += rightRounded ? ' card-image-rounded-right' : null
+    classNames += rounded ? ' card-image-rounded' : ''
+    classNames += leftRounded ? ' card-image-rounded-left' : ''
+    classNames += rightRounded ? ' card-image-rounded-right' : ''
 
     return (
         <>
@@ -97,7 +99,7 @@ Card.Body = (props) => {
     // Generate the styles for the component
     let classNames = 'card-body'
 
-    classNames += rightBorder ? ' card-body-border-right' : null
+    classNames += rightBorder ? ' card-body-border-right' : ''
 
     return (
         <>
@@ -123,9 +125,9 @@ Card.Title = (props) => {
     // collect the styles needed
     let classNames
 
-    classNames += small ? ' card-title-small' : null
-    classNames += medium ? ' card-title-medium' : null
-    classNames += large ? ' card-title-large' : null
+    classNames += small ? ' card-title-small' : ''
+    classNames += medium ? ' card-title-medium' : ''
+    classNames += large ? ' card-title-large' : ''
 
     return (
         <>
@@ -147,7 +149,7 @@ Card.Header = (props) => {
     /* Construct the list of css classes to use */
     let classNames = "card-header"
 
-    classNames += classes ? classes : null
+    classNames += classes ? classes : ''
 
     return (
         <div aria-label="card header" className={classNames}>
@@ -169,7 +171,7 @@ Card.Footer = (props) => {
      /* Setup the css classes to apply to the component */
      let classNames = 'card-footer'
 
-     classNames += classes ? classes : null
+     classNames += classes ? classes : ''
 
      return (
         <div aria-label="card footer" classNames={classNames} >
@@ -190,7 +192,7 @@ Card.Actions = (props) => {
 
     /* Setup the css classes to apply tp the component */
     let classNames = 'card-actions'
-    classNames += classes ? classes : null
+    classNames += classes ? classes : ''
 
     return (
         <div arial-label="card actions" className={classNames}>
@@ -211,7 +213,7 @@ Card.Tags = (props) => {
 
     /* Setup the classes to be applied to the component */
     let classNames = 'card-tags'
-    classNames += classes ? classes : null
+    classNames += classes ? classes : ''
 
     return (
         <div aria-label="card tag list" className={classNames}>
@@ -232,7 +234,7 @@ Card.Tag = (props) => {
 
     /* Setup the classes to be applied to the component */
     let classNames = 'card-tag'
-    classNames += classes ? classes : null
+    classNames += classes ? classes : ''
 
     return (
         <div aria-label="card tag" className={classNames}>
