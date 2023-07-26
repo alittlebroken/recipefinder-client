@@ -19,7 +19,7 @@
     grid-gap: 15px;
 }
 
-.card {
+.card-admin {
     width: 300px;
     display: flex;
     flex-direction: column;
