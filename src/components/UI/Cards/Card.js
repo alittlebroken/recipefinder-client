@@ -67,7 +67,8 @@ Card.Image = (props) => {
         altText,
         rounded,
         leftRounded,
-        rightRounded
+        rightRounded,
+        roundTop,
     } = props
 
     // Setup the css class names to be used
@@ -76,6 +77,7 @@ Card.Image = (props) => {
     classNames += rounded ? ' card-image-rounded' : ''
     classNames += leftRounded ? ' card-image-rounded-left' : ''
     classNames += rightRounded ? ' card-image-rounded-right' : ''
+    classNames += roundTop ? ' border-radius-top' : ''
 
     return (
         <>
