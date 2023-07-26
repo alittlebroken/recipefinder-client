@@ -36,7 +36,7 @@ const ShowImage = () => {
             <div className="cards">
             {images.length > 0 && images.map(image => (
                     <div className="card-admin">
-                        <img src={image.src} title={image.title} alt={image.title} />
+                        <img src={image.src} title={image.title} alt={image.title} className="card-images" />
                         <div className="card-info">
                             <h3>{image.title}</h3>
                         </div>
