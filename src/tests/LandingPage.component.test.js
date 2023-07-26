@@ -55,6 +55,7 @@ describe('LandingPage Component', () => {
         renderWithProviders(<LandingPage />, { store })
         
         // Asserts
+        expect(screen.getByRole('generic', { name: /landing-container/i })).toBeInTheDocument()
         expect(screen.getByRole('heading', { name: /latest recipes/i })).toBeInTheDocument()
         expect(screen.getByRole('heading', { name: /popular recipes/i })).toBeIntheDocument()
         expect(screen.getByRole('heading', { name: /categories/i })).toBeInTheDocument()
