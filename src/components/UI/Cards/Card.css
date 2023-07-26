@@ -2,6 +2,9 @@
 .card-list {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    width: 100%;
     gap: 20px;
 }
 
@@ -149,8 +152,11 @@
 /* Desktop Styles */
 @media screen and (min-width: 960px) {
 
-    .card {
+    .card-list {
         flex-direction: row;
+        justify-content: space-between;
+        align-items: top;
+        gap: 20px;
     }
 
 }
