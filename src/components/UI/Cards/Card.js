@@ -17,7 +17,7 @@ const Card = (props) => {
     // Apply various classes based on the props passed in
     let className = 'card'
 
-    className += rounded ? ' card-rounded' : ''
+    className += rounded ? ' border-radius' : ''
     className += shadow ? ' card-shadow' : ''
     className += thinBorder ? ' card-border-thin' : ''
     className += mediumBorder ? ' card-border-medium' : ''
