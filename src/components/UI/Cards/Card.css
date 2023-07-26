@@ -10,8 +10,7 @@
 .card {
     display: flex;
     flex-direction: column;
-    border: 1px solid red;
-    width: 345px;
+    width: 90%;
 }
 
 .card-light {
