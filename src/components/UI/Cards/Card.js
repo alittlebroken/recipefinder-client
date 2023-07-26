@@ -22,11 +22,9 @@ const Card = (props) => {
     className += thinBorder ? ' card-border-thin' : ''
     className += mediumBorder ? ' card-border-medium' : ''
     className += thickBorder ? ' card-border-thick' : ''
-    
-    console.log(`Card Style = ${className}`)
 
     // Finally other styles here - Should be a string of class names starting with a space
-    className += otherClasses
+    className += ` ${otherClasses}`
 
     return (
         <>
