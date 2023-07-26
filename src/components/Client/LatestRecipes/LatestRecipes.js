@@ -26,11 +26,14 @@ const LatestRecipes = (props) => {
     ]
 
     return (
-        <Card.List>
-            {samples.map( sample => {
-                return <Recipe record={sample} />
-            })}
-        </Card.List>
+        <>
+            <h3>Latest Recipes</h3>
+            <Card.List>
+                {samples.map( sample => {
+                    return <Recipe record={sample} />
+                })}
+            </Card.List>
+        </>
     )
 
 }
