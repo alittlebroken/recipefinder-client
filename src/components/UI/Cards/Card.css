@@ -102,8 +102,7 @@
 
 .card-img {
     aspect-ratio: auto;
-    width: 350px;
-    height: 250px;
+    width: 100%;
 }
 
 .card-img-rounded {
