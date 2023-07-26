@@ -1,0 +1,20 @@
+/* Mobile Styles */
+
+.landing-container {
+    width: 100%;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+/* Dekstop Styles */
+/* Desktop Styles */
+@media screen and (min-width: 960px) {
+
+    .landing-container {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+}
