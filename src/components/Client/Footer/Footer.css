@@ -22,8 +22,8 @@
     padding: 10px;
     width: 100%;
     background-color: var(--col-primary);
-    position: absolute;
     bottom: 0;
+    flex-grow: 1;
 }
 
 /* Section container */
@@ -112,6 +112,10 @@
 }
 
 @media screen and (min-width: 960px) {
+
+    .footer-container {
+        margin-top: auto;
+    }
 
     .footer-section-container {
         display: flex;
