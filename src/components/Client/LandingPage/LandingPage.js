@@ -6,9 +6,9 @@ const LandingPage = (props) => {
 
 
     return (
-
-       <LatestRecipes /> 
-
+        <div aria-label="Landing page for website" className="landing-container">
+            <LatestRecipes /> 
+        </div>
     )
 }
 
