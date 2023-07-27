@@ -187,11 +187,17 @@ Card.Actions = (props) => {
     /* Destructure the props */
     const {
         children,
-        classes
+        classes,
+        alignLeft,
+        alignCenter,
+        alignRight
     } = props
 
     /* Setup the css classes to apply tp the component */
     let classNames = 'card-actions'
+    classNames += alignLeft ? ' align-left' : ''
+    classNames += alignCenter ? ' align-center' : ''
+    classNames += alignRight ? ' align-right' : ''
     classNames += classes ? classes : ''
 
     return (
