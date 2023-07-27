@@ -99,6 +99,18 @@ li::marker {
   flex-direction: row;
 }
 
+.align-left {
+  justify-content: start;
+}
+
+.align-center {
+  justify-content: center;
+}
+
+.align-right {
+  justify-content: end;
+}
+
 .w-100 {
   width: 100%;
 }
