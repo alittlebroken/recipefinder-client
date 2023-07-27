@@ -6,7 +6,6 @@
     padding: 10px;
     font-family: inherit;
     font-weight: bold;
-    width: auto;
     background-color: var(--col-primary);
     color: var(--col-secondary);
     border: none;
@@ -49,4 +48,16 @@
 .btn-circle-outline:hover {
     background-color: var(--col-primary);
     color: var(--col-secondary);
+}
+
+.btn-width-auto {
+    width: auto;
+}
+
+.btn.width-full {
+    width: 100%;
+}
+
+.btn-width-half {
+    width: 50%;
 }
