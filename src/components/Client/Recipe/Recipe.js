@@ -26,10 +26,9 @@ const Recipe = (props) => {
                 <Card.Title text={record.name} medium />
                 {record.textContent}
             </Card.Body>
-            <Card.Actions>
+            <Card.Actions alignCenter>
                 <Button 
-                clickHandler={() => {navigate(`/recipe/${record.id}`)}} 
-                
+                clickHandler={() => {navigate(`/recipe/${record.id}`)}}     
                 >
                     More
                 </Button>
