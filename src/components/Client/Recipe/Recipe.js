@@ -28,7 +28,8 @@ const Recipe = (props) => {
             </Card.Body>
             <Card.Actions alignCenter>
                 <Button 
-                clickHandler={() => {navigate(`/recipe/${record.id}`)}}     
+                clickHandler={() => {navigate(`/recipe/${record.id}`)}} 
+                widthFull  
                 >
                     More
                 </Button>
