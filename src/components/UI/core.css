@@ -51,59 +51,6 @@ section {
 
 }
 
-/* Buttons */
-.btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-    font-family: inherit;
-    font-weight: bold;
-    width: auto;
-    background-color: var(--col-primary);
-    color: var(--col-secondary);
-    border: none;
-    border-radius: 5px;
-    border: 2px solid var(--col-primary);
-}
-
-.btn:hover {
-    background-color: var(--col-secondary);
-    color: var(--col-primary);
-}
-
-.btn-outline {
-    background: none;
-    color: var(--col-primary);
-}
-
-.btn-outline:hover {
-    background: var(--col-primary);
-    color: var(--col-secondary);
-}
-
-.btn-circle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-}
-
-.btn-circle:hover {
-    background: none;
-    color: var(--col-primary);
-}
-
-.btn-circle-outline {
-   background: none;
-   color: var(--col-primary);
-}
-
-.btn-circle-outline:hover {
-    background-color: var(--col-primary);
-    color: var(--col-secondary);
-}
-
 /* Inputs */
 label {
     font-weight: bold;
