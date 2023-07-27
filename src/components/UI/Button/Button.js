@@ -9,7 +9,10 @@ const Button = (props) => {
         disabled,
         outline,
         rounded,
-        roundedOutline
+        roundedOutline,
+        widthAuto,
+        widthHalf,
+        widthFull
     } = props
 
     // Setup the class names for the button
@@ -17,6 +20,9 @@ const Button = (props) => {
     classNames += outline ? ' btn-outline' : ''
     classNames += rounded ? ' btn-circle' : ''
     classNames += roundedOutline ? ' btn-circle-outline' : ''
+    classNames += widthAuto ? ' btn-width-auto' : ''
+    classNames += widthHalf ? ' btn-width-half' : ''
+    classNames += widthFull ? ' btn-width-full' : ''
 
     return (
         <button 
