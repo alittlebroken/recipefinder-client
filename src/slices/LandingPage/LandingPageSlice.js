@@ -115,10 +115,10 @@ export const landingpageSlice = createSlice({
             state.hasError = false
 
             // Parse the payload
-            const results = JSON.parse(action.payload)
+            const results = action.payload?.data?.results
 
             // Store the results returned
-            state.latest = results?.data
+            state.latest = results
         },
         [getPopularRecipes.pending]: (state, action) => {
             state.isLoading = true
