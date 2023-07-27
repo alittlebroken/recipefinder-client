@@ -35,6 +35,10 @@
     font-weight: bold;
 }
 
+.card-title-small, .card-title-medium, .card-title-large {
+    margin-bottom: 15px;
+}
+
 .card-top-round {
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
