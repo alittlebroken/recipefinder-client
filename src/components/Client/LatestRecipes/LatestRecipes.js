@@ -26,14 +26,14 @@ const LatestRecipes = (props) => {
     ]
 
     return (
-        <>
+        <div aria-label="latestRecipes container" className="latestRecipeContainer">
             <h3>Latest Recipes</h3>
             <Card.List>
                 {samples.map( sample => {
                     return <Recipe record={sample} />
                 })}
             </Card.List>
-        </>
+        </div>
     )
 
 }
