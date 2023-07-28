@@ -5,8 +5,6 @@ import { useNavigate } from 'react-router-dom'
 
 const Recipe = (props) => {
 
-    console.log(props)
-
     /* Destructure the props */
     const { record } = props
 
