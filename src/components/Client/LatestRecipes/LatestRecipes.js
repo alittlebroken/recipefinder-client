@@ -5,6 +5,11 @@ import Recipe from '../Recipe/Recipe'
 
 const LatestRecipes = (props) => {
 
+    // Destructure the passed in props
+    const {
+        recipes,
+    } = props
+
     // Sample Data
     const samples = [
         {
@@ -29,8 +34,8 @@ const LatestRecipes = (props) => {
         <div aria-label="latestRecipes container" className="latestRecipeContainer">
             <h3>Latest Recipes</h3>
             <Card.List>
-                {samples.map( sample => {
-                    return <Recipe record={sample} />
+                {recipes.map( recipe => {
+                    return <Recipe record={recipe} />
                 })}
             </Card.List>
         </div>
