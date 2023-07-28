@@ -80,7 +80,7 @@ Card.Image = (props) => {
     classNames += roundTop ? ' border-radius-top' : ''
 
     // Set a placeholder image if we have none
-    let placeHolder = 'https://fakeimg.pl/600x400?text=Image+coming+soon'
+    let placeHolder = 'https://fakeimg.pl/600x400?text=No+image'
 
     return (
         <>
