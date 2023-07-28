@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom'
 
 const Recipe = (props) => {
 
+    console.log(props)
+
     /* Destructure the props */
     const { record } = props
 
@@ -12,19 +14,18 @@ const Recipe = (props) => {
     const navigate = useNavigate()
 
     return (
-        <Card 
-         
+        <Card key={record.id}
         thinBorder 
         >
             <Card.Image 
-                source={record.src} 
-                title={record.title}
-                altText={record.alt}
+                source={record?.images[0]?.source} 
+                title={record?.images[0]?.title}
+                altText={record?.images[0]?.alt}
                 
             /> 
             <Card.Body>
                 <Card.Title text={record.name} medium />
-                {record.textContent}
+                {record.description}
             </Card.Body>
             <Card.Actions alignCenter>
                 <Button 
