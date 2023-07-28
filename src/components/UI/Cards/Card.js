@@ -79,9 +79,12 @@ Card.Image = (props) => {
     classNames += rightRounded ? ' card-image-rounded-right' : ''
     classNames += roundTop ? ' border-radius-top' : ''
 
+    // Set a placeholder image if we have none
+    let placeHolder = 'https://fakeimg.pl/600x400?text=Image+coming+soon'
+
     return (
         <>
-            <img src={source} alt={altText} title={title} className={classNames} />
+            <img src={source ? source : placeHolder } alt={altText} title={title} className={classNames} />
        </>
     )
 
