@@ -12,6 +12,9 @@ const Card = (props) => {
         mediumBorder,
         thickBorder,
         otherClasses,
+        large,
+        medium,
+        small,
     } = props
 
     // Apply various classes based on the props passed in
@@ -22,6 +25,10 @@ const Card = (props) => {
     className += thinBorder ? ' card-border-thin' : ''
     className += mediumBorder ? ' card-border-medium' : ''
     className += thickBorder ? ' card-border-thick' : ''
+
+    className += small ? ' card-small' : ''
+    className += medium ? ' card-medium' : ''
+    className += large ? ' card-large' : ''
 
     // Finally other styles here - Should be a string of class names starting with a space
     className += ` ${otherClasses}`
