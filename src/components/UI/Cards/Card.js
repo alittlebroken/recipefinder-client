@@ -260,4 +260,25 @@ Card.Tag = (props) => {
 
 }
 
+/* Card container */
+Card.Container = (props) => {
+
+    /* Destructure the props */
+    const { 
+        children,
+        classes
+    } = props
+
+    /* Classnames to be applied */
+    let classNames = 'card-container'
+    classNames += classes ? classes : ''
+
+    return (
+        <div aria-label="card container" className={classNames}>
+            {children}
+        </div>
+    )
+
+}
+
 export default Card;
