@@ -9,5 +9,7 @@
 
 /* Desktop Styles */
 @media screen and (min-wdith: 960px) {
-    
+    .popularrecipes-container {
+        flex-direction: row;
+    }
 }
