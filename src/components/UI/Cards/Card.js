@@ -79,8 +79,6 @@ Card.Image = (props) => {
         leftRounded,
         rightRounded,
         roundTop,
-        overlayed,
-        overlayText
     } = props
 
     // Setup the css class names to be used
@@ -90,7 +88,6 @@ Card.Image = (props) => {
     classNames += leftRounded ? ' card-image-rounded-left' : ''
     classNames += rightRounded ? ' card-image-rounded-right' : ''
     classNames += roundTop ? ' border-radius-top' : ''
-    classNames += overlayed ? ' card-overlay' : ''
 
     // Set a placeholder image if we have none
     let placeHolder = 'https://fakeimg.pl/600x400?text=No+image'
@@ -98,7 +95,6 @@ Card.Image = (props) => {
     return (
         <>
             <img src={source ? source : placeHolder } alt={altText} title={title} className={classNames} />
-            {overlayed ? (<span className="card-overlay-center">{overlayText}</span>): ''}
        </>
     )
 
