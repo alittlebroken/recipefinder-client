@@ -59,7 +59,7 @@ export const getPopularRecipes = createAsyncThunk('landingPage/getPopularRecipes
 )
 
 /* Categories */
-const getCategories = createAsyncThunk('landingPage/getCategories', 
+export const getCategories = createAsyncThunk('landingPage/getCategories', 
     async (payload, thunkAPI) => {
 
         try{
@@ -72,7 +72,7 @@ const getCategories = createAsyncThunk('landingPage/getCategories',
                 },
                 pagination: {
                     page: 1,
-                    perPage: 6
+                    perPage: 3
                 }
             }
 
@@ -151,10 +151,10 @@ export const landingpageSlice = createSlice({
             state.hasError = false
 
             // Parse the returned data
-            const results = JSON.parse(action.payload)
+            const results = action.payload?.data?.results
 
             // Store the returned results
-            state.categories = results?.data
+            state.categories = results
         }
     },
 })
