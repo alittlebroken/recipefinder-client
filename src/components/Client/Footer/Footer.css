@@ -123,6 +123,8 @@
         flex-direction: row;
         gap: 50px;
         margin: 0 auto;
+        flex-basis: 100%;
+        align-items: center;
     }
 
 }
