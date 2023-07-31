@@ -18,7 +18,7 @@ export const getLatestRecipes = createAsyncThunk('landingpage/getLatestRecipes',
                 },
                 pagination: {
                     page: 1,
-                    perPage: 5
+                    perPage: 3
                 }
             }
 
