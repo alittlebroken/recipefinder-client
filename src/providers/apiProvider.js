@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+import queryString from 'query-string'
 import inMemoryJWT from '../utils/auth.utils';
 
 // Wrapper for API methods
@@ -137,7 +137,7 @@ const apiProvider = {
         }
 
         // Set the URL to use
-        let url = `${process.env.REACT_APP_API_URL}/${resource}?${JSON.stringify(queryParams)}`
+        let url = `${process.env.REACT_APP_API_URL}/${resource}?${queryString.stringify(queryParams)}`
 
         // Access the appropriate API and process the results
         const response = await axios.get(url, axiosOptions)
