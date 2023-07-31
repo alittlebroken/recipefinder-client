@@ -32,7 +32,7 @@ export const getLatestRecipes = createAsyncThunk('landingpage/getLatestRecipes',
 )
 
 /* Popular Recipes */
-const getPopularRecipes = createAsyncThunk('landingPage/getPopularRecipes', 
+export const getPopularRecipes = createAsyncThunk('landingPage/getPopularRecipes', 
     async (payload, thunkAPI) => {
 
         try {
@@ -45,7 +45,7 @@ const getPopularRecipes = createAsyncThunk('landingPage/getPopularRecipes',
                 },
                 pagination: {
                     page: 1,
-                    perPage: 6
+                    perPage: 3
                 }
             }
 
@@ -133,10 +133,10 @@ export const landingpageSlice = createSlice({
             state.hasError = false
 
             // Parse the data returned from the thunk
-            const results = JSON.parse(action.payload)
+            const results = action.payload?.data?.results
 
             // Store the results returned
-            state.popular = results?.data
+            state.popular = results
         },
         [getCategories.pending]: (state, action) => {
             state.isLoading = true
