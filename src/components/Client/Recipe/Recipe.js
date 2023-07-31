@@ -20,19 +20,21 @@ const Recipe = (props) => {
                 title={record?.images[0]?.title}
                 altText={record?.images[0]?.alt}
                 
-            /> 
-            <Card.Body>
-                <Card.Title text={record.name} medium />
-                {record.description}
-            </Card.Body>
-            <Card.Actions alignCenter>
-                <Button 
-                clickHandler={() => {navigate(`/recipe/${record.id}`)}} 
-                widthFull  
-                >
-                    More
-                </Button>
-            </Card.Actions>
+            />
+            <Card.Title text={record.name} medium />
+            <Card.Container>
+                <Card.Body>
+                    {record.description}
+                </Card.Body>
+                <Card.Actions alignCenter>
+                    <Button 
+                    clickHandler={() => {navigate(`/recipe/${record.id}`)}} 
+                    widthFull  
+                    >
+                        More
+                    </Button>
+                </Card.Actions>
+            </Card.Container>
         </Card>
     )
 }
