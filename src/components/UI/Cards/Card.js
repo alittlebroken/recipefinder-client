@@ -15,6 +15,7 @@ const Card = (props) => {
         large,
         medium,
         small,
+        circular
     } = props
 
     // Apply various classes based on the props passed in
@@ -29,6 +30,8 @@ const Card = (props) => {
     className += small ? ' card-small' : ''
     className += medium ? ' card-medium' : ''
     className += large ? ' card-large' : ''
+
+    className += circular ? ' card-circular' : ''
 
     // Finally other styles here - Should be a string of class names starting with a space
     className += ` ${otherClasses}`
@@ -76,6 +79,8 @@ Card.Image = (props) => {
         leftRounded,
         rightRounded,
         roundTop,
+        overlayed,
+        overlayText
     } = props
 
     // Setup the css class names to be used
@@ -85,6 +90,7 @@ Card.Image = (props) => {
     classNames += leftRounded ? ' card-image-rounded-left' : ''
     classNames += rightRounded ? ' card-image-rounded-right' : ''
     classNames += roundTop ? ' border-radius-top' : ''
+    classNames += overlayed ? ' card-overlay' : ''
 
     // Set a placeholder image if we have none
     let placeHolder = 'https://fakeimg.pl/600x400?text=No+image'
@@ -92,6 +98,7 @@ Card.Image = (props) => {
     return (
         <>
             <img src={source ? source : placeHolder } alt={altText} title={title} className={classNames} />
+            {overlayed ? (<span className="card-overlay-center">{overlayText}</span>): ''}
        </>
     )
 
@@ -129,7 +136,8 @@ Card.Title = (props) => {
         text,
         small,
         medium,
-        large
+        large,
+        overlay
     } = props
 
     // collect the styles needed
@@ -138,6 +146,8 @@ Card.Title = (props) => {
     classNames += small ? ' card-title-small' : ''
     classNames += medium ? ' card-title-medium' : ''
     classNames += large ? ' card-title-large' : ''
+
+    classNames += overlay ? ' card-overlay-center' : ''
 
     return (
         <>
@@ -266,12 +276,14 @@ Card.Container = (props) => {
     /* Destructure the props */
     const { 
         children,
-        classes
+        classes,
+        overlay
     } = props
 
     /* Classnames to be applied */
     let classNames = 'card-container'
     classNames += classes ? classes : ''
+    classNames += overlay ? ' card-overlay' : ''
 
     return (
         <div aria-label="card container" className={classNames}>
@@ -280,5 +292,33 @@ Card.Container = (props) => {
     )
 
 }
+
+/* OverLay text for images */
+Card.Overlay = (props) => {
+
+    /* Destructure the props */
+    const { 
+        children,
+        classes,
+        center,
+        centerTop,
+        centerBottom
+    } = props
+
+    /* Classnames to be applied */
+    let classNames = ''
+    classNames += classes ? classes : ''
+    classNames += center ? ' card-overlay-center' : ''
+    classNames += centerTop ? ' card-overlay-center-top' : ''
+    classNames += centerBottom ? ' card-overlay-center-bottom' : ''
+
+    return (
+        <div aria-label="card overlay" className={classNames}>
+            {children}
+        </div>
+    )
+
+}
+
 
 export default Card;
