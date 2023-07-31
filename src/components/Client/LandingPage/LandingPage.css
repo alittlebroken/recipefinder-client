@@ -13,8 +13,9 @@
 @media screen and (min-width: 960px) {
 
     .landing-container {
-        width: 75%;
         margin: 0 auto;
+        padding: 5px;
+        
     }
 
 }

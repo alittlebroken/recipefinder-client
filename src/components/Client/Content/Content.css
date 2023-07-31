@@ -12,5 +12,6 @@
 @media screen and (min-width: 960px) {
     .content-container {
         width: 95%;
+        height: 100%;
     }
 }
