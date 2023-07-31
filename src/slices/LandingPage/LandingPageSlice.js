@@ -67,7 +67,7 @@ export const getCategories = createAsyncThunk('landingPage/getCategories',
             // Extract parameters from the payload
             const params = {
                 sort: {
-                    field: 'rating',
+                    field: 'created_at',
                     order: 'desc'
                 },
                 pagination: {
