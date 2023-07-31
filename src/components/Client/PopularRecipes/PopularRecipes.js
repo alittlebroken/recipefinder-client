@@ -11,7 +11,7 @@ const PopularRecipes = (props) => {
 
     return (
         <div aria-label="popular recipes container" className="popularrecipes-container">
-            <h2>Popular Recipes</h2>
+            <h3>Popular Recipes</h3>
             {records.map((recipe) => {
                 return <Recipe record={recipe} />
             })}
