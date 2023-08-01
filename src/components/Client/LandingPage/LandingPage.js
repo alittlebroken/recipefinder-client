@@ -3,6 +3,7 @@ import { useDispatch, useSelector, shallowEqual  } from 'react-redux';
 
 import "./LandingPage.css"
 
+import LandingHero from  '../LandingHero/LandingHero'
 import LatestRecipes from '../LatestRecipes/LatestRecipes'
 import PopularRecipes from '../PopularRecipes/PopularRecipes'
 import LandingCategories from '../LandingCategories/LandingCategories'
@@ -41,11 +42,14 @@ const LandingPage = (props) => {
     }, [dispatch]) // Only perform when the component mounts 
 
     return (
-        <div aria-label="Landing page for website" className="landing-container">
-           { loading ? 'Loading latest recipe data' : (<LatestRecipes recipes={latestRecipeData}/>) }
-           { loading ? 'Loading popular recipe data' : (<PopularRecipes records={popularRecipeData}/>)}
-           { loading ? 'Loading category data' : (<LandingCategories categories={categories}/>)}
-        </div>
+        <>
+            <LandingHero />
+            <div aria-label="Landing page for website" className="landing-container">
+                { loading ? 'Loading latest recipe data' : (<LatestRecipes recipes={latestRecipeData}/>) }
+                { loading ? 'Loading popular recipe data' : (<PopularRecipes records={popularRecipeData}/>)}
+                { loading ? 'Loading category data' : (<LandingCategories categories={categories}/>)}
+            </div>
+        </>
     )
 }
 
