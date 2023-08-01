@@ -1,0 +1,58 @@
+/* Mobile Layout */
+
+/* Desktop Layout */
+@media screen and (min-width: 960px) {
+    .landingHero-container {
+        width: 100%;
+        height: 500px;
+        background-color: var(--col-primary);
+        display: flex;
+        flex-direction: column;
+        padding: 15px;
+        color: white;
+        justify-content: center;
+        align-items: center;
+        gap: 25px;
+    }
+
+    .hero-heading {
+        font-family: 'Borel', cursive;
+        font-size: 4rem;
+        padding: 0;
+        margin: 0;
+    }
+
+    .hero-input {
+        border-radius: 35px;
+        border: none;
+        padding: 25px;
+        font-family: inherit;
+        font-size: 2rem;
+        width: 100%;
+        text-indent: 30px;
+        outline: none;
+        text-align: center;
+    }
+
+    .search-form {
+       width: 75%;
+       margin: 0 auto;
+    }
+
+    .search-container i {
+        position: absolute;
+    }
+
+    .search-container {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .icon {
+        padding: 30px;
+        min-width: 40px;
+        color: var(--col-accent);
+        font-size: 2rem;
+    }
+
+}
