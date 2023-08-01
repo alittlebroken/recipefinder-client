@@ -1,0 +1,27 @@
+/* Mobile Layout */
+.category-container {
+    display: flex;
+    padding: 15px;
+    border-radius: 50%;
+    width: 300px;
+    height: 300px;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-color: var(--col-primary);
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-top: 25px;
+    background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTbM2QvYoYP_gLsNYWaENarCK0HjBwgv2QjQ&usqp=CAU);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Desktop Layout */
+@media screen and (min-size: 960px) {
+
+    .category-container {
+        flex-direction: row;
+    }
+
+}
