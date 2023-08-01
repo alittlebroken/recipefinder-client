@@ -13,6 +13,11 @@
     width: 100%;
 }
 
+.card-rounded {
+    border-radius: 15px;
+    overflow: hidden;
+}
+
 .card-circular {
     border-radius: 50%;
 }
@@ -116,7 +121,7 @@
 }
 
 .card-img-rounded {
-    border-radius: 10px;
+    border-radius: 15px;
 }
 
 .card-img-rounded-left {

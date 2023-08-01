@@ -15,13 +15,14 @@ const Card = (props) => {
         large,
         medium,
         small,
-        circular
+        circular,
+        overlay
     } = props
 
     // Apply various classes based on the props passed in
     let className = 'card'
 
-    className += rounded ? ' border-radius' : ''
+    className += rounded ? ' card-rounded' : ''
     className += shadow ? ' card-shadow' : ''
     className += thinBorder ? ' card-border-thin' : ''
     className += mediumBorder ? ' card-border-medium' : ''
@@ -32,6 +33,8 @@ const Card = (props) => {
     className += large ? ' card-large' : ''
 
     className += circular ? ' card-circular' : ''
+
+    className += overlay ? ' card-overlay' : ''
 
     // Finally other styles here - Should be a string of class names starting with a space
     className += ` ${otherClasses}`
@@ -273,13 +276,15 @@ Card.Container = (props) => {
     const { 
         children,
         classes,
-        overlay
+        overlay,
+        rounded
     } = props
 
     /* Classnames to be applied */
     let classNames = 'card-container'
     classNames += classes ? classes : ''
     classNames += overlay ? ' card-overlay' : ''
+    classNames += rounded ? ' card-rounded' : ''
 
     return (
         <div aria-label="card container" className={classNames}>
