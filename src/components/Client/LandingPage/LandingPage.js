@@ -5,6 +5,7 @@ import "./LandingPage.css"
 
 import LatestRecipes from '../LatestRecipes/LatestRecipes'
 import PopularRecipes from '../PopularRecipes/PopularRecipes'
+import LandingCategories from '../LandingCategories/LandingCategories'
 
 import {
     getLatestRecipes,
@@ -12,6 +13,8 @@ import {
     selectLatestRecipes,
     getPopularRecipes,
     selectPopularRecipes,
+    getCategories,
+    selectCategories,
     selectisLoading,
     selectHasError
 } from '../../../slices/LandingPage/LandingPageSlice'
@@ -25,6 +28,7 @@ const LandingPage = (props) => {
     let latestRecipeData = useSelector(selectLatestRecipes)
     let latestCount = useSelector(selectLatestCount)
     let popularRecipeData = useSelector(selectPopularRecipes)
+    let categories = useSelector(selectCategories)
     let loading = useSelector(selectisLoading)
 
     // Get the data we need for the component
@@ -32,6 +36,7 @@ const LandingPage = (props) => {
 
         dispatch(getLatestRecipes())
         dispatch(getPopularRecipes())
+        dispatch(getCategories())
 
     }, [dispatch]) // Only perform when the component mounts 
 
@@ -39,6 +44,7 @@ const LandingPage = (props) => {
         <div aria-label="Landing page for website" className="landing-container">
            { loading ? 'Loading latest recipe data' : (<LatestRecipes recipes={latestRecipeData}/>) }
            { loading ? 'Loading popular recipe data' : (<PopularRecipes records={popularRecipeData}/>)}
+           { loading ? 'Loading category data' : (<LandingCategories categories={categories}/>)}
         </div>
     )
 }
