@@ -2,10 +2,8 @@
 
 .landing-container {
     width: 100%;
-    padding: 15px;
     display: flex;
     flex-direction: column;
-    margin: 0 auto;
     gap: 30px;
 }
 
@@ -14,10 +12,8 @@
 @media screen and (min-width: 960px) {
 
     .landing-container {
-        width: 75%;
-        margin: 0 auto;
-        padding: 5px;
-        gap: 75px;
+        width: 100%;
+        gap: 25px;
     }
 
 }
