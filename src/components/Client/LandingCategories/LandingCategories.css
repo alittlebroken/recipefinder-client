@@ -6,3 +6,8 @@
     padding: 25px;
     gap: 25px;
 }
+
+.categoryLayer {
+    width: 100%;
+    background-color: white;
+}

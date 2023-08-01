@@ -9,13 +9,15 @@ const LandingCategories = (props) => {
     const { categories } = props
 
     return (
-        <div aria-label="landing page categories" className="landingcategories-container">
-            <h3>Categories</h3>
-            <Card.List>
-                {categories.map((category) => {
-                    return <Category record={category} />
-                })}
-            </Card.List>
+        <div aria-label="categories layer" className="categoryLayer">
+            <div aria-label="landing page categories" className="landingcategories-container">
+                <h3>Categories</h3>
+                <Card.List>
+                    {categories.map((category) => {
+                        return <Category record={category} />
+                    })}
+                </Card.List>
+            </div>
         </div>
     )
 
