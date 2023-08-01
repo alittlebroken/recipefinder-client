@@ -7,12 +7,16 @@
     padding: 25px;
 }
 
+.latest-layer {
+    width: 100%;
+    background-color: white;
+}
+
 /* Desktop Styles */
 @media screen and (min-size: 960px) {
 
     .latestRecipeContainer {
         flex-direction: row;
-
-    }  
+    }
 
 }
