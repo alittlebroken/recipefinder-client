@@ -11,13 +11,15 @@ const LatestRecipes = (props) => {
     } = props
 
     return (
-        <div aria-label="latestRecipes container" className="latestRecipeContainer">
-            <h3>Latest Recipes</h3>
-            <Card.List>
-                {recipes.map( recipe => {
-                    return <Recipe record={recipe} />
-                })}
-            </Card.List>
+        <div aria-label="latest recipes layer" className="latest-layer">
+            <div aria-label="latestRecipes container" className="latestRecipeContainer">
+                <h3>Latest Recipes</h3>
+                <Card.List>
+                    {recipes.map( recipe => {
+                        return <Recipe record={recipe} />
+                    })}
+                </Card.List>
+            </div>
         </div>
     )
 
