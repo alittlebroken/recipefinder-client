@@ -140,7 +140,7 @@ Card.Title = (props) => {
     } = props
 
     // collect the styles needed
-    let classNames
+    let classNames = 'card-title'
 
     classNames += small ? ' card-title-small' : ''
     classNames += medium ? ' card-title-medium' : ''
@@ -150,7 +150,7 @@ Card.Title = (props) => {
 
     return (
         <>
-            <h5 className={classNames}>{text}</h5>
+            <p className={classNames}>{text}</p>
         </>
     )
 
