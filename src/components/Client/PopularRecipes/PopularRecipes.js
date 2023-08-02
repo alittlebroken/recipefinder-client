@@ -15,7 +15,7 @@ const PopularRecipes = (props) => {
             <h3>Popular Recipes</h3>
             <Card.List>
                 {records.map((recipe) => {
-                    return <Recipe record={recipe} />
+                    return <Recipe key={recipe.id} record={recipe} />
                 })}
             </Card.List>
         </div>
