@@ -17,6 +17,11 @@ const Recipe = (props) => {
                 is={{ borderRadius: 15}}
             />
             <Card.Title text={record.name} medium link={`/recipe/${record.id}`} />
+            <Card.Tags>
+                {record.categories.map((category) => {
+                    return <Card.Tag key={category.id} text={category.name} />
+                })}
+            </Card.Tags>
             <Card.Container>
 
                 <Card.Actions alignCenter>
