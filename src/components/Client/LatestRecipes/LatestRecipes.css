@@ -13,10 +13,11 @@
 }
 
 /* Desktop Styles */
-@media screen and (min-size: 960px) {
+@media screen and (min-width: 960px) {
 
     .latestRecipeContainer {
-        flex-direction: row;
+        width: 1024px;
+        margin: 0 auto;
     }
 
 }

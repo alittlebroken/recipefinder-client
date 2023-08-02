@@ -11,3 +11,11 @@
     width: 100%;
     background-color: white;
 }
+
+/* Desktop Layout */
+@media screen and (min-width: 960px) {
+    .landingcategories-container {
+        width: 1024px;
+        margin: 0 auto;
+    }
+}
