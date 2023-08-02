@@ -16,17 +16,15 @@ const Recipe = (props) => {
                 altText={record?.images[0]?.alt}
                 is={{ borderRadius: 15}}
             />
-            <Card.Title text={record.name} medium link={`/recipe/${record.id}`} />
-            <Card.Tags>
-                {record.categories.map((category) => {
-                    return <Card.Tag key={category.id} text={category.name} />
-                })}
-            </Card.Tags>
             <Card.Container>
-
-                <Card.Actions alignCenter>
-                </Card.Actions>
+                <Card.Title text={record.name} medium link={`/recipe/${record.id}`} is={{ display: 'flex', justifyContent: 'center' }} />
+                <Card.Tags is={{ display: 'flex', justifyContent: 'center' }} >
+                    {record.categories.map((category) => {
+                        return <Card.Tag key={category.id} text={category.name} />
+                    })}
+                </Card.Tags>
             </Card.Container>
+            
         </Card>
     )
 }
