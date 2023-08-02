@@ -184,7 +184,7 @@
     .card-list {
         flex-direction: row;
         flex-wrap: wrap;
-        align-items: start;
+        width: 100%;
     }
 
     .card {
