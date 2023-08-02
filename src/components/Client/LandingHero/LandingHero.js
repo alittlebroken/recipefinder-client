@@ -1,6 +1,11 @@
 import './LandingHero.css'
 
+import { useState } from 'react'
+
 const LandingHero = (props) => {
+
+    /* Setup the form state */
+    const [searchTerms, setSearchTerms] = useState('')
 
     /* Destructure any passed in props */
     const { children } = props
@@ -16,6 +21,8 @@ const LandingHero = (props) => {
                     name="search" 
                     className="hero-input" 
                     placeholder="Type in a recipe name or ingredient"
+                    value={searchTerms}
+                    onChange={(e) => setSearchTerms(e.target.value)}
                     />
                 </div>
             </form>
