@@ -64,6 +64,7 @@ a {
   text-decoration: none;
   font-family: inherit;
   border-bottom: 1px solid var(--col-primary);
+  color: black;
 }
 
 a:hover {
