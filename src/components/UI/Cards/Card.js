@@ -140,7 +140,8 @@ Card.Title = (props) => {
         medium,
         large,
         overlay,
-        is
+        is,
+        link
     } = props
 
     // collect the styles needed
@@ -154,7 +155,9 @@ Card.Title = (props) => {
 
     return (
         <>
-            <p className={classNames} style={is}>{text}</p>
+            <p className={classNames} style={is}>
+                {link ? (<a href={link}>{text}</a>) : text}
+            </p>
         </>
     )
 
