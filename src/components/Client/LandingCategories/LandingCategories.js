@@ -14,7 +14,7 @@ const LandingCategories = (props) => {
                 <h3>Categories</h3>
                 <Card.List>
                     {categories.map((category) => {
-                        return <Category record={category} />
+                        return <Category key={category.id} record={category} />
                     })}
                 </Card.List>
             </div>
