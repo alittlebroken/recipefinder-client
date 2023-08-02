@@ -16,7 +16,8 @@ const Card = (props) => {
         medium,
         small,
         circular,
-        overlay
+        overlay,
+        is
     } = props
 
     // Apply various classes based on the props passed in
@@ -41,7 +42,7 @@ const Card = (props) => {
 
     return (
         <>
-            <div aria-label="card-container" className={className}>
+            <div aria-label="card-container" className={className} style={is}>
                 {children}
             </div>
         </>
@@ -55,7 +56,8 @@ Card.List = (props) => {
     /* Destructure the props */
     const {
         children,
-        classes
+        classes,
+        is
     } = props
 
     /* Setup the classes to be applied to the component */
@@ -63,7 +65,7 @@ Card.List = (props) => {
     classNames += classes ? classes : ''
 
     return (
-        <div aria-label="card list" className={classNames}>
+        <div aria-label="card list" className={classNames} style={is}>
             {children}
         </div>
     )
@@ -82,6 +84,7 @@ Card.Image = (props) => {
         leftRounded,
         rightRounded,
         roundTop,
+        is
     } = props
 
     // Setup the css class names to be used
@@ -97,7 +100,7 @@ Card.Image = (props) => {
 
     return (
         <>
-            <img src={source ? source : placeHolder } alt={altText} title={title} className={classNames} />
+            <img src={source ? source : placeHolder } alt={altText} title={title} className={classNames} style={is} />
        </>
     )
 
@@ -136,7 +139,8 @@ Card.Title = (props) => {
         small,
         medium,
         large,
-        overlay
+        overlay,
+        is
     } = props
 
     // collect the styles needed
@@ -150,7 +154,7 @@ Card.Title = (props) => {
 
     return (
         <>
-            <p className={classNames}>{text}</p>
+            <p className={classNames} style={is}>{text}</p>
         </>
     )
 
@@ -162,7 +166,8 @@ Card.Header = (props) => {
     /* Destructure the passed in props */
     const {
         text,
-        classes
+        classes,
+        is
     } = props
 
     /* Construct the list of css classes to use */
@@ -171,7 +176,7 @@ Card.Header = (props) => {
     classNames += classes ? classes : ''
 
     return (
-        <div aria-label="card header" className={classNames}>
+        <div aria-label="card header" className={classNames} style={is}>
             {text}
         </div>
     )
@@ -184,7 +189,8 @@ Card.Footer = (props) => {
     /* Destructure the props passed in */
     const { 
         text,
-        classes
+        classes,
+        is
      } = props
 
      /* Setup the css classes to apply to the component */
@@ -193,7 +199,7 @@ Card.Footer = (props) => {
      classNames += classes ? classes : ''
 
      return (
-        <div aria-label="card footer" classNames={classNames} >
+        <div aria-label="card footer" classNames={classNames} style={is}>
             {text}
         </div>
      )
@@ -209,7 +215,8 @@ Card.Actions = (props) => {
         classes,
         alignLeft,
         alignCenter,
-        alignRight
+        alignRight,
+        is
     } = props
 
     /* Setup the css classes to apply tp the component */
@@ -220,7 +227,7 @@ Card.Actions = (props) => {
     classNames += classes ? classes : ''
 
     return (
-        <div arial-label="card actions" className={classNames}>
+        <div arial-label="card actions" className={classNames} style={is}>
             {children}
         </div>
     )
@@ -233,7 +240,8 @@ Card.Tags = (props) => {
     /* Destructure the props */
     const {
         children,
-        classes
+        classes,
+        is
     } = props
 
     /* Setup the classes to be applied to the component */
@@ -241,7 +249,7 @@ Card.Tags = (props) => {
     classNames += classes ? classes : ''
 
     return (
-        <div aria-label="card tag list" className={classNames}>
+        <div aria-label="card tag list" className={classNames} style={is}>
             {children}
         </div>
     )
@@ -254,7 +262,8 @@ Card.Tag = (props) => {
     /* Destructure the props */
     const {
         text,
-        classes
+        classes,
+        is
     } = props
 
     /* Setup the classes to be applied to the component */
@@ -262,7 +271,7 @@ Card.Tag = (props) => {
     classNames += classes ? classes : ''
 
     return (
-        <div aria-label="card tag" className={classNames}>
+        <div aria-label="card tag" className={classNames} style={is}>
             {text}
         </div>
     )
@@ -277,7 +286,8 @@ Card.Container = (props) => {
         children,
         classes,
         overlay,
-        rounded
+        rounded,
+        is
     } = props
 
     /* Classnames to be applied */
@@ -287,7 +297,7 @@ Card.Container = (props) => {
     classNames += rounded ? ' card-rounded' : ''
 
     return (
-        <div aria-label="card container" className={classNames}>
+        <div aria-label="card container" className={classNames} style={is}>
             {children}
         </div>
     )
@@ -303,7 +313,8 @@ Card.Overlay = (props) => {
         classes,
         center,
         centerTop,
-        centerBottom
+        centerBottom,
+        is
     } = props
 
     /* Classnames to be applied */
@@ -314,7 +325,7 @@ Card.Overlay = (props) => {
     classNames += centerBottom ? ' card-overlay-center-bottom' : ''
 
     return (
-        <div aria-label="card overlay" className={classNames}>
+        <div aria-label="card overlay" className={classNames} style={is}>
             {children}
         </div>
     )
