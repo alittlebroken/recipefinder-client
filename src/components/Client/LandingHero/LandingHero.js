@@ -15,7 +15,7 @@ const LandingHero = (props) => {
             <h3 className="hero-heading">Find your favourite</h3>
             <form className="search-form">
                 <div className="search-container">
-                    <i class="fa fa-search icon"></i>
+                    <i className="fa fa-search icon"></i>
                     <input 
                     type="search" 
                     name="search" 

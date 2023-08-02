@@ -24,7 +24,7 @@ const Header = () => {
                     <div aria-label="brand-tagline" className="brand-tagline">Find your favourite recipe</div>
                 </div>
                 <div role="presentation" aria-label="nav-menu-icon" className="nav-burger" onClick={handleHamburgerClick}>
-                        <i class="fa-solid fa-bars"></i>
+                        <i className="fa-solid fa-bars"></i>
                 </div>
             </div>
             <nav className="nav-container">
