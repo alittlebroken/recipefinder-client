@@ -10,7 +10,6 @@
 .card {
     display: flex;
     flex-direction: column;
-    width: 100%;
 }
 
 .card-rounded {
@@ -185,7 +184,7 @@
     .card-list {
         flex-direction: row;
         flex-wrap: wrap;
-        align-items: stretch;
+        align-items: start;
     }
 
     .card {
