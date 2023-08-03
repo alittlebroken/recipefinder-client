@@ -6,26 +6,16 @@
     padding: 10px;
     font-family: inherit;
     font-weight: bold;
-    background-color: var(--col-primary);
-    color: var(--col-secondary);
+    /*background-color: var(--col-primary);
+    color: var(--col-secondary);*/
     border: none;
     border-radius: 5px;
     border: 2px solid var(--col-primary);
 }
 
-.btn:hover {
-    background-color: var(--col-secondary);
-    color: var(--col-primary);
-}
-
 .btn-outline {
     background: none;
     color: var(--col-primary);
-}
-
-.btn-outline:hover {
-    background: var(--col-primary);
-    color: var(--col-secondary);
 }
 
 .btn-circle {
@@ -40,16 +30,6 @@
     color: var(--col-primary);
 }
 
-.btn-circle-outline {
-   background: none;
-   color: var(--col-primary);
-}
-
-.btn-circle-outline:hover {
-    background-color: var(--col-primary);
-    color: var(--col-secondary);
-}
-
 .btn-width-auto {
     width: auto;
 }
@@ -60,4 +40,26 @@
 
 .btn-width-half {
     width: 50%;
+}
+
+.btn-color-pri {
+    background-color: var(--col-primary);
+    color: var(--col-secondary);
+}
+
+.btn-color-pri:hover {
+    border: 3px solid var(--col-primary);
+    color: var(--col-primary);
+    background: none;
+}
+
+.btn-color-sec {
+    background-color: var(--col-secondary);
+    color: var(--col-primary);
+}
+
+.btn-color-sec:hover {
+    border: 3px solid var(--col-secondary);
+    color: var(--col-secondary);
+    background: none;
 }
