@@ -16,7 +16,8 @@ const Button = (props) => {
         widthHalf,
         widthFull,
         is,
-        classes
+        classes,
+        id
     } = props
 
     // Setup the class names for the button
@@ -37,6 +38,7 @@ const Button = (props) => {
             {...(disabled && disabled)} 
             onClick={clickHandler}
             style={is}
+            id={id}
         >
             {children}
         </button>
