@@ -12,7 +12,8 @@ const Button = (props) => {
         roundedOutline,
         widthAuto,
         widthHalf,
-        widthFull
+        widthFull,
+        is
     } = props
 
     // Setup the class names for the button
@@ -29,6 +30,7 @@ const Button = (props) => {
             className={classNames} 
             {...(disabled && disabled)} 
             onClick={clickHandler}
+            style={is}
         >
             {children}
         </button>
