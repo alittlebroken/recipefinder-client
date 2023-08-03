@@ -48,7 +48,7 @@ const LandingHero = (props) => {
                         padding: '25px',
                         fontSize: '2rem',
                         borderRadius: '35px',
-                        }}>Search</Button>
+                        }}>GO</Button>
                 </div>
             </form>
         </div>
