@@ -44,11 +44,8 @@ const LandingHero = (props) => {
                     roundedOutline 
                     secondary 
                     clickHandler={handleSubmit}
-                    is={{ 
-                        padding: '25px',
-                        fontSize: '2rem',
-                        borderRadius: '35px',
-                        }}>GO</Button>
+                    id="hero-search-button"
+                    >GO</Button>
                 </div>
             </form>
         </div>
