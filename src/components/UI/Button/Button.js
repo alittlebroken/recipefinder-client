@@ -5,6 +5,8 @@ const Button = (props) => {
     // Destructure passed in props
     const {
         children,
+        primary,
+        secondary,
         clickHandler,
         disabled,
         outline,
@@ -24,6 +26,8 @@ const Button = (props) => {
     classNames += widthAuto ? ' btn-width-auto' : ''
     classNames += widthHalf ? ' btn-width-half' : ''
     classNames += widthFull ? ' btn-width-full' : ''
+    classNames +=  primary ? ' btn-color-pri' : '';
+    classNames +=  secondary ? ' btn-color-sec' : '';
 
     return (
         <button 
