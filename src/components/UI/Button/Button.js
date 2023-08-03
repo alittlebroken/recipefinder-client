@@ -15,7 +15,8 @@ const Button = (props) => {
         widthAuto,
         widthHalf,
         widthFull,
-        is
+        is,
+        classes
     } = props
 
     // Setup the class names for the button
@@ -28,6 +29,7 @@ const Button = (props) => {
     classNames += widthFull ? ' btn-width-full' : ''
     classNames +=  primary ? ' btn-color-pri' : '';
     classNames +=  secondary ? ' btn-color-sec' : '';
+    classNames +=  classes ? classes : '';
 
     return (
         <button 
