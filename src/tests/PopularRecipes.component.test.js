@@ -57,7 +57,7 @@ const mockedData = [
     },
 ]
 
-describe('LatestRecipes component', () => {
+describe('PopularRecipes component', () => {
 
     it("renders the component", async () => {
 
