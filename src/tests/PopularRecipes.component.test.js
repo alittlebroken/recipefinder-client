@@ -3,64 +3,86 @@ import { screen, within  } from '@testing-library/react'
 
 // Import custom render function
 import { renderWithProviders } from '../utils/test.utils'
-import { setupStore } from '../store/store'
 
 // Import components being tested
 import PopularRecipes from '../components/Client/PopularRecipes/PopularRecipes'
-import Recipe from '../components/Client/Recipe/Recipe'
 
-// Inital store state
-const initialStoreState = {
-    landingpage: {
-        latest: [],
-        popular: [],
-        categories: [],
-        isLoading: false,
-        hasError: false,
-    }
-}
-
-// setup a store for the tests to use
-let store
-
-// Mock any child components
-jest.mock('../components/Client/Recipe/Recipe')
+// Mock data to pass to the child components
+const mockedData = [
+    {
+        id: 9,
+        userId: 3,
+        name: "Beans on toast",
+        description: "World's tastiest snack",
+        servings: 1,
+        calories_per_serving: 246,
+        prep_time: 5,
+        cook_time: 10,
+        rating: null,
+        ingredients: [
+            {
+                id: 67,
+                name: 'Bread',
+                amount: 2,
+                amount_type: 'slices'
+            }
+        ],
+        cookbooks: [
+            {
+                id: 2,
+                name: 'My Favourite Recipes'
+            }
+        ],
+        steps: [
+            {
+                id: 38,
+                stepNo: 1,
+                content: 'Toast the bread in a toaster or under the grill'
+            }
+        ],
+        categories: [
+            {
+                id: 6,
+                name: 'Breakfast'
+            }
+        ],
+        images: [
+           {
+            imageId: 36,
+            source: '/public/test.img',
+            title: 'Pot of baked beans',
+            alt: null
+           } 
+        ]
+    },
+]
 
 describe('LatestRecipes component', () => {
-
-    beforeEach(() => {
-        // Create an initial store
-        store = setupStore(initialStoreState)
-    })
 
     it("renders the component", async () => {
 
         // render the component
-        renderWithProviders(<PopularRecipes />, { store })
+        renderWithProviders(<PopularRecipes records={mockedData} />)
 
         // Asserts
         expect(screen).toBeDefined()
-        expect(screen.getByRole('heading', { name: /Popular Recipes/i })).toBeInTheDoucument()
+        expect(screen.getByRole('heading', { name: /Popular Recipes/i })).toBeInTheDocument()
 
-    })
+        // Check the child components
+        let children = screen.getByRole('generic', { name: /card list/i })
 
-    it("The child component is called", async () => {
+        expect(within(children).getAllByRole('img')).toHaveLength(1)
+        expect(within(children).getAllByRole('link')).toHaveLength(1)
+        expect(within(children).getByText('Beans on toast')).toBeInTheDocument()
 
-        // render the component
-        renderWithProviders(<PopularRecipes />, { store })
-
-        // Asserts
-        expect(screen).toBeDefined()
-        expect(screen.getByRole('heading', { name: /Popular Recipes/i })).toBeInTheDoucument()
-
-        expect(Recipe).toHaveBeenCalled()
-
+        expect(within(children).getByText('Breakfast')).toBeInTheDocument()
+        
     })
 
     xit("Skeleton test", async () => {
 
         // render the component
-        renderWithProviders(<LatestRecipes />, { store })
+        renderWithProviders(<PopularRecipes records={mockedData} />)
         
         // Setup
         const latestRecipes = screen.getByRole('generic', { name: /recipes-Container/i })
