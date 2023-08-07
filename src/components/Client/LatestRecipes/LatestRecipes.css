@@ -1,0 +1,23 @@
+/* Mobile first */
+.latestRecipeContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    padding: 25px;
+}
+
+.latest-layer {
+    width: 100%;
+    background-color: white;
+}
+
+/* Desktop Styles */
+@media screen and (min-width: 960px) {
+
+    .latestRecipeContainer {
+        width: 1024px;
+        margin: 0 auto;
+    }
+
+}

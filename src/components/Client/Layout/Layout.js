@@ -1,4 +1,5 @@
-import Container from 'react-bootstrap/Container'
+
+import './Layout.css'
 
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
@@ -8,10 +9,12 @@ const Layout = ({ children }) => {
     return (
         <>
             <Header />
-            <Content>
-                { children }
-            </Content>
-            <Footer />
+            <div aria-label="content-footer-container" className="contentfooter-container">
+                <Content>
+                    { children }
+                </Content>
+                <Footer />
+            </div>
         </>
     )
 }

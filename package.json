@@ -50,7 +50,8 @@
     ]
   },
   "devDependencies": {
-    "jest-mock-axios": "^4.7.0-beta4"
+    "jest-mock-axios": "^4.7.0-beta4",
+    "msw": "^1.2.3"
   },
   "jest": {
     "transformIgnorePatterns": [

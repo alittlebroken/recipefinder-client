@@ -22,8 +22,8 @@
     padding: 10px;
     width: 100%;
     background-color: var(--col-primary);
-    position: absolute;
     bottom: 0;
+    flex-grow: 1;
 }
 
 /* Section container */
@@ -113,11 +113,18 @@
 
 @media screen and (min-width: 960px) {
 
+    .footer-container {
+       margin-top: auto;
+       height: 500px;
+    }
+
     .footer-section-container {
         display: flex;
         flex-direction: row;
         gap: 50px;
         margin: 0 auto;
+        flex-basis: 100%;
+        align-items: center;
     }
 
 }

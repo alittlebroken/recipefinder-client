@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import Layout from './Layout/Layout'
 
+import LandingPage from './LandingPage/LandingPage'
 
 const Client = () => {
   return (
@@ -8,6 +9,7 @@ const Client = () => {
       <Routes>
        {/*<Route path="/" element={<TestComponent />} />
        <Route path="/home" element={<HomeComponent />} />*/}
+       <Route path="/" element={<LandingPage />} />
       </Routes>
     </Layout>
   )

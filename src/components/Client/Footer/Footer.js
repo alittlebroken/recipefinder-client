@@ -19,25 +19,25 @@ const Footer = () => {
                         
                         <div aria-label="facebookBadge" className="badge">
                             <a href="https://www.facebook.com/recipefinder">
-                                <i class="fa-brands fa-facebook-f"></i>
+                                <i className="fa-brands fa-facebook-f"></i>
                             </a>
                         </div>
 
                         <div aria-label="instagramBadge" className="badge">
                             <a href="https://www.instagram.com/recipe-finder">
-                                <i class="fa-brands fa-instagram"></i>
+                                <i className="fa-brands fa-instagram"></i>
                             </a>
                         </div>
 
                         <div aria-label="youtubeBadge" className="badge">
                             <a href="https://www.youtube.com/@recipe-finder">
-                                <i class="fa-brands fa-youtube"></i>
+                                <i className="fa-brands fa-youtube"></i>
                             </a>
                         </div>
 
                         <div aria-label="twitterBadge" className="badge">
                             <a href="https://twitter.com/recipe-finder">
-                                <i class="fa-brands fa-twitter"></i>
+                                <i className="fa-brands fa-twitter"></i>
                             </a>
                         </div>
 

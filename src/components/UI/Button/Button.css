@@ -1,0 +1,65 @@
+/* Buttons */
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    font-family: inherit;
+    font-weight: bold;
+    /*background-color: var(--col-primary);
+    color: var(--col-secondary);*/
+    border: none;
+    border-radius: 5px;
+    border: 2px solid var(--col-primary);
+}
+
+.btn-outline {
+    background: none;
+    color: var(--col-primary);
+}
+
+.btn-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.btn-circle:hover {
+    background: none;
+    color: var(--col-primary);
+}
+
+.btn-width-auto {
+    width: auto;
+}
+
+.btn-width-full {
+    width: 100%;
+}
+
+.btn-width-half {
+    width: 50%;
+}
+
+.btn-color-pri {
+    background-color: var(--col-primary);
+    color: var(--col-secondary);
+}
+
+.btn-color-pri:hover {
+    border: 3px solid var(--col-primary);
+    color: var(--col-primary);
+    background: none;
+}
+
+.btn-color-sec {
+    background-color: var(--col-secondary);
+    color: var(--col-primary);
+}
+
+.btn-color-sec:hover {
+    border: 3px solid var(--col-secondary);
+    color: var(--col-secondary);
+    background: none;
+}

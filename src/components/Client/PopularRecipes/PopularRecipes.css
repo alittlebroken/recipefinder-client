@@ -1,0 +1,16 @@
+/* Mobile Styles */
+.popularrecipes-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    padding: 25px;
+}
+
+/* Desktop Styles */
+@media screen and (min-width: 960px) {
+    .popularrecipes-container {
+        width: 1024px;
+        margin: 0 auto;
+    }
+}

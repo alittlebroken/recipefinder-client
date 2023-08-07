@@ -3,9 +3,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Emilys+Candy&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Emilys+Candy&family=La+Belle+Aurore&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Borel&display=swap');
+
 
 /* Google Icons */
 .material-symbols-outlined {
@@ -62,6 +64,7 @@ a {
   text-decoration: none;
   font-family: inherit;
   border-bottom: 1px solid var(--col-primary);
+  color: black;
 }
 
 a:hover {
@@ -99,6 +102,18 @@ li::marker {
   flex-direction: row;
 }
 
+.align-left {
+  justify-content: start;
+}
+
+.align-center {
+  justify-content: center;
+}
+
+.align-right {
+  justify-content: end;
+}
+
 .w-100 {
   width: 100%;
 }
@@ -131,3 +146,26 @@ li::marker {
   padding: 25px;
 }
 
+.border-radius-top {
+  /* top-left top-right bottom-right bottom-left  */
+  border-radius: 15px 15px 0 0;
+}
+
+.border-radius-bottom {
+  /* top-left top-right bottom-right bottom-left  */
+  border-radius: 0 0 15px 15px;
+}
+
+.border-radius-left {
+  /* top-left top-right bottom-right bottom-left  */
+  border-radius: 15px 0 0 15px;
+}
+
+.border-radius-right {
+  /* top-left top-right bottom-right bottom-left  */
+  border-radius: 0 15px 15px 0;
+}
+
+.border-radius {
+  border-radius: 15px;
+}
