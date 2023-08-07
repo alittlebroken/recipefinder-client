@@ -7,8 +7,14 @@ import '@testing-library/jest-dom';
 // Import and setup MSW
 import { server } from './mocks/server.js'
 
-beforeAll(() => server.listen())
+beforeAll(() => {
+    server.listen()
+})
 
-afterEach(() => server.resetHandlers())
+afterEach(() => {
+    server.resetHandlers()
+})
 
-afterAll(() => server.close())
+afterAll(() => {
+    server.close()
+})
