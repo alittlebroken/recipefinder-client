@@ -2,12 +2,18 @@ import './LandingHero.css'
 import Button from '../../UI/Button/Button'
 
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+
+import { setSearchTerms } from '../../../slices/Search/SearchSlice'
 
 const LandingHero = (props) => {
 
+    /* Alias the dispatcher */
+    const dispatch = useDispatch()
+
     /* Setup the form state */
-    const [searchTerms, setSearchTerms] = useState('')
+    const [terms, setTerms] = useState('')
 
     /* Alias the Navigate function */
     const navigate = useNavigate()
@@ -20,7 +26,9 @@ const LandingHero = (props) => {
 
         /* Prevent the default form action from happening */
         e.preventDefault()
-        navigate(`/search?terms=${searchTerms}`)
+        /* Set the search terms in the store */
+        dispatch(setSearchTerms(terms))
+        navigate(`/search`)
         
     }
 
@@ -35,8 +43,8 @@ const LandingHero = (props) => {
                     name="search" 
                     className="hero-input" 
                     placeholder="Type in a recipe name or ingredient"
-                    value={searchTerms}
-                    onChange={(e) => setSearchTerms(e.target.value)}
+                    value={terms}
+                    onChange={(e) => setTerms(e.target.value)}
                     style={{
                     }}
                     />
