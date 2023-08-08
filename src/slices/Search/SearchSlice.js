@@ -94,5 +94,8 @@ export const selectSearchNumRecords = state => state.search.totalRecords
 export const selectSearchLoading = state => state.search.isLoading
 export const selectSearchErrored = state => state.search.hasError
 
+// Export the actions/reducers
+export const { setSearchTerms } = searchSlice.actions
+
 // Export the reducer for this slice
 export default searchSlice.reducer;
