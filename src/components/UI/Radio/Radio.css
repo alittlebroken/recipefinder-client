@@ -1,0 +1,23 @@
+/* Mobile Layout */
+.radio-container {
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    font-weight: bold;
+    font-family: inherit;
+}
+
+.radio-primary {
+    accent-color: var(--col-accent);
+    color: var(--col-primary);
+}
+
+.radio-secondary {
+    accent-color: var(--col-accent);
+    color: var(--col-secondary);
+}
+
+/* Desktop Layout */
+@media screen and (min-width: 960px) {
+
+}
