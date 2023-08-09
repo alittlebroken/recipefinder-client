@@ -77,9 +77,10 @@ export const searchSlice = createSlice({
             state.hasError = false
 
             // Extract the data from the API results
-            console.log(action)
-
-            state.results = action.payload
+            state.results = action.payload.results.results
+            state.page = action.payload.results.currentPage
+            state.totalPages = action.payload.results.totalPages
+            state.totalRecords = action.payload.results.totalRecords
 
         }
     }
