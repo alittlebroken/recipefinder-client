@@ -9,6 +9,8 @@ export const performSearch = createAsyncThunk('search/performSearch',
 
         try{
 
+            const state = thunkAPI.getState()
+
             // Get the search terms
             const {
                 terms,
@@ -29,7 +31,7 @@ export const performSearch = createAsyncThunk('search/performSearch',
                 },
                 payload: {
                     terms,
-                    typeOfSearch: thunkAPI.state.searchOptions ? thunkAPI.state.searchOptions : 'recipes'
+                    typeOfSearch: state.searchOptions ? state.searchOptions : 'recipes'
                 }
             }
 
