@@ -29,7 +29,7 @@ export const performSearch = createAsyncThunk('search/performSearch',
                 },
                 payload: {
                     terms,
-                    typeOfSearch: options ? options : 'recipes'
+                    typeOfSearch: thunkAPI.state.searchOptions ? thunkAPI.state.searchOptions : 'recipes'
                 }
             }
 
@@ -47,6 +47,7 @@ export const performSearch = createAsyncThunk('search/performSearch',
 const initialState = {
     terms: '',
     results: [],
+    searchOptions: '',
     page: 1,
     totalPages: 1,
     totalRecords: 10,
@@ -62,6 +63,9 @@ export const searchSlice = createSlice({
         setSearchTerms: (state, action) => {
             state.terms = action.payload
         },
+        setSearchOptions: (state, action) => {
+            state.searchOptions = action.payload
+        }
     },
     extraReducers: {
         [performSearch.pending]: (state, action) => {
@@ -89,6 +93,7 @@ export const searchSlice = createSlice({
 // Export the selects for the data
 export const selectSearchResults = state => state.search.results
 export const selectSearchTerms = state => state.search.terms
+export const selectSearchOptions = state => state.search.searchOptions
 export const selectSearchPage = state => state.search.page
 export const selectSearchNumPages = state => state.search.totalPages
 export const selectSearchNumRecords = state => state.search.totalRecords
@@ -96,7 +101,7 @@ export const selectSearchLoading = state => state.search.isLoading
 export const selectSearchErrored = state => state.search.hasError
 
 // Export the actions/reducers
-export const { setSearchTerms } = searchSlice.actions
+export const { setSearchTerms, setSearchOptions } = searchSlice.actions
 
 // Export the reducer for this slice
 export default searchSlice.reducer;
