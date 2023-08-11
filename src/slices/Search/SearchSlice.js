@@ -67,6 +67,9 @@ export const searchSlice = createSlice({
         },
         setSearchOptions: (state, action) => {
             state.searchOptions = action.payload
+        },
+        clearSearchResults: (state, action) => {
+            state.searchResults = []
         }
     },
     extraReducers: {
@@ -103,7 +106,7 @@ export const selectSearchLoading = state => state.search.isLoading
 export const selectSearchErrored = state => state.search.hasError
 
 // Export the actions/reducers
-export const { setSearchTerms, setSearchOptions } = searchSlice.actions
+export const { setSearchTerms, setSearchOptions, clearSearchResults } = searchSlice.actions
 
 // Export the reducer for this slice
 export default searchSlice.reducer;
