@@ -6,14 +6,26 @@ const Recipe = (props) => {
     /* Destructure the props */
     const { record } = props
 
+    /* Get image details out of the passed in record */
+    let imgSource, imgTitle, imgAlt
+    if(record.images === undefined || record?.images?.length < 1){
+        imgSource = 'https://fakeimg.pl/600x400?text=No+image'
+        imgTitle = 'No Image currently Available'
+        imgAlt = imgTitle
+    } else {
+        imgSource = record?.images[0]?.source
+        imgTitle = record?.images[0]?.title
+        imgAlt = record?.images[0]?.alt
+    }
+
     return (
         <Card key={record.id}
         is={{ width: 400 }}
         >
             <Card.Image 
-                source={record?.images[0]?.source} 
-                title={record?.images[0]?.title}
-                altText={record?.images[0]?.alt}
+                source={imgSource} 
+                title={imgTitle}
+                altText={imgAlt}
                 is={{ borderRadius: 15}}
             />
             <Card.Container>
