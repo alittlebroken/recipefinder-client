@@ -76,10 +76,13 @@ export const searchSlice = createSlice({
         [performSearch.pending]: (state, action) => {
             state.isLoading = true
             state.hasError = false
+            state.results = []
         },
         [performSearch.rejected]: (state, action) => {
             state.isLoading = false
             state.hasError = true
+            state.results = []
+            
         },
         [performSearch.fulfilled]: (state, action) => {
             state.isLoading = false
