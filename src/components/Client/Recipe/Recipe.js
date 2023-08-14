@@ -19,9 +19,7 @@ const Recipe = (props) => {
     }
 
     return (
-        <Card key={record.id}
-        is={{ width: 400 }}
-        >
+        <Card key={record.id}>
             <Card.Image 
                 source={imgSource} 
                 title={imgTitle}
@@ -30,7 +28,7 @@ const Recipe = (props) => {
             />
             <Card.Container>
                 <Card.Title text={record.name} medium link={`/recipe/${record.id}`} is={{ display: 'flex', justifyContent: 'center' }} />
-                <Card.Tags is={{ display: 'flex', justifyContent: 'center' }} >
+                <Card.Tags>
                     {record.categories.map((category) => {
                         return <Card.Tag key={category.id} text={category.name} />
                     })}
