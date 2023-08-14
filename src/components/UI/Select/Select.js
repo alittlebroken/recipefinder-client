@@ -10,7 +10,8 @@ const Select  = (props) => {
         is, 
         id, 
         selected,
-        handleChange
+        handleChange,
+        initialOption
     } = props
 
     /* Set up the clkasses to be used for the component */
@@ -18,6 +19,7 @@ const Select  = (props) => {
 
     return (
         <select name={name} style={is} id={id} className={classes} onChange={handleChange}>
+            <option>{initialOption}</option>
             {options.map((option) => {
                 if(selected === option.value){
                     return <option value={option.value} selected>{option.value}</option>
