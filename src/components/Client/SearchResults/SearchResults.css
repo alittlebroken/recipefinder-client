@@ -1,0 +1,15 @@
+/* Mobile Layout Styles */
+.searchResultsContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}
+
+/* Desktop Layout Styles */
+@media screen and (min-width: 960px){
+
+}
