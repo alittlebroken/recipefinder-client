@@ -85,12 +85,12 @@ export const searchSlice = createSlice({
         [performSearch.fulfilled]: (state, action) => {
             state.isLoading = false
             state.hasError = false
-
+            
             // Extract the data from the API results
             if(Array.isArray(action.payload.results)){
                 state.results = action.payload.results
             } else {
-                state.results = action.payload.results.results
+                state.results = action?.payload?.results?.results
             }
             
             state.page = action.payload.results.currentPage
