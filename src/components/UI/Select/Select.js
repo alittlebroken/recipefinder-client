@@ -22,9 +22,9 @@ const Select  = (props) => {
             <option>{initialOption}</option>
             {options.map((option) => {
                 if(selected === option.value){
-                    return <option value={option.value} selected>{option.value}</option>
+                    return <option key={option.value} value={option.value} selected>{option.value}</option>
                 } else {
-                    return <option value={option.value}>{option.value}</option>
+                    return <option key={option.value} value={option.value}>{option.value}</option>
                 }
             })}
         </select>
