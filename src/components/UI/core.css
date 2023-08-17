@@ -1,3 +1,10 @@
+/* Layout Styles */
+/* Flex based */
+.flex { display: flex; }
+.flex-row { flex-direction: row; }
+.flex-col { flex-direction: col; }
+.flex-center { justify-content: center; align-items: center;}
+
 /* Header Styling */
 .header {
     background-color: var(--col-secondary);
