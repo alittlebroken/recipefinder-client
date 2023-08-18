@@ -1,7 +1,17 @@
+import { useSelector } from 'react-redux'
+
 import './SearchResults.css'
 
 import Card from '../../UI/Cards/Card'
 import Recipe from '../Recipe/Recipe'
+
+import Pagination from '../../UI/Pagination/Pagination'
+
+import { 
+    selectSearchPage,
+    selectSearchNumPages,
+    selectSearchNumRecords 
+} from '../../../slices/Search/SearchSlice'
 
 const SearchResults = (props) => {
 
@@ -12,6 +22,11 @@ const SearchResults = (props) => {
        searchType,
        totalCount 
     } = props
+
+    /* Gather the details for the Pagination component */
+    const currentPage = useSelector(selectSearchPage)
+    const totalPages = useSelector(selectSearchNumPages)
+    const totalRecords = useSelector(selectSearchNumRecords)
 
     /* Determine the title for the page */
     const allRecipes = `${totalCount} recipes found.`
@@ -27,6 +42,11 @@ const SearchResults = (props) => {
                     return <Recipe key={result.id} record={result} />
                 })}
             </Card.List>
+            <Pagination 
+                totalRecords={totalRecords} 
+                currentPage={currentPage} 
+                totalPages={totalPages}
+            />
         </div>
     )
 
