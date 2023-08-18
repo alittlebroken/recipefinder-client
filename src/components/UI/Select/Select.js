@@ -1,4 +1,5 @@
 import './Select.css'
+import { nanoid } from '@reduxjs/toolkit'
 
 const Select  = (props) => {
 
@@ -22,9 +23,9 @@ const Select  = (props) => {
             <option>{initialOption}</option>
             {options.map((option) => {
                 if(selected === option.value){
-                    return <option key={option.value} value={option.value} selected>{option.value}</option>
+                    return <option key={nanoid()} value={option.value} selected>{option.value}</option>
                 } else {
-                    return <option key={option.value} value={option.value}>{option.value}</option>
+                    return <option key={nanoid()} value={option.value}>{option.value}</option>
                 }
             })}
         </select>
