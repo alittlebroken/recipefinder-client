@@ -27,7 +27,8 @@ export const performSearch = createAsyncThunk('search/performSearch',
                 },
                 pagination: {
                     page: pagination.page || 1,
-                    perPage: pagination.perPage || 10
+                    //perPage: pagination.perPage || 10
+                    perPage: state.search.recsPerPage || 5
                 },
                 payload: {
                     terms,
@@ -53,6 +54,7 @@ const initialState = {
     page: 1,
     totalPages: 1,
     totalRecords: 10,
+    recsPerPage: 5,
     isLoading: false,
     hasError: false
 }
@@ -70,6 +72,15 @@ export const searchSlice = createSlice({
         },
         clearSearchResults: (state, action) => {
             state.searchResults = []
+        },
+        increasePage: (state, action) => {
+            state.page += 1
+        },
+        decreasePage: (state, action) => {
+            state.page -= 1
+        },
+        setRecsPerPage: (state, action) => {
+            state.recsPerPage = action.payload || 5
         }
     },
     extraReducers: {
@@ -112,7 +123,12 @@ export const selectSearchLoading = state => state.search.isLoading
 export const selectSearchErrored = state => state.search.hasError
 
 // Export the actions/reducers
-export const { setSearchTerms, setSearchOptions, clearSearchResults } = searchSlice.actions
+export const { setSearchTerms, 
+    setSearchOptions, 
+    increasePage,
+    decreasePage,
+    setRecsPerPage,
+    clearSearchResults } = searchSlice.actions
 
 // Export the reducer for this slice
 export default searchSlice.reducer;
