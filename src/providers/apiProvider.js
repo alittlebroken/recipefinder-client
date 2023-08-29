@@ -426,6 +426,23 @@ const apiProvider = {
             const { authenticate } = params.auth || false
             const { roles } = params.auth || 'user'
 
+            // Pagination
+            const { page } = params.pagination || 1
+            const { perPage } = params.pagination || 10
+
+            // Sorting
+            const { field } = params.sort || 'id'
+            const { order } = params.sort || 'desc' 
+
+            // Set up the query params
+            let queryParams = {
+                page: page ? page : 1,
+                limit: perPage ? perPage : 10,
+                sort_by: field ? field : 'id',
+                sort_direction: order ? order : 'desc',
+                filter: JSON.stringify(params.filter)
+            }
+
             // Generate the initial header for the request
             let headers = { 'Content-type': 'application/json' }
 
@@ -443,7 +460,7 @@ const apiProvider = {
             }
 
             // Set the URL to use
-            let url = `${process.env.REACT_APP_API_URL}/search`
+            let url = `${process.env.REACT_APP_API_URL}/search?${queryString.stringify(queryParams)}`
 
             // Access the appropriate API and process the results
             const response = await axios.post(url, payload, axiosOptions)
