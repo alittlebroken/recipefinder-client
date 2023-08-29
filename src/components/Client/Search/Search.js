@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import Button from '../../UI/Button/Button'
 import Select from '../../UI/Select/Select'
 
+import Pagination from '../../UI/Pagination/Pagination'
+
 import { 
     performSearch,
     setSearchTerms,
@@ -18,7 +20,11 @@ import {
     selectSearchErrored,
     selectSearchOptions,
     clearSearchResults,
-    setSearchOptions
+    setSearchOptions,
+    increasePage,
+    decreasePage,
+    setRecsPerPage,
+    goToPage,
  } from '../../../slices/Search/SearchSlice'
 
 import SearchResults from '../SearchResults/SearchResults'
@@ -27,24 +33,6 @@ const Search = (props) => {
 
     // Alias dispatch function
     const dispatch = useDispatch()
-
-    // Update the state as the component mounts
-    useEffect(() => {
-        if(terms !== undefined){
-            dispatch(performSearch({
-                terms,
-                options: searchOptions,
-                pagination: {
-                   page,
-                   perPage
-                },
-                sort: {
-                    field: 'created_at',
-                    order: 'desc'
-                }
-            }))
-        }
-    },[dispatch])
 
     // Gather data from the store for the component
     const searchTerms = useSelector(selectSearchTerms)
@@ -63,6 +51,24 @@ const Search = (props) => {
     // Pagination State
     const [ page, setPage ] = useState(currentPage || 1)
     const [ perPage, setPerPage ] = useState(10)
+
+    // Update the state as the component mounts
+    useEffect(() => {
+        if(terms !== undefined){
+            dispatch(performSearch({
+                terms,
+                options: searchOptions,
+                pagination: {
+                   page,
+                   perPage
+                },
+                sort: {
+                    field: 'created_at',
+                    order: 'desc'
+                }
+            }))
+        }
+    },[dispatch, page, perPage])
 
     // Handler for submit of the search from
     const handleSearchSubmit = (e) => {
@@ -89,18 +95,29 @@ const Search = (props) => {
         setTerms(e.target.value)
     }
 
-    // Handlers for Pagination
-    const handlePageChange = (e) => {
-        setPage(parseInt(e.target.value))
-    }
-
-    const handlePerPageChange = (e) => {
-        setPerPage(e.target.value)
-    }
-
+    /* Handlers for Pagination */
     const handleOptionChange = (e) => {
         dispatch(setSearchOptions(e.target.value))
         setOptions(e.target.value)
+    }
+
+    const handleChangeOfPage = (e) => {
+        if(e.target.value === '-'){
+            setPage(page - 1)
+            dispatch(decreasePage())
+        } else if(e.target.value === '+'){
+            setPage(page + 1)
+            dispatch(increasePage())
+        }
+    }
+
+    const handleRecsPerPageChange = (e) => {
+        setPerPage(parseInt(e.target.value))
+        dispatch(setRecsPerPage(e.target.value))
+    }
+
+    const handleGoToSpecificPage = (e) => {
+        dispatch(goToPage(e.target.value))
     }
 
     return(
@@ -139,6 +156,14 @@ const Search = (props) => {
                 {loading ? 'Loading search results' : (<SearchResults results={searchResults} terms={terms} searchType={options} totalCount={totalRecords} />)}
 
             </div>
+            <Pagination 
+                totalRecords={totalRecords} 
+                currentPage={currentPage} 
+                totalPages={totalPages}
+                handlePageChange={handleChangeOfPage}
+                handleGoToPage={handleGoToSpecificPage}
+                handleRecsChange={handleRecsPerPageChange}
+            />
         </div>
     )
 
