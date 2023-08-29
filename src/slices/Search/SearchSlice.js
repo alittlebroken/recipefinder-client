@@ -110,10 +110,17 @@ export const searchSlice = createSlice({
             } else {
                 state.results = action?.payload?.results?.results
             }
-            
-            state.page = action.payload.results.currentPage
-            state.totalPages = action.payload.results.totalPages
-            state.totalRecords = action.payload.results.totalRecords
+
+            /* Check if we have some results */
+            if(state.results?.length < 1){
+                state.page = 1
+                state.totalPages = 1
+                state.totalRecords = 0
+            } else {
+                state.page = action.payload.results?.currentPage
+                state.totalPages = action.payload.results?.totalPages
+                state.totalRecords = action.payload.results?.totalRecords
+            }
 
         }
     }
