@@ -31,7 +31,7 @@ export const performSearch = createAsyncThunk('search/performSearch',
                     perPage: state.search.recsPerPage || 5
                 },
                 payload: {
-                    terms,
+                    terms: state.search.terms || terms,
                     typeOfSearch: state.search.searchOptions ? state.search.searchOptions : 'recipes'
                 }
             }
