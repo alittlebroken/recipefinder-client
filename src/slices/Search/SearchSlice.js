@@ -26,7 +26,7 @@ export const performSearch = createAsyncThunk('search/performSearch',
                     order: sort.order || 'desc'
                 },
                 pagination: {
-                    page: pagination.page || 1,
+                    page: state.search.page || 1,
                     //perPage: pagination.perPage || 10
                     perPage: state.search.recsPerPage || 5
                 },
