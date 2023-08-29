@@ -135,6 +135,7 @@ export const selectSearchNumPages = state => state.search.totalPages
 export const selectSearchNumRecords = state => state.search.totalRecords
 export const selectSearchLoading = state => state.search.isLoading
 export const selectSearchErrored = state => state.search.hasError
+export const selectRecsPerPage = state => state.search.recsPerPage
 
 // Export the actions/reducers
 export const { setSearchTerms, 
