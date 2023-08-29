@@ -84,7 +84,7 @@ export const searchSlice = createSlice({
             if(state.page < 1) state.page = 1
         },
         setRecsPerPage: (state, action) => {
-            state.recsPerPage = action.payload || 5
+            state.recsPerPage = parseInt(action.payload) || 5
         }
     },
     extraReducers: {
