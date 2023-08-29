@@ -75,9 +75,13 @@ export const searchSlice = createSlice({
         },
         increasePage: (state, action) => {
             state.page += 1
+            /* Check we have not gone past the upper page limit */
+            if(state.page > state.totalPages) state.page = state.totalPages
         },
         decreasePage: (state, action) => {
             state.page -= 1
+            /* Check we have not gone past the lower page limit */
+            if(state.page < 1) state.page = 1
         },
         setRecsPerPage: (state, action) => {
             state.recsPerPage = action.payload || 5
