@@ -85,7 +85,10 @@ export const searchSlice = createSlice({
         },
         setRecsPerPage: (state, action) => {
             state.recsPerPage = parseInt(action.payload) || 5
-        }
+        },
+        goToPage: (state, action) => {
+            state.page = parseInt(action.payload)
+        },
     },
     extraReducers: {
         [performSearch.pending]: (state, action) => {
@@ -132,7 +135,9 @@ export const { setSearchTerms,
     increasePage,
     decreasePage,
     setRecsPerPage,
-    clearSearchResults } = searchSlice.actions
+    clearSearchResults,
+    goToPage
+} = searchSlice.actions
 
 // Export the reducer for this slice
 export default searchSlice.reducer;
