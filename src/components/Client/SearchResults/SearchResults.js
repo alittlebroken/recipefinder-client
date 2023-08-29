@@ -1,21 +1,12 @@
-import { useSelector } from 'react-redux'
 
 import './SearchResults.css'
 
 import Card from '../../UI/Cards/Card'
 import Recipe from '../Recipe/Recipe'
 
-import Pagination from '../../UI/Pagination/Pagination'
-
-import { 
-    selectSearchPage,
-    selectSearchNumPages,
-    selectSearchNumRecords 
-} from '../../../slices/Search/SearchSlice'
-
 const SearchResults = (props) => {
 
-    // Destructure the supplied props
+    /* Destructure the supplied props */
     const {
        results,
        terms,
@@ -23,14 +14,12 @@ const SearchResults = (props) => {
        totalCount 
     } = props
 
-    /* Gather the details for the Pagination component */
-    const currentPage = useSelector(selectSearchPage)
-    const totalPages = useSelector(selectSearchNumPages)
-    const totalRecords = useSelector(selectSearchNumRecords)
-
     /* Determine the title for the page */
     const allRecipes = `${totalCount} recipes found.`
-    const foundRecipes = `${totalCount} recipes found matching "${terms}"`
+    const foundRecipes = `${totalCount ? totalCount : 0 } recipes found matching "${terms}"`
+
+    /* Setup handlers for the components */
+    
 
     return (
         <div aria-label="search-results-container" className="searchResultsContainer">
@@ -42,11 +31,6 @@ const SearchResults = (props) => {
                     return <Recipe key={result.id} record={result} />
                 })}
             </Card.List>
-            <Pagination 
-                totalRecords={totalRecords} 
-                currentPage={currentPage} 
-                totalPages={totalPages}
-            />
         </div>
     )
 
