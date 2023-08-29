@@ -43,7 +43,7 @@ const Pagination = (props) => {
 
      return (
         <>
-            <div aria-label="pagination container" className="page-container flex flex-row">
+            <div aria-label="pagination container" className="page-container flex flex-row flex-center">
                 <Button
                     id={nanoid()}
                     outline
