@@ -24,6 +24,7 @@ import {
     increasePage,
     decreasePage,
     setRecsPerPage,
+    selectRecsPerPage,
     goToPage,
  } from '../../../slices/Search/SearchSlice'
 
@@ -43,6 +44,7 @@ const Search = (props) => {
     const loading = useSelector(selectSearchLoading)
     const errored = useSelector(selectSearchErrored)
     const searchOptions = useSelector(selectSearchOptions)
+    const currentRecsPerPage = useSelector(selectRecsPerPage)
 
     // Create state for the component
     const [ terms, setTerms ] = useState(searchTerms || '')
@@ -50,7 +52,7 @@ const Search = (props) => {
     
     // Pagination State
     const [ page, setPage ] = useState(currentPage || 1)
-    const [ perPage, setPerPage ] = useState(10)
+    const [ perPage, setPerPage ] = useState(5)
 
     // Update the state as the component mounts
     useEffect(() => {
@@ -160,6 +162,7 @@ const Search = (props) => {
                 totalRecords={totalRecords} 
                 currentPage={currentPage} 
                 totalPages={totalPages}
+                recsPerPage={currentRecsPerPage}
                 handlePageChange={handleChangeOfPage}
                 handleGoToPage={handleGoToSpecificPage}
                 handleRecsChange={handleRecsPerPageChange}
