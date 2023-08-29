@@ -15,7 +15,7 @@ const SearchResults = (props) => {
     } = props
 
     /* Determine the title for the page */
-    const allRecipes = `${totalCount} recipes found.`
+    const allRecipes = `${totalCount ? totalCount : 0} recipes found.`
     const foundRecipes = `${totalCount ? totalCount : 0 } recipes found matching "${terms}"`
 
     /* Setup handlers for the components */
