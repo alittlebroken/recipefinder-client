@@ -1,5 +1,7 @@
 import { rest } from 'msw'
 
+import { users, tokens } from './data'
+
 export const handlers = [
     rest.get('http://localhost:5000/categories', (req, res, ctx) => {
         
@@ -57,6 +59,17 @@ export const handlers = [
                     ]
                 }
             )
+        )
+    }),
+    rest.post('http://localhost:5000/auth/login', ( req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.json(
+                {
+                    accessToken: tokens.accessToken
+                }
+            ),
+            ctx.cookie('jwt', tokens.refreshToken)
         )
     })
 ]
