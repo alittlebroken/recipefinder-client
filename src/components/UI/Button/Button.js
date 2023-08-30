@@ -17,7 +17,8 @@ const Button = (props) => {
         widthFull,
         is,
         classes,
-        id
+        id,
+        value
     } = props
 
     // Setup the class names for the button
@@ -39,6 +40,7 @@ const Button = (props) => {
             onClick={clickHandler}
             style={is}
             id={id}
+            value={value}
         >
             {children}
         </button>

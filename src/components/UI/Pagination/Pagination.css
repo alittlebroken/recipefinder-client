@@ -1,0 +1,25 @@
+/* Mobile Layout */
+.page-container {
+    padding: 10px;
+    gap: 5px;
+}
+
+.pagerButton {
+    min-width: 40px;
+    height: 40px;
+    padding: 10px;
+    border: 2px solid var(--col-primary);
+    border-radius: 7px; 
+    color: var(--col-primary);
+    font-size: .8rem;
+}
+
+.pagerButton:hover {
+    background-color: var(--col-primary);
+    color: white;
+}
+
+/* Desktop Layout */
+@media screen and (min-size: 960px) {
+
+}

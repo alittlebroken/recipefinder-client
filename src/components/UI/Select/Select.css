@@ -1,0 +1,12 @@
+/* Mobile Layout Styles */
+.search-select {
+    font-family: inherit;
+    font-size: inherit;
+    padding: 5px;
+    border-radius: 7px;
+}
+
+/* Desktop Layout Styles */
+@media screen and (min-width: 960px) {
+
+}

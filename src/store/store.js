@@ -2,10 +2,12 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
 
 import landingReducer from '../slices/LandingPage/LandingPageSlice'
+import searchReducer from '../slices/Search/SearchSlice'
 
 // Create a root reducer that comines all the slices reducers together
 const rootReducer = combineReducers({
-    landingPage: landingReducer
+    landingPage: landingReducer,
+    search: searchReducer,
 })
 
 // Creates a store with all the correct reducers and actions

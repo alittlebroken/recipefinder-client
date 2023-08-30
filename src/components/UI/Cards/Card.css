@@ -5,11 +5,13 @@
     justify-content: center;
     align-items: center;
     gap: 45px;
+    width: 100%;
 }
 
 .card {
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
 .card-rounded {
@@ -106,6 +108,8 @@
 .card-tags {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    flex-basis: 25%;
     gap: 7px;
     padding: 5px;
 }
@@ -190,6 +194,7 @@
 
     .card {
         justify-content: space-between;
+        width: 400px;
     }
 
     .card-img {
