@@ -119,6 +119,7 @@ const Search = (props) => {
     }
 
     const handleGoToSpecificPage = (e) => {
+        setPage(e.target.value)
         dispatch(goToPage(e.target.value))
     }
 
