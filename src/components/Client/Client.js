@@ -3,6 +3,7 @@ import Layout from './Layout/Layout'
 
 import LandingPage from './LandingPage/LandingPage'
 import Search from './Search/Search'
+import LoginForm from './LoginForm/LoginForm'
 
 import { ProviderContext } from '../../contexts/providers'
 
@@ -25,6 +26,7 @@ const Client = (props) => {
         <Route path="/home" element={<HomeComponent />} />*/}
         <Route path="/" element={<LandingPage />} />
         <Route path="/search" element={<Search />} />
+        <Route path="/login" element={<LoginForm />} />
         </Routes>
       </Layout>
     </ProviderContext.Provider>
