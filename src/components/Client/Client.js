@@ -5,7 +5,7 @@ import LandingPage from './LandingPage/LandingPage'
 import Search from './Search/Search'
 import LoginForm from './LoginForm/LoginForm'
 
-import { ProviderContext } from '../../contexts/providers'
+import { ProviderContext, AccessTokenProvider, useAccessToken } from '../../contexts/providers'
 
 const Client = (props) => {
 
@@ -16,19 +16,22 @@ const Client = (props) => {
   } = props
 
   return (
+
     <ProviderContext.Provider value={{
       authProvider,
       dataProvider
     }}>
-      <Layout>
-        <Routes>
-        {/*<Route path="/" element={<TestComponent />} />
-        <Route path="/home" element={<HomeComponent />} />*/}
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/search" element={<Search />} />
-        <Route path="/login" element={<LoginForm />} />
-        </Routes>
-      </Layout>
+      <AccessTokenProvider>
+        <Layout>
+          <Routes>
+          {/*<Route path="/" element={<TestComponent />} />
+          <Route path="/home" element={<HomeComponent />} />*/}
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/login" element={<LoginForm />} />
+          </Routes>
+        </Layout>
+      </AccessTokenProvider>
     </ProviderContext.Provider>
   )
 }
