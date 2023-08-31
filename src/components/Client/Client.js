@@ -4,6 +4,8 @@ import Layout from './Layout/Layout'
 import LandingPage from './LandingPage/LandingPage'
 import Search from './Search/Search'
 
+import { ProviderContext } from '../../contexts/providers'
+
 const Client = (props) => {
 
   /* destructure the props */
@@ -11,16 +13,21 @@ const Client = (props) => {
     authProvider,
     dataProvider
   } = props
-  
+
   return (
-    <Layout>
-      <Routes>
-       {/*<Route path="/" element={<TestComponent />} />
-       <Route path="/home" element={<HomeComponent />} />*/}
-       <Route path="/" element={<LandingPage />} />
-       <Route path="/search" element={<Search />} />
-      </Routes>
-    </Layout>
+    <ProviderContext.Provider value={{
+      authProvider,
+      dataProvider
+    }}>
+      <Layout>
+        <Routes>
+        {/*<Route path="/" element={<TestComponent />} />
+        <Route path="/home" element={<HomeComponent />} />*/}
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/search" element={<Search />} />
+        </Routes>
+      </Layout>
+    </ProviderContext.Provider>
   )
 }
 
