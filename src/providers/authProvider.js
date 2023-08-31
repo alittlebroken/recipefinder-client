@@ -215,7 +215,7 @@ const authProvider = {
 
     },
 
-    loggedIn: async () => {
+    loggedIn: () => {
 
         /* We can say if we have an access token then we have
            logged in OK */
