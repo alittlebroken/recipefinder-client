@@ -213,6 +213,18 @@ const authProvider = {
 
         }
 
+    },
+
+    loggedIn: async () => {
+
+        /* We can say if we have an access token then we have
+           logged in OK */
+        if(!inMemoryJWT.getToken()){
+            return false
+        } else {
+            return true
+        }
+
     }
 
 }
