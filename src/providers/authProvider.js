@@ -225,6 +225,20 @@ const authProvider = {
             return true
         }
 
+    },
+
+    hasPermission: async (payload) => {
+
+        /* Only allow access if the user has the same 
+           level of permissions as the payload */
+        const token  = jwt_decode(inMemoryJWT.getToken())
+
+        if(token.roles !== payload){
+            return false
+        } else {
+            return true
+        }
+
     }
 
 }
