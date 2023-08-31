@@ -4,7 +4,14 @@ import Layout from './Layout/Layout'
 import LandingPage from './LandingPage/LandingPage'
 import Search from './Search/Search'
 
-const Client = () => {
+const Client = (props) => {
+
+  /* destructure the props */
+  const {
+    authProvider,
+    dataProvider
+  } = props
+  
   return (
     <Layout>
       <Routes>
