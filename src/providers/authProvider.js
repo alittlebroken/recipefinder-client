@@ -82,13 +82,12 @@ const authProvider = {
         if(response.status >= 200 && response.status < 300){
             /* Successful login */
             if(response.data.accessToken){
-               inMemoryJWT.setToken(response.data.accessToken, refreshRate) 
+               inMemoryJWT.setToken(response.data.accessToken, refreshRate)
+               return response.data.accessToken
             } else {
                 return false
             }
         }
-
-        return true
 
     },
 
@@ -219,6 +218,7 @@ const authProvider = {
 
         /* We can say if we have an access token then we have
            logged in OK */
+        console.log('loggedIn check for token: ', inMemoryJWT.getToken())
         if(!inMemoryJWT.getToken()){
             return false
         } else {
