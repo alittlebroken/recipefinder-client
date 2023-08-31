@@ -18,6 +18,9 @@ import dataProvider from './providers/dataProvider'
 /* Components needed */
 import Client from './components/Client/Client'
 
+import { AccessTokenProvider } from './contexts/providers'
+
+
 /* Styles needed */
 import './index.css';
 
@@ -28,7 +31,7 @@ ReactDOM.render(
       <Routes>
 
         {/* Client interface */}
-        <Route path='/*' element={<Client authProvider={authProvider} dataProvider={dataProvider} />} />
+        <Route path='/*' element={<AccessTokenProvider><Client authProvider={authProvider} dataProvider={dataProvider} /></AccessTokenProvider>} />
         
 
         {/* Administration interface */}
