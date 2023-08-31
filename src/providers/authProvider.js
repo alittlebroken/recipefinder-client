@@ -79,12 +79,16 @@ const authProvider = {
             }
         }
 
-        return {
-            status: 200,
-            success: true,
-            message: 'Login successful',
-            token:  response.data.accessToken
+        if(response.status >= 200 && response.status < 300){
+            /* Successful login */
+            if(response.data.accessToken){
+               inMemoryJWT.setToken(response.data.accessToken, refreshRate) 
+            } else {
+                return false
+            }
         }
+
+        return true
 
     },
 
