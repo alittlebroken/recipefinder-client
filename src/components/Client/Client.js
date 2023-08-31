@@ -15,13 +15,16 @@ const Client = (props) => {
     dataProvider
   } = props
 
+  /* Setup state for the accessToken */
+  const [accessToken, setAccessToken] = useAccessToken()
+
   return (
 
     <ProviderContext.Provider value={{
       authProvider,
       dataProvider
     }}>
-      <AccessTokenProvider>
+      
         <Layout>
           <Routes>
           {/*<Route path="/" element={<TestComponent />} />
@@ -31,7 +34,7 @@ const Client = (props) => {
           <Route path="/login" element={<LoginForm />} />
           </Routes>
         </Layout>
-      </AccessTokenProvider>
+
     </ProviderContext.Provider>
   )
 }
