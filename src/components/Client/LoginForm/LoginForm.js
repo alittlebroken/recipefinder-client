@@ -2,7 +2,7 @@ import { useState, useContext } from "react"
 import { redirect } from "react-router-dom";
 
 /* Import provider context  */
-import { ProviderContext } from '../../contexts/providers'
+import { ProviderContext } from '../../../contexts/providers'
 
 const LoginForm = () => {
 
@@ -69,9 +69,9 @@ const LoginForm = () => {
     /* render the component */
     return (
         <form onSubmit={handleSubmit} className="flex flex-col">
-            <label for="email">Email address:</label>
+            <label htmlFor="email">Email address:</label>
             <input type="text" id="email" placeholder="Email address" />
-            <label for="password">Password:</label>
+            <label htmlFor="password">Password:</label>
             <input type="password" id="password" />
             <button type="submit">Submit</button>
             {errors.map((error) => {
