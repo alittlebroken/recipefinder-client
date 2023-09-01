@@ -1,6 +1,13 @@
 import './header.css'
+import { Link } from 'react-router-dom'
+
+/* Import provider context  */
+import { useAccessToken } from '../../../contexts/providers'
 
 const Header = () => {
+
+    /* Set the state for the access token */
+    const [accessToken, setAccessToken] = useAccessToken()
 
     /* Handle the burger menu */
     const handleHamburgerClick = () => {
@@ -29,11 +36,11 @@ const Header = () => {
             </div>
             <nav className="nav-container">
                 <ul className="nav-list">
-                    <li className="nav-list-item"><a className="nav-item-link" href="/recipes">Recipes</a></li>
-                    <li className="nav-list-item"><a className="nav-item-link" href="/categories">Categories</a></li>
-                    <li className="nav-list-item"><a className="nav-item-link" href="/ingredients">Ingredients</a></li>
-                    <li className="nav-list-item"><a className="nav-item-link" href="/login">Login</a></li>
-                    <li className="nav-list-item"><a className="nav-item-link" href="/search">Search</a></li>
+                    <li className="nav-list-item"><Link to="/recipes">Recipes</Link></li>
+                    <li className="nav-list-item"><Link to="/categories">Categories</Link></li>
+                    <li className="nav-list-item"><Link to="/ingredients">Ingredients</Link></li>
+                    {accessToken ? (<li className="nav-list-item"><Link to="/profile">Profile</Link></li>) : (<li className="nav-list-item"><Link to="/login">Login</Link></li>)}
+                    <li className="nav-list-item"><Link to="/search">Search</Link></li>
                 </ul>
             </nav>
 
