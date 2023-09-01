@@ -94,6 +94,7 @@ const LoginForm = () => {
     /* render the component */
     return (
         <form onSubmit={handleSubmit} className="flex flex-col login-form-container">
+            <h2 className="login-header">Login</h2>
             <label htmlFor="email">Email address:</label>
             <input type="text" id="email" placeholder="Email address" onChange={handleUsernameChange} />
             <label htmlFor="password">Password:</label>
