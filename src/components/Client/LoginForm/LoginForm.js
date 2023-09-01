@@ -71,15 +71,7 @@ const LoginForm = () => {
         /* Validate the form inputs */
         handleValidation()
 
-        /* Perform the login 
-        const result = providers.authProvider.login(username, password)
-        if(result !== true){
-            setErrors([
-                ...errors,
-                result.message
-            ])
-        }
-        */
+        /* Perform the login */
         providers.authProvider.login(username, password)
         .then((result) => {
             setAccessToken(result)
