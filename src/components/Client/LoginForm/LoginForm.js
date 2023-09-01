@@ -105,7 +105,7 @@ const LoginForm = () => {
                 return (<p key={nanoid()} className="formError">{error}</p>)
             })}
             <hr />
-            <div aria-role="signup-container" className="flex flex-row signup-container">
+            <div aria-label="signup-container" className="flex flex-row signup-container">
                 No account? &nbsp; Then &nbsp; <Link to="/signup" className="">Signup</Link>
             </div>
         </form>
