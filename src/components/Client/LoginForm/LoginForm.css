@@ -1,0 +1,42 @@
+/* mobile styles */
+
+.login-form-container {
+    padding: 10px;
+    font-size: .9rem;
+    gap: 5px;
+}
+
+.login-header {
+    text-align: center;
+    padding: 10px;
+}
+
+.login-label {
+    font-size: .8rem;
+}
+
+.login-input {
+    font-family: inherit;
+    font-size: inherit;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.login-button {
+    background: none;
+    background-color: var(--col-primary);
+    color: white;
+    font-size: inherit;
+    font-family: inherit;
+}
+
+.signup-container {
+    padding: 5px;
+    align-items: center;
+    justify-content: center;
+}
+
+/* desktop styles */
+@media screen and ( min-width: 900px ){
+
+}
