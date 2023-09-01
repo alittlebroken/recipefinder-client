@@ -1,6 +1,7 @@
 import { useState, useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import { nanoid } from "@reduxjs/toolkit"
+import { Link } from "react-router-dom"
 
 import './LoginForm.css'
 
@@ -95,16 +96,18 @@ const LoginForm = () => {
     return (
         <form onSubmit={handleSubmit} className="flex flex-col login-form-container">
             <h2 className="login-header">Login</h2>
-            <label htmlFor="email">Email address:</label>
-            <input type="text" id="email" placeholder="Email address" onChange={handleUsernameChange} />
-            <label htmlFor="password">Password:</label>
-            <input type="password" id="password"  onChange={handlePasswordChange} />
-            <button type="submit">Submit</button>
+            <label htmlFor="email" className="login-label">Email address:</label>
+            <input type="text" id="email" className="login-input" placeholder="Email address" onChange={handleUsernameChange} />
+            <label htmlFor="password" className="login-label">Password:</label>
+            <input type="password" id="password" className="login-input" onChange={handlePasswordChange} />
+            <button className="btn login-button" type="submit">Submit</button>
             {errors.map((error) => {
                 return (<p key={nanoid()} className="formError">{error}</p>)
             })}
             <hr />
-            <a href="/signup">Sign Up</a>
+            <div aria-role="signup-container" className="flex flex-row signup-container">
+                No account? &nbsp; Then &nbsp; <Link to="/signup" className="">Signup</Link>
+            </div>
         </form>
     )
 
