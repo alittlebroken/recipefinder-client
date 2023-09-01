@@ -28,16 +28,18 @@ const root = document.getElementById('root')
 ReactDOM.render(
   <BrowserRouter>
     <Provider store={store}>
-      <Routes>
+      <AccessTokenProvider>
+        <Routes>
 
-        {/* Client interface */}
-        <Route path='/*' element={<AccessTokenProvider><Client authProvider={authProvider} dataProvider={dataProvider} /></AccessTokenProvider>} />
-        
+          {/* Client interface */}
+          <Route path='/*' element={<Client authProvider={authProvider} dataProvider={dataProvider} />} />
+          
 
-        {/* Administration interface */}
-        <Route path='/admin/*' element={<AdminSite />} />
+          {/* Administration interface */}
+          <Route path='/admin/*' element={<AdminSite />} />
 
-      </Routes>
+        </Routes>
+        </AccessTokenProvider>
     </Provider>
   </BrowserRouter>,
   root
