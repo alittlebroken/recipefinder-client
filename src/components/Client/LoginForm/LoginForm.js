@@ -2,6 +2,8 @@ import { useState, useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import { nanoid } from "@reduxjs/toolkit"
 
+import './LoginForm.css'
+
 /* Import provider context  */
 import { ProviderContext, AccessTokenProvider, useAccessToken } from '../../../contexts/providers'
 
@@ -91,7 +93,7 @@ const LoginForm = () => {
 
     /* render the component */
     return (
-        <form onSubmit={handleSubmit} className="flex flex-col">
+        <form onSubmit={handleSubmit} className="flex flex-col login-form-container">
             <label htmlFor="email">Email address:</label>
             <input type="text" id="email" placeholder="Email address" onChange={handleUsernameChange} />
             <label htmlFor="password">Password:</label>
