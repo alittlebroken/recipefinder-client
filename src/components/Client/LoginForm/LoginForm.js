@@ -22,6 +22,7 @@ const LoginForm = () => {
     /* Setup state for handling the form inputs */
     const [username, setUsername] = useState('')
     const [usernameErrors, setUsernameErrors] = useState('')
+    const [passwordErrors, setPasswordErrors] = useState('')
     const [password, setPassword] = useState('')
 
     /* Handlers for updating the form inputs */
@@ -36,7 +37,11 @@ const LoginForm = () => {
 
     const handlePasswordChange = (e) => {
         setPassword(e.target.value)
-        
+        if(e.target.value.length === 0){
+            setPasswordErrors('You must specify a password')
+        } else if (e.target.value.length < 4){
+            setPasswordErrors('Password must be 4 characters or longer')
+        }
     }
 
     /* Handle submission of the form */
