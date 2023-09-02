@@ -72,7 +72,7 @@ const LoginForm = () => {
             {emailErrors ? (<p key={nanoid()} className="formError">{emailErrors}</p>) : null }
             <label htmlFor="password" className="login-label">Password:</label>
             <input type="password" id="password" className="login-input" onChange={handlePasswordChange} />
-            
+            {passwordErrors ? (<p key={nanoid()} className="formError">{passwordErrors}</p>) : null }
             <button className="btn login-button" type="submit">Submit</button>
             <hr />
             <div aria-label="signup-container" className="flex flex-row signup-container">
