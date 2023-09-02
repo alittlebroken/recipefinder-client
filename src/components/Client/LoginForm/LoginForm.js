@@ -20,18 +20,18 @@ const LoginForm = () => {
     const providers = useContext(ProviderContext)
 
     /* Setup state for handling the form inputs */
-    const [username, setUsername] = useState('')
-    const [usernameErrors, setUsernameErrors] = useState('')
+    const [email, setEmail] = useState('')
+    const [emailErrors, setEmailErrors] = useState('')
     const [passwordErrors, setPasswordErrors] = useState('')
     const [password, setPassword] = useState('')
 
     /* Handlers for updating the form inputs */
-    const handleUsernameChange = (e) => {
-        setUsername(e.target.value)
+    const handleEmailChange = (e) => {
+        setEmail(e.target.value)
         if(e.target.value.length === 0){
-            setUsernameErrors('You must specify a username')
-        } else if (e.target.value.length < 8){
-            setUsernameErrors('Username must be 8 characters or longer')
+            setEmailErrors('You must specify an email address')
+        } else if (e.target.value.length < 15){
+            setEmailErrors('Email address must be 15 characters or longer')
         }
     }
 
@@ -50,7 +50,7 @@ const LoginForm = () => {
 
          
             /* Perform the login */
-            providers.authProvider.login(username, password)
+            providers.authProvider.login(email, password)
             .then((result) => {
                 setAccessToken(result)
                 /* redirect to the main page */
@@ -68,10 +68,11 @@ const LoginForm = () => {
         <form onSubmit={handleSubmit} className="flex flex-col login-form-container">
             <h2 className="login-header">Login</h2>
             <label htmlFor="email" className="login-label">Email address:</label>
-            <input type="text" id="email" className="login-input" placeholder="Email address" onChange={handleUsernameChange} />
-            {usernameErrors ? (<p key={nanoid()} className="formError">{usernameErrors}</p>) : null }
+            <input type="text" id="email" className="login-input" placeholder="Email address" onChange={handleEmailChange} />
+            {emailErrors ? (<p key={nanoid()} className="formError">{emailErrors}</p>) : null }
             <label htmlFor="password" className="login-label">Password:</label>
             <input type="password" id="password" className="login-input" onChange={handlePasswordChange} />
+            
             <button className="btn login-button" type="submit">Submit</button>
             <hr />
             <div aria-label="signup-container" className="flex flex-row signup-container">
