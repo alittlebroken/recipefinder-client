@@ -5,7 +5,8 @@ import LandingPage from './LandingPage/LandingPage'
 import Search from './Search/Search'
 import LoginForm from './LoginForm/LoginForm'
 
-import { ProviderContext, AccessTokenProvider, useAccessToken } from '../../contexts/providers'
+import { ProviderContext, useAccessToken } from '../../contexts/providers'
+
 
 const Client = (props) => {
 
@@ -15,7 +16,7 @@ const Client = (props) => {
     dataProvider
   } = props
 
-  /* Setup state for the accessToken */
+  /* accessToken state */
   const [accessToken, setAccessToken] = useAccessToken()
 
   return (
