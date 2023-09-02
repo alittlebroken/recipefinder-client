@@ -1,6 +1,5 @@
 import './header.css'
 import { Link } from 'react-router-dom'
-import { useContext } from 'react'
 
 /* Import provider context  */
 import { useAccessToken } from '../../../contexts/providers'
