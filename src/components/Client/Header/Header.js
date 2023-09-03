@@ -1,6 +1,15 @@
 import './header.css'
+import { Link } from 'react-router-dom'
+
+import Menu from '../../UI/Menu/Menu'
+
+/* Import provider context  */
+import { useAccessToken } from '../../../contexts/providers'
 
 const Header = () => {
+
+    /* Set the state for the access token */
+    const [accessToken, setAccessToken] = useAccessToken()
 
     /* Handle the burger menu */
     const handleHamburgerClick = () => {
@@ -29,11 +38,18 @@ const Header = () => {
             </div>
             <nav className="nav-container">
                 <ul className="nav-list">
-                    <li className="nav-list-item"><a className="nav-item-link" href="/recipes">Recipes</a></li>
-                    <li className="nav-list-item"><a className="nav-item-link" href="/categories">Categories</a></li>
-                    <li className="nav-list-item"><a className="nav-item-link" href="/ingredients">Ingredients</a></li>
-                    <li className="nav-list-item"><a className="nav-item-link" href="/login">Login</a></li>
-                    <li className="nav-list-item"><a className="nav-item-link" href="/search">Search</a></li>
+                    <li className="nav-list-item"><Link to="/recipes" className="nav-item-link">Recipes</Link></li>
+                    <li className="nav-list-item"><Link to="/categories" className="nav-item-link">Categories</Link></li>
+                    <li className="nav-list-item"><Link to="/ingredients" className="nav-item-link">Ingredients</Link></li>
+                    {accessToken ? (
+                        <li className="nav-list-item">
+                            <Menu title="Profile" items={[
+                                { name: 'Settings', url: '/profile'},
+                                { name: 'Logout', url: '/logout' }
+                            ]} />
+                        </li>
+                        ) : (<li className="nav-list-item"><Link to="/login" className="nav-item-link">Login</Link></li>)}
+                    <li className="nav-list-item"><Link to="/search" className="nav-item-link">Search</Link></li>
                 </ul>
             </nav>
 

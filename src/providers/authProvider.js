@@ -68,7 +68,10 @@ const authProvider = {
         }
 
         /* Make the request */
-        const response = await axios.post(`${BASEURL}/auth/login`,{ username, password }, unauthedAxiosOptions)
+        const response = await axios.post(
+            `${BASEURL}/auth/login`,
+            { username, password }, 
+            axiosOptions)
 
         if(response.status >= 400 ){
             return {
@@ -79,11 +82,14 @@ const authProvider = {
             }
         }
 
-        return {
-            status: 200,
-            success: true,
-            message: 'Login successful',
-            token:  response.data.accessToken
+        if(response.status >= 200 && response.status < 300){
+            /* Successful login */
+            if(response.data.accessToken){
+               inMemoryJWT.setToken(response.data.accessToken, refreshRate)
+               return response.data.accessToken
+            } else {
+                return false
+            }
         }
 
     },
@@ -207,6 +213,34 @@ const authProvider = {
                 user: null
             }
 
+        }
+
+    },
+
+    loggedIn: () => {
+
+        /* We can say if we have an access token then we have
+           logged in OK */
+        const token  = jwt_decode(inMemoryJWT.getToken())
+        console.log(token)
+        if(!token){
+            return false
+        } else {
+            return true
+        }
+
+    },
+
+    hasPermission: (payload) => {
+
+        /* Only allow access if the user has the same 
+           level of permissions as the payload */
+        const token  = jwt_decode(inMemoryJWT.getToken())
+        console.log(token)
+        if(token.roles !== payload){
+            return false
+        } else {
+            return true
         }
 
     }

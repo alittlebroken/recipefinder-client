@@ -11,8 +11,15 @@ import JWTManager from './utils/auth.utils'
 /* Import the apps store */
 import store from './store/store'
 
+/* Import the auth and data providers */
+import authProvider from './providers/authProvider'
+import dataProvider from './providers/dataProvider'
+
 /* Components needed */
 import Client from './components/Client/Client'
+
+import { AccessTokenProvider } from './contexts/providers'
+
 
 /* Styles needed */
 import './index.css';
@@ -21,16 +28,18 @@ const root = document.getElementById('root')
 ReactDOM.render(
   <BrowserRouter>
     <Provider store={store}>
-      <Routes>
+      <AccessTokenProvider>
+        <Routes>
 
-        {/* Client interface */}
-        <Route path='/*' element={<Client />} />
-        
+          {/* Client interface */}
+          <Route path='/*' element={<Client authProvider={authProvider} dataProvider={dataProvider} />} />
+          
 
-        {/* Administration interface */}
-        <Route path='/admin/*' element={<AdminSite />} />
+          {/* Administration interface */}
+          <Route path='/admin/*' element={<AdminSite />} />
 
-      </Routes>
+        </Routes>
+        </AccessTokenProvider>
     </Provider>
   </BrowserRouter>,
   root
