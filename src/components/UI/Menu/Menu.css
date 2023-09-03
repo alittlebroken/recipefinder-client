@@ -1,46 +1,95 @@
 /* Mobile styles */
 
-.menu {
+.dropdown {
+    position: relative;
     display: flex;
     flex-direction: column;
-    justify-items: center;
+    justify-content: center;
     align-items: center;
 }
 
-.menu:hover {
-    background-color: var(--col-primary);
-    color: white;
-}
-
-.menu-content {
+.dropdown-content {
     display: none;
     position: relative;
     min-width: 100%;
 }
 
-.menu:hover .menu-content {
-    display: flex;
-    flex-wrap: wrap;
+.dropdown-content > a {
+    border: none;
+    padding: 15px;
+    min-width: 100%;
+    text-align: center;
 }
 
-.menu-item {
+.dropdown-content > a:hover {
+    background-color: var(--col-primary);
+    color: var(--col-secondary);
+}
+
+.dropdown:hover .dropdown-content {
     display: flex;
-    flex-basis: 100%;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 15px;
 }
 
-.menu-item:hover {
-    background-color: var(--col-secondary);
-    color: var(--col-primary);
+.dropdown-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    border: none;
+    width: 100%;
 }
 
-.menu-title {
-    padding: 15px;
+.dropdown-title:hover {
+   background-color: var(--col-primary);
+   color: var(--col-secondary);
 }
+
 
 /* Desktop Styles */
 @media screen and (min-width: 900px){
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        min-width: 250px;
+        top: 100%;
+        left: -90px;
+        overflow: hidden;
+        z-index: 1;
+        border-radius: 7px;
+        background-color: var(--col-secondary);
+        box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.5);
+    }
+    
+    .dropdown-content > a {
+        border: none;
+        padding: 15px;
+        background-color: var(--col-secondary);
+        text-align: start;
+    }
+
+    .dropdown:hover .dropdown-content{
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+    
+    .dropdown-title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 15px;
+        border: none;
+    }
+    
+    .dropdown-title:hover {
+        color: black;
+        border-bottom: 1px solid var(--col-primary);
+        background-color: var(--col-secondary);
+    }
 
 }
