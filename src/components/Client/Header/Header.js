@@ -1,6 +1,8 @@
 import './header.css'
 import { Link } from 'react-router-dom'
 
+import Menu from '../../UI/Menu/Menu'
+
 /* Import provider context  */
 import { useAccessToken } from '../../../contexts/providers'
 
@@ -39,7 +41,14 @@ const Header = () => {
                     <li className="nav-list-item"><Link to="/recipes" className="nav-item-link">Recipes</Link></li>
                     <li className="nav-list-item"><Link to="/categories" className="nav-item-link">Categories</Link></li>
                     <li className="nav-list-item"><Link to="/ingredients" className="nav-item-link">Ingredients</Link></li>
-                    {accessToken ? (<li className="nav-list-item"><Link to="/profile" className="nav-item-link">Profile</Link></li>) : (<li className="nav-list-item"><Link to="/login" className="nav-item-link">Login</Link></li>)}
+                    {accessToken ? (
+                        <li className="nav-list-item">
+                            <Menu title="Profile" items={[
+                                { name: 'Settings', url: '/profile'},
+                                { name: 'Logout', url: '/logout' }
+                            ]} />
+                        </li>
+                        ) : (<li className="nav-list-item"><Link to="/login" className="nav-item-link">Login</Link></li>)}
                     <li className="nav-list-item"><Link to="/search" className="nav-item-link">Search</Link></li>
                 </ul>
             </nav>
