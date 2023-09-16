@@ -52,7 +52,7 @@ describe('Login component', () => {
 
         // Assertions
         const profile = await screen.findByRole('link', { name: /Profile/i })
-        expect(profile).toBeInTheDoucment()
+        expect(profile).toBeInTheDocument()
 
     })
 
@@ -112,6 +112,8 @@ describe('Login component', () => {
         expect(expectedText).toBeInTheDocument()
 
     })
+
+
 
     xit('sample test', async () => {
 
