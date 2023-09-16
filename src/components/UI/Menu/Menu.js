@@ -20,7 +20,7 @@ const Menu = (props) => {
             <div aria-label="dropdown content" className="dropdown-content">
                 {items.map(item => {
                     return (
-                        <Link to={item.url} className="dropdown-link">{item.name}</Link>
+                        <Link to={item.url} className="dropdown-link" onClick={item.handleClick}>{item.name}</Link>
                     )
                 })}
             </div>
