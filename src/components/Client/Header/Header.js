@@ -1,12 +1,15 @@
 import './header.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import Menu from '../../UI/Menu/Menu'
 
 /* Import provider context  */
-import { useAccessToken } from '../../../contexts/providers'
+import { ProviderContext, useAccessToken } from '../../../contexts/providers'
 
 const Header = () => {
+
+    /* Set the alias for the useNavigate hook */
+    const navigate  = useNavigate()
 
     /* Set the state for the access token */
     const [accessToken, setAccessToken] = useAccessToken()
@@ -19,6 +22,21 @@ const Header = () => {
 
         hamburger.classList.toggle("active")
         menu.classList.toggle("active")
+
+    }
+
+    /* Handle logout */
+    const handleLogout = (e) => {
+
+        /* Attempt the logout */
+        ProviderContext.authProvider.logout()
+        .then(result => {
+            return navigate("/")
+        })
+        .catch(err => {
+            console.log(err)
+            return false
+        })
 
     }
 
@@ -44,8 +62,8 @@ const Header = () => {
                     {accessToken ? (
                         <li className="nav-list-item">
                             <Menu title="Profile" items={[
-                                { name: 'Settings', url: '/profile'},
-                                { name: 'Logout', url: '/logout' }
+                                { name: 'Settings', url: '/profile', handleClick: null},
+                                { name: 'Logout', url: '/logout', handleClick: handleLogout }
                             ]} />
                         </li>
                         ) : (<li className="nav-list-item"><Link to="/login" className="nav-item-link">Login</Link></li>)}
