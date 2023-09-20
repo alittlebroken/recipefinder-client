@@ -1,0 +1,49 @@
+/* Mobile Styles */
+.formContainer {
+    padding: 10px;
+    row-gap: 10px;
+}
+
+.form-title {
+    text-align: center;
+    padding: 5px;
+}
+
+.form-btn {
+    padding: 15px;
+    font-family: inherit;
+    font-size: inherit;
+    background-color: var(--col-primary);
+    color: white;
+}
+
+.form-input {
+    border-radius: 7px;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.form-terms {
+    padding: 5px;
+    text-align: center;
+}
+
+.form-account {
+    padding: 5px;
+    text-align: center;
+}
+
+.form-error {
+    font-size: .75rem;
+    color: red;
+}
+
+/* desktop Styles */
+@media screen and (min-width: 960px) {
+    .formContainer {
+        width: 450px;
+        margin: 30px auto;
+        border: 3px solid var(--col-primary);
+        border-radius: 10px;
+    }
+}
