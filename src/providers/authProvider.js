@@ -187,12 +187,14 @@ const authProvider = {
             const response = await axios.post(`${BASEURL}/auth/register`, payload, unauthedAxiosOptions)
 
             // Check for any errors
+            console.log(response)
             if(response.status >= 400){
                 return {
                     status: response.data.status,
                     success: response.data.success,
                     message: response.data.message,
-                    user: response.data.user
+                    user: response.data.user,
+                    roles: response.data.roles
                 }
             }
 
@@ -201,7 +203,8 @@ const authProvider = {
                 status: response.data.status,
                 success: response.data.success,
                 message: response.data.message,
-                user: response.data.user
+                user: response.data.user,
+                roles: response.data.roles
             }
 
         } catch(e) {
