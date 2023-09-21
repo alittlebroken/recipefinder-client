@@ -187,7 +187,6 @@ const authProvider = {
             const response = await axios.post(`${BASEURL}/auth/register`, payload, unauthedAxiosOptions)
 
             // Check for any errors
-            console.log(response)
             if(response.status >= 400){
                 return {
                     status: response.data.status,
