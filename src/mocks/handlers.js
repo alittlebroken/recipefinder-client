@@ -71,5 +71,19 @@ export const handlers = [
             ),
             ctx.cookie('jwt', tokens.refreshToken)
         )
-    })
+    }),
+    rest.post('http://localhost:5000/auth/register', (req,res,ctx) => {
+        return res(
+            ctx.status(201),
+            ctx.json({
+                status: 201,
+                success: true,
+                username: req.username,
+                forename: req.forename,
+                surname: req.surname,
+                email: req.email,
+                roles: 'Customer'  
+            })
+        )
+    }),
 ]

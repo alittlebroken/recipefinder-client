@@ -192,7 +192,8 @@ const authProvider = {
                     status: response.data.status,
                     success: response.data.success,
                     message: response.data.message,
-                    user: response.data.user
+                    user: response.data.user,
+                    roles: response.data.roles
                 }
             }
 
@@ -201,7 +202,8 @@ const authProvider = {
                 status: response.data.status,
                 success: response.data.success,
                 message: response.data.message,
-                user: response.data.user
+                user: response.data.user,
+                roles: response.data.roles
             }
 
         } catch(e) {
