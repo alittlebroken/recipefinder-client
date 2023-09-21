@@ -32,7 +32,7 @@ const SignupForm = () => {
         event.preventDefault()
 
         /* Validate the form fields */
-        if(email === undefined) {
+        if(email === '' || email === undefined) {
             setEmailError('You must supply an email address to register')
             setFormOk(false)
             return false
@@ -44,7 +44,7 @@ const SignupForm = () => {
             return false
         } 
 
-        if(forename === undefined) { 
+        if(forename === undefined || forename === '') { 
             setForenameError('You must supply a forename to register')
             setFormOk(false)
             return false
@@ -56,7 +56,7 @@ const SignupForm = () => {
             return false
         } 
 
-        if(surname === undefined) {
+        if(surname === undefined || surname === '') {
             setSurnameError('You must supply a surname to register')
             setFormOk(false)
             return false
@@ -68,7 +68,7 @@ const SignupForm = () => {
             return false
         }
 
-        if(password === undefined) {
+        if(password === undefined || password === '') {
             setPasswordError('You must supply a password to register')
             setFormOk(false)
             return false
@@ -80,7 +80,7 @@ const SignupForm = () => {
             return false
         } 
 
-        if(confirmPassword === undefined) {
+        if(confirmPassword === undefined || confirmPassword === '') {
             setConfirmError('You must confirm your password to register')
             setFormOk(false)
             return false
