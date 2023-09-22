@@ -245,6 +245,54 @@ const authProvider = {
             return true
         }
 
+    },
+
+    getProfile: async (id) => {
+      
+        try {
+
+            /* Determine if the passed in user is logged in first */
+            if(!inMemoryJWT.getToken()){
+                return {
+                    status: 400,
+                    success: false,
+                    message: 'You must be logged in to access this resource'
+                }
+            }
+
+            /* Get the profile data */
+            const response = await axios.get(
+                `${BASEURL}/auth/profile`,
+                axiosOptions
+            )
+
+            /* Check all went OK */
+            if(response.status >=200 && response.status < 300){
+                return {
+                    success: response.data.success,
+                    status: response.status,
+                    data: response.data
+                }
+            } else {
+                return {
+                    status: 400,
+                    success: false,
+                    data: {},
+                    message: 'There was a problem retrieving your profile, please try again later'
+                }
+            }
+    
+        
+        } catch(e) {
+
+            return {
+                status: 500,
+                success: false,
+                message: 'There was a problem with the resource, please try again later'
+            }
+
+        }
+
     }
 
 }
