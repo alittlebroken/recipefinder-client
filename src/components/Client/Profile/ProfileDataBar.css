@@ -1,0 +1,65 @@
+/* Mobile layout */
+.pdb-container {
+    padding: 15px;
+    gap:5px;
+    border-radius: 10px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.pdb-link-btn {
+   padding: 7px;
+   display: flex;
+   color: white;
+   background-color: var(--col-primary);
+   border-radius: 10px;
+   flex-basis: 100px;
+   font-family: inherit;
+   font-size: .8rem;
+   align-items: center;
+   justify-content: center;
+}
+
+.pdb-link-btn::after {
+    content: attr(data-descr);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border: 2px solid white;
+    border-radius: 10px;
+    min-width: 15px;
+    height: 15px;
+    padding: 3px;
+    margin-left: 5px;
+}
+
+.pdb-link-btn:hover {
+    color: var(--col-primary);
+    background-color: var(--col-secondary);
+    border: 2px solid var(--col-primary);
+}
+
+.pdb-link-btn:hover::after {
+    border: 2px solid var(--col-primary);
+    background-color: var(--col-primary);
+    color: var(--col-secondary);
+}
+
+/* Dekstop Layout */
+@media screen and (min-width: 900px) {
+
+    .pdb-container {
+       max-width: 520px;
+       border: 2px solid var(--col-primary);
+       padding: 15px 5px;
+       margin-bottom: 15px;
+    }
+
+    .pdb-link-btn {
+        padding: 7px;
+        border: 2px solid var(--col-primary);
+    }
+
+}
