@@ -1,0 +1,43 @@
+/* Mobile Layout */
+.ph-container{
+    padding: 20px;
+}
+
+.ph-avatar{
+    width: 175px;
+    height: auto;
+    border-radius: 50%;
+    border: 2px solid var(--col-primary);
+    overflow: hidden;
+}
+
+.ph-fullname {
+    font-size: 2rem;
+}
+
+.ph-email {
+    font-size: .8rem;
+    color: var(--col-primary);
+}
+
+/* Desktop Layout */
+@media screen and (min-width: 900px) {
+
+    .ph-container {
+        padding: 35px;
+    }
+
+    .ph-avatar {
+        width: 350px;
+    }
+
+    .ph-fullname {
+        padding: 15px;
+        font-size: 3.5rem;
+    }
+
+    .ph-email {
+       font-size: 1.3rem; 
+    }
+
+}
