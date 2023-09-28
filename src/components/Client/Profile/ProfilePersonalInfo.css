@@ -74,4 +74,23 @@ input[type="file"]::file-selector-button:hover {
 /* Desktop Layout */
 @media screen and (min-width: 900px){
 
+    .ppi-container{
+        padding: 25px;
+        width: 525px;
+        margin: 30px auto;
+        border: 2px solid var(--col-primary);
+        border-radius: 10px;
+    }
+
+    .ppi-container > label {
+        font-size: 1.2rem;
+    }
+    
+    .ppi-heading2 {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+
 }
