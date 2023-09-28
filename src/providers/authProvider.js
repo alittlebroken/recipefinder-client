@@ -238,7 +238,7 @@ const authProvider = {
         /* Only allow access if the user has the same 
            level of permissions as the payload */
         const token  = jwt_decode(inMemoryJWT.getToken())
-        console.log(token)
+        
         if(token.roles !== payload){
             return false
         } else {
@@ -268,6 +268,12 @@ const authProvider = {
 
             /* Check all went OK */
             if(response.status >=200 && response.status < 300){
+
+                /* Get the image for the user */
+                const imagePayload = {
+                    
+                }
+
                 return {
                     success: response.data.success,
                     status: response.status,
@@ -293,7 +299,7 @@ const authProvider = {
 
         }
 
-    }
+    },
 
 }
 
