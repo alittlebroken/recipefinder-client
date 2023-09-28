@@ -1,0 +1,77 @@
+/* Mobile Layout */
+.ppi-container{
+    padding: 5px;
+}
+
+.ppi-container > label {
+    font-size: .9rem;
+    padding: 5px;
+}
+
+.ppi-heading2 {
+    font-size: 2rem;
+    margin-bottom: 7px;
+}
+
+.ppi-heading4 {
+    margin: 15px 0;
+    font-size: 1.3rem;
+}
+
+.ppi-input {
+    border-radius: 7px;
+    font-family: inherit;
+    font-size: inherit;
+    margin-bottom: 10px;
+}
+
+.ppi-error{
+    color: red;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+.ppi-avatar {
+    width: 250px;
+    height: auto;
+    margin: 0 auto;
+}
+
+.ppi-btn {
+    background-color: var(--vol-primary);
+    color: white;
+    padding: 10px;
+    margin: 10px;
+    width: auto;
+    background-color: var(--col-primary);
+    border: 2px solid var(--col-primary);
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+.ppi-btn:hover {
+    background-color: white;
+    color: var(--col-primary);
+}
+
+input[type="file"]::file-selector-button {
+    background-color: var(--col-primary);
+    border: 2px solid var(--col-primary);
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 5px;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+input[type="file"]::file-selector-button:hover {
+    color: var(--col-primary);
+    background-color: white;
+}
+
+/* Desktop Layout */
+@media screen and (min-width: 900px){
+
+}
