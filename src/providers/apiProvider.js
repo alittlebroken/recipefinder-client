@@ -340,7 +340,8 @@ const apiProvider = {
 
     update: async (resource, params) => {
 
-        // Extract the params out
+        /* return result for the method */
+        let returnResult
 
             // Veify the passed in params
             if(!params || params === undefined){
@@ -366,7 +367,7 @@ const apiProvider = {
             const { authenticate } = params.auth || false
             const { roles } = params.auth || 'user'
 
-        // Generate the header and any options to send along with the request
+            // Generate the header and any options to send along with the request
 
             // Generate the initial header for the request
             let headers = { 'Content-type': 'application/json' }
@@ -384,14 +385,97 @@ const apiProvider = {
                 axiosOptions.withCredentials = true
             }
 
-        // Set the URL to use
-        let url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}`
+            /* Url to send the request to */
+            let url
+
+            /* Request Body */
+            let reqBody
+
+            /* Generate the url and payload based on the resource */
+            if(resource === 'users'){
+
+                url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}`
+                
+                reqBody = {
+                    username: payload.username,
+                    forename: payload.forename,
+                    surname: payload.surname,
+                    email: payload.email,
+                    roles: payload.roles
+                }
+
+                /* Send the request */
+                const res = await axios.put(
+                    url,
+                    reqBody,
+                    axiosOptions
+                )
+                console.log(res)
+                /* If the response is OK then update the picture, if any */
+                if(res.status === 204 && payload.upload !== ''){
+
+                    /* Generate the payload to send */
+                    const formData = new FormData()
+                    formData.append(
+                        'images',
+                        payload.upload,
+                        payload.upload.name
+                    )
+                    formData.append('userid',payload.id)
+                    formData.append('resourceid', payload.id)
+                    formData.append('resource', 'users')
+                    formData.append('title', payload.title)
+
+                    /* url to upload to */
+                    url = `${process.env.REACT_APP_API_URL}/uploads/${payload.imageId}`
+
+                    /* Update the Image */
+                    const imageRes = await axios.put(
+                        url,
+                        formData,
+                        axiosOptions
+                    )
+
+                    /* ensure all is ok */
+                    if(imageRes.status === 204){
+                        returnResult = {
+                            status: 204,
+                            success: true,
+                            message: 'Profile updated successfully'
+                        }
+                    } else {
+                        returnResult =  {
+                            status: 204,
+                            success: true,
+                            message: 'Unable to update profile, please try again later'
+                        }
+                    }
+
+                } else if(res.status === 204) {
+                  
+                    returnResult = {
+                        status: 204,
+                        success: true,
+                        message: 'Profile updated successfully'
+                    }
+
+                }
+                return returnResult
+
+            } else {
+                /* generic catch all url, should be good for most resources */
+                url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}`
+
+            }
+
+            
 
         // Access the appropriate API and process the results
         const response = await axios.put(url, payload, axiosOptions)
 
         // Check the status codes returned
         if(response.status >= 400){
+            
             return response.data
         }
 
