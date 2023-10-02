@@ -301,6 +301,84 @@ const authProvider = {
 
     },
 
+    resetPassword: async (payload) => {
+
+        try{
+
+            /* Determine if the passed in user is logged in first */
+            if(!inMemoryJWT.getToken()){
+                return {
+                    status: 400,
+                    success: false,
+                    message: 'You must be logged in to access this resource'
+                }
+            }
+
+            /* Get the decoded token for the currently logged in user */
+            const token  = jwt_decode(inMemoryJWT.getToken())
+
+            /* Create the url to send the request to */
+            const url = `${BASEURL}/auth/reset-password`
+
+            /* Create the payload to be sent to the API */
+            const reqBody = {
+                userId: token.user.id,
+                password: payload.password
+            }
+
+            // Set the options for axios
+            const axiosOptions = {
+                withCredentials: true,
+                headers: {
+                    'token': inMemoryJWT.getToken(),
+                    'Content-type': 'application/json'
+                }
+            }
+
+            /* Send the request and check the response sent back */
+            await axios.post(
+                url,
+                reqBody,
+                axiosOptions
+            )
+            .then(result => {
+                
+                if(result.status === 200){
+                    return {
+                        status: 200,
+                        success: true,
+                        message: 'Password successfully changed'
+                    } 
+                } else {
+                    return {
+                        status: result.status,
+                        success: false,
+                        message: 'There was a problem restting your password, please try again later'
+                    }
+                }
+
+            })
+            .catch(e => {
+                return {
+                    status: 400,
+                    success: false,
+                    message: 'There was a problem restting your password, please try again later'
+                }
+            })
+
+
+        } catch(e) {
+
+            return {
+                status: 500,
+                success: false,
+                message: 'There was a problem with the resource, please try again later'
+            }
+
+        }
+
+    }
+
 }
 
 export default authProvider;
