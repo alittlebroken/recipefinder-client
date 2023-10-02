@@ -62,7 +62,7 @@ const ProfilePasswordReset = () => {
           className="pr-container flex flex-col"
           onSubmit={handleSubmit}
         >
-            <h2>Password Reset</h2>
+            <h2 className="pr-head2">Password Reset</h2>
             <label htmlFor="Password">Password:</label>
             <input 
                 type="password" 
@@ -83,7 +83,7 @@ const ProfilePasswordReset = () => {
             {conError && (
                 <span className="pr-error">{conError}</span>
             )}
-            <button type="submit">Change Password</button>
+            <button type="submit" className="pr-btn">Change Password</button>
             {submitOk && (
                 <span className="pr-ok">{submitOk}</span>
             )}
