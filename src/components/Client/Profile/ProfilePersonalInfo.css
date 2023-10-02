@@ -2,6 +2,7 @@
 .ppi-container{
     padding: 5px;
     background-color: white;
+    border-radius: 10px;
 }
 
 .ppi-container > label {
