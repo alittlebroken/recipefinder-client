@@ -1,6 +1,7 @@
 /* Mobile Layout */
 .ppi-container{
     padding: 5px;
+    background-color: white;
 }
 
 .ppi-container > label {
