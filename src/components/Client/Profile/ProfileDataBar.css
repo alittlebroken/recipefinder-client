@@ -22,31 +22,12 @@
    justify-content: center;
 }
 
-.pdb-link-btn::after {
-    content: attr(data-descr);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    border: 2px solid white;
-    border-radius: 10px;
-    min-width: 15px;
-    height: 15px;
-    padding: 3px;
-    margin-left: 5px;
-}
-
 .pdb-link-btn:hover {
     color: var(--col-primary);
     background-color: var(--col-secondary);
     border: 2px solid var(--col-primary);
 }
 
-.pdb-link-btn:hover::after {
-    border: 2px solid var(--col-primary);
-    background-color: var(--col-primary);
-    color: var(--col-secondary);
-}
 
 /* Dekstop Layout */
 @media screen and (min-width: 900px) {
