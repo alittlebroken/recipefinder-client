@@ -49,6 +49,9 @@ export const profileSlice = createSlice({
         [getProfile.rejected]: (state, action) => {
             state.isLoading = false
             state.hasError = true
+
+            console.log(action)
+
         },
         [getProfile.fulfilled]: (state, action) => {
             state.isLoading = false
@@ -71,6 +74,8 @@ export const profileSlice = createSlice({
 
 /* Export selectors for retrieving the data */
 export const selectProfileData = state => state.profile.data
+export const selectLoading = state => state.profile.isLoading
+export const selectHasError = state => state.profile.hasError
 
 /* export the default reducer for this slice to be used in the store */
 export default profileSlice.reducer
