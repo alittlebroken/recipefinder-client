@@ -5,6 +5,8 @@ import inMemoryJWT from '../utils/auth.utils';
 
 import { isType, isSet } from '../utils/validation'
 
+import queryString from 'query-string'
+
 /* Set the base URL for the axios requests */
 const BASEURL = process.env.REACT_APP_API_URL
 
@@ -238,11 +240,198 @@ const authProvider = {
         /* Only allow access if the user has the same 
            level of permissions as the payload */
         const token  = jwt_decode(inMemoryJWT.getToken())
-        console.log(token)
+        
         if(token.roles !== payload){
             return false
         } else {
             return true
+        }
+
+    },
+
+    getProfile: async (id) => {
+      
+        try {
+
+            /* Determine if the passed in user is logged in first */
+            if(!inMemoryJWT.getToken()){
+                return {
+                    status: 400,
+                    success: false,
+                    message: 'You must be logged in to access this resource'
+                }
+            }
+
+            /* Set the options to use for the axios request */
+            const axiosOptions = {
+                withCredentials: true,
+                headers: {
+                    'token': inMemoryJWT.getToken(),
+                    'Content-type': 'application/json'
+                }
+            }
+
+
+            /* Get the profile data */
+            const response = await axios.get(
+                `${BASEURL}/auth/profile`,
+                axiosOptions
+            )
+
+            /* Use this to build up the results we wish to send back piece
+             * by piece */
+            let returnData
+
+            /* Check all went OK */
+            if(response.status >=200 && response.status < 300){
+
+                /* Build the main portion of the user profile data to be returned */
+                returnData = {
+                    ...response.data.data,
+                }
+
+                /* Create the query String params for the uploads to get the 
+                 * correct profile image for the user if there is one */
+
+                /* Generate the filter object to be strinigifed here as only one value is being
+                 * sent across when the object is created direct in JSON.Stringify */
+                const filterParams = {
+                    resourceid: id, 
+                    resource: 'users',
+                    userId: id
+                }
+
+                const queryParams = { filter: JSON.stringify(filterParams) }
+
+                axios.get(
+                    `${BASEURL}/uploads/?${queryString.stringify(queryParams)}`,
+                    axiosOptions
+                ).then(result => {
+                    if(result.status >= 200 && result.status < 300){
+                        returnData.avatar = {
+                            url: result.src,
+                            alt: result.alt,
+                            title: result.title
+                        }
+                    }
+                }).catch(e => {
+                    returnData.avatar = {
+                        url: null,
+                        alt: 'Default missing profile picture',
+                        title: 'Default missing profile picture'
+                    }
+                })
+
+
+                return {
+                    success: response.data.success,
+                    status: response.status,
+                    data: returnData,
+                    message: ''
+                }
+            } else {
+                return {
+                    status: 400,
+                    success: false,
+                    data: {},
+                    message: 'There was a problem retrieving your profile, please try again later'
+                }
+            }
+    
+        
+        } catch(e) {
+
+            return {
+                status: 500,
+                success: false,
+                message: 'There was a problem with the resource, please try again later'
+            }
+
+        }
+
+    },
+
+    resetPassword: async (payload) => {
+
+        try{
+
+            /* Determine if the passed in user is logged in first */
+            if(!inMemoryJWT.getToken()){
+                return {
+                    status: 400,
+                    success: false,
+                    message: 'You must be logged in to access this resource'
+                }
+            }
+
+            /* Set the return result */
+            let returnResult
+
+            /* Get the decoded token for the currently logged in user */
+            const token  = jwt_decode(inMemoryJWT.getToken())
+
+            /* Create the url to send the request to */
+            const url = `${BASEURL}/auth/reset-password`
+
+            /* Create the payload to be sent to the API */
+            const reqBody = {
+                userId: token.user.id,
+                password: payload.password
+            }
+
+            // Set the options for axios
+            const axiosOptions = {
+                withCredentials: true,
+                headers: {
+                    'token': inMemoryJWT.getToken(),
+                    'Content-type': 'application/json'
+                }
+            }
+
+            /* Send the request and check the response sent back */
+            await axios.post(
+                url,
+                reqBody,
+                axiosOptions
+            )
+            .then(result => {
+                
+                if(result.status === 200){
+                    returnResult = {
+                        status: 200,
+                        success: true,
+                        message: 'Password successfully changed'
+                    } 
+                    
+                } else {
+                    returnResult = {
+                        status: result.status,
+                        success: false,
+                        message: 'There was a problem restting your password, please try again later'
+                    }
+                    
+                }
+
+            })
+            .catch(e => {
+                return {
+                    status: 400,
+                    success: false,
+                    message: 'There was a problem restting your password, please try again later'
+                }
+            })
+
+            return returnResult
+
+
+        } catch(e) {
+
+            return {
+                status: 500,
+                success: false,
+                message: 'There was a problem with the resource, please try again later'
+            }
+
         }
 
     }

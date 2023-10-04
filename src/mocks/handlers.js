@@ -86,4 +86,42 @@ export const handlers = [
             })
         )
     }),
+    rest.get('http://localhost:5000/auth/profile', (req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.json(
+                {
+                    status: 200,
+                    success: true,
+                    data: {
+                        id: 12,
+                        username: 'twallaby@australia.net',
+                        forename: 'Terry',
+                        surname: 'Wallaby',
+                        roles: 'Customer',
+                        created_at: '2022-11-15 13:15:45'
+                    },
+                    message: null
+                }
+            )
+        )
+    }),
+    rest.post('http://localhost:5000/auth/profile', (req,res,ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.json({
+                status: 200,
+                success: true,
+                message: 'Profile successfully updated',
+                data: {
+                    id: 12,
+                    username: 'twallaby@australia.net',
+                    forename: 'Terry',
+                    surname: 'Wallaby',
+                    roles: 'Customer',
+                    created_at: '2022-11-15 13:15:45'
+                }
+            })
+        )
+    })
 ]

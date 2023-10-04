@@ -5,9 +5,11 @@ import LandingPage from './LandingPage/LandingPage'
 import Search from './Search/Search'
 import LoginForm from './LoginForm/LoginForm'
 import SignupForm from './SignupForm/SignupForm'
+import Profile from './Profile/Profile'
 
 import { ProviderContext, useAccessToken } from '../../contexts/providers'
 
+import ProtectedRoute from './ProtectedRoute/ProtectedRoute'
 
 const Client = (props) => {
 
@@ -35,6 +37,8 @@ const Client = (props) => {
           <Route path="/search" element={<Search />} />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/signup" element={<SignupForm />} />
+          {/* Protected Routes will go here */}
+            <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
           </Routes>
         </Layout>
 
