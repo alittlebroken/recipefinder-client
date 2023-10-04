@@ -5,9 +5,9 @@
 
 .ph-avatar{
     width: 175px;
-    height: auto;
+    height: 175px;
+    object-fit: cover;
     border-radius: 50%;
-    border: 2px solid var(--col-primary);
     overflow: hidden;
 }
 
