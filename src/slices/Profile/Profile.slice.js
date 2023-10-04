@@ -4,8 +4,8 @@ import authProvider from "../../providers/authProvider"
 
 /* Set up thunks for gathering data from the API */
 
-export const getProfile = createAsyncThunk(
-    'profile/getProfile',
+export const getUserProfile = createAsyncThunk(
+    'profile/getUserProfile',
     async (payload, thunkAPI) => {
 
         try{
@@ -42,31 +42,31 @@ export const profileSlice = createSlice({
     initialState: initialState,
     reducers: {},
     extraReducers:{
-        [getProfile.pending]: (state, action) => {
+        [getUserProfile.pending]: (state, action) => {
             state.isLoading = true
             state.hasError = false
+
         },
-        [getProfile.rejected]: (state, action) => {
+        [getUserProfile.rejected]: (state, action) => {
             state.isLoading = false
             state.hasError = true
 
-            console.log(action)
-
+            
         },
-        [getProfile.fulfilled]: (state, action) => {
+        [getUserProfile.fulfilled]: (state, action) => {
             state.isLoading = false
             state.hasError = false
 
             /* Parse and assign the data returned from the API */
             let profile = action.payload.data
-            state.data.userId = profile.id
-            state.data.forename = profile.forename
-            state.data.surname = profile.surname
-            state.data.email = profile.email
-            state.data.username = profile.username
-            state.data.avatar_src = profile.avatar.url
-            state.data.avatar_alt = profile.avatar.alt
-            state.data.avatar.title = profile.avatar.title
+            state.data.userId = profile?.id
+            state.data.forename = profile?.forename
+            state.data.surname = profile?.surname
+            state.data.email = profile?.email
+            state.data.username = profile?.username
+            state.data.avatar_src = profile?.avatar?.url ? profile.avatar.url : '/default_profile_pic.jpg'
+            state.data.avatar_alt = profile?.avatar?.alt ? profile.avatar.alt : 'Default profile picture'
+            state.data.avatar_title = profile?.avatar?.title ? profile.avatar.title : 'Default profile picture'
 
         }
     }
