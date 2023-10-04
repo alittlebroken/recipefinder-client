@@ -10,18 +10,18 @@ const ProfilePersonalInfo = (props) => {
     const { resourceid, fileId, userId, user } = props
 
     /* Create state for the form fields and to capture errors */
-    const [forename, setForename] = useState(user.forename)
+    const [forename, setForename] = useState(user?.forename)
     const [forenameError, setForenameError] = useState('')
-    const [surname, setSurname] = useState(user.surname)
+    const [surname, setSurname] = useState(user?.surname)
     const [surnameError, setSurnameError] = useState('')
-    const [email, setEmail] = useState(user.email)
+    const [email, setEmail] = useState(user?.email)
     const [emailError, setEmailError] = useState('')
-    const [roles, setRoles] = useState(user.roles)
+    const [roles, setRoles] = useState(user?.roles)
     const [rolesError, setRolesError] = useState('')
-    const [avatar, setAvatar] = useState(user.avatar)
+    const [avatar, setAvatar] = useState(user?.avatar)
     const [avatarError, setAvatarError] = useState('')
     const [upload, setUpload] = useState('')
-    const [title, setTitle] = useState(user.avatar.title)
+    const [title, setTitle] = useState(user?.avatar?.title)
     const [titleError, setTitleError] = useState('')
     const [formOk, setFormOk] = useState(true)
     const [dirty, setDirty] = useState(false)
@@ -144,14 +144,14 @@ const ProfilePersonalInfo = (props) => {
             <h4 className="ppi-heading4">Profile Image</h4>
             {avatar && (<img src={avatar.src} alt={avatar.title} title={avatar.title} className="ppi-avatar" />)}
             <label htmlFor="title">Title:</label>
-            <input 
+            { title && <input 
                 type="text" 
                 id="title" 
                 name="title" 
                 value={title} 
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="Insert picture title"
-                className="ppi-input" />
+                className="ppi-input" /> } 
             <label htmlFor="avatar">New profile image</label>
             <input type="file" id="avatar" name="avatar" onChange={(e) => setUpload(e.target.files[0])} />
             {avatarError && (<p className="ppi-error">{avatarError}</p>)}
