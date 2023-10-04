@@ -33,7 +33,7 @@ const Profile = (props) => {
     /* Load the users profile when the component is mounted */
     useEffect(() => {
         const fetchData = async () => {
-            console.log('During useEffect')
+            
             await dispatch(getUserProfile(token?.user?.id))
         }
         fetchData()
