@@ -123,5 +123,23 @@ export const handlers = [
                 }
             })
         )
+    }),
+    rest.get('http://localhost:5000/ingredients', (req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.json({
+                results: [
+                    { id: 1, name: 'Flour'},
+                    { id: 2, name: 'Eggs'},
+                    { id: 3, name: 'Butter' },
+                    { id: 4, name: 'Milk' },
+                    { id: 5, name: 'Sugar' },
+                    { id: 6, name: 'Strawberry Jam' }
+                ],
+                totalPages: 1,
+                totalRecords: 6,
+                currentPage: 1
+            })
+        )
     })
 ]
