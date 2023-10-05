@@ -21,6 +21,7 @@ const Ingredients = () => {
     /* Render the compnent */
     return (
         <div aria-label="ig-container flex flex-col">
+            <h2 className="if-head-2">Ingredients</h2>
             <form id="filterIngredients" onSubmit={handleSubmit} className="flex flex-row ig-filter">
                 <input 
                     type="search" 
@@ -29,20 +30,21 @@ const Ingredients = () => {
                     onChange={(e) => {
                         setFilter(e.target.value)
                     }} 
+                    placeholder="Ingredient Name"
                     className="ig-input" 
                 />
                 
                 <button type="submit" className="ig-button">Filter</button>
             </form>
             <div aria-label="list container" className="list-container flex flex-row">
-                    {listHeader && <h3 className="ig-head-3">listHeader</h3>}
-                    {results && (
+                    {listHeader && <h3 className="ig-head-3">{listHeader}</h3>}
+                    {results ? (
                         results.forEach((result) => {
                             <div aria-label="ingredient-container" className="ig-container">
-                                {result}
+                                {result.name}
                             </div>
                         })
-                    )}
+                    ) : `No ingredients found` }
             </div>
         </div>
     )
