@@ -8,7 +8,35 @@ const getIngredients = createAsyncThunk(
 
         try{
 
-            thunkAPI.getState()
+            /* Extract the filter from the store and gather the required ingredients
+             * from the API */
+            const { ingredients } = thunkAPI.getState()
+
+            /* Extract the payload vars */
+            const {
+                filter,
+                options,
+                pagination,
+                sort
+            } = payload
+
+            /* The params now need to be constructed and then sent to the API */
+            const params = {
+                sort: {
+                    field: sort.field || 'created_at',
+                    order: sort.order || 'desc'
+                },
+                pagination: {
+                    page: ingredients.page || 1,
+                    perPage: ingredients.recsPerPage || 10
+                },
+                payload: {
+                    terms: ingredients.filter || filter
+                }
+            }
+
+            /* Perform the request */
+            return await apiProvider.getList('ingredients', params)
 
         } catch(error) {
             throw error
