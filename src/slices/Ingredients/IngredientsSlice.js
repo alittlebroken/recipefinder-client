@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import apiProvider from "../../providers/apiProvider"
 
 /* Connect to the API and get a list of all ingredients */
-const getIngredients = createAsyncThunk(
+export const getIngredients = createAsyncThunk(
     'ingredients/getIngredients',
     async (payload, thunkAPI) => {
 
