@@ -6,6 +6,7 @@ import Search from './Search/Search'
 import LoginForm from './LoginForm/LoginForm'
 import SignupForm from './SignupForm/SignupForm'
 import Profile from './Profile/Profile'
+import Ingredients from './Ingredients/Ingredients'
 
 import { ProviderContext, useAccessToken } from '../../contexts/providers'
 
@@ -31,13 +32,14 @@ const Client = (props) => {
       
         <Layout>
           <Routes>
-          {/*<Route path="/" element={<TestComponent />} />
-          <Route path="/home" element={<HomeComponent />} />*/}
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="/login" element={<LoginForm />} />
-          <Route path="/signup" element={<SignupForm />} />
-          {/* Protected Routes will go here */}
+            {/*<Route path="/" element={<TestComponent />} />
+            <Route path="/home" element={<HomeComponent />} />*/}
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/login" element={<LoginForm />} />
+            <Route path="/signup" element={<SignupForm />} />
+            <Route path="/ingredients" element={<Ingredients />} />
+            {/* Protected Routes will go here */}
             <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
           </Routes>
         </Layout>
