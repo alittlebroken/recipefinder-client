@@ -104,8 +104,12 @@ const ingredientsSlice = createSlice({
             state.hasError = false
 
             /* store the data returned from the API call */
-            state.results = action?.payload?.data?.results
-            
+            if(action?.payload?.data?.results?.length > 0){
+                state.results = action?.payload?.data?.results
+            } else {
+                state.results = []
+            }
+
             /* Configure the pagination state based on results returned */
             if(state.results?.length > 1){
                 /* set the pagination options */
