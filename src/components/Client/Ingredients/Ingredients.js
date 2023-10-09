@@ -85,7 +85,7 @@ const Ingredients = () => {
     /* Render the compnent */
     return (
         <div aria-label="ig-container flex flex-col">
-            <h2 className="if-head-2">Ingredients</h2>
+            <h2 className="ig-head-2">Ingredients</h2>
             <form id="filterIngredients" onSubmit={handleSubmit} className="flex flex-row ig-filter">
                 <input 
                     type="search" 
