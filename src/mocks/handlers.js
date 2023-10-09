@@ -126,24 +126,40 @@ export const handlers = [
     }),
     rest.get('http://localhost:5000/ingredients', (req, res, ctx) => {
         
-        let filter = req.url.searchParams.get('filter')
-
-        
+        let filter = JSON.parse(req.url.searchParams.get('filter'))
 
         /* If a filter has been set for testing then send a reduced set of results, otherwise send the fullset 
          * NOTE: The filter param has been passed through JSON.strinfigy so at thgis point it is actually a string
          * and not an object
          */
 
-        if(filter !== "{}"){
-            return res(
-                ctx.status(200),
-                ctx.json({
-                    results: [
-                        { id: 2, name: 'Eggs'}
-                    ]
-                })
-            )
+        if(filter.name !== undefined){
+
+            console.log('No filter defined')
+
+            /* Check for the term we are filtering on, as we use one term to test for no records returned back */
+            if(filter.name === "butterkist"){
+                
+                return res(
+                    ctx.status(200),
+                    ctx.json({
+                        results: []
+                    })
+                )
+
+            } else {
+
+                return res(
+                    ctx.status(200),
+                    ctx.json({
+                        results: [
+                            { id: 2, name: 'Eggs'}
+                        ]
+                    })
+                )
+
+            }
+            
         } else {
             return res(
                 ctx.status(200),
