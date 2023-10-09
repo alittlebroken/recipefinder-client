@@ -14,7 +14,7 @@ export const getIngredients = createAsyncThunk(
 
             /* Extract the payload vars */
             const {
-                filter,
+                terms,
                 options,
                 pagination,
                 sort
@@ -30,8 +30,8 @@ export const getIngredients = createAsyncThunk(
                     page: ingredients?.page || 1,
                     perPage: ingredients?.recsPerPage || 10
                 },
-                payload: {
-                    terms: ingredients?.filter || filter
+                filter: {
+                    name: ingredients?.filter || terms
                 }
             }
 
@@ -98,7 +98,6 @@ const ingredientsSlice = createSlice({
         [getIngredients.rejected]: (state, action) => {
             state.isLoading = false
             state.hasError = true
-
         },
         [getIngredients.fulfilled]: (state, action) => {
             state.isLoading = false
@@ -106,7 +105,7 @@ const ingredientsSlice = createSlice({
 
             /* store the data returned from the API call */
             state.results = action?.payload?.data?.results
-
+            
             /* Configure the pagination state based on results returned */
             if(state.results?.length > 1){
                 /* set the pagination options */
