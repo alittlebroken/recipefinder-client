@@ -125,6 +125,21 @@ export const handlers = [
         )
     }),
     rest.get('http://localhost:5000/ingredients', (req, res, ctx) => {
+        
+        let filter = req.url.searchParams.get('filter')
+
+        /* If a filter has been set for testing then send a reduced set of results, otherwise send the fullset */
+        if(filter){
+            return res(
+                ctx.status(200),
+                ctx.json({
+                    results: [
+                        { id: 2, name: 'Eggs'}
+                    ]
+                })
+            )
+        }
+
         return res(
             ctx.status(200),
             ctx.json({
