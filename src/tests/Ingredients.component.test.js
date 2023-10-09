@@ -31,15 +31,23 @@ describe('Ingredients', () => {
         // Assert
         expect(screen).toBeDefined()
 
-        expect(screen.getByRole('heading', { name: /Ingredients/i })).toBeInTheDocument()
+        expect(screen.getByRole('heading', { level: 2, name: /Ingredients/i })).toBeInTheDocument()
         expect(screen.getByPlaceholderText('Ingredient Name')).toBeInTheDocument()
         expect(screen.getByRole('button', { name: /Filter/i })).toBeInTheDocument()
 
         let ingredients = screen.getByRole('generic', { name: /list container/i })
         expect(ingredients).toBeInTheDocument()
 
-        expect(within(ingredients).getAllByRole('generic', { name: /ingredient-container/i })).toHaveLength(6)
-        expect(within(ingredients).getAllByRole('generic', { name: /ingredient-container/i })).toHaveClass('ig-container')
+        /* Wait for the page to gather the initial data from the API */
+        let list
+        await waitFor(() => {
+            list = screen.getAllByRole('generic', { name: /ingredient-container/i })
+        })
+
+        expect(list).toHaveLength(6)
+        list.forEach((item) => {
+            expect(item).toHaveClass('ig-container')
+        })
 
     })
 
@@ -54,20 +62,23 @@ describe('Ingredients', () => {
         userEvent.type(searchField, 'egg')
         userEvent.click(searchButton)
 
+        let ingredients = screen.getByRole('generic', { name: /list container/i })
+
+
         // Assert
         expect(screen).toBeDefined()
+        expect(ingredients).toBeInTheDocument()
 
-        let heading
+        /* Wait for the page to gather the initial data from the API */
+        let list
         await waitFor(() => {
-            heading = screen.getByRole('heading')
-            expect(heading).tobeInTheDocument()
+            list = screen.getAllByRole('generic', { name: /ingredient-container/i })
         })
-        expect(heading).toHaveValue('Filtering by the term: egg')
 
-        /* Check for resuts */
-        const list = screen.getByRole('generic', { name: /list container/i })
-
-        expect(within(list).getAllByRole('generic', { name: /ingredient-container/i })).toHaveLength(1)
+        expect(list).toHaveLength(1)
+        list.forEach((item) => {
+            expect(item).toHaveClass('ig-container')
+        })
 
     })
 
@@ -82,20 +93,12 @@ describe('Ingredients', () => {
         userEvent.type(searchField, 'butterkist')
         userEvent.click(searchButton)
 
+        let ingredients = screen.getByRole('generic', { name: /list container/i })
+
         //Assert
         expect(screen).toBeDefined()
-
-        let heading
-        await waitFor(() => {
-            heading = screen.getByRole('heading')
-            expect(heading).toBeInTheDocument()
-        })
-        expect(heading).toHaveValue('Filtering by the term: butterkist')
-
-        let list = screen.getByRole('generic', { name: /list container/i })
-        expect(list).toBeInTheDocument()
-        expect(await within(list).findAllByRole('generic', { name: /ingredient-container/i})).toHaveLength(0)
-        expect(await within(list).findAllByRole('heading')).toHaveValue('No ingredients found for filter butterkist')
+        expect(ingredients).toBeInTheDocument()
+        expect(screen.getByRole('heading', {level: 4, name: /No ingredients found matching the term butterkist/i })).toBeInTheDocument()
 
     })
 
