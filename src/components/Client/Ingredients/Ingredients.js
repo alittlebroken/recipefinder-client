@@ -1,19 +1,83 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { nanoid } from "@reduxjs/toolkit"
 
 import './Ingredients.css'
 
+import {
+    getIngredients,
+    selectIngredients,
+    selectPage,
+    selectPages,
+    selectRecsPerPage,
+    selectRecords,
+    selectFilter,
+    isLoading,
+    hasError,
+    applyFilter,
+    clearFilter,
+    pageUp,
+    pageDown,
+    setRecsPerPage,
+    goToPage
+} from '../../../slices/Ingredients/IngredientsSlice'
+
 const Ingredients = () => {
+
+    /* Alias the dispatch function  */
+    const dispatch = useDispatch()
+
+    /* Gather the data from the store for this component */
+    
+    /* Unfiltered ingredients to start with */
+    const ingredients = useSelector(selectIngredients)
+
+    /* pagination options */
+    const pagination = {
+        page: useSelector(selectPage),
+        pages: useSelector(selectPages),
+        resPerPage: useSelector(selectRecsPerPage),
+        records: useSelector(selectRecords)
+    }
+
+    /* What filter has been used */
+    const filter = useSelector(selectFilter)
+
+    /* Are we still loading data or have we encountered an error */
+    const loading = useSelector(isLoading)
+    const errored = useSelector(hasError)
 
     /* Setup state for the component */
     const [terms, setFilter] = useState('')
 
-    /* Store the results of ingredients from the API */
-    let results
-
     /* Setup up handlers for form submission */
     const handleSubmit = (e) => {
         e.preventDefault()
+
+        /* Set the store filter */
+        dispatch(applyFilter(terms))
+
+        /* Get a new set of ingredients that have been filtered */
+        dispatch(getIngredients({
+            pagination: {
+                page: pagination.page,
+                perPage: pagination.recsPerPage
+            },
+            payload: {
+                terms: terms
+            }
+        }))
+
     }
+
+    /* Load data when the component mounts */
+    useEffect(() => {
+        dispatch(getIngredients({
+            payload: {
+                terms: terms
+            }
+        }))
+    }, [])
     
     /* Header for the list of results found/not found */
     const listHeader = terms ? `Filtering by the term: ${terms}` : null
@@ -38,13 +102,18 @@ const Ingredients = () => {
             </form>
             <div aria-label="list container" className="list-container flex flex-row">
                     {listHeader && <h3 className="ig-head-3">{listHeader}</h3>}
-                    {results ? (
-                        results.forEach((result) => {
-                            <div aria-label="ingredient-container" className="ig-container">
-                                {result.name}
-                            </div>
+                    {ingredients.length === 0 ? (
+                            <h4 className="ig-nomatch">No ingredients found matching the term {terms}</h4>
+                        ) : 
+                        ingredients.map(ingredient => {
+                            return (
+                                <div key={nanoid()} aria-label="ingredient-container" className="ig-container">
+                                    {ingredient.name}
+                                </div>
+                            )
                         })
-                    ) : `No ingredients found` }
+                    }
+                    
             </div>
         </div>
     )
