@@ -73,7 +73,8 @@ export const getCategories = createAsyncThunk('landingPage/getCategories',
                 pagination: {
                     page: 1,
                     perPage: 4
-                }
+                },
+                filter: { "name": payload.terms }
             }
 
             return await apiProvider.getList('categories', params)
