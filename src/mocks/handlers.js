@@ -135,8 +135,6 @@ export const handlers = [
 
         if(filter.name !== undefined){
 
-            console.log('No filter defined')
-
             /* Check for the term we are filtering on, as we use one term to test for no records returned back */
             if(filter.name === "butterkist"){
                 
