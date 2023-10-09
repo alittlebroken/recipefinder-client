@@ -23,15 +23,15 @@ export const getIngredients = createAsyncThunk(
             /* The params now need to be constructed and then sent to the API */
             const params = {
                 sort: {
-                    field: sort.field || 'created_at',
-                    order: sort.order || 'desc'
+                    field: sort?.field || 'created_at',
+                    order: sort?.order || 'desc'
                 },
                 pagination: {
-                    page: ingredients.page || 1,
-                    perPage: ingredients.recsPerPage || 10
+                    page: ingredients?.page || 1,
+                    perPage: ingredients?.recsPerPage || 10
                 },
                 payload: {
-                    terms: ingredients.filter || filter
+                    terms: ingredients?.filter || filter
                 }
             }
 
@@ -48,7 +48,7 @@ export const getIngredients = createAsyncThunk(
 /* Set the initial state for the imgredients store */
 const initialState = {
     filter: '',
-    ingredients: [],
+    results: [],
     isLoading: false,
     hasError: false,
     page: 1,
@@ -93,24 +93,26 @@ const ingredientsSlice = createSlice({
         [getIngredients.pending]: (state, action) => {
             state.isLoading = true
             state.hasError = false
+
         },
         [getIngredients.rejected]: (state, action) => {
             state.isLoading = false
             state.hasError = true
+
         },
         [getIngredients.fulfilled]: (state, action) => {
             state.isLoading = false
             state.hasError = false
 
             /* store the data returned from the API call */
-            state.ingredients = action?.payload?.results
+            state.results = action?.payload?.data?.results
 
             /* Configure the pagination state based on results returned */
-            if(state.ingredients?.length > 1){
+            if(state.results?.length > 1){
                 /* set the pagination options */
-                state.page = action.payload.results.currentPage
-                state.pages = action.payload.results.totalPages
-                state.records = action.payload.results.totalRecords
+                state.page = action.payload?.currentPage
+                state.pages = action.payload?.totalPages
+                state.records = action.payload?.totalRecords
             }
 
         }
@@ -118,7 +120,7 @@ const ingredientsSlice = createSlice({
 })
 
 /* Export the store selectors */
-export const selectIngredients = state => state.ingredients.ingredients
+export const selectIngredients = state => state.ingredients.results
 export const selectPage = state => state.ingredients.page
 export const selectPages = state => state.ingredients.pages
 export const selectRecsPerPage = state => state.ingredients.recsPerPage
