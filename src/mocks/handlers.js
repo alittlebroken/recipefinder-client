@@ -128,8 +128,14 @@ export const handlers = [
         
         let filter = req.url.searchParams.get('filter')
 
-        /* If a filter has been set for testing then send a reduced set of results, otherwise send the fullset */
-        if(filter){
+        
+
+        /* If a filter has been set for testing then send a reduced set of results, otherwise send the fullset 
+         * NOTE: The filter param has been passed through JSON.strinfigy so at thgis point it is actually a string
+         * and not an object
+         */
+
+        if(filter !== "{}"){
             return res(
                 ctx.status(200),
                 ctx.json({
@@ -138,23 +144,23 @@ export const handlers = [
                     ]
                 })
             )
+        } else {
+            return res(
+                ctx.status(200),
+                ctx.json({
+                    results: [
+                        { id: 1, name: 'Flour'},
+                        { id: 2, name: 'Eggs'},
+                        { id: 3, name: 'Butter' },
+                        { id: 4, name: 'Milk' },
+                        { id: 5, name: 'Sugar' },
+                        { id: 6, name: 'Strawberry Jam' }
+                    ],
+                    totalPages: 1,
+                    totalRecords: 6,
+                    currentPage: 1
+                })
+            )
         }
-
-        return res(
-            ctx.status(200),
-            ctx.json({
-                results: [
-                    { id: 1, name: 'Flour'},
-                    { id: 2, name: 'Eggs'},
-                    { id: 3, name: 'Butter' },
-                    { id: 4, name: 'Milk' },
-                    { id: 5, name: 'Sugar' },
-                    { id: 6, name: 'Strawberry Jam' }
-                ],
-                totalPages: 1,
-                totalRecords: 6,
-                currentPage: 1
-            })
-        )
     })
 ]
