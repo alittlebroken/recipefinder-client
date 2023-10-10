@@ -84,7 +84,7 @@ const Ingredients = () => {
 
     /* Render the compnent */
     return (
-        <div aria-label="ig-container flex flex-col">
+        <div aria-label="ig-contain" className="ig-contain flex flex-col">
             <h2 className="ig-head-2">Ingredients</h2>
             <form id="filterIngredients" onSubmit={handleSubmit} className="flex flex-row ig-filter">
                 <input 
@@ -98,13 +98,15 @@ const Ingredients = () => {
                     className="ig-input" 
                 />
                 
-                <button type="submit" className="ig-button">Filter</button>
+                <button type="submit" className="ig-button btn">Filter</button>
             </form>
-            <div aria-label="list container" className="list-container flex flex-row">
+            <div aria-label="list container" className="list-container flex flex-col">
                     {listHeader && <h3 className="ig-head-3">{listHeader}</h3>}
+                    <div aria-label="ig-list" className="ig-list flex flex-row">
                     {ingredients.length === 0 ? (
                             <h4 className="ig-nomatch">No ingredients found matching the term {terms}</h4>
                         ) : 
+                        
                         ingredients.map(ingredient => {
                             return (
                                 <div key={nanoid()} aria-label="ingredient-container" className="ig-container">
@@ -112,8 +114,9 @@ const Ingredients = () => {
                                 </div>
                             )
                         })
+            
                     }
-                    
+                    </div>
             </div>
         </div>
     )
