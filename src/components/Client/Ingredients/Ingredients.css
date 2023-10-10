@@ -1,5 +1,89 @@
 /* Mobile Styles */
 
+.ig-contain {
+    padding: 10px;
+}
+
+.ig-head-2 {
+   font-family: inherit;
+   font-size: 3rem;
+   padding: 10px;
+   text-align: center;
+   margin-bottom: 10px;
+}
+
+.ig-head-3 {
+    font-family: inherit;
+    font-size: 1.2rem;
+    text-align: center;
+    padding: 10px;
+}
+
+.ig-head-4 {
+    font-family: inherit;
+    font-size: .9rem;
+    text-align: center;
+    padding: 10px;
+}
+
+.ig-filter {
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.ig-input {
+    border-radius: 7px;
+    width: 100%;
+
+}
+
+.ig-button {
+    padding: 5px;
+    font-family: inherit;
+    background-color: var(--col-primary);
+    color: white;
+    width: auto;
+}
+
+.ig-button:hover {
+    background-color: white;
+    color: var(--col-primary);
+}
+
+.ig-list {
+    padding: 5px;
+    gap: 15px;
+    flex-wrap: no-wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.ig-container {
+    width: 300px;
+    display: flex;
+    border-radius: 7px;
+    position: relative;
+    text-align: center;
+    overflow: hidden;
+}
+
+.ig-container-image {
+    object-fit: cover; 
+    width: 100%;
+    height: 200px;
+}
+
+.ig-container-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: white;
+    text-shadow: 2px 2px 4px #000000;
+}
+
 /* Desktop Styles */
 @media screen and (min-width: 900px){
     
