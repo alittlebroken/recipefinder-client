@@ -109,8 +109,20 @@ const Ingredients = () => {
                         
                         ingredients.map(ingredient => {
                             return (
-                                <div key={nanoid()} aria-label="ingredient-container" className="ig-container">
-                                    {ingredient.name}
+                                <div 
+                                    key={nanoid()} 
+                                    aria-label="ingredient-container" 
+                                    className="ig-container"
+                                >
+                                    <img 
+                                        src={ingredient.src ? ingredient.src : '/no_image.png'} 
+                                        alt={ingredient.alt} 
+                                        title={ingredient.title} 
+                                        className="ig-container-image"
+                                    />
+                                    <div className="ig-container-text">
+                                        {ingredient.name}
+                                    </div>
                                 </div>
                             )
                         })
