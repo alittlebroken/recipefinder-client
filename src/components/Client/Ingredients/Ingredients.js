@@ -102,7 +102,7 @@ const Ingredients = () => {
             </form>
             <div aria-label="list container" className="list-container flex flex-col">
                     {listHeader && <h3 className="ig-head-3">{listHeader}</h3>}
-                    <div aria-label="ig-list" className="ig-list flex flex-row">
+                    <div aria-label="ig-list" className="ig-list flex flex-col">
                     {ingredients.length === 0 ? (
                             <h4 className="ig-nomatch">No ingredients found matching the term {terms}</h4>
                         ) : 
