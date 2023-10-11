@@ -225,12 +225,11 @@ const authProvider = {
 
         /* We can say if we have an access token then we have
            logged in OK */
-        const token  = jwt_decode(inMemoryJWT.getToken())
-        console.log(token)
-        if(!token){
-            return false
-        } else {
+        
+        if(inMemoryJWT.getToken()){
             return true
+        } else {
+            return false
         }
 
     },
