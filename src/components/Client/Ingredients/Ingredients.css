@@ -87,4 +87,22 @@
 /* Desktop Styles */
 @media screen and (min-width: 900px){
     
+    .ig-contain {
+        padding: 25px;
+        width: 900px;
+        margin: 0 auto;
+    }
+
+    .ig-head-2 {
+        font-size: 3.5rem;
+    }
+
+    .ig-list.flex-col {
+        flex-direction: row;
+    }
+
+    .ig-list {
+        flex-wrap: wrap;
+    }
+
 }
