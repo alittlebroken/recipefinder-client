@@ -113,9 +113,11 @@ const ingredientsSlice = createSlice({
             /* Configure the pagination state based on results returned */
             if(state.results?.length > 1){
                 /* set the pagination options */
+                
                 state.page = action.payload?.data?.currentPage
-                state.pages = action.payload?.data?.totalPages
+                state.pages = Math.ceil(action?.payload?.data?.totalRecords/state.recsPerPage) || 1
                 state.records = action.payload?.data?.totalRecords
+
             }
 
         }
