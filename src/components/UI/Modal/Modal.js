@@ -9,7 +9,7 @@ const Modal = ({handleClose, show, children}) => {
         <div aria-label="modal container" className={showHideClass}>
             <div aria-label="modal content" className="modal-main">
                 {children}
-                <button type="button" onClick={handleClose}>Close</button>
+                <button className="modal-close" type="button" onClick={handleClose}>X</button>
             </div>
         </div>
     )
