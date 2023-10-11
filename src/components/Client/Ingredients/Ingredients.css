@@ -103,6 +103,31 @@
     border-color: white;
 }
 
+.ig-add-form {
+     padding: 10px;
+     gap: 15px;
+}
+
+.ig-add-heading {
+    text-align: center;
+}
+
+.ig-add-btn {
+    color: white;
+    background-color: var(--col-primary);
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+.ig-add-btn:hover {
+    color: var(--col-primary);
+    background-color: white;
+}
+
+.ig-add-error {
+    color: red;
+}
+
 /* Desktop Styles */
 @media screen and (min-width: 900px){
     
