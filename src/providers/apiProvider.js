@@ -324,7 +324,15 @@ const apiProvider = {
             }
 
         // Set the URL to use
-        let url = `${process.env.REACT_APP_API_URL}/${resource}`
+
+        // Determine the type of resource we are accessing
+        let url
+        if(resource === 'pantry' || resource === 'pantries'){
+            url = `${process.env.REACT_APP_API_URL}/${resource}/${params?.payload?.pantryId}`
+        } else {
+            url = `${process.env.REACT_APP_API_URL}/${resource}`
+        }
+        
 
         // Access the appropriate API and process the results
         const response = await axios.post(url, payload, axiosOptions)
