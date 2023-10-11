@@ -3,7 +3,7 @@ import './Modal.css'
 const Modal = ({handleClose, show, children}) => {
 
     /* set the classes to apply if the Modal is open or not */
-    const showHideClass  = show ? "modal display-block" : "modal display-none"
+    const showHideClass  = show ? "modal modal-display" : "modal modal-none"
 
     return (
         <div aria-label="modal container" className={showHideClass}>
