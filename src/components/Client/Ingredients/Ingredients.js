@@ -161,6 +161,7 @@ const Ingredients = () => {
                         })
             
                     }
+                    </div>
                     <Pagination 
                         totalRecords={pagination.records}
                         recsPerPage={pagination.recsPerPage}
@@ -170,7 +171,6 @@ const Ingredients = () => {
                         handleRecsChange={recsChangeHandler}
                         minified
                     />
-                    </div>
             </div>
         </div>
     )
