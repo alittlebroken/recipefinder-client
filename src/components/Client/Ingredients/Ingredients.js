@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { nanoid } from "@reduxjs/toolkit"
+import Pagination from "../../UI/Pagination/Pagination"
 
 import './Ingredients.css'
 
@@ -36,9 +37,13 @@ const Ingredients = () => {
     const pagination = {
         page: useSelector(selectPage),
         pages: useSelector(selectPages),
-        resPerPage: useSelector(selectRecsPerPage),
+        recsPerPage: useSelector(selectRecsPerPage),
         records: useSelector(selectRecords)
     }
+
+    /* State for controlling pagination */
+    const [page, setPage] = useState(pagination.page)
+    const [recsPage, setRecsPage] = useState(pagination.recsPerPage)
 
     /* What filter has been used */
     const filter = useSelector(selectFilter)
@@ -70,6 +75,25 @@ const Ingredients = () => {
 
     }
 
+    /* Handler for going forward or backward the pages */
+    const pageChangeHandler = async (e) => {
+        if(e.target.value === '-'){
+            setPage(page - 1)
+            dispatch(pageDown())
+        } else if(e.target.value === '+'){
+            setPage(page + 1)
+            dispatch(pageUp())
+        }
+    }
+
+    /* Handler for changing how many records to display per
+     * page 
+    */
+    const recsChangeHandler = async (e) => {
+        setRecsPage(e.target.value)
+        dispatch(setRecsPerPage(e.target.value))
+    }
+
     /* Load data when the component mounts */
     useEffect(() => {
         dispatch(getIngredients({
@@ -77,7 +101,7 @@ const Ingredients = () => {
                 terms: terms
             }
         }))
-    }, [])
+    }, [page, recsPage])
     
     /* Header for the list of results found/not found */
     const listHeader = terms ? `Filtering by the term: ${terms}` : null
@@ -101,6 +125,15 @@ const Ingredients = () => {
                 <button type="submit" className="ig-button btn">Filter</button>
             </form>
             <div aria-label="list container" className="list-container flex flex-col">
+                    <Pagination 
+                        totalRecords={pagination.records}
+                        recsPerPage={pagination.recsPerPage}
+                        totalPages={pagination.pages}
+                        currentPage={pagination.page}
+                        handlePageChange={pageChangeHandler}
+                        handleRecsChange={recsChangeHandler}
+                        minified
+                    />
                     {listHeader && <h3 className="ig-head-3">{listHeader}</h3>}
                     <div aria-label="ig-list" className="ig-list flex flex-col">
                     {ingredients.length === 0 ? (
@@ -128,6 +161,15 @@ const Ingredients = () => {
                         })
             
                     }
+                    <Pagination 
+                        totalRecords={pagination.records}
+                        recsPerPage={pagination.recsPerPage}
+                        totalPages={pagination.pages}
+                        currentPage={pagination.page}
+                        handlePageChange={pageChangeHandler}
+                        handleRecsChange={recsChangeHandler}
+                        minified
+                    />
                     </div>
             </div>
         </div>
