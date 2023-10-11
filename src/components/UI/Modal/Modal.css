@@ -27,12 +27,10 @@
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
 }
 
 .modal-main > button {
+    position: absolute;
     padding: 10px;
     border: 2px solid var(--col-primary);
     border-radius: 7px;
@@ -46,6 +44,16 @@
 .modal-main > button:hover {
     background-color: white;
     color: var(--col-primary);
+}
+
+.modal-close {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    top: 0;
+    right: 15px;
+    transform: translate(11px, 3px);
+    z-index: 99999999;
 }
 
 /* Desktop Styles */
