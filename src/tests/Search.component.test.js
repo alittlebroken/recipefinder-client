@@ -40,7 +40,7 @@ describe('Search component', () => {
         let heading
         await waitFor(() => {
             heading = screen.getByRole('heading')
-            screen.debug(heading)
+            
             expect(heading).tobeInTheDocument()
         })
         expect(heading).toHaveValue('Results found for search term eggs')

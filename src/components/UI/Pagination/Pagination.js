@@ -18,7 +18,8 @@ const Pagination = (props) => {
         recsPerPage,
         handlePageChange,
         handleRecsChange,
-        handleGoToPage
+        handleGoToPage,
+        minified
      } = props
 
      /* Create an array of buttons */
@@ -53,7 +54,9 @@ const Pagination = (props) => {
                 >
                     {'<'}
                 </Button>
-                {
+                { minified ? (
+                    <div aria-label="minified page number count" className="page-minified">{`${currentPage} of ${totalPages}`}</div>
+                ) :
                     pagers.map((pager) => {
                         return (
                             <Button
