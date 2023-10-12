@@ -277,7 +277,7 @@ const Ingredients = () => {
                     className="ig-input" 
                 />
                 
-                <button type="submit" className="ig-button btn">Filter</button>
+                <button type="submit" className="ig-button btn" name="filter-button">Filter</button>
             </form>
             <div aria-label="list container" className="list-container flex flex-col">
                     <Pagination 

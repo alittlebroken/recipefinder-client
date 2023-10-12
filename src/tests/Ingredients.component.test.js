@@ -56,7 +56,7 @@ describe('Ingredients', () => {
         // Setup
         renderWithProviders(<Ingredients />)
         const searchField = screen.getByRole('searchbox')
-        const searchButton = screen.getByRole('button')
+        const searchButton = screen.getByRole('button', { name: /Filter/i })
 
         // Execute
         userEvent.type(searchField, 'egg')
@@ -87,7 +87,7 @@ describe('Ingredients', () => {
         //Setup
         renderWithProviders(<Ingredients />)
         const searchField = screen.getByRole('searchbox')
-        const searchButton = screen.getByRole('button')
+        const searchButton = screen.getByRole('button', { name: /Filter/i })
 
         //Execute
         userEvent.type(searchField, 'butterkist')
