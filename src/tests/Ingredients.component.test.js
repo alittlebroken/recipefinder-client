@@ -47,6 +47,14 @@ describe('Ingredients', () => {
         expect(list).toHaveLength(6)
         list.forEach((item) => {
             expect(item).toHaveClass('ig-container')
+            
+            let addIngredient = within(item).getByRole('button', { name: /\+/i } )
+            let image = within(item).getByRole('img')
+            let name = within(item).getByRole('generic', { name: /ingredient name/i })
+
+            expect(addIngredient).toBeDefined()
+            expect(image).toBeDefined()
+            expect(name).toBeDefined()
         })
 
     })
