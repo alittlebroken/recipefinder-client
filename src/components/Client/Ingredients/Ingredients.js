@@ -308,7 +308,7 @@ const Ingredients = () => {
                                         title={ingredient.title} 
                                         className="ig-container-image"
                                     />
-                                    <div className="ig-container-text">
+                                    <div aria-label="ingredient name" className="ig-container-text">
                                         {ingredient.name}
                                     </div>
                                     <button 
