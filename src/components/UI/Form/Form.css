@@ -1,0 +1,16 @@
+/* Mobile */
+.Form {
+    display: flex;
+    flex-direction: column;
+    border-radius: 7px;
+    background-color: white;
+    border: 2px solid #f0f0f0;
+    width: 100%;
+    height: auto;
+    margin-bottom: 2rem; 
+}
+
+/* Desktop */
+@media screen and (min-width: 900px) {
+    
+}
