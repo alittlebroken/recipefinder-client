@@ -1,0 +1,20 @@
+/* Mobile */
+.FormInputContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 3px;
+    margin-bottom: 2rem;
+}
+
+.FormLabel {
+    font-weight: bold;
+}
+
+.FormInput {
+    padding: 5px;
+}
+
+/* Desktop */
+@media screen and (min-width: 900px) {
+    
+}
