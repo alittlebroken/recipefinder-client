@@ -19,6 +19,8 @@ import {
     selectProfileData,
 } from '../../../slices/Profile/Profile.slice'
 import Pagination from '../../UI/Pagination/Pagination'
+import Form from '../../UI/Form/Form'
+import FormInput from '../../UI/Form/FormInput'
 
 
 const Pantry = (props) => {
@@ -82,8 +84,27 @@ const Pantry = (props) => {
         fetchData()
     }, [])
 
+    /* Handler for the forms submit function */
+    const submit = (event, form) => {
+        event.preventDefault()
+        
+    }
+
     return (
         <>
+            <h2 className="pantry-head-2">{profileData.username}'s Pantry</h2>
+            <Form 
+                initialValues={{
+                findIngredient: ''
+            }}
+                
+                onSubmit={submit}
+            >
+                <FormInput 
+                    name="findIngredient"
+                    label="Find Ingredient"
+                />
+            </Form>
             <Pagination 
                         totalRecords={pagination.records}
                         recsPerPage={pagination.recsPerPage}
