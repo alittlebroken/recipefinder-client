@@ -14,13 +14,10 @@ import {
     pageUp,
     pageDown,
     setRecsPerPage,
-    goToPage
 } from '../../../slices/Pantry/Pantry.slice'
 import { 
-    getUserProfile, 
     selectProfileData,
 } from '../../../slices/Profile/Profile.slice'
-import authProvider from '../../../providers/authProvider'
 import Pagination from '../../UI/Pagination/Pagination'
 
 
