@@ -1,5 +1,7 @@
 import { createContext, useState } from "react"
 
+import './Form.css'
+
 export const FormContext = createContext({
     form: {}
 })
