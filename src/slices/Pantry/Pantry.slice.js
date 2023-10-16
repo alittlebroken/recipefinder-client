@@ -95,7 +95,8 @@ const pantrySlice = createSlice({
             state.hasError = false
             state.isLoading = false
 
-            console.log(action?.payload)
+            const results = action.payload?.data?.results[0]?.ingredients
+            state.ingredients = results
         }
     }
 })
