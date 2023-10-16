@@ -16,6 +16,10 @@ import {
     setRecsPerPage,
     goToPage
 } from '../../../slices/Pantry/Panty.slice'
+import { 
+    getUserProfile, 
+    selectProfileData,
+} from '../../../slices/Profile/Profile.slice'
 import authProvider from '../../../providers/authProvider'
 import Pagination from '../../UI/Pagination/Pagination'
 
@@ -32,6 +36,10 @@ const Pantry = (props) => {
 
     /* Gather the data from the store */
     const ingredients = useSelector(selectPantryIngredients)
+
+    /* Get the user profile data */
+    let profileData = useSelector(selectProfileData)
+    console.log('profileData', profileData)
 
     /* pagination options */
     const pagination = {
@@ -68,7 +76,14 @@ const Pantry = (props) => {
         dispatch(setRecsPerPage(e.target.value))
     }
 
-
+    /* Load the user pantry */
+    useEffect(() => {
+        const fetchData = async () => {
+            await dispatch(getUserProfile(token?.user?.id))
+            await dispatch(getPantryIngredients())
+        }
+        fetchData()
+    }, [])
 
     return (
         <>
