@@ -1,7 +1,10 @@
 import { useState, useContext } from "react"
+import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { nanoid } from "@reduxjs/toolkit"
 import { Link } from "react-router-dom"
+import jwt_decode from 'jwt-decode'
+import { getUserProfile } from "../../../slices/Profile/Profile.slice"
 
 import './LoginForm.css'
 
@@ -12,6 +15,9 @@ const LoginForm = () => {
 
     /* Navigation to redirect the login form */
     const navigate = useNavigate()
+
+    /* Alias the dispatch function */
+    const dispatch = useDispatch()
 
     /* Set the access token state */
     const [accessToken, setAccessToken] = useAccessToken()
@@ -48,11 +54,18 @@ const LoginForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-         
             /* Perform the login */
             providers.authProvider.login(email, password)
             .then((result) => {
                 setAccessToken(result)
+
+                /* Set the users profile data, get the ID from the token just sent back
+                 * and then pass it to the profile slice */
+                const token = jwt_decode(result)
+                const fetchProfile = async ({user}) => {
+                    await dispatch(getUserProfile(user.id))
+                }
+                fetchProfile(token)
                 /* redirect to the main page */
                 return navigate("/")
             })
