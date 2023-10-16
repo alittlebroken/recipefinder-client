@@ -39,6 +39,7 @@ const Form = (props) => {
                 handleFormChange,
             }}>
                 {children}
+                <button type="submit" onClick={submit(form)} className="FormButton">Submit</button>
             </FormContext.Provider>
         </form>
     )
