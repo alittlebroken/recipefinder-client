@@ -39,7 +39,6 @@ const Pantry = (props) => {
 
     /* Get the user profile data */
     let profileData = useSelector(selectProfileData)
-    console.log('profileData', profileData)
 
     /* pagination options */
     const pagination = {
@@ -79,8 +78,11 @@ const Pantry = (props) => {
     /* Load the user pantry */
     useEffect(() => {
         const fetchData = async () => {
-            await dispatch(getUserProfile(token?.user?.id))
-            await dispatch(getPantryIngredients({ pantryId: profileData.pantryId}))
+            dispatch(getUserProfile(token?.user?.id))
+            
+            dispatch(getPantryIngredients({ 
+                pantryId: parseInt(profileData.pantryId)
+            }))
         }
         fetchData()
     }, [])
