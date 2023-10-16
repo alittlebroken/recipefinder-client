@@ -23,6 +23,9 @@ export const getPantryIngredients = createAsyncThunk(
 
             /* The params now need to be constructed and then sent to the API */
             const params = {
+                auth: {
+                    authenticate: true
+                },
                 sort: {
                     field: sort?.field || 'created_at',
                     order: sort?.order || 'desc'
@@ -86,6 +89,7 @@ const pantrySlice = createSlice({
         [getPantryIngredients.rejected]: (state, action) => {
             state.hasError = true
             state.isLoading = false
+            console.log(action)
         },
         [getPantryIngredients.fulfilled]: (state, action) => {
             state.hasError = false
