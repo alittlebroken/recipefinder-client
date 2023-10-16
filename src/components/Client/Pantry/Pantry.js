@@ -17,6 +17,7 @@ import {
     goToPage
 } from '../../../slices/Pantry/Panty.slice'
 import authProvider from '../../../providers/authProvider'
+import Pagination from '../../UI/Pagination/Pagination'
 
 
 const Pantry = (props) => {
@@ -71,6 +72,25 @@ const Pantry = (props) => {
 
     return (
         <>
+            <Pagination 
+                        totalRecords={pagination.records}
+                        recsPerPage={pagination.recsPerPage}
+                        totalPages={pagination.pages}
+                        currentPage={pagination.page}
+                        handlePageChange={pageChangeHandler}
+                        handleRecsChange={recsChangeHandler}
+                        minified
+            />
+
+            <Pagination 
+                        totalRecords={pagination.records}
+                        recsPerPage={pagination.recsPerPage}
+                        totalPages={pagination.pages}
+                        currentPage={pagination.page}
+                        handlePageChange={pageChangeHandler}
+                        handleRecsChange={recsChangeHandler}
+                        minified
+            />
         </>
     )
 }
