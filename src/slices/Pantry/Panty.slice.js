@@ -101,6 +101,11 @@ export const selectPantryIngredients = state => state.pantry.ingredients
 export const selectError = state => state.pantry.hasError
 export const selectLoading = state => state.pantry.isLoading
 
+export const selectPage = state => state.pantry.page
+export const selectPages = state => state.pantry.pages
+export const selectRecsPerPage = state => state.pantry.recsPerPage
+export const selectRecords = state => state.pantry.records
+
 /* Export out our actions for the slice */
 const {
     pageUp, 
