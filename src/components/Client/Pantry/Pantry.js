@@ -78,8 +78,6 @@ const Pantry = (props) => {
     /* Load the user pantry */
     useEffect(() => {
         const fetchData = async () => {
-            await dispatch(getUserProfile(token?.user?.id))
-            
             await dispatch(getPantryIngredients({ 
                 pantryId: parseInt(profileData.pantryId)
             }))
