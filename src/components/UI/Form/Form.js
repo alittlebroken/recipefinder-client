@@ -12,7 +12,7 @@ const Form = (props) => {
     const {
         children,
         initialValues,
-        submit = () => {}
+        submit = () => {},
     } = props
 
     /* The forms current state */
@@ -33,13 +33,13 @@ const Form = (props) => {
     }
 
     return (
-        <form className="Form">
+        <form className="Form" onSubmit={ event => props?.onSubmit(event, form)}>
             <FormContext.Provider value={{
                 form,
                 handleFormChange,
             }}>
                 {children}
-                <button type="submit" onClick={() => { submit(form) }} className="FormButton">Submit</button>
+                <button type="submit" className="FormButton">Submit</button>
             </FormContext.Provider>
         </form>
     )
