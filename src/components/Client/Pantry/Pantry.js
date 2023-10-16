@@ -15,7 +15,7 @@ import {
     pageDown,
     setRecsPerPage,
     goToPage
-} from '../../../slices/Pantry/Panty.slice'
+} from '../../../slices/Pantry/Pantry.slice'
 import { 
     getUserProfile, 
     selectProfileData,
@@ -80,7 +80,7 @@ const Pantry = (props) => {
     useEffect(() => {
         const fetchData = async () => {
             await dispatch(getUserProfile(token?.user?.id))
-            await dispatch(getPantryIngredients())
+            await dispatch(getPantryIngredients({ pantryId: profileData.pantryId}))
         }
         fetchData()
     }, [])
