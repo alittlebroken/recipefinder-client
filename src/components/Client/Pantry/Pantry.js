@@ -16,7 +16,8 @@ import {
     setRecsPerPage,
     goToPage
 } from '../../../slices/Pantry/Panty.slice'
-import { AuthProvider } from 'react-admin'
+import authProvider from '../../../providers/authProvider'
+
 
 const Pantry = (props) => {
 
@@ -66,7 +67,7 @@ const Pantry = (props) => {
         dispatch(setRecsPerPage(e.target.value))
     }
 
-    
+
 
     return (
         <>
