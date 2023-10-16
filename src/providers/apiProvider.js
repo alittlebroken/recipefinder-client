@@ -137,8 +137,18 @@ const apiProvider = {
         }
 
         // Set the URL to use
-        let url = `${process.env.REACT_APP_API_URL}/${resource}?${queryString.stringify(queryParams)}`
 
+        /* Determine which resource to access */
+        let url
+        if(resource === 'pantries' || resource === 'pantry'){
+            /* Get the passed in id */
+            url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}`
+
+        } else {
+            url = `${process.env.REACT_APP_API_URL}/${resource}?${queryString.stringify(queryParams)}`
+
+        }
+         
         // Access the appropriate API and process the results
         const response = await axios.get(url, axiosOptions)
 
