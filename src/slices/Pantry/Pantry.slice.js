@@ -100,6 +100,7 @@ const pantrySlice = createSlice({
             state.isLoading = false
 
             const results = action.payload?.data?.results[0]?.ingredients
+            
             state.ingredients = results
         }
     }
@@ -108,9 +109,9 @@ const pantrySlice = createSlice({
 /* Export out the selectors for the slice */
 export const selectPantryIngredients = state => {
     if(!state.filter || state.filter === undefined || state.filter === ''){
-        return state.ingredients
+        return state.pantry.ingredients
     } else {
-        return state.ingredients.map(item => item.name.includes(state.filter) )
+        return state.pantry.ingredients.map(item => item.name.includes(state.filter) )
     }
 }
 export const selectError = state => state.pantry.hasError
