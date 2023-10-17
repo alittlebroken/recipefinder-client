@@ -59,6 +59,7 @@ const initialState = {
 const pantrySlice = createSlice({
     name: 'pantry',
     initialState: initialState,
+    filter: '',
     reducers: {
         pageUp: (state, action) => {
             if(state.page + 1 > state.pages){
@@ -79,6 +80,9 @@ const pantrySlice = createSlice({
         },
         goToPage: (state, action) => {
             state.page = parseInt(action.payload)
+        },
+        setFilter: (state, action) => {
+            state.filter = action.payload
         }
     },
     extraReducers: {
@@ -111,12 +115,22 @@ export const selectPages = state => state.pantry.pages
 export const selectRecsPerPage = state => state.pantry.recsPerPage
 export const selectRecords = state => state.pantry.records
 
+export const selectFiltered = state => {
+    if(!state.filter || state.filter === undefined || state.filter === ''){
+        return state.ingredients
+    } else {
+        return state.ingredients.map(item => item.name.includes(state.filter) )
+    }
+    
+}
+
 /* Export out our actions for the slice */
 export const {
     pageUp, 
     pageDown,
     setRecsPerPage,
-    goToPage
+    goToPage,
+    setFilter
 } = pantrySlice.actions
 
 /* Export out the reducer */
