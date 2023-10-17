@@ -19,7 +19,7 @@ const FormInput = (props) => {
     return(
         <>
             <div aria-label="input container" className="FormInputContainer">
-                <label htmlFor={name} className="FormLabel">{label}</label>
+                <label htmlFor={name} className="FormLabel">{label}:</label>
                 <input 
                     name={name}
                     type={type}
