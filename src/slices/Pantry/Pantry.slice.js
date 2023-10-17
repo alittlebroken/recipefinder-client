@@ -106,7 +106,13 @@ const pantrySlice = createSlice({
 })
 
 /* Export out the selectors for the slice */
-export const selectPantryIngredients = state => state.pantry.ingredients
+export const selectPantryIngredients = state => {
+    if(!state.filter || state.filter === undefined || state.filter === ''){
+        return state.ingredients
+    } else {
+        return state.ingredients.map(item => item.name.includes(state.filter) )
+    }
+}
 export const selectError = state => state.pantry.hasError
 export const selectLoading = state => state.pantry.isLoading
 
@@ -114,15 +120,6 @@ export const selectPage = state => state.pantry.page
 export const selectPages = state => state.pantry.pages
 export const selectRecsPerPage = state => state.pantry.recsPerPage
 export const selectRecords = state => state.pantry.records
-
-export const selectFiltered = state => {
-    if(!state.filter || state.filter === undefined || state.filter === ''){
-        return state.ingredients
-    } else {
-        return state.ingredients.map(item => item.name.includes(state.filter) )
-    }
-    
-}
 
 /* Export out our actions for the slice */
 export const {
