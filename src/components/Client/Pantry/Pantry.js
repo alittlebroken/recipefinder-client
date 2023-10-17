@@ -119,12 +119,13 @@ const Pantry = (props) => {
             <div aria-label="ingredient list" className="pi-list">
 
                 {ingredients.map( ingredient => {
+                    
                     return (
                         <div aria-label="ingredient container" className="flex pi-ingredient">
                             <img 
-                                src={ingredient?.src}
-                                alt={ingredient?.alt}
-                                title={ingredient?.title}
+                                src={ingredient?.images[0] ? ingredient.images[0].src : '/no_image.png'}
+                                alt={ingredient?.images[0] ? ingredient.images[0].alt : 'Picture dipicting no image for the ingredient'}
+                                title={ingredient?.images[0] ? ingredient.images[0].title : 'Picture dipicting no image for the ingredient'}
                             />
                             <div aria-label="ingredient details container" className="flex pi-detail-container">
                                
