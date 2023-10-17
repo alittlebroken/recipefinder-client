@@ -1,5 +1,79 @@
 /* Mobile Styles */
 
+.p-container {
+    width: 90%;
+    margin: 0 auto;
+    gap: 15px;
+}
+
+.p-head-2 {
+    font-family: inherit;
+    font-size: 2.3rem;
+    text-align: center;
+    padding: 10px;
+}
+
+.pi-list {
+    padding: 5px;
+}
+
+.pi-ingredient {
+    flex-direction: column;
+    margin-bottom: 15px;
+    width: 100%;
+    box-shadow: 5px 4px 12px rgba(0, 0, 0, 0.5);
+    height: auto;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 3px solid #f0f0f0;
+}
+
+.pi-ingredient > img {
+    object-fit: cover; 
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.pi-detail-container {
+    flex-direction: column;
+    display: 1px solid blue;
+    padding: 10px;
+    margin-bottom: 8px;
+}
+
+.pi-details {
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.pi-details > h3 {
+    font-family: inherit;
+    font-size: 1.5rem;
+    padding: 5px 0;
+}
+
+.pi-amount > label {
+    margin-right: 10px;
+}
+
+.pi-actions {
+    gap: 10px;
+    width: 100%;
+}
+
+.pi-remove, .pi-edit {
+    background-color: var(--col-primary);
+    color: white;
+    border: 2px solid var(--col-primary);
+}
+
+.pi-remove:hover, .pi-edit:hover {
+    background-color: white;
+    color: var(--col-primary);
+}
+
 /* Desktop Styles */
 @media screen and (min-width: 960px) {
     
