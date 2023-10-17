@@ -52,14 +52,14 @@ const initialState = {
     page: 1,
     pages: 1,
     records: 0,
-    recsPerPage: 10
+    recsPerPage: 10,
+    filter: ''
 }
 
 /* Create the slice */
 const pantrySlice = createSlice({
     name: 'pantry',
     initialState: initialState,
-    filter: '',
     reducers: {
         pageUp: (state, action) => {
             if(state.page + 1 > state.pages){
