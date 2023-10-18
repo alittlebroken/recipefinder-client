@@ -83,12 +83,15 @@ const Pantry = (props) => {
             }))
         }
         fetchData()
-    }, [])
+    }, [page, recsPage, dispatch])
 
     /* Handler for the forms submit function */
     const submit = async (event, form) => {
         event.preventDefault()
         await dispatch(setFilter(event.target[0].value))
+        await dispatch(getPantryIngredients({ 
+            pantryId: parseInt(profileData.pantryId)
+        }))
     }
 
     return (
