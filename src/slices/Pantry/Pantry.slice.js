@@ -26,6 +26,10 @@ export const getPantryIngredients = createAsyncThunk(
                 auth: {
                     authenticate: true
                 },
+                pagination: {
+                    page: pantry?.page || 1,
+                    perPage: pantry?.recsPerPage || 10
+                },
                 sort: {
                     field: sort?.field || 'created_at',
                     order: sort?.order || 'desc'
@@ -109,6 +113,7 @@ const pantrySlice = createSlice({
                 state.page = action.payload?.data?.currentPage
                 state.pages = Math.ceil(action?.payload?.data?.totalRecords/state.recsPerPage) || 1
                 state.records = action.payload?.data?.totalRecords
+
 
             }
         }
