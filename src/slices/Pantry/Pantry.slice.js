@@ -113,11 +113,10 @@ const pantrySlice = createSlice({
 
             const results = action.payload?.data?.results[0]?.ingredients
             state.ingredients = results
-
             /* Configure the pagination state based on results returned */
-            if(state.ingredients?.length > 1){
+            if(state.ingredients?.length > 0){
                 /* set the pagination options */
-                
+
                 state.page = action.payload?.data?.currentPage
                 state.pages = action.payload?.data?.totalPages
                 state.records = action.payload?.data?.totalRecords
