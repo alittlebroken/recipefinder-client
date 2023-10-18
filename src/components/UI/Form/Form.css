@@ -4,10 +4,27 @@
     flex-direction: column;
     border-radius: 7px;
     background-color: white;
-    border: 2px solid #f0f0f0;
+    border: 3px solid #f0f0f0;
     width: 100%;
     height: auto;
-    margin-bottom: 2rem; 
+    margin-bottom: 1rem; 
+    padding: 10px;
+}
+
+.Form > button {
+    font-family: inherit;
+    font-size: 1rem;
+    padding: 10px;
+    width: 100%;
+    color: white;
+    background-color: var(--col-primary);
+    border: 2px solid var(--col-primary);
+    border-radius: 10px;
+}
+
+.Form > button:hover {
+    color: var(--col-primary);
+    background-color: white;
 }
 
 /* Desktop */
