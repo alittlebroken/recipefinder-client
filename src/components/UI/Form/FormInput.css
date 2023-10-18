@@ -2,16 +2,17 @@
 .FormInputContainer {
     display: flex;
     flex-direction: column;
-    padding: 3px;
-    margin-bottom: 2rem;
+    padding: 5px;
 }
 
 .FormLabel {
     font-weight: bold;
+    padding: 6px 0;
 }
 
 .FormInput {
-    padding: 5px;
+    padding: 7px;
+    border-radius: 7px;
 }
 
 /* Desktop */
