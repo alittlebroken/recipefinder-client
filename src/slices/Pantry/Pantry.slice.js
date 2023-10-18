@@ -17,6 +17,7 @@ export const getPantryIngredients = createAsyncThunk(
 
             /* Extract the payload vars */
             const {
+                terms,
                 pantryId,
                 sort
             } = payload
@@ -35,6 +36,13 @@ export const getPantryIngredients = createAsyncThunk(
                     order: sort?.order || 'desc'
                 },
                 id: pantryId
+            }
+
+            /* If we have a filter set then lets add it in */
+            if(pantry.filter && pantry.filter !== ''){
+                params.filter = {
+                    name: pantry?.filter || terms
+                }
             }
 
 
@@ -111,10 +119,8 @@ const pantrySlice = createSlice({
                 /* set the pagination options */
                 
                 state.page = action.payload?.data?.currentPage
-                state.pages = Math.ceil(action?.payload?.data?.totalRecords/state.recsPerPage) || 1
+                state.pages = action.payload?.data?.totalPages
                 state.records = action.payload?.data?.totalRecords
-
-
             }
         }
     }
