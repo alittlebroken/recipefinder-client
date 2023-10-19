@@ -220,7 +220,7 @@ const apiProvider = {
         
         // Access the appropriate API and process the results
         const response = await axios.delete(url, axiosOptions)
-        console.log(response)
+        
         if(response.status >= 400){
             return {
                 status: response.status,
