@@ -198,6 +198,10 @@ const Pantry = (props) => {
                                     <button 
                                         className="btn pi-edit" 
                                         value={ingredient.ingredientId}
+                                        onClick={(event => {
+                                            setId(event.target.value)
+                                            setShowEditModal(true)
+                                        })}
                                     >
                                         Edit
                                     </button>
