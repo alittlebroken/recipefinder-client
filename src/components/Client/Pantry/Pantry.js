@@ -114,7 +114,7 @@ const Pantry = (props) => {
 
             {/* Modals */}
             <Modal show={showRemoveModal} handleClose={handleCloseRemovalModal}>
-                <PantryFormRemoval name="Remove Ingredient" modalShow={handleCloseRemovalModal} id={id} />
+                <PantryFormRemoval name="Remove Ingredient" modalShow={handleCloseRemovalModal} id={id} pantry={parseInt(profileData.pantryId)} />
             </Modal>
 
             <h3 className="p-head-2">{profileData.username}'s Pantry</h3>
