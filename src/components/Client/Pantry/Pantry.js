@@ -62,6 +62,9 @@ const Pantry = (props) => {
     /* remove ingredient State */
     const [showRemoveModal, setShowRemoveModal] = useState(false)
 
+    /* State for controlling if the data is outdated ( dirty ) */
+    const [isDirty, setIsDirty] = useState(false)
+
     /* State for setting id of ingredient to remove or update */
     const [id, setId] = useState()
 
@@ -92,7 +95,8 @@ const Pantry = (props) => {
             }))
         }
         fetchData()
-    }, [page, recsPage, dispatch])
+        setIsDirty(false)
+    }, [page, recsPage, dispatch, isDirty])
 
     /* Handler for the forms submit function */
     const submit = async (event, form) => {
@@ -101,6 +105,7 @@ const Pantry = (props) => {
         await dispatch(getPantryIngredients({ 
             pantryId: parseInt(profileData.pantryId)
         }))
+        
     }
 
     /* Handler for cloising the remove modal */
@@ -114,7 +119,7 @@ const Pantry = (props) => {
 
             {/* Modals */}
             <Modal show={showRemoveModal} handleClose={handleCloseRemovalModal}>
-                <PantryFormRemoval name="Remove Ingredient" modalShow={handleCloseRemovalModal} id={id} pantry={parseInt(profileData.pantryId)} />
+                <PantryFormRemoval name="Remove Ingredient" modalShow={handleCloseRemovalModal} id={id} pantry={parseInt(profileData.pantryId)} handleIsDirty={setIsDirty} />
             </Modal>
 
             <h3 className="p-head-2">{profileData.username}'s Pantry</h3>
@@ -169,7 +174,7 @@ const Pantry = (props) => {
                                 <div aria-label="pantry ingredient actions" className="pi-actions flex">
                                     <button 
                                         className="btn pi-remove" 
-                                        value={ingredient.id}
+                                        value={ingredient.ingredientId}
                                         onClick={(event => {
                                             setId(event.target.value)
                                             setShowRemoveModal(true)
@@ -179,7 +184,7 @@ const Pantry = (props) => {
                                     </button>
                                     <button 
                                         className="btn pi-edit" 
-                                        value={ingredient.id}
+                                        value={ingredient.ingredientId}
                                     >
                                         Edit
                                     </button>
