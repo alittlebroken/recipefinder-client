@@ -169,8 +169,6 @@ const apiProvider = {
 
     removeOne: async (resource, params) => {
 
-        console.log('removeOne')
-
         // Validation
         if(!params || params === undefined){
             return {
