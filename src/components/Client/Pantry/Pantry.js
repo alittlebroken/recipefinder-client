@@ -22,6 +22,8 @@ import {
 import Pagination from '../../UI/Pagination/Pagination'
 import Form from '../../UI/Form/Form'
 import FormInput from '../../UI/Form/FormInput'
+import Modal from '../../UI/Modal/Modal'
+import PantryFormRemoval from './PantryFormRemove'
 
 
 const Pantry = (props) => {
@@ -55,6 +57,13 @@ const Pantry = (props) => {
     /* State for controlling pagination */
     const [page, setPage] = useState(pagination.page)
     const [recsPage, setRecsPage] = useState(pagination.recsPerPage)
+
+    /* State for Modal forms */
+    /* remove ingredient State */
+    const [showRemoveModal, setShowRemoveModal] = useState(false)
+
+    /* State for setting id of ingredient to remove or update */
+    const [id, setId] = useState()
 
     /* Handler for going forward or backward the pages */
     const pageChangeHandler = async (e) => {
@@ -94,8 +103,20 @@ const Pantry = (props) => {
         }))
     }
 
+    /* Handler for cloising the remove modal */
+    const handleCloseRemovalModal = () => {
+        setId(null)
+        setShowRemoveModal(false)
+    }
+
     return (
         <div className="p-container flex flex-col">
+
+            {/* Modals */}
+            <Modal show={showRemoveModal} handleClose={handleCloseRemovalModal}>
+                <PantryFormRemoval name="Remove Ingredient" modalShow={handleCloseRemovalModal} id={id} />
+            </Modal>
+
             <h3 className="p-head-2">{profileData.username}'s Pantry</h3>
             <Form 
                 initialValues={{
@@ -146,8 +167,22 @@ const Pantry = (props) => {
                                 </div>
 
                                 <div aria-label="pantry ingredient actions" className="pi-actions flex">
-                                    <button className="btn pi-remove">Remove</button>
-                                    <button className="btn pi-edit">Edit</button>
+                                    <button 
+                                        className="btn pi-remove" 
+                                        value={ingredient.id}
+                                        onClick={(event => {
+                                            setId(event.target.value)
+                                            setShowRemoveModal(true)
+                                        })}
+                                    >
+                                        Remove
+                                    </button>
+                                    <button 
+                                        className="btn pi-edit" 
+                                        value={ingredient.id}
+                                    >
+                                        Edit
+                                    </button>
                                 </div>
                             </div>
                         </div>
