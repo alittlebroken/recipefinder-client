@@ -24,6 +24,7 @@ import Form from '../../UI/Form/Form'
 import FormInput from '../../UI/Form/FormInput'
 import Modal from '../../UI/Modal/Modal'
 import PantryFormRemoval from './PantryFormRemove'
+import PantryFormEdit from './PantryFormEdit'
 
 
 const Pantry = (props) => {
@@ -61,6 +62,8 @@ const Pantry = (props) => {
     /* State for Modal forms */
     /* remove ingredient State */
     const [showRemoveModal, setShowRemoveModal] = useState(false)
+    /* edit ingredient state */
+    const [showEditModal, setShowEditModal] = useState(false)
 
     /* State for controlling if the data is outdated ( dirty ) */
     const [isDirty, setIsDirty] = useState(false)
@@ -108,10 +111,16 @@ const Pantry = (props) => {
         
     }
 
-    /* Handler for cloising the remove modal */
+    /* Handler for closing the remove modal */
     const handleCloseRemovalModal = () => {
         setId(null)
         setShowRemoveModal(false)
+    }
+
+    /* Handle the closing of the edit model */
+    const handleCloseEditModal = () => {
+        setId(null)
+        setShowEditModal(false)
     }
 
     return (
@@ -120,6 +129,10 @@ const Pantry = (props) => {
             {/* Modals */}
             <Modal show={showRemoveModal} handleClose={handleCloseRemovalModal}>
                 <PantryFormRemoval name="Remove Ingredient" modalShow={handleCloseRemovalModal} id={id} pantry={parseInt(profileData.pantryId)} handleIsDirty={setIsDirty} />
+            </Modal>
+
+            <Modal show={showEditModal} handleClose={handleCloseEditModal}>
+                <PantryFormEdit modalShow={handleCloseEditModal} ingredientId={id} pantryId={parseInt(profileData.pantryId)} handleIsDirty={setIsDirty} />
             </Modal>
 
             <h3 className="p-head-2">{profileData.username}'s Pantry</h3>
