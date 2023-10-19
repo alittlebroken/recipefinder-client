@@ -169,6 +169,8 @@ const apiProvider = {
 
     removeOne: async (resource, params) => {
 
+        console.log('removeOne')
+
         // Validation
         if(!params || params === undefined){
             return {
@@ -209,11 +211,18 @@ const apiProvider = {
         }
 
         // Set the URL to use
-        let url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}`
-
+        let url
+        if(resource === 'pantries' || resource === 'pantry'){
+            url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}/${params.ingredientId}`
+            
+        } else {
+            url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}`
+            
+        }
+        
         // Access the appropriate API and process the results
         const response = await axios.delete(url, axiosOptions)
-
+        console.log(response)
         if(response.status >= 400){
             return {
                 status: response.status,
