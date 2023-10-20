@@ -5,16 +5,13 @@ import apiProvider from "../../../providers/apiProvider"
 const PantryFormEdit = (props) => {
 
     /* Destructure the props */
-    const {
-        ingredientId,
-        pantryId,
-        closeModal
-    } = props
+    const ingredient = JSON.parse(props.ingredient)
+    const closeModal = props.closeModal
 
     /* Hold state for the forms inputs */
-    const [amount, setAmount] = useState()
+    const [amount, setAmount] = useState(ingredient.amount)
     const [amountError, setAmountError] = useState()
-    const [amountType, setAmountType] = useState()
+    const [amountType, setAmountType] = useState(ingredient.amountType)
     const [amountTypeError, setAmountTypeError] = useState()
     const [formOK, setFormOK] = useState(true)
 
@@ -46,8 +43,8 @@ const PantryFormEdit = (props) => {
         if(formOK){
             /* Build the params to send to the API */
             const params = {
-                pantryId,
-                ingredientId,
+                pantryId: parseInt(ingredient.pantry),
+                ingredientId: parseInt(ingredient.id),
                 amount,
                 amountType
             }
