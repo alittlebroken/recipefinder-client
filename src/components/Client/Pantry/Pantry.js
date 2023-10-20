@@ -70,7 +70,7 @@ const Pantry = (props) => {
 
     /* State for setting id of ingredient to remove or update */
     const [id, setId] = useState()
-    const [ingredientData, setIngredientData] = useState()
+    const [ingredientData, setIngredientData] = useState(JSON.stringify({}))
 
     /* Handler for going forward or backward the pages */
     const pageChangeHandler = async (e) => {
