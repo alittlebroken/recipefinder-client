@@ -204,7 +204,7 @@ const Pantry = (props) => {
                                                 id: ingredient.id,
                                                 name: ingredient.name,
                                                 amount: ingredient.amount,
-                                                amountType: ingredient.amountType
+                                                amountType: ingredient.amount_type
                                             })
                                         }
                                         onClick={(event => {
