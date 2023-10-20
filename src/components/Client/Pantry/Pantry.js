@@ -70,6 +70,7 @@ const Pantry = (props) => {
 
     /* State for setting id of ingredient to remove or update */
     const [id, setId] = useState()
+    const [ingredientData, setIngredientData] = useState()
 
     /* Handler for going forward or backward the pages */
     const pageChangeHandler = async (e) => {
@@ -132,7 +133,7 @@ const Pantry = (props) => {
             </Modal>
 
             <Modal show={showEditModal} handleClose={handleCloseEditModal}>
-                <PantryFormEdit modalShow={handleCloseEditModal} ingredientId={id} pantryId={parseInt(profileData.pantryId)} handleIsDirty={setIsDirty} />
+                <PantryFormEdit ingredient={ingredientData} modalShow={handleCloseEditModal} handleIsDirty={setIsDirty} />
             </Modal>
 
             <h3 className="p-head-2">{profileData.username}'s Pantry</h3>
@@ -197,9 +198,17 @@ const Pantry = (props) => {
                                     </button>
                                     <button 
                                         className="btn pi-edit" 
-                                        value={ingredient.ingredientId}
+                                        value={
+                                            JSON.stringify({
+                                                pantry: parseInt(profileData.pantryId),
+                                                id: ingredient.id,
+                                                name: ingredient.name,
+                                                amount: ingredient.amount,
+                                                amountType: ingredient.amountType
+                                            })
+                                        }
                                         onClick={(event => {
-                                            setId(event.target.value)
+                                            setIngredientData(event.target.value)
                                             setShowEditModal(true)
                                         })}
                                     >
