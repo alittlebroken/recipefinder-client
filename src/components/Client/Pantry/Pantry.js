@@ -25,7 +25,7 @@ import FormInput from '../../UI/Form/FormInput'
 import Modal from '../../UI/Modal/Modal'
 import PantryFormRemoval from './PantryFormRemove'
 import PantryFormEdit from './PantryFormEdit'
-
+import { nanoid } from '@reduxjs/toolkit'
 
 const Pantry = (props) => {
 
@@ -132,10 +132,6 @@ const Pantry = (props) => {
                 <PantryFormRemoval name="Remove Ingredient" modalShow={handleCloseRemovalModal} id={id} pantry={parseInt(profileData.pantryId)} handleIsDirty={setIsDirty} />
             </Modal>
 
-            <Modal show={showEditModal} handleClose={handleCloseEditModal}>
-                <PantryFormEdit ingredient={ingredientData} modalShow={handleCloseEditModal} handleIsDirty={setIsDirty} />
-            </Modal>
-
             <h3 className="p-head-2">{profileData.username}'s Pantry</h3>
             <Form 
                 initialValues={{
@@ -162,9 +158,12 @@ const Pantry = (props) => {
             <div aria-label="ingredient list" className="pi-list">
 
                 {ingredients.map( ingredient => {
-                    
+
                     return (
-                        <div aria-label="ingredient container" className="flex pi-ingredient">
+                        <div key={nanoid()} aria-label="ingredient container" className="flex pi-ingredient">
+                            <Modal key={nanoid()} show={showEditModal} handleClose={handleCloseEditModal}>
+                                <PantryFormEdit key={nanoid()} ingredient={ingredientData} modalShow={handleCloseEditModal} handleIsDirty={setIsDirty} />
+                            </Modal>
                             <img 
                                 src={ingredient?.images[0] ? ingredient.images[0].src : '/no_image.png'}
                                 alt={ingredient?.images[0] ? ingredient.images[0].alt : 'Picture dipicting no image for the ingredient'}
@@ -187,6 +186,7 @@ const Pantry = (props) => {
 
                                 <div aria-label="pantry ingredient actions" className="pi-actions flex">
                                     <button 
+                                        key={nanoid()}
                                         className="btn pi-remove" 
                                         value={ingredient.ingredientId}
                                         onClick={(event => {
@@ -197,11 +197,13 @@ const Pantry = (props) => {
                                         Remove
                                     </button>
                                     <button 
+                                        key={nanoid()}
                                         className="btn pi-edit" 
                                         value={
                                             JSON.stringify({
                                                 pantry: parseInt(profileData.pantryId),
                                                 id: ingredient.id,
+                                                ingredientId: ingredient.ingredientId,
                                                 name: ingredient.name,
                                                 amount: ingredient.amount,
                                                 amountType: ingredient.amount_type
