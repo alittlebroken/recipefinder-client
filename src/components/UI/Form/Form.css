@@ -29,5 +29,13 @@
 
 /* Desktop */
 @media screen and (min-width: 900px) {
-    
+  
+    .Form {
+        flex-direction: row;
+    }
+
+    .Form > button {
+        width: auto;
+    }
+
 }
