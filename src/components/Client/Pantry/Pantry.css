@@ -25,7 +25,8 @@
     height: auto;
     border-radius: 10px;
     overflow: hidden;
-    border: 3px solid #f0f0f0;
+    /* border: 3px solid #f0f0f0; */
+    border: 3px solid var(--col-primary);
 }
 
 .pi-ingredient > img {
@@ -76,5 +77,40 @@
 
 /* Desktop Styles */
 @media screen and (min-width: 960px) {
-    
+    .p-container {
+        width: 900px;
+        margin: 0 auto;
+    }
+
+    .p-head-2 {
+        font-size: 4rem;
+        margin-top: 10px;
+    }
+
+    .pi-ingredient {
+        flex-direction: row;
+        padding: 0;
+    }
+
+    .pi-ingredient > img {
+        width: 250px;
+    }
+
+    .pi-detail-container {
+        flex-direction: row;
+        width: 100%;
+    }
+
+    .pi-details {
+        flex-basis: 80%;
+        justify-content: space-between;
+        margin-bottom: 0;
+        margin-left: 5px;
+    }
+
+    .pi-actions {
+        flex-basis: 20%;
+        flex-direction: column;
+        justify-content: space-between;
+    }
 } 
