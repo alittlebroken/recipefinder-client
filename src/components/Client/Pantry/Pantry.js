@@ -132,6 +132,10 @@ const Pantry = (props) => {
                 <PantryFormRemoval name="Remove Ingredient" modalShow={handleCloseRemovalModal} id={id} pantry={parseInt(profileData.pantryId)} handleIsDirty={setIsDirty} />
             </Modal>
 
+            <Modal key={nanoid()} show={showEditModal} handleClose={handleCloseEditModal}>
+                <PantryFormEdit key={nanoid()} ingredient={ingredientData} modalShow={handleCloseEditModal} handleIsDirty={setIsDirty} />
+            </Modal>
+
             <h3 className="p-head-2">{profileData.username}'s Pantry</h3>
             <Form 
                 initialValues={{
@@ -161,9 +165,7 @@ const Pantry = (props) => {
 
                     return (
                         <div key={nanoid()} aria-label="ingredient container" className="flex pi-ingredient">
-                            <Modal key={nanoid()} show={showEditModal} handleClose={handleCloseEditModal}>
-                                <PantryFormEdit key={nanoid()} ingredient={ingredientData} modalShow={handleCloseEditModal} handleIsDirty={setIsDirty} />
-                            </Modal>
+                            
                             <img 
                                 src={ingredient?.images[0] ? ingredient.images[0].src : '/no_image.png'}
                                 alt={ingredient?.images[0] ? ingredient.images[0].alt : 'Picture dipicting no image for the ingredient'}
