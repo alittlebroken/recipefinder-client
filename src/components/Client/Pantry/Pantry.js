@@ -174,12 +174,13 @@ const Pantry = (props) => {
                                <div aria-label="pantry ingredient details" className="pi-details flex">
                                     
                                     <h3>{ingredient.name}</h3>
-
-                                    <div aria-label="pantry ingredient amount" className="pi-amount flex flex-row">
-                                        <label>Amount:</label><p>{ingredient.amount}</p>
-                                    </div>
-                                    <div aria-label="pantry ingredient amount" className="pi-amount flex flex-row">
-                                        <label>Amount Type:</label><p>{ingredient.amount_type}</p>
+                                    <div>
+                                        <div aria-label="pantry ingredient amount" className="pi-amount flex flex-row">
+                                            <label>Amount:</label><p>{ingredient.amount}</p>
+                                        </div>
+                                        <div aria-label="pantry ingredient amount" className="pi-amount flex flex-row">
+                                            <label>Amount Type:</label><p>{ingredient.amount_type}</p>
+                                        </div>
                                     </div>
 
                                 </div>
