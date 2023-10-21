@@ -4,7 +4,7 @@
     flex-direction: column;
     border-radius: 7px;
     background-color: white;
-    border: 3px solid #f0f0f0;
+    border: 3px solid var(--col-primary);
     width: 100%;
     height: auto;
     margin-bottom: 1rem; 
