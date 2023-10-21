@@ -75,6 +75,7 @@ const PantryFormEdit = (props) => {
             <input type="hidden" name="id" value={ingredient.id} />
             <input type="hidden" name="ingredientId" value={ingredient.ingredientId} />
             <input type="hidden" name="pantry" value={ingredient.pantry} />
+            <h3>Editing {ingredient.name}</h3>
             <label htmlFor="amount" className="editFormLabel" >Amount:</label>
             <input 
                 type="number" 
