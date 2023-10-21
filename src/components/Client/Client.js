@@ -7,6 +7,7 @@ import LoginForm from './LoginForm/LoginForm'
 import SignupForm from './SignupForm/SignupForm'
 import Profile from './Profile/Profile'
 import Ingredients from './Ingredients/Ingredients'
+import Pantry from './Pantry/Pantry'
 
 import { ProviderContext, useAccessToken } from '../../contexts/providers'
 
@@ -41,6 +42,7 @@ const Client = (props) => {
             <Route path="/ingredients" element={<Ingredients />} />
             {/* Protected Routes will go here */}
             <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+            <Route path="/pantry" element={<ProtectedRoute><Pantry /></ProtectedRoute>} />
           </Routes>
         </Layout>
 

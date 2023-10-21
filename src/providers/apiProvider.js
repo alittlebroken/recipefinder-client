@@ -137,8 +137,17 @@ const apiProvider = {
         }
 
         // Set the URL to use
-        let url = `${process.env.REACT_APP_API_URL}/${resource}?${queryString.stringify(queryParams)}`
 
+        /* Determine which resource to access */
+        let url
+        if(resource === 'pantries' || resource === 'pantry'){
+            /* Get the passed in id */
+            url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}?${queryString.stringify(queryParams)}`
+        } else {
+            url = `${process.env.REACT_APP_API_URL}/${resource}?${queryString.stringify(queryParams)}`
+
+        }
+         
         // Access the appropriate API and process the results
         const response = await axios.get(url, axiosOptions)
 
@@ -200,11 +209,18 @@ const apiProvider = {
         }
 
         // Set the URL to use
-        let url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}`
-
+        let url
+        if(resource === 'pantries' || resource === 'pantry'){
+            url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}/${params.ingredientId}`
+            
+        } else {
+            url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}`
+            
+        }
+        
         // Access the appropriate API and process the results
         const response = await axios.delete(url, axiosOptions)
-
+        
         if(response.status >= 400){
             return {
                 status: response.status,

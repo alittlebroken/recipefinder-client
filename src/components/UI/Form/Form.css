@@ -1,0 +1,41 @@
+/* Mobile */
+.Form {
+    display: flex;
+    flex-direction: column;
+    border-radius: 7px;
+    background-color: white;
+    border: 3px solid var(--col-primary);
+    width: 100%;
+    height: auto;
+    margin-bottom: 1rem; 
+    padding: 10px;
+}
+
+.Form > button {
+    font-family: inherit;
+    font-size: 1rem;
+    padding: 10px;
+    width: 100%;
+    color: white;
+    background-color: var(--col-primary);
+    border: 2px solid var(--col-primary);
+    border-radius: 10px;
+}
+
+.Form > button:hover {
+    color: var(--col-primary);
+    background-color: white;
+}
+
+/* Desktop */
+@media screen and (min-width: 900px) {
+  
+    .Form {
+        flex-direction: row;
+    }
+
+    .Form > button {
+        width: auto;
+    }
+
+}

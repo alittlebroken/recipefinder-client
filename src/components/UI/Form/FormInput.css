@@ -1,0 +1,33 @@
+/* Mobile */
+.FormInputContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+
+.FormLabel {
+    font-weight: bold;
+    padding: 6px 0;
+}
+
+.FormInput {
+    padding: 7px;
+    border-radius: 7px;
+}
+
+/* Desktop */
+@media screen and (min-width: 900px) {
+   
+    .FormInputContainer {
+        flex-direction: row;
+    }
+
+    .FormInput {
+        width: 615px;
+    }
+
+    .FormLabel {
+        margin-right: 15px;
+    }
+
+}

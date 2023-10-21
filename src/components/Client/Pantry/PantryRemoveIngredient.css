@@ -1,0 +1,32 @@
+/* Mobile Styles */
+.form-container {
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-container > h3 {
+    font-family: inherit;
+    font-size: 1.3rem;
+}
+
+.btn-action {
+    background-color: var(--col-primary);
+    color: white;
+    border: 2px solid var(--col-primary);
+}
+
+.btn-action:hover {
+    color: var(--col-primary);
+    background-color: white;
+}
+
+.action-container {
+    justify-content: center;
+    gap: 25px;
+    padding: 15px;
+}
+
+/* Desktop Styles */
+@media screen and (min-width: 900px) {
+
+}

@@ -31,6 +31,7 @@ const initialState = {
         avatar_src: null,
         avatar_alt: null,
         avatar_title: null,
+        pantryId: null
     },
     isLoading: false,
     hasError: false
@@ -59,6 +60,7 @@ export const profileSlice = createSlice({
 
             /* Parse and assign the data returned from the API */
             let profile = action.payload.data
+            
             state.data.userId = profile?.id
             state.data.forename = profile?.forename
             state.data.surname = profile?.surname
@@ -68,7 +70,7 @@ export const profileSlice = createSlice({
             state.data.avatar_src = profile?.avatar?.url ? profile.avatar.url : '/default_profile_pic.jpg'
             state.data.avatar_alt = profile?.avatar?.alt ? profile.avatar.alt : 'Default profile picture'
             state.data.avatar_title = profile?.avatar?.title ? profile.avatar.title : 'Default profile picture'
-
+            state.data.pantryId = profile?.pantryId
         }
     }
 })
