@@ -17,5 +17,17 @@
 
 /* Desktop */
 @media screen and (min-width: 900px) {
-    
+   
+    .FormInputContainer {
+        flex-direction: row;
+    }
+
+    .FormInput {
+        width: 615px;
+    }
+
+    .FormLabel {
+        margin-right: 15px;
+    }
+
 }
