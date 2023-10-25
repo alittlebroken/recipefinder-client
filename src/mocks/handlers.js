@@ -212,5 +212,41 @@ export const handlers = [
         })
        )
 
+    }),
+    rest.get('http://localhost:5000/uploads', (req, res, ctx) => {
+
+        /* Extract the request parameters */
+        let filter = JSON.parse(req.url.searchParams.get('filter'))
+        let resource = filter['resource']
+        let userId = filter['userid']
+        let resourceId = filter['resourceid']
+
+        /* image data */
+        let data = [
+            //{ id: 1, userId: 1, src: '', title: '', alt: '', resource: '', resourceid: ''},
+            { id: 1, userId: 1, src: '/cookbook_default.png', title: 'Generic cookbook with list of recipes', alt: 'Generic cookbook with list of recipes', resource: 'Cookbook', resourceid: 1},
+            { id: 2, userId: 1, src: '/cookbook_vegan.png', title: 'Picture of a cookbook next to vegan ingredients', alt: 'Picture of a cookbook next to vegan ingredients', resource: 'Cookbook', resourceid: 2},
+            { id: 3, userId: 1, src: '/cookbook_next.png', title: 'Cookbook atop pile of flour', alt: 'Cookbook atop pile of flour', resource: 'Cookbook', resourceid: 3},
+        ]
+
+        /* Filter out the images to return */
+        let filtered = data.filter( cbk => cbk.userId === userId && cbk.resource === resource && cbk.resourceId === resourceId )
+
+        /* Returned the found image(s) */
+        return res(
+            ctx.status(200),
+            ctx.json({
+                status: 200,
+                success: true,
+                message: '',
+                results: filtered,
+                pagination: {
+                    total: Math.ceil(filtered.length/10),
+                    records: filtered.length,
+                    current: 1
+                }
+            })
+        )
+
     })
 ]
