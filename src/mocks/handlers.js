@@ -176,5 +176,41 @@ export const handlers = [
                 })
             )
         }
+    }),
+    rest.get('http://localhost:5000/users/:id/cookbooks', (req, res, ctx) => {
+
+       /* Get the cookbook id we want to look at */
+       const id = req.params.id
+       
+       /* Check if we have a valid cookbook id */
+       if(!id || id === undefined || typeof id != 'number') {
+        return res(
+            ctx.status(400),
+            ctx.json({
+                status: 400,
+                success: false,
+                message: 'You must supply a valid user id'
+            })
+        )
+       }
+
+       /* Display a list of the users cookbooks */
+       return res(
+        ctx.status(200),
+        ctx.json({
+            status: 200,
+            success: true,
+            message: '',
+            results: [
+                { id: 1, userId: 1, name: 'My Cookbooks', description: 'Your default cook book for storing your favourite recipes.'},
+                { id: 2, userId: 1, name: 'Vegan recipes', description: 'My curated list of vegan recipes I have tried and love.'},
+                { id: 3, userId: 1, name: 'Next meal ideas', description: 'Interesting recipes I have yet to try.'}
+            ],
+            totalPages: 1,
+            totalRecords: 3,
+            currentPage: 1
+        })
+       )
+
     })
 ]
