@@ -21,6 +21,15 @@ const ProfileCookbooks = (props) => {
     /* Alias the dispatch and selector hooks */
     const dispatch = useDispatch()
 
+    /* Extract the data from the slice */
+    const cookbooks = useSelector(selectCookBooks)
+    const isLoading = useSelector(selectIsLoading)
+    const hasError = useSelector(selectHasError)
+    const pages = useSelector(selectPages)
+    const page = useSelector(selectPage)
+    const recsPerPage = useSelector(selectRecsPerPage)
+    const records = useSelector(selectRecords)
+
 
     return(
         <div aria-label="content container" className="flex flex-col">
