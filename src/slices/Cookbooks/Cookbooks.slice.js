@@ -49,7 +49,7 @@ export const getCookbooks = createAsyncThunk(
 
 /* Create the inital structure for the slice and any default values
 it needs */
-const initialData = {
+const initialState = {
     cookbooks: [],
     hasError: false,
     isLoading: false,
@@ -62,7 +62,7 @@ const initialData = {
 /* Create the slice */
 const cookbooksSlice = createSlice({
     name: 'cookbooks',
-    initialData: initialData,
+    initialState: initialState,
     reducers: {
         upPage: (state, action) => {
             if(state.page + 1 > state.pages){
