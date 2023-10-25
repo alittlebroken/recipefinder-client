@@ -1,5 +1,6 @@
 import './ProfileCookbooks.com'
 import { useSelector, useDispatch } from 'react-redux'
+import { useEffect } from 'react'
 
 import {
     getCookbooks,
@@ -16,6 +17,10 @@ import {
     selectRecords
 } from  '../../../slices/Cookbooks/Cookbooks.slice'
 
+import { 
+    selectProfileData,
+} from '../../../slices/Profile/Profile.slice'
+
 const ProfileCookbooks = (props) => {
 
     /* Alias the dispatch and selector hooks */
@@ -30,6 +35,29 @@ const ProfileCookbooks = (props) => {
     const recsPerPage = useSelector(selectRecsPerPage)
     const records = useSelector(selectRecords)
 
+    /* Gather the users profile data */
+    /* Get the user profile data */
+    let profileData = useSelector(selectProfileData)
+
+    useEffect(() => {
+
+        /* Generate a payload to send to the API */
+        const payload = {
+            user: {
+               id: profileData.userId
+            }
+        }
+
+        /* This function will allows us to use async in useEffectn when we try and get the
+         * data from the API */
+        const fetchData = async () => {
+
+            await getCookbooks(payload)
+        }
+
+        /* get the data from the API */
+        fetchData()
+    }, [dispatch])
 
     return(
         <div aria-label="content container" className="flex flex-col">
