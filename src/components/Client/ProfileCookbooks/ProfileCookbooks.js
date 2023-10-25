@@ -1,6 +1,26 @@
 import './ProfileCookbooks.com'
+import { useSelector, useDispatch } from 'react-redux'
+
+import {
+    getCookbooks,
+    pageUp,
+    pageDown,
+    setRecsPerPage,
+    goToPage,
+    selectCookBooks,
+    selectIsLoading,
+    selectHasError,
+    selectPages,
+    selectPage,
+    selectRecsPerPage,
+    selectRecords
+} from  '../../../slices/Cookbooks/Cookbooks.slice'
 
 const ProfileCookbooks = (props) => {
+
+    /* Alias the dispatch and selector hooks */
+    const dispatch = useDispatch()
+
 
     return(
         <div aria-label="content container" className="flex flex-col">
@@ -18,7 +38,7 @@ const ProfileCookbooks = (props) => {
 
             <div aria-label="cookbooks container" className="pc-cookbooks-container flex">
 
-                
+
 
             </div>
 
