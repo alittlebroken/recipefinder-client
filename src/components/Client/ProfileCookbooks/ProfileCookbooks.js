@@ -23,6 +23,8 @@ import {
 
 import CookBookCard from './CookbookCard'
 
+import { nanoid } from '@reduxjs/toolkit'
+
 const ProfileCookbooks = (props) => {
 
     /* Alias the dispatch and selector hooks */
@@ -79,7 +81,7 @@ const ProfileCookbooks = (props) => {
 
                 {cookbooks.map( cookbook => {
                     return (
-                        <CookBookCard data={cookbook} />
+                        <CookBookCard key={nanoid()} data={cookbook} />
                     )
                 })}
 
