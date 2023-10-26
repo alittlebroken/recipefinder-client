@@ -21,6 +21,8 @@ import {
     selectProfileData,
 } from '../../../slices/Profile/Profile.slice'
 
+import CookBookCard from './CookbookCard'
+
 const ProfileCookbooks = (props) => {
 
     /* Alias the dispatch and selector hooks */
@@ -75,7 +77,11 @@ const ProfileCookbooks = (props) => {
 
             <div aria-label="cookbooks container" className="pc-cookbooks-container flex">
 
-
+                {cookbooks.map( cookbook => {
+                    return (
+                        <CookBookCard data={cookbook} />
+                    )
+                })}
 
             </div>
 
