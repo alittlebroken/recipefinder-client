@@ -1,6 +1,6 @@
 import './ProfileCookbooks.com'
 import { useSelector, useDispatch } from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 import {
     getCookbooks,
@@ -25,6 +25,9 @@ import CookBookCard from './CookbookCard'
 
 import { nanoid } from '@reduxjs/toolkit'
 
+import Modal from '../../UI/Modal/Modal'
+import NewCookbookForm from './newCookbookForm'
+
 const ProfileCookbooks = (props) => {
 
     /* Alias the dispatch and selector hooks */
@@ -42,6 +45,14 @@ const ProfileCookbooks = (props) => {
     /* Gather the users profile data */
     /* Get the user profile data */
     let profileData = useSelector(selectProfileData)
+
+    /* state for showing the add cookbook modal form */
+    const [showNewModal, setShowNewModal] = useState(false)
+
+    /* Handler for closing the new cookbook modal */
+    const handleNewModalClose = () => {
+        setShowNewModal(false)
+    }
 
     useEffect(() => {
 
@@ -63,8 +74,13 @@ const ProfileCookbooks = (props) => {
         fetchData()
     }, [dispatch])
 
+
     return(
         <div aria-label="content container" className="flex flex-col">
+
+            <Modal show={showNewModal} handleClose={handleNewModalClose}>
+                <NewCookbookForm />
+            </Modal>
 
             <div aria-label="container for header and add button" className=" head-container flex">
                 <h2 className="pc-head-2">Add Cookbook</h2>
