@@ -1,4 +1,4 @@
-import './ProfileCookbooks.com'
+import './ProfileCookbooks.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
 
