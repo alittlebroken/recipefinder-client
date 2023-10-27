@@ -22,7 +22,7 @@ const Form = (props) => {
     const handleFormChange = (e) => {
 
         /* Get the name and value of the form event that has changed */
-        const { name, value } = e.target;
+        const { name, value, type, files } = e.target;
 
         /* Update the forms data by copying the exiting data and then just
            adding back in the value and form element that has changed */
