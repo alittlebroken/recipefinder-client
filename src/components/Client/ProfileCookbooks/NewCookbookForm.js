@@ -77,6 +77,7 @@ const NewCookbookForm = (props) => {
         <Form 
             initialValues={initialValues}
             submit={handleSubmit}
+            bordered={false}
         >
             <FormInput 
                 name="name"
