@@ -349,9 +349,36 @@ const apiProvider = {
             url = `${process.env.REACT_APP_API_URL}/${resource}`
         }
         
+        /* Check what the resource type is and use the appropriate 
+           axios post. For uploads we need to create a form Data field
+           and send that as the payload */
+        let response
 
-        // Access the appropriate API and process the results
-        const response = await axios.post(url, payload, axiosOptions)
+        if(resource === "uploads"){
+
+            /* Generate the payload to send */
+            const formData = new FormData()
+            formData.append(
+                'images',
+                payload.images,
+                payload.images.name
+            )
+            formData.append('userid',payload.userId)
+            formData.append('resourceid', payload.resourceid)
+            formData.append('resource', 'Cookbook')
+            formData.append('title', payload.title)
+
+            /* Update the Image */
+            response = await axios.put(
+                url,
+                formData,
+                axiosOptions
+            )
+
+        } else {
+            // Access the appropriate API and process the results
+            response = await axios.post(url, payload, axiosOptions)
+        }
 
         // Check the status codes returned
         if(response.status >= 400){
