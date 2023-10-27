@@ -24,11 +24,19 @@ const Form = (props) => {
         /* Get the name and value of the form event that has changed */
         const { name, value, type, files } = e.target;
 
+        /* Check the type of input currently that has changed on the form */
+        let formValue
+        if(type === "file"){
+            formValue = files
+        } else {
+            formValue = value
+        }
+
         /* Update the forms data by copying the exiting data and then just
            adding back in the value and form element that has changed */
         setForm({
             ...form,
-            [name]: value
+            [name]: formValue
         })
     }
 
