@@ -23,6 +23,7 @@ const FormUpload = (props) => {
             <div aria-label="upload container" className="FormUploadContainer">
                 <label htmlFor={name} className="FormLabel">{label}:</label>
                 <input 
+                    id={name}
                     name={name}
                     type={type}
                     value={form[name]}

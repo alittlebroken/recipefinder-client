@@ -21,6 +21,7 @@ const FormInput = (props) => {
             <div aria-label="input container" className="FormInputContainer">
                 <label htmlFor={name} className="FormLabel">{label}:</label>
                 <input 
+                    id={name}
                     name={name}
                     type={type}
                     value={form[name]}
