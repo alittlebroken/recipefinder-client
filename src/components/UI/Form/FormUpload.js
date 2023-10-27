@@ -9,7 +9,9 @@ const FormUpload = (props) => {
     const {
         name,
         label,
-        fileType
+        type="file",
+        acceptType,
+        multiple=false
     } = props
 
     /* Get the form context to access the values needed */
@@ -22,8 +24,10 @@ const FormUpload = (props) => {
                 <label htmlFor={name} className="FormLabel">{label}:</label>
                 <input 
                     name={name}
-                    type="upload"
+                    type={type}
                     value={form[name]}
+                    accept={acceptType}
+                    multiple={multiple}
                     onChange={handleFormChange}
                     className="FormUpload"
                 />
