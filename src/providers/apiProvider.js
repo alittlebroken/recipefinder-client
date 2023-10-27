@@ -365,11 +365,14 @@ const apiProvider = {
             )
             formData.append('userid',payload.userId)
             formData.append('resourceid', payload.resourceid)
-            formData.append('resource', 'Cookbook')
+            formData.append('resource', payload.resource)
             formData.append('title', payload.title)
 
+            /* set the correct mimetype for the form */
+            axiosOptions.headers['Content-type'] = "multipart/form-data"
+
             /* Update the Image */
-            response = await axios.put(
+            response = await axios.post(
                 url,
                 formData,
                 axiosOptions
@@ -461,7 +464,7 @@ const apiProvider = {
                     reqBody,
                     axiosOptions
                 )
-                console.log(res)
+                
                 /* If the response is OK then update the picture, if any */
                 if(res.status === 204 && payload.upload !== ''){
 
