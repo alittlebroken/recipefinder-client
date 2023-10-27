@@ -46,7 +46,7 @@ const NewCookbookForm = (props) => {
 
         /* First try to add the cookbook details */
         const cookbookResult = await apiProvider.create('cookbooks', cookbookParams)
-        console.log(cookbookResult)
+        
         if(cookbookResult.success){
             /* Get the ID for the cookbook just created */
             const cookbookId = cookbookResult?.results[0].id
