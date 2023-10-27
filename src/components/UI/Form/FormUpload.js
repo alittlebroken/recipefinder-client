@@ -1,15 +1,15 @@
 import { useContext } from "react"
 import { FormContext } from "./Form"
 
-import './FormInput.css'
+import './FormUpload.css'
 
-const FormInput = (props) => {
+const FormUpload = (props) => {
 
     /* Destructure the required pass in props */
     const {
         name,
         label,
-        type = 'text'
+        fileType
     } = props
 
     /* Get the form context to access the values needed */
@@ -18,14 +18,14 @@ const FormInput = (props) => {
 
     return(
         <>
-            <div aria-label="input container" className="FormInputContainer">
+            <div aria-label="upload container" className="FormUploadContainer">
                 <label htmlFor={name} className="FormLabel">{label}:</label>
                 <input 
                     name={name}
-                    type={type}
+                    type="upload"
                     value={form[name]}
                     onChange={handleFormChange}
-                    className="FormInput"
+                    className="FormUpload"
                 />
             </div>
         </>
@@ -33,4 +33,4 @@ const FormInput = (props) => {
 
 }
 
-export default FormInput
+export default FormUpload
