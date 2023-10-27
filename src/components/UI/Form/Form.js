@@ -13,7 +13,13 @@ const Form = (props) => {
         children,
         initialValues,
         submit = () => {},
+        bordered = true
     } = props
+
+    /* Sets classes on the form based on passed in props */
+    let classes = "Form "
+
+    if (bordered) classes += "form-border "
 
     /* The forms current state */
     const [form, setForm] = useState(initialValues)
@@ -41,7 +47,7 @@ const Form = (props) => {
     }
 
     return (
-        <form className="Form" onSubmit={ event => props?.onSubmit(event, form)}>
+        <form className={classes} onSubmit={ event => props?.onSubmit(event, form)}>
             <FormContext.Provider value={{
                 form,
                 handleFormChange,
