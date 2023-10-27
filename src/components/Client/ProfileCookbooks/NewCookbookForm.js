@@ -2,8 +2,19 @@ import './NewCookbookForm.css'
 import Form from '../../UI/Form/Form'
 import FormInput from '../../UI/Form/FormInput'
 import FormUpload from '../../UI/Form/FormUpload'
+import apiProvider from '../../../providers/apiProvider'
+import { selectProfileData } from '../../../slices/Profile/Profile.slice'
+import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 const NewCookbookForm = (props) => {
+
+    /* Set any state this form needs to use */
+    const [hasError, setHasError] = useState()
+    const [hasResult, setHasResult] = useState()
+
+    /* Get profile data */
+    const profile = useSelector(selectProfileData)
 
     /* Set the initial values for the form */
     const initialValues = {
@@ -15,12 +26,49 @@ const NewCookbookForm = (props) => {
     }
 
     /* Handler for the form submission */
-    const handleSubmit = (e, form) => {
+    const handleSubmit = async (e, form) => {
         /* prevent the from from submitting */
         e.preventDefault()
 
-        
+        /* Generate payloads for the various resources we are going to be 
+         * creating */
+        const cookbookParams = {
+            payload: {
+                userId: profile.userId,
+                name: form.name,
+                description: form.description,
+                image: null
+            }
+        }
 
+        /* First try to add the cookbook details */
+        const cookbookResult = await apiProvider.create('cookbooks', cookbookParams)
+        if(cookbookResult.status >= 200 && cookbookResult.status < 300){
+            /* Get the ID for the cookbook just created */
+            const cookbookId = cookbookResult?.results[0].id
+            
+            /* Create the params to send with the request */
+            const imageParams = {
+                payload: {
+                    userId: profile.userId,
+                    src: '',
+                    resource: 'Cookbook',
+                    resourceid: cookbookId,
+                    title: form.title,
+                    images: form.images
+                }
+            }
+
+            /* Send the request and check the sreponse */
+            const imageResult = await apiProvider.create('uploads', imageParams)
+            if(imageResult.status >= 200 && imageResult.status < 300){
+                setHasResult('New cookbook successfully created')
+            }
+
+        } else {
+            /* Something went wrong */
+            setHasError('Unable to add new cookbook. Please try again later')
+        }
 
     }
 
@@ -55,6 +103,18 @@ const NewCookbookForm = (props) => {
                 name="altText"
                 label="Image Alternative Text"
             />
+
+            {hasError && (
+                <div aria-label="add new cookbook error" className="nc-error">
+                    {hasError}
+                </div>
+            )}
+
+            {hasResult && (
+                <div aria-label="add new cookbook success" className="nc-ok">
+                    {hasResult}
+                </div>
+            )}
 
         </Form>
     )
