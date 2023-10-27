@@ -9,7 +9,7 @@ const NewCookbookForm = (props) => {
     const initialValues = {
         name: '',
         description: '',
-        image: '',
+        images: '',
         title: '',
         altText: ''
     }
@@ -41,7 +41,7 @@ const NewCookbookForm = (props) => {
             />
 
             <FormUpload 
-                name="image"
+                name="images"
                 label="Cookbook Image"
                 acceptType="image/*"
             />
