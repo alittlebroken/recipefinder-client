@@ -68,7 +68,7 @@ const NewCookbookForm = (props) => {
 
             /* Send the request and check the sreponse */
             const imageResult = await apiProvider.create('uploads', imageParams)
-            console.log(imageResult)
+            
             if(imageResult.status >= 200 && imageResult.status < 300){
                 setHasResult('New cookbook successfully created')
             }
