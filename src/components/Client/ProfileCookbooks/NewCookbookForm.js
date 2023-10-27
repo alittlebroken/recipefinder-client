@@ -15,8 +15,13 @@ const NewCookbookForm = (props) => {
     }
 
     /* Handler for the form submission */
-    const handleSubmit = (e) => {
+    const handleSubmit = (e, form) => {
+        /* prevent the from from submitting */
         e.preventDefault()
+
+        
+
+
     }
 
 
