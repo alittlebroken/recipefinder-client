@@ -26,7 +26,6 @@ const FormUpload = (props) => {
                     id={name}
                     name={name}
                     type={type}
-                    value={form[name]}
                     accept={acceptType}
                     multiple={multiple}
                     onChange={handleFormChange}
