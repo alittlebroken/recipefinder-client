@@ -5,7 +5,7 @@ import FormUpload from '../../UI/Form/FormUpload'
 import apiProvider from '../../../providers/apiProvider'
 import { selectProfileData } from '../../../slices/Profile/Profile.slice'
 import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 const NewCookbookForm = (props) => {
 
@@ -20,7 +20,7 @@ const NewCookbookForm = (props) => {
     const initialValues = {
         name: '',
         description: '',
-        images: '',
+        images: [],
         title: '',
         altText: ''
     }
@@ -33,6 +33,9 @@ const NewCookbookForm = (props) => {
         /* Generate payloads for the various resources we are going to be 
          * creating */
         const cookbookParams = {
+            auth: {
+                authenticate: true
+            },
             payload: {
                 userId: profile.userId,
                 name: form.name,
@@ -49,6 +52,9 @@ const NewCookbookForm = (props) => {
             
             /* Create the params to send with the request */
             const imageParams = {
+                auth: {
+                    authenticate: true
+                },
                 payload: {
                     userId: profile.userId,
                     src: '',
@@ -76,7 +82,7 @@ const NewCookbookForm = (props) => {
     return (
         <Form 
             initialValues={initialValues}
-            submit={handleSubmit}
+            onSubmit={handleSubmit}
             bordered={false}
         >
             <FormInput 
