@@ -46,7 +46,8 @@ const NewCookbookForm = (props) => {
 
         /* First try to add the cookbook details */
         const cookbookResult = await apiProvider.create('cookbooks', cookbookParams)
-        if(cookbookResult.status >= 200 && cookbookResult.status < 300){
+        console.log(cookbookResult)
+        if(cookbookResult.success){
             /* Get the ID for the cookbook just created */
             const cookbookId = cookbookResult?.results[0].id
             
@@ -61,12 +62,13 @@ const NewCookbookForm = (props) => {
                     resource: 'Cookbook',
                     resourceid: cookbookId,
                     title: form.title,
-                    images: form.images
+                    images: form.images[0]
                 }
             }
 
             /* Send the request and check the sreponse */
             const imageResult = await apiProvider.create('uploads', imageParams)
+            console.log(imageResult)
             if(imageResult.status >= 200 && imageResult.status < 300){
                 setHasResult('New cookbook successfully created')
             }
