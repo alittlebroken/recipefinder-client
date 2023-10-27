@@ -26,7 +26,7 @@ import CookBookCard from './CookbookCard'
 import { nanoid } from '@reduxjs/toolkit'
 
 import Modal from '../../UI/Modal/Modal'
-import NewCookbookForm from './newCookbookForm'
+import NewCookbookForm from './NewCookbookForm'
 
 const ProfileCookbooks = (props) => {
 
