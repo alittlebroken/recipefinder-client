@@ -88,6 +88,7 @@ const ProfileCookbooks = (props) => {
                     type="submit" 
                     value="new" 
                     className="btn pc-btn-new"
+                    onClick={ e=> { setShowNewModal(true) }}
                 >
                     New
                 </button>
