@@ -11,7 +11,7 @@ const CookBookCard = (props) => {
     return (
         <div aria-label="cookbook container" className="cc-container flex">
 
-            <img src={data.image_src} title={data.img_title} alt={data.img_alt} className="cc-image" />
+            <img src={data.src} title={data.title} alt={data.alt} className="cc-image" />
 
             <div aria-label="cookbook details" className="cc-details-container flex">
 
