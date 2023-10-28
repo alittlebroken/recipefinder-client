@@ -32,7 +32,7 @@ export const getCookbooks = createAsyncThunk(
                     perPage: cookbooks?.recsPerPage || 10
                 },
                 filter: {
-                    resource: 'Cookbook',
+                    //resource: 'Cookbook',
                     userid: user.id
                 }
             }
