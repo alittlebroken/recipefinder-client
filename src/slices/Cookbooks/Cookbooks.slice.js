@@ -33,7 +33,7 @@ export const getCookbooks = createAsyncThunk(
                 },
                 filter: {
                     //resource: 'Cookbook',
-                    userid: user.id
+                    userId: user.id
                 }
             }
 
