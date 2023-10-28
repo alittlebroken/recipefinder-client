@@ -63,16 +63,15 @@ const ProfileCookbooks = (props) => {
             }
         }
 
-        /* This function will allows us to use async in useEffectn when we try and get the
+        /* This function will allows us to use async in useEffect when we try and get the
          * data from the API */
         const fetchData = async () => {
-
-            await getCookbooks(payload)
+            await dispatch(getCookbooks(payload))
         }
 
         /* get the data from the API */
         fetchData()
-    }, [dispatch])
+    },[dispatch])
 
 
     return(
