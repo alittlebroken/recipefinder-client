@@ -1,4 +1,32 @@
 /* Mobile */
+.head-container {
+    width: 100%;
+    justify-content: space-between;
+    padding: 15px;
+}
+
+.pc-head-2 {
+    font-family: inherit;
+    font-size: 2rem;
+    text-align: center;
+    width: 100%;
+}
+
+.pc-btn-new {
+    background-color: var(--col-primary);
+    color: white;  
+}
+
+.pc-btn-new:hover {
+    background-color: white;
+    color: var(--col-primary);
+}
+
+.pc-cookbooks-container {
+    flex-direction: column;
+    padding: 30px;
+}
+
 
 /* Desktop */
 @media screen and ( min-width: 960px){
