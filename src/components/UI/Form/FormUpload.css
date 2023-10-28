@@ -11,8 +11,8 @@
 /* Desktop */
 @media screen and (min-width: 960px){
 
-    .FormUploadContainer > label {
-        margin-bottom: 10px;
+    .FormUpload {
+        margin-top: 10px;
     }
 
 }
