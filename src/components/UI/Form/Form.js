@@ -13,7 +13,8 @@ const Form = (props) => {
         children,
         initialValues,
         submit = () => {},
-        bordered = true
+        bordered = true,
+        buttonName = "Submit"
     } = props
 
     /* Sets classes on the form based on passed in props */
@@ -53,7 +54,7 @@ const Form = (props) => {
                 handleFormChange,
             }}>
                 {children}
-                <button type="submit" className="FormButton">Submit</button>
+                <button type="submit" className="FormButton">{buttonName}</button>
             </FormContext.Provider>
         </form>
     )
