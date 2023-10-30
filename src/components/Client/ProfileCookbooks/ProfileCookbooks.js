@@ -52,6 +52,9 @@ const ProfileCookbooks = (props) => {
     /* Sets if the data for this is dirty and needs to be refreshed */
     const [isDataDirty, setIsDataDirty] = useState(false)
 
+    /* Notifications */
+    const [notifications, setNotifications] = useState()
+
     /* Handler for closing the new cookbook modal */
     const handleNewModalClose = () => {
         setShowNewModal(false)
@@ -100,10 +103,21 @@ const ProfileCookbooks = (props) => {
 
                 {cookbooks.map( cookbook => {
                     return (
-                        <CookBookCard key={nanoid()} data={cookbook} setIsDirty={setIsDataDirty} />
+                        <CookBookCard key={nanoid()} data={cookbook} setIsDirty={setIsDataDirty} handleNotifications={setNotifications} />
                     )
                 })}
 
+            </div>
+
+            <div aria-label="notification container" className="cc-notifications">
+                {notifications && (
+                    <div 
+                        aria-label="notification message" 
+                        className={notifications.className}
+                    >
+                        {notifications.message}
+                    </div>
+                )}
             </div>
 
         </div>

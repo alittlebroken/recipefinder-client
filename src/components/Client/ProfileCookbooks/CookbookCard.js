@@ -9,14 +9,12 @@ const CookBookCard = (props) => {
     /* Destructure the passed in props */
     const {
         data,
-        setIsDirty
+        setIsDirty,
+        handleNotifications
     } = props
 
     /* Set the state for opening the modal form */
     const [showRemoveModal, setShowRemoveModal] = useState(false)
-
-    /* Set notification state for the operation being performed */
-    const [notifications, setNotifications] = useState()
 
     /* Handle the close of the remove Modal */
     const handleRemoveModal = (e) => {
@@ -49,13 +47,13 @@ const CookBookCard = (props) => {
             const res = await apiProvider.removeOne('cookbooks', params)
 
             if(res.status >= 200 && res.status < 300){
-                setNotifications({
+                handleNotifications({
                     className: "cc-notif cc-ok",
                     message: "Cookbook successfully removed"
                 })
                 setIsDirty(true)
             } else {
-                setNotifications({
+                handleNotifications({
                     className: "cc-notif cc-error",
                     message: "Unable to remove cookbook. Please try again later."
                 })
@@ -91,14 +89,6 @@ const CookBookCard = (props) => {
                         >
                             Cancel
                         </button>
-                        {notifications && (
-                            <div 
-                                aria-label="notification message" 
-                                className={notifications.className}
-                            >
-                                {notifications.message}
-                            </div>
-                        )}
                     </div>
                 </form>
 
@@ -131,17 +121,6 @@ const CookBookCard = (props) => {
                     </button>
 
                 </div>
-            </div>
-
-            <div aria-label="notification container" className="cc-notifications">
-                {notifications && (
-                    <div 
-                        aria-label="notification message" 
-                        className={notifications.className}
-                    >
-                        {notifications.message}
-                    </div>
-                )}
             </div>
 
         </div>
