@@ -60,6 +60,20 @@
     color: var(--col-primary);
 }
 
+.cc-notif {
+    padding: 15px;
+}
+
+.cc-ok {
+    color: green;
+    font-weight: bold;
+}
+
+.cc-error {
+    color: red;
+    font-weight: bold;
+}
+
 /* Desktop */
 @media screen and (min-width: 960px) {
     
