@@ -6,6 +6,11 @@
     overflow: hidden;
     background-color: white;
     border: 1px solid #e5e4e4;
+    /*font-family: "Karla";*/
+}
+
+.cc-content-container {
+    flex-direction: column;
 }
 
 .cc-image {
@@ -59,4 +64,9 @@
 /* Desktop */
 @media screen and (min-width: 960px) {
     
+    .cc-content-container {
+        flex-grow: 1;
+        justify-content: space-between;
+    }
+
 }

@@ -13,24 +13,26 @@ const CookBookCard = (props) => {
 
             <img src={data.src} title={data.title} alt={data.alt} className="cc-image" />
 
-            <div aria-label="cookbook details" className="cc-details-container flex">
+            <div aria-label="card content container" className="flex cc-content-container">
+                <div aria-label="cookbook details" className="cc-details-container flex">
 
-                <h3 className="cc-head-3">{data.title}</h3>
+                    <h3 className="cc-head-3">{data.title}</h3>
 
-                <p className="cc-description">{data.description}</p>
+                    <p className="cc-description">{data.description}</p>
 
-            </div>
+                </div>
 
-            <div aria-label="cookbook action button container" className="cc-action-buttons flex">
+                <div aria-label="cookbook action button container" className="cc-action-buttons flex">
 
-                <button name="moreInfo" className="cc-btn-action-more" value="more">
-                    More Info
-                </button>
+                    <button name="moreInfo" className="cc-btn-action-more" value="more">
+                        More Info
+                    </button>
 
-                <button name="remove" className="cc-btn-action-remove" value="remove">
-                    Remove
-                </button>
+                    <button name="remove" className="cc-btn-action-remove" value="remove">
+                        Remove
+                    </button>
 
+                </div>
             </div>
 
         </div>
