@@ -19,11 +19,53 @@ const CookBookCard = (props) => {
         setShowRemoveModal(false)
     }
 
+    /* Handles the submission of the form */
+    const handleSubmit = (e) => {
+        e.preventDefault()
+    }
+
+    /* Handle the click of a button */
+    const handleClick = (e) => {
+        e.preventDefault()
+
+        /* Which button was pressed */
+        if(e.target.value === "cancel"){
+            setShowRemoveModal(false)
+        } else if (e.target.value === "remove"){
+            /* Perform the dispatch for removing the cookbook */
+            
+        }
+
+    }
+
     return (
 
         <div aria-label="cookbook container" className="cc-container flex">
 
-            <Modal key={nanoid()} show={showRemoveModal} handleClose={handleRemoveModal} >
+            <Modal key={nanoid()} show={showRemoveModal} handleClose={handleRemoveModal}>
+                
+                <form id="form-remove" onSubmit={handleSubmit} className="flex form-container">
+                    <h3>{data.name}</h3>
+                    <p>Are you sure you wish to remove this cookbook and all it's recipes?</p>
+                    <div aria-label="action buttons container" className="flex flex-row action-container">
+                        <button 
+                            id="remove" 
+                            value="remove" 
+                            className="btn btn-action"
+                            onClick={handleClick}
+                        >
+                            Remove
+                        </button>
+                        <button 
+                            id="cancel" 
+                            value="cancel" 
+                            className="btn btn-action"
+                            onClick={handleClick}
+                        >
+                            Cancel
+                        </button>
+                    </div>
+                </form>
 
             </Modal>
 
