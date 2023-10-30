@@ -84,7 +84,7 @@ const ProfileCookbooks = (props) => {
         <div aria-label="content container" className="cookbooks-container flex">
 
             <Modal show={showNewModal} handleClose={handleNewModalClose}>
-                <NewCookbookForm />
+                <NewCookbookForm handleNotifications={setNotifications} isDataDirty={setIsDataDirty} />
             </Modal>
 
             <div aria-label="container for header and add button" className=" head-container flex">
