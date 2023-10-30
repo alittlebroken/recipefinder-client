@@ -73,6 +73,7 @@ const ProfileCookbooks = (props) => {
          * data from the API */
         const fetchData = async () => {
             await dispatch(getCookbooks(payload))
+            setIsDataDirty(false)
         }
 
         /* get the data from the API */
