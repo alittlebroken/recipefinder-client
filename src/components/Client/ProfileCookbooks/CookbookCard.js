@@ -2,6 +2,7 @@ import './CookbookCard.css'
 import { nanoid } from '@reduxjs/toolkit'
 import { useState } from 'react'
 import Modal from '../../UI/Modal/Modal'
+import apiProvider from "../../../providers/apiProvider"
 
 const CookBookCard = (props) => {
 
@@ -12,6 +13,9 @@ const CookBookCard = (props) => {
 
     /* Set the state for opening the modal form */
     const [showRemoveModal, setShowRemoveModal] = useState(false)
+
+    /* Set notification state for the operation being performed */
+    const [notifications, setNotifications] = useState()
 
     /* Handle the close of the remove Modal */
     const handleRemoveModal = (e) => {
@@ -25,15 +29,33 @@ const CookBookCard = (props) => {
     }
 
     /* Handle the click of a button */
-    const handleClick = (e) => {
+    const handleClick = async (e) => {
         e.preventDefault()
 
         /* Which button was pressed */
         if(e.target.value === "cancel"){
             setShowRemoveModal(false)
         } else if (e.target.value === "remove"){
-            /* Perform the dispatch for removing the cookbook */
             
+            /* generate the params for removing the cookbook */
+            const params = {
+                id: data?.id
+            }
+
+            const res = await apiProvider.removeOne('cookbooks', params)
+
+            if(res.status >= 200 && res.status < 300){
+                setNotifications({
+                    className: "cc-notif cc-ok",
+                    message: "Cookbook successfully removed"
+                })
+            } else {
+                setNotifications({
+                    className: "cc-notif cc-error",
+                    message: "Unable to remove cookbook. Please try again later."
+                })
+            }
+
         }
 
     }
@@ -96,6 +118,17 @@ const CookBookCard = (props) => {
                     </button>
 
                 </div>
+            </div>
+
+            <div aria-label="notification container" className="cc-notifications">
+                {notifications && (
+                    <div 
+                        aria-label="notification message" 
+                        className={notifications.className}
+                    >
+                        {notifications.message}
+                    </div>
+                )}
             </div>
 
         </div>
