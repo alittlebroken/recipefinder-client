@@ -75,7 +75,7 @@ const ProfileCookbooks = (props) => {
 
 
     return(
-        <div aria-label="content container" className="flex flex-col">
+        <div aria-label="content container" className="cookbooks-container flex">
 
             <Modal show={showNewModal} handleClose={handleNewModalClose}>
                 <NewCookbookForm />
