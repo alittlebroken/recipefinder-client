@@ -16,7 +16,7 @@ const CookBookCard = (props) => {
             <div aria-label="card content container" className="flex cc-content-container">
                 <div aria-label="cookbook details" className="cc-details-container flex">
 
-                    <h3 className="cc-head-3">{data.title}</h3>
+                    <h3 className="cc-head-3">{data.name}</h3>
 
                     <p className="cc-description">{data.description}</p>
 
