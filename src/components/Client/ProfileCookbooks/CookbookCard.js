@@ -1,5 +1,7 @@
 import './CookbookCard.css'
-
+import { nanoid } from '@reduxjs/toolkit'
+import { useState } from 'react'
+import Modal from '../../UI/Modal/Modal'
 
 const CookBookCard = (props) => {
 
@@ -8,8 +10,22 @@ const CookBookCard = (props) => {
         data
     } = props
 
+    /* Set the state for opening the modal form */
+    const [showRemoveModal, setShowRemoveModal] = useState(false)
+
+    /* Handle the close of the remove Modal */
+    const handleRemoveModal = (e) => {
+        e.preventDefault()
+        setShowRemoveModal(false)
+    }
+
     return (
+
         <div aria-label="cookbook container" className="cc-container flex">
+
+            <Modal key={nanoid()} show={showRemoveModal} handleClose={handleRemoveModal} >
+
+            </Modal>
 
             <img src={data.src} title={data.title} alt={data.alt} className="cc-image" />
 
@@ -28,7 +44,12 @@ const CookBookCard = (props) => {
                         More Info
                     </button>
 
-                    <button name="remove" className="cc-btn-action-remove" value="remove">
+                    <button 
+                        name="remove" 
+                        className="cc-btn-action-remove" 
+                        value="remove"
+                        onClick={(e) => { setShowRemoveModal(true)}}
+                    >
                         Remove
                     </button>
 
