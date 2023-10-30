@@ -1,6 +1,5 @@
 /* mobile */
 .cc-container {
-    width: 300px;
     flex-direction: column;
     border-radius: 10px;
     overflow: hidden;
@@ -64,6 +63,10 @@
 /* Desktop */
 @media screen and (min-width: 960px) {
     
+    .cc-container {
+        flex-basis: 32%;
+    }
+
     .cc-content-container {
         flex-grow: 1;
         justify-content: space-between;
