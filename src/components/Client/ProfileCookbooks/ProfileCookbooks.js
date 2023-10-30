@@ -82,7 +82,7 @@ const ProfileCookbooks = (props) => {
             </Modal>
 
             <div aria-label="container for header and add button" className=" head-container flex">
-                <h2 className="pc-head-2">Add Cookbook</h2>
+                <h2 className="pc-head-2">My Cookbooks</h2>
                 <button 
                     type="submit" 
                     value="new" 
