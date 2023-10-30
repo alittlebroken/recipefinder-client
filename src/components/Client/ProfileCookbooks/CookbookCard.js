@@ -39,6 +39,9 @@ const CookBookCard = (props) => {
             
             /* generate the params for removing the cookbook */
             const params = {
+                auth: {
+                    authenticate: true
+                },
                 id: data?.id
             }
 
