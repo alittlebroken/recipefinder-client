@@ -49,6 +49,9 @@ const ProfileCookbooks = (props) => {
     /* state for showing the add cookbook modal form */
     const [showNewModal, setShowNewModal] = useState(false)
 
+    /* Sets if the data for this is dirty and needs to be refreshed */
+    const [isDataDirty, setIsDataDirty] = useState(false)
+
     /* Handler for closing the new cookbook modal */
     const handleNewModalClose = () => {
         setShowNewModal(false)
@@ -71,7 +74,7 @@ const ProfileCookbooks = (props) => {
 
         /* get the data from the API */
         fetchData()
-    },[dispatch])
+    },[dispatch, isDataDirty])
 
 
     return(
@@ -97,7 +100,7 @@ const ProfileCookbooks = (props) => {
 
                 {cookbooks.map( cookbook => {
                     return (
-                        <CookBookCard key={nanoid()} data={cookbook} />
+                        <CookBookCard key={nanoid()} data={cookbook} setIsDirty={setIsDataDirty} />
                     )
                 })}
 
