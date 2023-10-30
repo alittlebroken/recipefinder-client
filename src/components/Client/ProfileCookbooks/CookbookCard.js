@@ -8,7 +8,8 @@ const CookBookCard = (props) => {
 
     /* Destructure the passed in props */
     const {
-        data
+        data,
+        setIsDirty
     } = props
 
     /* Set the state for opening the modal form */
@@ -52,6 +53,7 @@ const CookBookCard = (props) => {
                     className: "cc-notif cc-ok",
                     message: "Cookbook successfully removed"
                 })
+                setIsDirty(true)
             } else {
                 setNotifications({
                     className: "cc-notif cc-error",
@@ -89,6 +91,14 @@ const CookBookCard = (props) => {
                         >
                             Cancel
                         </button>
+                        {notifications && (
+                            <div 
+                                aria-label="notification message" 
+                                className={notifications.className}
+                            >
+                                {notifications.message}
+                            </div>
+                        )}
                     </div>
                 </form>
 
