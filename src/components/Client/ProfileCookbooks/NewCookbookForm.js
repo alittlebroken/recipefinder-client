@@ -9,9 +9,12 @@ import { useSelector } from 'react-redux'
 
 const NewCookbookForm = (props) => {
 
-    /* Set any state this form needs to use */
-    const [hasError, setHasError] = useState()
-    const [hasResult, setHasResult] = useState()
+    /* Extract props passed in */
+    const {
+        handleNotifications,
+        isDataDirty,
+        handleCloseModal
+    } = props
 
     /* Get profile data */
     const profile = useSelector(selectProfileData)
@@ -70,16 +73,24 @@ const NewCookbookForm = (props) => {
             const imageResult = await apiProvider.create('uploads', imageParams)
             
             if(imageResult.status >= 200 && imageResult.status < 300){
-                setHasResult('New cookbook successfully created')
+                handleNotifications({
+                    className: "cc-notif cc-ok",
+                    message: 'New cookbook successfully created'
+                })
+                isDataDirty(true)
+                handleCloseModal(true)
             }
 
         } else {
-            /* Something went wrong */
-            setHasError('Unable to add new cookbook. Please try again later')
+                /* Something went wrong */
+                handleNotifications({
+                    className: "cc-notif cc-error",
+                    message: 'Unable to add new cookbook. Please try again later'
+                })
+                handleCloseModal(true)
         }
 
     }
-
 
     return (
         <Form 
@@ -112,18 +123,6 @@ const NewCookbookForm = (props) => {
                 name="altText"
                 label="Image Alternative Text"
             />
-
-            {hasError && (
-                <div aria-label="add new cookbook error" className="nc-error">
-                    {hasError}
-                </div>
-            )}
-
-            {hasResult && (
-                <div aria-label="add new cookbook success" className="nc-ok">
-                    {hasResult}
-                </div>
-            )}
 
         </Form>
     )
