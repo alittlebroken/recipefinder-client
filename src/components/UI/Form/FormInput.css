@@ -15,6 +15,13 @@
     border-radius: 7px;
 }
 
+.FormNotificationContainer {
+    padding: 5px;
+    font-size: .9rem;    
+    font-weight: bold;
+    color: red;
+}
+
 /* Desktop */
 @media screen and (min-width: 900px) {
    
