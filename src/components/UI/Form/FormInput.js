@@ -23,7 +23,7 @@ const FormInput = (props) => {
 
     /* Get the form context to access the values needed */
     const formContext = useContext(FormContext)
-    const { form, handleFormChange } = formContext
+    const { form, handleFormChange, setDirty } = formContext
 
     /* Store the result of validation, by default set the form to be validated and allow the validation
        steps to set if validation failed or not
@@ -35,6 +35,9 @@ const FormInput = (props) => {
 
     /* const handle validation */
     const handleValidation = (e) => {
+
+        /* By Default set the form to clean and only set it dirty if validation fails */
+        setDirty(false)
 
        /* Only perform validation if we have validators to apply */
        if(validators?.length >= 1){
@@ -48,7 +51,7 @@ const FormInput = (props) => {
                 switch(validator.type){
                     case "minLength":
                         result = minLength(validator.value, e)
-
+                        
                         /* Check the validation methids return type. If it's a boolean 
                         then it has passed the check, otherwise it is a string and this
                         means the validation failed for some reason */
@@ -56,7 +59,10 @@ const FormInput = (props) => {
                         if(typeof result !== 'boolean'){
                             setValidationMessage(result)
                             setValidated(false)
-                        }                        
+                            setDirty(true)
+                        } else {
+                            setValidationMessage(null)
+                        }                   
                         break;
                     case "maxLength":
                         result = maxLength(validator.value, e)
@@ -68,6 +74,9 @@ const FormInput = (props) => {
                         if(typeof result !== 'boolean'){
                             setValidationMessage(result)
                             setValidated(false)
+                            setDirty(true)
+                        } else {
+                            setValidationMessage(null)
                         }                        
                         break;
                     case "minValue":
@@ -80,7 +89,10 @@ const FormInput = (props) => {
                         if(typeof result !== 'boolean'){
                             setValidationMessage(result)
                             setValidated(false)
-                        }                        
+                            setDirty(true)
+                        } else {
+                            setValidationMessage(null)
+                        }                      
                         break;
                     case "maxValue":
                         result = max(validator.value, e)
@@ -92,6 +104,9 @@ const FormInput = (props) => {
                         if(typeof result !== 'boolean'){
                             setValidationMessage(result)
                             setValidated(false)
+                            setDirty(true)
+                        } else {
+                            setValidationMessage(null)
                         }                        
                         break;
                     default:
