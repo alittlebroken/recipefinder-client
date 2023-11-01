@@ -3,7 +3,7 @@ import { createContext, useState } from "react"
 import './Form.css'
 
 export const FormContext = createContext({
-    form: {}
+    form: {},
 })
 
 const Form = (props) => {
@@ -24,6 +24,7 @@ const Form = (props) => {
 
     /* The forms current state */
     const [form, setForm] = useState(initialValues)
+    const [dirty, setDirty] = useState(true)
 
     /* Handle updating the various form elements */
     const handleFormChange = (e) => {
@@ -48,10 +49,11 @@ const Form = (props) => {
     }
 
     return (
-        <form className={classes} onSubmit={ event => props?.onSubmit(event, form)}>
+        <form className={classes} onSubmit={ event => props?.onSubmit(event, form, dirty)}>
             <FormContext.Provider value={{
                 form,
                 handleFormChange,
+                setDirty
             }}>
                 {children}
                 <button type="submit" className="FormButton">{buttonName}</button>
