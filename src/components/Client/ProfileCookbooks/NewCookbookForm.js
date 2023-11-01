@@ -29,7 +29,7 @@ const NewCookbookForm = (props) => {
     }
 
     /* Handler for the form submission */
-    const handleSubmit = async (e, form) => {
+    const handleSubmit = async (e, form, dirty) => {
         /* prevent the from from submitting */
         e.preventDefault()
 
@@ -47,48 +47,53 @@ const NewCookbookForm = (props) => {
             }
         }
 
-        /* First try to add the cookbook details */
-        const cookbookResult = await apiProvider.create('cookbooks', cookbookParams)
+        /* First try to add the cookbook details, if the form is Dirty don't submit */
+        if(!dirty){
+
+            const cookbookResult = await apiProvider.create('cookbooks', cookbookParams)
         
-        if(cookbookResult.success){
-            /* Get the ID for the cookbook just created */
-            const cookbookId = cookbookResult?.results[0].id
-            
-            /* Create the params to send with the request */
-            const imageParams = {
-                auth: {
-                    authenticate: true
-                },
-                payload: {
-                    userId: profile.userId,
-                    src: '',
-                    resource: 'Cookbook',
-                    resourceid: cookbookId,
-                    title: form.title,
-                    images: form.images[0]
+            if(cookbookResult.success){
+                /* Get the ID for the cookbook just created */
+                const cookbookId = cookbookResult?.results[0].id
+                
+                /* Create the params to send with the request */
+                const imageParams = {
+                    auth: {
+                        authenticate: true
+                    },
+                    payload: {
+                        userId: profile.userId,
+                        src: '',
+                        resource: 'Cookbook',
+                        resourceid: cookbookId,
+                        title: form.title,
+                        images: form.images[0]
+                    }
                 }
+
+                /* Send the request and check the sreponse */
+                const imageResult = await apiProvider.create('uploads', imageParams)
+                
+                if(imageResult.status >= 200 && imageResult.status < 300){
+                    handleNotifications({
+                        className: "cc-notif cc-ok",
+                        message: 'New cookbook successfully created'
+                    })
+                    isDataDirty(true)
+                    handleCloseModal(true)
+                }
+
+            } else {
+                    /* Something went wrong */
+                    handleNotifications({
+                        className: "cc-notif cc-error",
+                        message: 'Unable to add new cookbook. Please try again later'
+                    })
+                    handleCloseModal(true)
             }
 
-            /* Send the request and check the sreponse */
-            const imageResult = await apiProvider.create('uploads', imageParams)
-            
-            if(imageResult.status >= 200 && imageResult.status < 300){
-                handleNotifications({
-                    className: "cc-notif cc-ok",
-                    message: 'New cookbook successfully created'
-                })
-                isDataDirty(true)
-                handleCloseModal(true)
-            }
-
-        } else {
-                /* Something went wrong */
-                handleNotifications({
-                    className: "cc-notif cc-error",
-                    message: 'Unable to add new cookbook. Please try again later'
-                })
-                handleCloseModal(true)
         }
+        
 
     }
 
@@ -101,11 +106,17 @@ const NewCookbookForm = (props) => {
             <FormInput 
                 name="name"
                 label="Name"
+                validators={[
+                    { type: "minLength", value: 4}
+                ]}
             />
 
             <FormInput 
                 name="description"
                 label="Description"
+                validators={[
+                    { type: "minLength", value: 4}
+                ]}
             />
 
             <FormUpload 
@@ -117,11 +128,17 @@ const NewCookbookForm = (props) => {
             <FormInput 
                 name="title"
                 label="Image Title"
+                validators={[
+                    { type: "minLength", value: 4}
+                ]}
             />
 
             <FormInput 
                 name="altText"
                 label="Image Alternative Text"
+                validators={[
+                    { type: "minLength", value: 4}
+                ]}
             />
 
         </Form>
