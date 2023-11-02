@@ -1,3 +1,4 @@
+import { TypographyNestedContext } from "@mui/joy/Typography/Typography"
 
 /* Checks if the element has a minimum length */
 export const min = (min, e) => {
@@ -121,6 +122,33 @@ export const required = (e) => {
     }
     
     /* By default set return value to true */
+    return true
+
+}
+
+/* checks that the filetype matches the passed in array of acceptable file types */
+export const allowedFileTypes = (e, types) => {
+
+    /* Check that the passed in types is an array and has items */
+    if(!types || !Array.isArray(types) || types?.length < 1){
+        return 'You must supply a valid list of file types to check against'
+    }
+
+    /* Loop through each file type and check against the current elements file
+      type and if a match is found then increase the match count*/
+    let matches = 0
+    types.forEach( type => {
+        if(type === e.target.files[0].type){
+            matches += 1
+        }
+    })
+
+    /* Return a message if no matches found */
+    if(matches < 1){
+        return 'The supplied file does not match one of the allowed types'
+    }
+
+    /* Set the default return value */
     return true
 
 }
