@@ -105,7 +105,7 @@ export const required = (e) => {
 
     /* Destructure the passed in event */
     const { target }  = e
-    console.log(target.files[0])
+    
     /* Check the type of the element that is required */
     if(target.type === 'file'){
 
@@ -151,4 +151,24 @@ export const allowedFileTypes = (e, types) => {
     /* Set the default return value */
     return true
 
+}
+
+/* Checks the file being uploaded does not exceed a certain size in bytes */
+export const maxFileSize = (e, size) => {
+
+    /* Check that we have a value passed in for checking the size against */
+    if(!size || typeof size !== 'number' || size === null || size === undefined){
+        return 'You must supply a valid size to check against'
+    }
+
+    /* Get the file we are interested in */
+    const file = e.target.files[0]
+
+    /* Check the current file is not larger than the max size */
+    if(file.size / 1024 > size){
+        return 'The supplied file exceeds the max file size of ' + size + ' kb'
+    }
+
+    /* Set the default return value */
+    return true
 }
