@@ -3,6 +3,7 @@ import { nanoid } from '@reduxjs/toolkit'
 import { useState } from 'react'
 import Modal from '../../UI/Modal/Modal'
 import apiProvider from "../../../providers/apiProvider"
+import { useNavigate } from 'react-router-dom'
 
 const CookBookCard = (props) => {
 
@@ -12,6 +13,9 @@ const CookBookCard = (props) => {
         setIsDirty,
         handleNotifications
     } = props
+
+    /* Alias the navigate hook */
+    const navigate = useNavigate()
 
     /* Set the state for opening the modal form */
     const [showRemoveModal, setShowRemoveModal] = useState(false)
@@ -107,7 +111,14 @@ const CookBookCard = (props) => {
 
                 <div aria-label="cookbook action button container" className="cc-action-buttons flex">
 
-                    <button name="moreInfo" className="cc-btn-action-more" value="more">
+                    <button 
+                        name="moreInfo" 
+                        className="cc-btn-action-more" 
+                        value="more"
+                        onClick={(e) => {
+                            navigate(`/profile/cookbook/${data.id}`)
+                        }}
+                    >
                         More Info
                     </button>
 
