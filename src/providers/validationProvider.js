@@ -98,3 +98,29 @@ export const maxLength = (max, e) => {
     return true
 
 }
+
+/* Check to ensure there is a value set for the element being validated */
+export const required = (e) => {
+
+    /* Destructure the passed in event */
+    const { target }  = e
+    console.log(target.files[0])
+    /* Check the type of the element that is required */
+    if(target.type === 'file'){
+
+        if(!target.value || target.value === undefined || target.value === null){
+            return 'This is a required field please supply a valid value'
+        } 
+
+    }  else {
+        /* All other element types to be checke here */
+        if(!target.value || target.value === undefined || target.value === null || target.value === ''){
+            return `This is a required field please supply a valid value`
+        }
+
+    }
+    
+    /* By default set return value to true */
+    return true
+
+}
