@@ -123,6 +123,16 @@ const NewCookbookForm = (props) => {
                 name="images"
                 label="Cookbook Image"
                 acceptType="image/*"
+                validators={[
+                    { type: "required", value: null},
+                    { type: "fileType", value: [
+                        'image/png',
+                        'image/jpg',
+                        'image/jpeg',
+                        'image/gif'
+                    ]},
+                    {type: "maxFileSize", value: 1024}
+                ]}
             />
 
             <FormInput 
