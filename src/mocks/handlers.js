@@ -265,5 +265,37 @@ export const handlers = [
 
         )
 
+    }),
+    rest.get('http://localhost:5000/cookbooks/:id/recipes', (req, res, ctx) => {
+
+        return res(
+            ctx.status(200),
+            ctx.json({
+                results: [
+                    {
+                        id: 1,
+                        name: "Spaghetti Bolognaise",
+                        description: "A delicious and simple Spaghettit Bolognaise",
+                        rating: 5,
+                        categories: [
+                            { categoryId: 1, name: "Dinner", recipeId: 1}
+                        ],
+                        images: [
+                            { 
+                                imageId: 1,
+                                imageUser: 1,
+                                imageSrc: 'spagbol.png',
+                                imageTitle: 'Spaghetti Bolognaise',
+                                imageAlt: 'Image of a bowl of Spaghetti Bolognaise'
+                            }
+                        ]
+                    }
+                ],
+                totalPages: 1,
+                totalRecords: 1,
+                currentPage: 1
+            })
+        )
+
     })
 ]
