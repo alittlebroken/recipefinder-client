@@ -7,8 +7,16 @@ import {
     pageDown,
     setRecsPerPage,
     goToPage,
-    selectRecipes
+    selectIsLoading,
+    selectHasError,
+    selectRecipes,
+    selectPage,
+    selectPages,
+    selectRecsPerPage,
+    selectRecords
 } from '../../../slices/Cookbooks/Cookbooks.slice'
+import Pagination from '../../UI/Pagination/Pagination'
+
 
 const ProfileCookbook = (props) => {
 
@@ -22,6 +30,17 @@ const ProfileCookbook = (props) => {
 
     /* Get a list of the recipes for this cookbook */
     const recipes = useSelector(selectRecipes)
+
+    /* Are we still loading data or have we encountered an error */
+    const loading = useSelector(selectIsLoading)
+    const errored = useSelector(selectHasError)
+
+    /* State for controlling pagination */
+    const [page, setPage] = useState(pagination.page)
+    const [recsPage, setRecsPage] = useState(pagination.recsPerPage)
+
+    /* State for controlling if the data is outdated ( dirty ) */
+    const [isDirty, setIsDirty] = useState(false)
 
     /* Load the recipe list */
     useEffect(() => {
@@ -39,7 +58,36 @@ const ProfileCookbook = (props) => {
 
         /* Get the data */
         fetchData()
-    }, [dispatch])
+    }, [page, recsPage, dispatch, isDirty])
+
+    /* pagination options */
+    const pagination = {
+        page: useSelector(selectPage),
+        pages: useSelector(selectPages),
+        recsPerPage: useSelector(selectRecsPerPage),
+        records: useSelector(selectRecords)
+    }
+
+    /* Handler for changing how many records to display per
+     * page 
+    */
+    const recsChangeHandler = async (e) => {
+        setRecsPerPage(e.target.value)
+        dispatch(setRecsPerPage(e.target.value))
+    }
+
+    /* Handler for going forward or backward the pages */
+    const pageChangeHandler = async (e) => {
+        if(e.target.value === '-'){
+            setPage(page - 1)
+            dispatch(pageDown())
+        } else if(e.target.value === '+'){
+            setPage(page + 1)
+            dispatch(pageUp())
+        }
+    }
+
+
 
     return (
         
@@ -60,6 +108,16 @@ const ProfileCookbook = (props) => {
             </div>
 
             <div aria-label="recipes container" className="cb-recipe-list flex">
+
+            <Pagination 
+                        totalRecords={pagination.records}
+                        recsPerPage={pagination.recsPerPage}
+                        totalPages={pagination.pages}
+                        currentPage={pagination.page}
+                        handlePageChange={pageChangeHandler}
+                        handleRecsChange={recsChangeHandler}
+                        minified
+            />
 
                 {recipes.map( recipe => {
 
@@ -94,6 +152,16 @@ const ProfileCookbook = (props) => {
                     </div>
 
                 })}
+
+                <Pagination 
+                        totalRecords={pagination.records}
+                        recsPerPage={pagination.recsPerPage}
+                        totalPages={pagination.pages}
+                        currentPage={pagination.page}
+                        handlePageChange={pageChangeHandler}
+                        handleRecsChange={recsChangeHandler}
+                        minified
+            />
 
             </div>
 
