@@ -248,5 +248,22 @@ export const handlers = [
             })
         )
 
+    }),
+    rest.get('http://localhost:5000/cookbooks/:id', (req, res, ctx) => {
+
+        return res(
+            ctx.status(200),
+            ctx.json([
+                { 
+                    id: 1, 
+                    userId: 1, 
+                    name: "My Favourites",
+                    description: "Plethora of my favourite recipes",
+                    image:  "favourite_cookbooks.png"
+                }
+            ])
+
+        )
+
     })
 ]
