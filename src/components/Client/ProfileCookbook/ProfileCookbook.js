@@ -1,11 +1,45 @@
 import './ProfileCookbook.css'
+import { useSelector, useDispatch } from 'react-redux'
+import { useEffect } from 'react'
+import {
+    getCookBookRecipeList,
+    pageUp,
+    pageDown,
+    setRecsPerPage,
+    goToPage,
+    selectRecipes
+} from '../../../slices/Cookbooks/Cookbooks.slice'
 
 const ProfileCookbook = (props) => {
+
+    /* Alias the dispatch hook */
+    const dispatch = useDispatch()
 
     /* Destructure the props passed in */
     const {
         cookbook
     } = props
+
+    /* Get a list of the recipes for this cookbook */
+    const recipes = useSelector(selectRecipes)
+
+    /* Load the recipe list */
+    useEffect(() => {
+
+        /* function to fetch the data from the API asynchronously */
+        const fetchData = async () => {
+
+            /* generate the payload for the API call */
+            const payload = {
+                cookbookId: cookbook.id
+            }
+
+            await getCookBookRecipeList(payload)
+        }
+
+        /* Get the data */
+        fetchData()
+    }, [dispatch])
 
     return (
         
