@@ -18,12 +18,16 @@ import {
 import Pagination from '../../UI/Pagination/Pagination'
 import { nanoid } from '@reduxjs/toolkit'
 import Modal from '../../UI/Modal/Modal'
+import { useNavigate } from 'react-router-dom'
 
 
 const ProfileCookbook = (props) => {
 
     /* Alias the dispatch hook */
     const dispatch = useDispatch()
+
+    /* Alias the navigation hook */
+    const navigate = useNavigate()
 
     /* Destructure the props passed in */
     const {
@@ -188,7 +192,7 @@ const ProfileCookbook = (props) => {
                                     name="moreInfo" 
                                     classname="btn cb-action-btn flex"
                                     onClick={(e) => {
-                                        
+                                        navigate(`/recipes/${recipe.id}`)
                                     }}
                                 >
                                     More Info
