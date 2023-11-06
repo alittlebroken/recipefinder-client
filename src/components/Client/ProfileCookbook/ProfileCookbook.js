@@ -282,9 +282,19 @@ const ProfileCookbook = (props) => {
                 alt={cookbook.alt}
             />
 
-            <h2 className="cb-head-2">
-                {cookbook.name}
-            </h2>
+            <div aria-label="heading container" className="cb-header-container flex">
+                <h2 className="cb-head-2">
+                    {cookbook.name}
+                </h2>
+                <button 
+                    className="btn cb-edit-btn"
+                    onClick={(e) => {
+                        setShowEditModal(true)
+                    }}
+                >
+                    Edit
+                </button>
+            </div>
 
             <div aria-label="cookbook description" className="cb-description">
                 {cookbook.description}
