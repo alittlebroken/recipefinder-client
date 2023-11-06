@@ -19,7 +19,11 @@ import Pagination from '../../UI/Pagination/Pagination'
 import { nanoid } from '@reduxjs/toolkit'
 import Modal from '../../UI/Modal/Modal'
 import { useNavigate } from 'react-router-dom'
-
+import Form from '../../UI/Form/Form'
+import FormInput from '../../UI/Form/FormInput'
+import FormUpload from '../../UI/Form/FormUpload'
+import { selectProfileData } from '../../../slices/Profile/Profile.slice'
+import apiProvider from '../../../providers/apiProvider'
 
 const ProfileCookbook = (props) => {
 
@@ -114,13 +118,158 @@ const ProfileCookbook = (props) => {
         setShowEditModal(false)
     }
 
+    /* Set the initial values for the Form component */
+    const formInitialValues = {
+        name: cookbook.name,
+        description: cookbook.description,
+        images: cookbook.src,
+        title: cookbook.title,
+        altText: cookbook.alt
+    }
+
+    /* Get profile data */
+    const profile = useSelector(selectProfileData)
+
+    /* Notifications */
+    const [notifications, setNotifications] = useState()
+
+    /* Handler for the form submission */
+    const handleSubmit = async (e, form, dirty) => {
+        
+        /* prevent the from from submitting */
+        e.preventDefault()
+
+        /* Create the params for editing the cookbook */
+        const cookbookParams = {
+            auth: {
+                authenticate: true
+            },
+            payload: {
+                userId: profile.userId,
+                cookbookId: cookbook.id,
+                name: form.name,
+                description: form.description,
+                image: null
+            }
+        }
+
+        /* Only update the form if it has been changed */
+        if(isDirty){
+
+            /* Update the cookbook */
+            const cookbookResult = await apiProvider.update('cookbooks', cookbookParams)
+
+            if(cookbookResult.success){
+
+                /* Attempt to update the Image for the cookbook */
+
+                /* Create a param object to pass with the image request */
+                const imageParams = {
+                    auth: {
+                        authenticate: true
+                    },
+                    payload: {
+                        userId: profile.userId,
+                        src: '',
+                        resource: 'Cookbook',
+                        resourceid: cookbook.id,
+                        title: form.title,
+                        images: form.images[0]
+                    }
+                }
+
+                /* Send the request and check the response */
+                const imageResult = await apiProvider.updated('images', imageParams)
+
+                if(imageResult.status >= 200 && imageResult.status < 300){
+                    setNotifications({
+                        className: "cc-notif cc-ok",
+                        message: "Cookbook successfully updated."
+                    })
+                    setIsDirty(true)
+                    handleCloseEditModal(true)
+                }
+
+            } else {
+
+                setNotifications({
+                    className: "cc-notif cc-error",
+                    message: "Unable to update the cookbook. Please try again later."
+                })
+                handleCloseEditModal(true)
+
+            }
+
+        }
+
+    }
 
     return (
         
         <div aria-label="cookbook container" className="cb-container flex">
 
             <Modal key={nanoid()} show={showEditModal} handleClose={handleCloseEditModal}>
-                
+                <Form 
+                    initialValues={formInitialValues}
+                    onSubmit={handleSubmit}
+                    bordered={false}
+                >
+                    
+                    <img 
+                        src={cookbook.src}
+                        title={cookbook.title}
+                        alt={cookbook.alt}
+                    />
+
+                    <FormInput 
+                        name="name"
+                        label="Name"
+                        validators={[
+                            { type: "minLength", value: 4}
+                        ]}
+                    />   
+
+                    <FormInput 
+                        name="description"
+                        label="Description"
+                        validators={[
+                            { type: "minLength", value: 4}
+                        ]}
+                    />
+
+                    <FormUpload 
+                        name="images"
+                        label="Cookbook Image"
+                        acceptType="image/*"
+                        validators={[
+                            { type: "required", value: null},
+                            { type: "fileType", value: [
+                                'image/png',
+                                'image/jpg',
+                                'image/jpeg',
+                                'image/gif'
+                            ]},
+                            {type: "maxFileSize", value: 1024}
+                        ]}
+                    />
+
+                    <FormInput 
+                        name="title"
+                        label="Image Title"
+                        validators={[
+                            { type: "minLength", value: 4}
+                        ]}
+                    />
+
+                    <FormInput 
+                        name="altText"
+                        label="Image Alternative Text"
+                        validators={[
+                            { type: "minLength", value: 4}
+                        ]}
+                    />
+
+                </Form>
             </Modal>
 
             <Modal key={nanoid()} show={showRemoveModal} handleClose={handleCloseRemovalModal}>
@@ -204,6 +353,17 @@ const ProfileCookbook = (props) => {
                     </div>
 
                 })}
+
+                <div aria-label="notification container" className="cc-notifications">
+                    {notifications && (
+                        <div 
+                            aria-label="notification message" 
+                            className={notifications.className}
+                        >
+                            {notifications.message}
+                        </div>
+                    )}
+                </div>
 
                 <Pagination 
                         totalRecords={pagination.records}
