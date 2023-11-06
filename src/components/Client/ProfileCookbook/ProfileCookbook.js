@@ -16,6 +16,7 @@ import {
     selectRecords
 } from '../../../slices/Cookbooks/Cookbooks.slice'
 import Pagination from '../../UI/Pagination/Pagination'
+import { nanoid } from '@reduxjs/toolkit'
 
 
 const ProfileCookbook = (props) => {
@@ -121,7 +122,7 @@ const ProfileCookbook = (props) => {
 
                 {recipes.map( recipe => {
 
-                    <div aria-label="recipe-container" className="cb-recipe-container flex">
+                    <div key={nanoid()} aria-label="recipe-container" className="cb-recipe-container flex">
 
                         <img 
                             src={recipe.images[0].imageSrc} 
