@@ -47,10 +47,48 @@ export const getCookbooks = createAsyncThunk(
     }
 )
 
+/* Thunk to load a cookbooks recipe list */
+export const getCookBookRecipeList = createAsyncThunk(
+    'cookbooks/getCookbookRecipeList',
+    async (payload, thunkAPI) => {
+
+        try{
+
+            /* Destructure payload */
+            const { cookbookId, sort } = payload
+
+            /* Extract out the correct state we need to access */
+            const { cookbooks } = thunkAPI.getState()
+
+            /* Setup the params form the API */
+            const params = {
+                auth: { authenticated: true},
+                id: cookbookId,
+                sort: {
+                    field: sort?.field || 'created_at',
+                    order: sort?.order || 'desc'
+                },
+                pagination: {
+                    page: cookbooks?.page || 1,
+                    perPage: cookbooks?.recsPerPage || 10
+                },
+            }
+
+            /* Send the query and return the results */
+            return await apiProvider.getList('cookbookRecipes', params)
+
+        } catch(e) {
+            throw e
+        }
+
+    }
+)
+
 /* Create the inital structure for the slice and any default values
 it needs */
 const initialState = {
     cookbooks: [],
+    recipes: [],
     hasError: false,
     isLoading: false,
     page: 1,
@@ -109,6 +147,29 @@ const cookbooksSlice = createSlice({
                 state.records = results?.totalRecords
             }
 
+        },
+        [getCookBookRecipeList.pending]: (state, action) => {
+            state.isLoading = true
+            state.hasError = false
+        },
+        [getCookBookRecipeList.rejected]: (state, action) => {
+            state.isLoading = false
+            state.hasError = true
+        },
+        [getCookBookRecipeList.fulfilled]: (state, action) => {
+            state.isLoading = false
+            state.hasError = false
+
+            /* Assign the results to the correct var in the store */
+            const results = action.payload?.data?.results
+            state.recipes = results
+
+            /* Set the pagination for the recipes */
+            if(state.cookbooks?.length >= 1){
+                state.pages = results?.totalPages || 1
+                state.page = results?.currentPage || 1
+                state.records = results?.totalRecords
+            }
         }
     }
 })
@@ -129,6 +190,7 @@ export const selectPages = state => state.cookbooks.pages
 export const selectPage = state => state.cookbooks.page
 export const selectRecsPerPage = state => state.cookbooks.recsPerPage
 export const selectRecords = state => state.cookbooks.records
+export const selectRecipes = state => state.cookbooks.recipes
 
 /* Export the reducer itself */
 export default cookbooksSlice.reducer
