@@ -17,6 +17,7 @@ import {
 } from '../../../slices/Cookbooks/Cookbooks.slice'
 import Pagination from '../../UI/Pagination/Pagination'
 import { nanoid } from '@reduxjs/toolkit'
+import Modal from '../../UI/Modal/Modal'
 
 
 const ProfileCookbook = (props) => {
@@ -50,6 +51,15 @@ const ProfileCookbook = (props) => {
 
     /* State for controlling if the data is outdated ( dirty ) */
     const [isDirty, setIsDirty] = useState(false)
+
+    /* State for Modal forms */
+    /* remove ingredient State */
+    const [showRemoveModal, setShowRemoveModal] = useState(false)
+    /* edit ingredient state */
+    const [showEditModal, setShowEditModal] = useState(false)
+
+    /* State for setting id of ingredient to remove or update */
+    const [id, setId] = useState()
 
     /* Load the recipe list */
     useEffect(() => {
@@ -88,11 +98,30 @@ const ProfileCookbook = (props) => {
         }
     }
 
+    /* Handler for closing the remove modal */
+    const handleCloseRemovalModal = () => {
+        setId(null)
+        setShowRemoveModal(false)
+    }
+
+    /* Handle the closing of the edit model */
+    const handleCloseEditModal = () => {
+        setId(null)
+        setShowEditModal(false)
+    }
 
 
     return (
         
         <div aria-label="cookbook container" className="cb-container flex">
+
+            <Modal key={nanoid()} show={showEditModal} handleClose={handleCloseEditModal}>
+                
+            </Modal>
+
+            <Modal key={nanoid()} show={showRemoveModal} handleClose={handleCloseRemovalModal}>
+                
+            </Modal>
 
             <img 
                 src={cookbook.src}
@@ -144,8 +173,26 @@ const ProfileCookbook = (props) => {
 
                             <div aria-label="recipe actions" className="cb-recipe-actions flex">
 
-                                <button name="remove" className="btn cb-action-btn flex">Remove</button>
-                                <button name="moreInfo" classname="btn cb-action-btn flex">More Info</button>
+                                <button 
+                                    name="remove" 
+                                    className="btn cb-action-btn flex"
+                                    value={recipe.id}
+                                    onClick={(event => {
+                                        setId(event.target.value)
+                                        setShowRemoveModal(true)
+                                    })}
+                                >
+                                    Remove
+                                </button>
+                                <button 
+                                    name="moreInfo" 
+                                    classname="btn cb-action-btn flex"
+                                    onClick={(e) => {
+                                        
+                                    }}
+                                >
+                                    More Info
+                                </button>
                             </div> 
 
                         </div>
