@@ -1,6 +1,6 @@
 import './ProfileCookbook.css'
 import { useSelector, useDispatch } from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import {
     getCookBookRecipeList,
     pageUp,
@@ -35,6 +35,14 @@ const ProfileCookbook = (props) => {
     const loading = useSelector(selectIsLoading)
     const errored = useSelector(selectHasError)
 
+    /* pagination options */
+    const pagination = {
+        page: useSelector(selectPage),
+        pages: useSelector(selectPages),
+        recsPerPage: useSelector(selectRecsPerPage),
+        records: useSelector(selectRecords)
+    }
+
     /* State for controlling pagination */
     const [page, setPage] = useState(pagination.page)
     const [recsPage, setRecsPage] = useState(pagination.recsPerPage)
@@ -59,14 +67,6 @@ const ProfileCookbook = (props) => {
         /* Get the data */
         fetchData()
     }, [page, recsPage, dispatch, isDirty])
-
-    /* pagination options */
-    const pagination = {
-        page: useSelector(selectPage),
-        pages: useSelector(selectPages),
-        recsPerPage: useSelector(selectRecsPerPage),
-        records: useSelector(selectRecords)
-    }
 
     /* Handler for changing how many records to display per
      * page 
