@@ -13,17 +13,19 @@ import {
     selectPage,
     selectPages,
     selectRecsPerPage,
-    selectRecords
+    selectRecords,
+    selectCookbook
 } from '../../../slices/Cookbooks/Cookbooks.slice'
 import Pagination from '../../UI/Pagination/Pagination'
 import { nanoid } from '@reduxjs/toolkit'
 import Modal from '../../UI/Modal/Modal'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import Form from '../../UI/Form/Form'
 import FormInput from '../../UI/Form/FormInput'
 import FormUpload from '../../UI/Form/FormUpload'
 import { selectProfileData } from '../../../slices/Profile/Profile.slice'
 import apiProvider from '../../../providers/apiProvider'
+
 
 const ProfileCookbook = (props) => {
 
@@ -33,13 +35,13 @@ const ProfileCookbook = (props) => {
     /* Alias the navigation hook */
     const navigate = useNavigate()
 
-    /* Destructure the props passed in */
-    const {
-        cookbook
-    } = props
+    /* Get the ID of the cookbook from the url params */
+    const urlParams = useParams()
+    const cookbookId = urlParams.id
 
     /* Get a list of the recipes for this cookbook */
     const recipes = useSelector(selectRecipes)
+
 
     /* Are we still loading data or have we encountered an error */
     const loading = useSelector(selectIsLoading)
@@ -52,6 +54,11 @@ const ProfileCookbook = (props) => {
         recsPerPage: useSelector(selectRecsPerPage),
         records: useSelector(selectRecords)
     }
+
+    /* Get the current cookbook */
+    const cookbooks = useSelector(selectCookbook)
+    const tmp = cookbooks.filter( item => item.id === parseInt(cookbookId))
+    const cookbook = tmp[0]
 
     /* State for controlling pagination */
     const [page, setPage] = useState(pagination.page)
