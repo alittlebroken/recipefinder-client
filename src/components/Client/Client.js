@@ -46,7 +46,7 @@ const Client = (props) => {
             <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
             <Route path="/pantry" element={<ProtectedRoute><Pantry /></ProtectedRoute>} />
             <Route path="/profile/cookbooks" element={<ProtectedRoute><ProfileCookbooks /></ProtectedRoute>} />
-            <Route path="/profile/cookbooks/:id" element={<ProtectedRoute><ProfileCookbook /></ProtectedRoute>} />
+            <Route path="/profile/cookbook/:id" element={<ProtectedRoute><ProfileCookbook /></ProtectedRoute>} />
           </Routes>
         </Layout>
 
