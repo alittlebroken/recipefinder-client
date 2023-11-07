@@ -383,7 +383,12 @@ const ProfileCookbook = (props) => {
                         minified
             />
 
-                {recipes.map( recipe => {
+                {recipes ? (
+                    <h4>
+                        Your Cookbook is empty.
+                    </h4>
+                    
+                        ) : recipes.map( recipe => {
 
                     <div key={nanoid()} aria-label="recipe-container" className="cb-recipe-container flex">
 
