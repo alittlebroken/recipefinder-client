@@ -87,7 +87,7 @@ const ProfileCookbook = (props) => {
                 cookbookId: cookbook.id
             }
 
-            await getCookBookRecipeList(payload)
+            await dispatch(getCookBookRecipeList(payload))
         }
 
         /* Get the data */
@@ -350,6 +350,7 @@ const ProfileCookbook = (props) => {
                 src={cookbook.src}
                 title={cookbook.title}
                 alt={cookbook.alt}
+                className="cb-image"
             />
 
             <div aria-label="heading container" className="cb-header-container flex">
