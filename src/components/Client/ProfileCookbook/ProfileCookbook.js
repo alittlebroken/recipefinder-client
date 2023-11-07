@@ -25,6 +25,7 @@ import FormInput from '../../UI/Form/FormInput'
 import FormUpload from '../../UI/Form/FormUpload'
 import { selectProfileData } from '../../../slices/Profile/Profile.slice'
 import apiProvider from '../../../providers/apiProvider'
+import { Link } from 'react-router-dom'
 
 
 const ProfileCookbook = (props) => {
@@ -384,9 +385,12 @@ const ProfileCookbook = (props) => {
             />
 
                 {recipes ? (
-                    <h4>
-                        Your Cookbook is empty.
-                    </h4>
+                    <>
+                        <h4>
+                            Your Cookbook is empty.
+                        </h4>
+                        Perform a <Link to="/search" className="cb-link">search</Link> to find your next favourite.
+                    </>
                     
                         ) : recipes.map( recipe => {
 
