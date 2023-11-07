@@ -176,8 +176,8 @@ const cookbooksSlice = createSlice({
 
 /* Export any and all actions from the slice */
 export const {
-    pageUp,
-    pageDown,
+    upPage,
+    downPage,
     setRecsPerPage,
     goToPage
 } = cookbooksSlice.actions
