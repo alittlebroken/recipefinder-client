@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
 import {
     getCookBookRecipeList,
-    pageUp,
-    pageDown,
+    upPage,
+    downPage,
     setRecsPerPage,
     goToPage,
     selectIsLoading,
@@ -106,10 +106,10 @@ const ProfileCookbook = (props) => {
     const pageChangeHandler = async (e) => {
         if(e.target.value === '-'){
             setPage(page - 1)
-            dispatch(pageDown())
+            dispatch(downPage())
         } else if(e.target.value === '+'){
             setPage(page + 1)
-            dispatch(pageUp())
+            dispatch(upPage())
         }
     }
 
