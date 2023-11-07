@@ -204,6 +204,45 @@ const ProfileCookbook = (props) => {
 
     }
 
+    /* Handle the removal of a recipe from the cookbook */
+    const handleRemove = async e => {
+
+        /* Prevent the default action when clicking the button*/
+        e.preventDefault()
+
+        /* Get the type of button that was pressed */
+        const buttonValue = e.target.name
+
+        if(buttonValue === "remove"){
+
+            /* Generate the paramns to send along with the API request */
+            const params = {
+                auth: {
+                    authenticate: true,
+                },
+                payload: {
+                    id: e.target.value
+                }
+            }
+
+            const result = await apiProvider.removeAll('recipes', params)
+
+            /* check the result of removing the record */
+            if(result.status >= 200 && result.status < 300){
+                setNotifications({
+                    className: "cc-notif cc-ok",
+                    message: "Recipe successfully removed from cookbook."
+                })
+            }
+
+            setId(null)
+            setShowRemoveModal(false)
+        } else if (buttonValue === "cancel"){
+            setId(null)
+            setShowRemoveModal(false)
+        }
+    }
+
     return (
         
         <div aria-label="cookbook container" className="cb-container flex">
@@ -274,6 +313,30 @@ const ProfileCookbook = (props) => {
 
             <Modal key={nanoid()} show={showRemoveModal} handleClose={handleCloseRemovalModal}>
                 
+                <div aria-label="recipe remove container" className="cb-recipe-remove-container">
+                    Are you sure you wish to remove this recipe from the Cookbook?
+
+                    <button 
+                        name="remove" 
+                        value={id}
+                        className="btn cb-remove-btn"
+                        onClick={(e) => {
+                            handleRemove(e)
+                        }}
+                    >
+                        Remove
+                    </button>
+                    <button 
+                        name="cancel" 
+                        className="btn cb-cancel-btn"
+                        onClick={(e) => {
+                            handleRemove(e)
+                        }}
+                    >
+                        Cancel
+                    </button>
+                </div>
+
             </Modal>
 
             <img 
