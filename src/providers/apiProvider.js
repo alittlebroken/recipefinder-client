@@ -143,6 +143,11 @@ const apiProvider = {
         if(resource === 'pantries' || resource === 'pantry'){
             /* Get the passed in id */
             url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}?${queryString.stringify(queryParams)}`
+        } else if (resource === 'cookbookRecipes'){
+
+            /* URL to get the recipes for a cookbook */
+            url = url = `${process.env.REACT_APP_API_URL}/cookbooks/${params.id}/recipes?${queryString.stringify(queryParams)}`
+
         } else {
             url = `${process.env.REACT_APP_API_URL}/${resource}?${queryString.stringify(queryParams)}`
 
