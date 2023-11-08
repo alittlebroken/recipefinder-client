@@ -238,7 +238,7 @@ const apiProvider = {
             url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}/${params.ingredientId}`
             
         } else if (resource === "cookbookRecipes") {
-            url = `${process.env.REACT_APP_API_URL}cookbooks/${params.filter.cookbookId}/recipes?${queryString.stringify(queryParams)}`
+            url = `${process.env.REACT_APP_API_URL}/cookbooks/${params.id}/recipes?${queryString.stringify(queryParams)}`
         } else {
             url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}`
             
@@ -246,7 +246,7 @@ const apiProvider = {
         
         // Access the appropriate API and process the results
         const response = await axios.delete(url, axiosOptions)
-        
+
         if(response.status >= 400){
             return {
                 status: response.status,
