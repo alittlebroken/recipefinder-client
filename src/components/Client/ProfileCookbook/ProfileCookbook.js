@@ -397,7 +397,7 @@ const ProfileCookbook = (props) => {
                     <div key={nanoid()} aria-label="recipe-container" className="cb-recipe-container flex">
 
 
-                        <img 
+                        <img className="cb-recipe-img"
                             src={recipe.images.length < 1 ? '/no_image.png' : recipe.images[0]?.imageSrc } 
                             title={recipe.images.length < 1 ? 'Picture representing no image for this content' : recipe.images[0]?.imageTitle }
                             alt={recipe.images.length < 1 ? 'Picture representing no image for this content' : recipe.images[0]?.imageAlt }
