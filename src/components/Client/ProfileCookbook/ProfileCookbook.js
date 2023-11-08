@@ -228,15 +228,15 @@ const ProfileCookbook = (props) => {
                 auth: {
                     authenticate: true,
                 },
-                id: e.target.value.recipeId,
+                id: id.cookbookId,
                 filter: {
-                    recipeId: e.target.value.recipeId,
-                    cookbookId: e.target.value.cookbookId
+                    recipeId: id.recipeId,
+                    cookbookId: id.cookbookId
                 }
             }
 
             const result = await apiProvider.removeOne('cookbookRecipes', params)
-
+            console.log(result)
             /* check the result of removing the record */
             if(result.status >= 200 && result.status < 300){
                 setNotifications({
