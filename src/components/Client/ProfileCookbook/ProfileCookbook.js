@@ -388,7 +388,7 @@ const ProfileCookbook = (props) => {
                         minified
             />
 
-                {!recipes ? (
+                {!recipes || recipes?.length < 1? (
                     <>
                         <h4>
                             Your Cookbook is empty.
