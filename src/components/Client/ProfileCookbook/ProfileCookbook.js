@@ -384,7 +384,7 @@ const ProfileCookbook = (props) => {
                         minified
             />
 
-                {recipes ? (
+                {!recipes ? (
                     <>
                         <h4>
                             Your Cookbook is empty.
@@ -392,14 +392,15 @@ const ProfileCookbook = (props) => {
                         <p>Perform a <Link to="/search" className="cb-link">search</Link> to find your next favourite.</p>
                     </>
                     
-                        ) : recipes.map( recipe => {
-
+                        ) : recipes.map( recipe => { return (
+                            
                     <div key={nanoid()} aria-label="recipe-container" className="cb-recipe-container flex">
 
+
                         <img 
-                            src={recipe.images[0].imageSrc} 
-                            title={recipe.images[0].imageTitle}
-                            alt={recipe.images[0].imageAlt}
+                            src={recipe.images.length < 1 ? '/no_image.png' : recipe.images[0]?.imageSrc } 
+                            title={recipe.images.length < 1 ? 'Picture representing no image for this content' : recipe.images[0]?.imageTitle }
+                            alt={recipe.images.length < 1 ? 'Picture representing no image for this content' : recipe.images[0]?.imageAlt }
                         />
 
                         <div aria-label="recipe content" className="cb-recipe-content flex">
@@ -429,7 +430,7 @@ const ProfileCookbook = (props) => {
                                 </button>
                                 <button 
                                     name="moreInfo" 
-                                    classname="btn cb-action-btn flex"
+                                    className="btn cb-action-btn flex"
                                     onClick={(e) => {
                                         navigate(`/recipes/${recipe.id}`)
                                     }}
@@ -441,6 +442,7 @@ const ProfileCookbook = (props) => {
                         </div>
 
                     </div>
+                        )
 
                 })}
 
