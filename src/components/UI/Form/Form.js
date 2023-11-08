@@ -24,7 +24,7 @@ const Form = (props) => {
 
     /* The forms current state */
     const [form, setForm] = useState(initialValues)
-    const [dirty, setDirty] = useState(true)
+    const [dirty, setDirty] = useState(false)
 
     /* Handle updating the various form elements */
     const handleFormChange = (e) => {
@@ -44,8 +44,11 @@ const Form = (props) => {
            adding back in the value and form element that has changed */
         setForm({
             ...form,
-            [name]: formValue
+            [name]: formValue,
+            isDirty: dirty
         })
+
+        setDirty(true)
     }
 
     return (
