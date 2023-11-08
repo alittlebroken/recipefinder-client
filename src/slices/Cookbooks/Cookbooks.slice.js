@@ -187,6 +187,7 @@ export const {
 /* export selectors for accessing the data in the slice */
 export const selectCookBooks = state => state.cookbooks.cookbooks
 export const selectCookbook = state => state.cookbooks.cookbooks
+export const selectCookbookRecipes = state => state.cookbooks.recipes
 export const selectIsLoading = state => state.cookbooks.isLoading
 export const selectHasError = state => state.cookbooks.hasError
 export const selectPages = state => state.cookbooks.pages
