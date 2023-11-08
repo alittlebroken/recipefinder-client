@@ -191,9 +191,26 @@ const apiProvider = {
             }
         }
 
+        // Pagination
+        const { page } = params.pagination || 1
+        const { perPage } = params.pagination || 10
+
+        // Sorting
+        const { field } = params.sort || 'id'
+        const { order } = params.sort || 'desc' 
+
         // Authentication
         const { authenticate } = params.auth || false
         const { roles } = params.auth || 'user'
+
+        // Set up the query params
+        let queryParams = {
+            page: page ? page : 1,
+            limit: perPage ? perPage : 10,
+            sort_by: field ? field : 'id',
+            sort_direction: order ? order : 'desc',
+            filter: JSON.stringify(params.filter)
+        }
 
         // Generate the header and any options to send along with the request
 
@@ -213,11 +230,15 @@ const apiProvider = {
             axiosOptions.withCredentials = true
         }
 
+
+
         // Set the URL to use
         let url
         if(resource === 'pantries' || resource === 'pantry'){
             url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}/${params.ingredientId}`
             
+        } else if (resource === "cookbookRecipes") {
+            url = `${process.env.REACT_APP_API_URL}cookbooks/${params.filter.cookbookId}/recipes?${queryString.stringify(queryParams)}`
         } else {
             url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}`
             
