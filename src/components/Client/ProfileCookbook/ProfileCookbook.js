@@ -167,7 +167,7 @@ const ProfileCookbook = (props) => {
 
             /* Update the cookbook */
             const cookbookResult = await apiProvider.update('cookbooks', cookbookParams)
-            console.log(cookbookResult)
+            
             if(cookbookResult.success){
 
                 /* Attempt to update the Image for the cookbook */
@@ -184,12 +184,13 @@ const ProfileCookbook = (props) => {
                         resourceid: cookbook.id,
                         title: form.title,
                         images: form.images[0]
-                    }
+                    },
+                    id: cookbook.imageid
                 }
 
                 /* Send the request and check the response */
-                const imageResult = await apiProvider.updated('images', imageParams)
-
+                const imageResult = await apiProvider.update('uploads', imageParams)
+                
                 if(imageResult.status >= 200 && imageResult.status < 300){
                     setNotifications({
                         className: "cc-notif cc-ok",
