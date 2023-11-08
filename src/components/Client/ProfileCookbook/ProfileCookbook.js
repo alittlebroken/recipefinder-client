@@ -389,7 +389,7 @@ const ProfileCookbook = (props) => {
                         <h4>
                             Your Cookbook is empty.
                         </h4>
-                        Perform a <Link to="/search" className="cb-link">search</Link> to find your next favourite.
+                        <p>Perform a <Link to="/search" className="cb-link">search</Link> to find your next favourite.</p>
                     </>
                     
                         ) : recipes.map( recipe => {
