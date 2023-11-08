@@ -158,15 +158,16 @@ const ProfileCookbook = (props) => {
                 name: form.name,
                 description: form.description,
                 image: null
-            }
+            },
+            id: cookbook.id
         }
 
         /* Only update the form if it has been changed */
-        if(isDirty){
+        if(form.isDirty){
 
             /* Update the cookbook */
             const cookbookResult = await apiProvider.update('cookbooks', cookbookParams)
-
+            console.log(cookbookResult)
             if(cookbookResult.success){
 
                 /* Attempt to update the Image for the cookbook */
@@ -246,9 +247,11 @@ const ProfileCookbook = (props) => {
             }
 
             setId(null)
+            setIsDirty(true)
             setShowRemoveModal(false)
         } else if (buttonValue === "cancel"){
             setId(null)
+            setIsDirty(false)
             setShowRemoveModal(false)
         }
     }
