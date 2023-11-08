@@ -197,7 +197,7 @@ const ProfileCookbook = (props) => {
                         className: "cc-notif cc-ok",
                         message: "Cookbook successfully updated."
                     })
-                    setIsDirty(true)
+                    setIsDirty(false)
                     handleCloseEditModal(true)
                 }
 
@@ -290,7 +290,7 @@ const ProfileCookbook = (props) => {
                             { type: "minLength", value: 4}
                         ]}
                     />
-
+                    {console.log('Before FormInput component: ', isDirty)}
                     <FormUpload 
                         name="images"
                         label="Cookbook Image"
@@ -306,7 +306,7 @@ const ProfileCookbook = (props) => {
                             {type: "maxFileSize", value: 1024}
                         ]}
                     />
-
+                    {console.log('After FormInput component: ', isDirty)}
                     <FormInput 
                         name="title"
                         label="Image Title"
