@@ -324,25 +324,27 @@ const ProfileCookbook = (props) => {
                 <div aria-label="recipe remove container" className="cb-recipe-remove-container">
                     Are you sure you wish to remove this recipe from the Cookbook?
 
-                    <button 
-                        name="remove" 
-                        value={id}
-                        className="btn cb-remove-btn"
-                        onClick={(e) => {
-                            handleRemove(e)
-                        }}
-                    >
-                        Remove
-                    </button>
-                    <button 
-                        name="cancel" 
-                        className="btn cb-cancel-btn"
-                        onClick={(e) => {
-                            handleRemove(e)
-                        }}
-                    >
-                        Cancel
-                    </button>
+                    <div aria-label="remove form action buttons" clasName="cb-recipe-remove-actions">
+                        <button 
+                            name="remove" 
+                            value={id}
+                            className="btn cb-remove-btn"
+                            onClick={(e) => {
+                                handleRemove(e)
+                            }}
+                        >
+                            Remove
+                        </button>
+                        <button 
+                            name="cancel" 
+                            className="btn cb-cancel-btn"
+                            onClick={(e) => {
+                                handleRemove(e)
+                            }}
+                        >
+                            Cancel
+                        </button>
+                    </div>
                 </div>
 
             </Modal>
