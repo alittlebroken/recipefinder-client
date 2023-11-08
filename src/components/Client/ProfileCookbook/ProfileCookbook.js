@@ -183,6 +183,7 @@ const ProfileCookbook = (props) => {
                         resource: 'Cookbook',
                         resourceid: cookbook.id,
                         title: form.title,
+                        alt: form.altText,
                         images: form.images[0]
                     },
                     id: cookbook.imageid
