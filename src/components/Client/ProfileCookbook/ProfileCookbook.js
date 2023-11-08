@@ -228,12 +228,14 @@ const ProfileCookbook = (props) => {
                 auth: {
                     authenticate: true,
                 },
-                payload: {
-                    id: e.target.value
+                id: e.target.value.recipeId,
+                filter: {
+                    recipeId: e.target.value.recipeId,
+                    cookbookId: e.target.value.cookbookId
                 }
             }
 
-            const result = await apiProvider.removeAll('recipes', params)
+            const result = await apiProvider.removeOne('cookbookRecipes', params)
 
             /* check the result of removing the record */
             if(result.status >= 200 && result.status < 300){
@@ -321,10 +323,10 @@ const ProfileCookbook = (props) => {
 
             <Modal key={nanoid()} show={showRemoveModal} handleClose={handleCloseRemovalModal}>
                 
-                <div aria-label="recipe remove container" className="cb-recipe-remove-container">
+                <div aria-label="recipe remove container" className="cb-recipe-remove-container flex">
                     Are you sure you wish to remove this recipe from the Cookbook?
 
-                    <div aria-label="remove form action buttons" clasName="cb-recipe-remove-actions">
+                    <div aria-label="remove form action buttons" className="cb-recipe-remove-actions flex">
                         <button 
                             name="remove" 
                             value={id}
@@ -424,7 +426,10 @@ const ProfileCookbook = (props) => {
                                     className="btn cb-action-btn flex"
                                     value={recipe.id}
                                     onClick={(event => {
-                                        setId(event.target.value)
+                                        setId({
+                                            recipeId: event.target.value,
+                                            cookbookId: cookbook.id
+                                        })
                                         setShowRemoveModal(true)
                                     })}
                                 >
