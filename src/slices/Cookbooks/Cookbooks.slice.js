@@ -62,7 +62,7 @@ export const getCookBookRecipeList = createAsyncThunk(
 
             /* Setup the params form the API */
             const params = {
-                auth: { authenticated: true},
+                auth: { authenticate: true},
                 id: cookbookId,
                 sort: {
                     field: sort?.field || 'created_at',
@@ -155,6 +155,8 @@ const cookbooksSlice = createSlice({
         [getCookBookRecipeList.rejected]: (state, action) => {
             state.isLoading = false
             state.hasError = true
+
+            console.log(action)
         },
         [getCookBookRecipeList.fulfilled]: (state, action) => {
             state.isLoading = false
