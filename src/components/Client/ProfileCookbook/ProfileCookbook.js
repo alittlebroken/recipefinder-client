@@ -381,8 +381,6 @@ const ProfileCookbook = (props) => {
                 {cookbook.description}
             </div>
 
-            <div aria-label="recipes container" className="cb-recipe-list flex">
-
             <Pagination 
                         totalRecords={pagination.records}
                         recsPerPage={pagination.recsPerPage}
@@ -392,6 +390,8 @@ const ProfileCookbook = (props) => {
                         handleRecsChange={recsChangeHandler}
                         minified
             />
+
+            <div aria-label="recipes container" className="cb-recipe-list flex">
 
                 {!recipes || recipes?.length < 1? (
                     <>
@@ -469,7 +469,11 @@ const ProfileCookbook = (props) => {
                     )}
                 </div>
 
-                <Pagination 
+                
+
+            </div>
+
+            <Pagination 
                         totalRecords={pagination.records}
                         recsPerPage={pagination.recsPerPage}
                         totalPages={pagination.pages}
@@ -478,8 +482,6 @@ const ProfileCookbook = (props) => {
                         handleRecsChange={recsChangeHandler}
                         minified
             />
-
-            </div>
 
         </div>
 
