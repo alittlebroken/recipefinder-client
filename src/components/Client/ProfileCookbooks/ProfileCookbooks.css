@@ -1,0 +1,64 @@
+/* Mobile */
+.cookbooks-container {
+    flex-direction: column;
+}
+
+.head-container {
+    width: 100%;
+    justify-content: space-between;
+    padding: 15px;
+}
+
+.pc-head-2 {
+    font-family: inherit;
+    font-size: 2rem;
+    text-align: center;
+    width: 100%;
+}
+
+.pc-btn-new {
+    background-color: var(--col-primary);
+    color: white;  
+}
+
+.pc-btn-new:hover {
+    background-color: white;
+    color: var(--col-primary);
+}
+
+.pc-cookbooks-container {
+    flex-direction: column;
+    padding: 30px;
+    gap: 20px;
+}
+
+
+/* Desktop */
+@media screen and ( min-width: 960px){
+
+    .cookbooks-container {
+        width: 1200px;
+        margin: 0 auto;
+    }
+
+    .head-container {
+        flex-direction: row;
+        padding: 30px;
+        align-items: center;
+    }
+
+    .pc-head-2 {
+        font-size: 3rem;
+    }
+
+    .pc-btn-new {
+        width: 100px;
+        height: 50px;
+    }
+
+    .pc-cookbooks-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+}

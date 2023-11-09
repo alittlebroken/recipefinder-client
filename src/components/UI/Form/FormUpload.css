@@ -1,0 +1,18 @@
+/* Mobile */
+.FormUploadContainer {
+    flex-direction: column;
+}
+
+.FormUploadContainer > input[type="file"] {
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* Desktop */
+@media screen and (min-width: 960px){
+
+    .FormUpload {
+        margin-top: 10px;
+    }
+
+}

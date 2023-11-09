@@ -4,7 +4,6 @@
     flex-direction: column;
     border-radius: 7px;
     background-color: white;
-    border: 3px solid var(--col-primary);
     width: 100%;
     height: auto;
     margin-bottom: 1rem; 
@@ -27,11 +26,16 @@
     background-color: white;
 }
 
+.form-border {
+    border: 3px solid var(--col-primary);
+}
+
 /* Desktop */
 @media screen and (min-width: 900px) {
   
     .Form {
-        flex-direction: row;
+        flex-direction: col;
+        gap: 15px;
     }
 
     .Form > button {

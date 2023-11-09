@@ -63,7 +63,8 @@ const Header = () => {
                         <li className="nav-list-item">
                             <Menu title="Profile" items={[
                                 { name: 'Settings', url: '/profile', handleClick: null},
-                                { name: 'Pantry', url: '/pantry', handleClick: null},
+                                { name: 'My Pantry', url: '/pantry', handleClick: null},
+                                { name: 'My Cookbooks', url: '/profile/cookbooks', handleClick: null},
                                 { name: 'Logout', url: '/logout', handleClick: handleLogout }
                             ]} />
                         </li>

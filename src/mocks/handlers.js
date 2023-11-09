@@ -176,5 +176,126 @@ export const handlers = [
                 })
             )
         }
+    }),
+    rest.get('http://localhost:5000/users/:id/cookbooks', (req, res, ctx) => {
+
+       /* Get the cookbook id we want to look at */
+       const id = req.params.id
+       
+       /* Check if we have a valid cookbook id */
+       if(!id || id === undefined || typeof id != 'number') {
+        return res(
+            ctx.status(400),
+            ctx.json({
+                status: 400,
+                success: false,
+                message: 'You must supply a valid user id'
+            })
+        )
+       }
+
+       /* Display a list of the users cookbooks */
+       return res(
+        ctx.status(200),
+        ctx.json({
+            status: 200,
+            success: true,
+            message: '',
+            results: [
+                { id: 1, userId: 1, name: 'My Cookbooks', description: 'Your default cook book for storing your favourite recipes.'},
+                { id: 2, userId: 1, name: 'Vegan recipes', description: 'My curated list of vegan recipes I have tried and love.'},
+                { id: 3, userId: 1, name: 'Next meal ideas', description: 'Interesting recipes I have yet to try.'}
+            ],
+            totalPages: 1,
+            totalRecords: 3,
+            currentPage: 1
+        })
+       )
+
+    }),
+    rest.get('http://localhost:5000/uploads', (req, res, ctx) => {
+
+        /* Extract the request parameters */
+        let filter = JSON.parse(req.url.searchParams.get('filter'))
+        let resource = filter['resource']
+        let userId = filter['userid']
+        let resourceId = filter['resourceid']
+
+        /* image data */
+        let data = [
+            //{ id: 1, userId: 1, src: '', title: '', alt: '', resource: '', resourceid: ''},
+            { id: 1, userId: 1, src: '/cookbook_default.png', title: 'Generic cookbook with list of recipes', alt: 'Generic cookbook with list of recipes', resource: 'Cookbook', resourceid: 1},
+            { id: 2, userId: 1, src: '/cookbook_vegan.png', title: 'Picture of a cookbook next to vegan ingredients', alt: 'Picture of a cookbook next to vegan ingredients', resource: 'Cookbook', resourceid: 2},
+            { id: 3, userId: 1, src: '/cookbook_next.png', title: 'Cookbook atop pile of flour', alt: 'Cookbook atop pile of flour', resource: 'Cookbook', resourceid: 3},
+        ]
+
+        /* Filter out the images to return */
+        let filtered = data.filter( cbk => cbk.userId === userId && cbk.resource === resource && cbk.resourceId === resourceId )
+
+        /* Returned the found image(s) */
+        return res(
+            ctx.status(200),
+            ctx.json({
+                status: 200,
+                success: true,
+                message: '',
+                results: filtered,
+                pagination: {
+                    total: Math.ceil(filtered.length/10),
+                    records: filtered.length,
+                    current: 1
+                }
+            })
+        )
+
+    }),
+    rest.get('http://localhost:5000/cookbooks/:id', (req, res, ctx) => {
+
+        return res(
+            ctx.status(200),
+            ctx.json([
+                { 
+                    id: 1, 
+                    userId: 1, 
+                    name: "My Favourites",
+                    description: "Plethora of my favourite recipes",
+                    image:  "favourite_cookbooks.png"
+                }
+            ])
+
+        )
+
+    }),
+    rest.get('http://localhost:5000/cookbooks/:id/recipes', (req, res, ctx) => {
+
+        return res(
+            ctx.status(200),
+            ctx.json({
+                results: [
+                    {
+                        id: 1,
+                        name: "Spaghetti Bolognaise",
+                        description: "A delicious and simple Spaghettit Bolognaise",
+                        rating: 5,
+                        categories: [
+                            { categoryId: 1, name: "Dinner", recipeId: 1}
+                        ],
+                        images: [
+                            { 
+                                imageId: 1,
+                                imageUser: 1,
+                                imageSrc: 'spagbol.png',
+                                imageTitle: 'Spaghetti Bolognaise',
+                                imageAlt: 'Image of a bowl of Spaghetti Bolognaise'
+                            }
+                        ]
+                    }
+                ],
+                totalPages: 1,
+                totalRecords: 1,
+                currentPage: 1
+            })
+        )
+
     })
 ]

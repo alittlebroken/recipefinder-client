@@ -1,0 +1,15 @@
+/* Mobile */
+.nc-error {
+    padding: 10px;
+    color: var(--col-primary);
+}
+
+.nc-ok {
+    padding: 10px;
+    color: green;
+}
+
+/* Desktop */
+@media screen and (min-width: 960px) {
+    
+}

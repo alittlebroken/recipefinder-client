@@ -1,0 +1,89 @@
+/* mobile */
+.cc-container {
+    flex-direction: column;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: white;
+    border: 1px solid #e5e4e4;
+    /*font-family: "Karla";*/
+}
+
+.cc-content-container {
+    flex-direction: column;
+}
+
+.cc-image {
+    width: 100%;
+    height: 300px;
+    object-fit:fill;
+    aspect-ratio: auto;
+}
+
+.cc-details-container {
+    flex-direction: column;
+    padding: 4px;
+}
+
+.cc-head-3 {
+    font-family: inherit;
+    font-size: 1.5rem;
+    padding: 3px;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+.cc-description {
+    font-family: inherit;
+    font-size: 1.2rem;
+    padding: 3px;
+}
+
+.cc-action-buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.cc-btn-action-more, .cc-btn-action-remove {
+    padding: 10px;
+    width: 100px;
+    border: 2px solid var(--col-primary);
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: .9;
+    color: white;
+    background-color: var(--col-primary);
+}
+
+.cc-btn-action-more:hover, .cc-btn-action-remove:hover {
+    background-color: white;
+    color: var(--col-primary);
+}
+
+.cc-notif {
+    padding: 15px;
+}
+
+.cc-ok {
+    color: green;
+    font-weight: bold;
+}
+
+.cc-error {
+    color: red;
+    font-weight: bold;
+}
+
+/* Desktop */
+@media screen and (min-width: 960px) {
+    
+    .cc-container {
+        flex-basis: 32%;
+    }
+
+    .cc-content-container {
+        flex-grow: 1;
+        justify-content: space-between;
+    }
+
+}

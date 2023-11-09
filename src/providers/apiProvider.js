@@ -143,6 +143,11 @@ const apiProvider = {
         if(resource === 'pantries' || resource === 'pantry'){
             /* Get the passed in id */
             url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}?${queryString.stringify(queryParams)}`
+        } else if (resource === 'cookbookRecipes'){
+
+            /* URL to get the recipes for a cookbook */
+            url = url = `${process.env.REACT_APP_API_URL}/cookbooks/${params.id}/recipes?${queryString.stringify(queryParams)}`
+
         } else {
             url = `${process.env.REACT_APP_API_URL}/${resource}?${queryString.stringify(queryParams)}`
 
@@ -186,9 +191,26 @@ const apiProvider = {
             }
         }
 
+        // Pagination
+        const { page } = params.pagination || 1
+        const { perPage } = params.pagination || 10
+
+        // Sorting
+        const { field } = params.sort || 'id'
+        const { order } = params.sort || 'desc' 
+
         // Authentication
         const { authenticate } = params.auth || false
         const { roles } = params.auth || 'user'
+
+        // Set up the query params
+        let queryParams = {
+            page: page ? page : 1,
+            limit: perPage ? perPage : 10,
+            sort_by: field ? field : 'id',
+            sort_direction: order ? order : 'desc',
+            filter: JSON.stringify(params.filter)
+        }
 
         // Generate the header and any options to send along with the request
 
@@ -208,11 +230,15 @@ const apiProvider = {
             axiosOptions.withCredentials = true
         }
 
+
+
         // Set the URL to use
         let url
         if(resource === 'pantries' || resource === 'pantry'){
             url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}/${params.ingredientId}`
             
+        } else if (resource === "cookbookRecipes") {
+            url = `${process.env.REACT_APP_API_URL}/cookbooks/${params.id}/recipes?${queryString.stringify(queryParams)}`
         } else {
             url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}`
             
@@ -220,7 +246,7 @@ const apiProvider = {
         
         // Access the appropriate API and process the results
         const response = await axios.delete(url, axiosOptions)
-        
+
         if(response.status >= 400){
             return {
                 status: response.status,
@@ -349,9 +375,39 @@ const apiProvider = {
             url = `${process.env.REACT_APP_API_URL}/${resource}`
         }
         
+        /* Check what the resource type is and use the appropriate 
+           axios post. For uploads we need to create a form Data field
+           and send that as the payload */
+        let response
 
-        // Access the appropriate API and process the results
-        const response = await axios.post(url, payload, axiosOptions)
+        if(resource === "uploads"){
+
+            /* Generate the payload to send */
+            const formData = new FormData()
+            formData.append(
+                'images',
+                payload.images,
+                payload.images.name
+            )
+            formData.append('userid',payload.userId)
+            formData.append('resourceid', payload.resourceid)
+            formData.append('resource', payload.resource)
+            formData.append('title', payload.title)
+
+            /* set the correct mimetype for the form */
+            axiosOptions.headers['Content-type'] = "multipart/form-data"
+
+            /* Update the Image */
+            response = await axios.post(
+                url,
+                formData,
+                axiosOptions
+            )
+
+        } else {
+            // Access the appropriate API and process the results
+            response = await axios.post(url, payload, axiosOptions)
+        }
 
         // Check the status codes returned
         if(response.status >= 400){
@@ -434,7 +490,7 @@ const apiProvider = {
                     reqBody,
                     axiosOptions
                 )
-                console.log(res)
+                
                 /* If the response is OK then update the picture, if any */
                 if(res.status === 204 && payload.upload !== ''){
 
