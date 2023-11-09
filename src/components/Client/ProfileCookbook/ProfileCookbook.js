@@ -469,8 +469,6 @@ const ProfileCookbook = (props) => {
                     )}
                 </div>
 
-                
-
             </div>
 
             <Pagination 
