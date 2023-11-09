@@ -141,5 +141,75 @@
 
 /* Desktop Styles */
 @media screen and (min-width: 900px){
+    .cb-container {
+        width: 900px; 
+    }
+
+    .cb-image {
+        padding: 30px;
+        width: 600px;
+        height: 450px;
+        object-fit:fill;
+        aspect-ratio: auto;
+        border-radius: 50px;
+    }
+
+    .cb-header-container {
+        padding: 20px;
+        gap: 30px;
+    }
     
+    .cb-head-2 {
+        font-family: inherit;
+        font-size: 4rem;
+    }
+    
+    .cb-edit-btn{
+        width: 80px;
+    }
+
+    .cb-description {
+        padding: 15px;
+        font-size: 1.3rem;
+    }
+
+    .cb-recipe-list {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .cb-recipe-container {
+        flex-direction: row;
+        width: 700px;
+    }
+    
+    .cb-recipe-img {
+        width: 150px;
+        height: 150px;
+        object-fit: fill;
+    }
+    
+    .cb-recipe-content {
+        flex-direction: row;
+        padding: 6px;
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .cb-head-3 {
+        font-size: 1.4rem;
+    }
+    
+    .cb-recipe-desc {
+        font-family: inherit;
+        font-size: 1.2rem;
+    }
+    
+    .cb-recipe-actions {
+        flex-direction: column;
+        justify-content: space-between;
+        margin: 5px 10px;
+    }
+ 
+
 }
