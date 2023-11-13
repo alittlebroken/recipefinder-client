@@ -111,13 +111,13 @@ export const {
 } = recipesSlice.actions
 
 /* Export selectors */
-export const selectIsLoading = state => state.cookbooks.isLoading
-export const selectHasError = state => state.cookbooks.hasError
-export const selectPages = state => state.cookbooks.pages
-export const selectPage = state => state.cookbooks.page
-export const selectRecsPerPage = state => state.cookbooks.recsPerPage
-export const selectRecords = state => state.cookbooks.records
-export const selectRecipes = state => state.cookbooks.recipes
+export const selectIsLoading = state => state.recipes.isLoading
+export const selectHasError = state => state.recipes.hasError
+export const selectPages = state => state.recipes.pages
+export const selectPage = state => state.recipes.page
+export const selectRecsPerPage = state => state.recipes.recsPerPage
+export const selectRecords = state => state.recipes.records
+export const selectRecipes = state => state.recipes.recipes
 
 /* Export the reducer */
 export default recipesSlice.reducer
