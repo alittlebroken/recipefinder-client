@@ -58,7 +58,41 @@ const ProfileRecipes = () => {
 
             </div>
 
-            <div aria-label="recipes container" className="pr-recipes-container">
+            <div aria-label="recipes container" className="pr-recipes-container flex">
+
+                {recipes.map((recipe) => {
+                    return (
+                        <div aria-label="recipe container" className="pr-recipe-container flex">
+
+                            <img src={recipe.src} alt={recipe.alt} title={recipe.title} className="pr-recipe-image" />
+
+                            <div aria-label="recipe details container" className="pr-recipe-details flex">
+                                <h3 className="pr-recipe-head-3">{recipe.name}</h3>
+                                <div aria-label="recipe description" className="pr-recipe-description">
+                                    {recipe.description}
+                                </div>
+                            </div>
+
+                            <div aria-label="recipe actions" className="pr-recipe-actions flex">
+                                <button 
+                                    className="btn pr-recipe-btn-more"
+                                    value="more"
+                                    onClick={handleClick}
+                                >
+                                        More Info
+                                </button>
+                                <button 
+                                    className="btn pr-recipe-btn-remove"
+                                    value="remove"
+                                    onClick={handleClick}
+                                > 
+                                        Remove
+                                </button>
+                            </div>
+
+                        </div>
+                    )
+                })}
 
             </div>
 
