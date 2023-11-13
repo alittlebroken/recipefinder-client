@@ -7,6 +7,7 @@ import profileReducer from '../slices/Profile/Profile.slice'
 import ingredientsReducer from '../slices/Ingredients/IngredientsSlice'
 import pantryReducer from '../slices/Pantry/Pantry.slice'
 import cookbooksReducer from '../slices/Cookbooks/Cookbooks.slice'
+import recipesReducer from '../slices/Recipes/Recipes.slice'
 
 // Create a root reducer that comines all the slices reducers together
 const rootReducer = combineReducers({
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
     profile: profileReducer,
     ingredients: ingredientsReducer,
     pantry: pantryReducer,
-    cookbooks: cookbooksReducer
+    cookbooks: cookbooksReducer,
+    recipes: recipesReducer
 })
 
 // Creates a store with all the correct reducers and actions
