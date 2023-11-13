@@ -12,6 +12,43 @@ const initialState = {
     recsPerPage: 10
 }
 
+/* Thunk to load the data from the API */
+export const fetchRecipes = createAsyncThunk(
+    'recipes/fetchRecipes',
+    async (payload, thunkAPI) => {
+
+        try{
+
+            /* Extract the payload vars */
+            const { userId, sort } = payload
+
+            /* Extract the state */
+            const { recipes } = thunkAPI.getState()
+
+            /* Build the params to send to the API method */
+            const params = {
+                sort: {
+                    field: sort?.field || 'created_at',
+                    order: sort?.order || 'desc'
+                },
+                pagination: {
+                    page: recipes?.page || 1,
+                    perPage: recipes?.recsPerPage || 10
+                },
+                filter: {
+                    userId: userId
+                }
+            }
+
+            await apiProvider.getList('recipes', params)
+
+        } catch(e) {
+            throw e
+        }
+
+    }
+)
+
 /* The actual slice holding the recucers and state for the store */
 const recipesSlice = createSlice({
     name: 'recipes',
@@ -38,7 +75,31 @@ const recipesSlice = createSlice({
             state.page = parseInt(action.payload)
         }
     },
-    extraReducers: {}
+    extraReducers: {
+        [fetchRecipes.pending]: (state, action) => {
+            state.hasError = false
+            state.isLoading = true
+        },
+        [fetchRecipes.rejected]: (state, action) => {
+            state.hasError = true
+            state.isLoading = false
+        },
+        [fetchRecipes.fulfilled]: (state, action) => {
+            state.hasError = false
+            state.isLoading = false
+
+            /* Store the records from the API call */
+            const results = action.payload?.data?.results
+            state.recipes = results
+
+            /* Setup the pagination if we have some results */
+            if(state.cookbooks?.length >= 1){
+                state.pages = results?.totalPages || 1
+                state.page = results?.currentPage || 1
+                state.records = results?.totalRecords
+            }
+        }
+    }
 })
 
 /* Export any and all actions from the slice */
