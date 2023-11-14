@@ -16,10 +16,15 @@ import {
     selectProfileData,
 } from '../../../slices/Profile/Profile.slice'
 
+import { useNavigate } from 'react-router-dom'
+
 const ProfileRecipes = () => {
 
     /* Alias the dispatcher */
     const dispatch = useDispatch()
+
+    /* Alias the navigation hook */
+    const navigate = useNavigate()
 
     /* Gather the data from the store */
     const recipes = useSelector(selectRecipes)
@@ -44,6 +49,24 @@ const ProfileRecipes = () => {
 
     }, [])
 
+    /* Handle the buttons onClick functionality */
+    const handleClick = (e) => {
+
+        e.preventDefault()
+
+        /* Check the button being clicked */
+        if(e.target.name === "more"){
+
+            /* Navigate to the recipe detail page */
+            navigate(`/recipes/${e.target.value}`)
+
+        } else if(e.target.name === "remove"){
+
+            
+
+        }
+
+    }
 
     return (
         <div aria-label="recipes container" className="pr-container flex">
@@ -76,14 +99,16 @@ const ProfileRecipes = () => {
                             <div aria-label="recipe actions" className="pr-recipe-actions flex">
                                 <button 
                                     className="btn pr-recipe-btn-more"
-                                    value="more"
+                                    name="more"
+                                    value={recipe.id}
                                     onClick={handleClick}
                                 >
                                         More Info
                                 </button>
                                 <button 
                                     className="btn pr-recipe-btn-remove"
-                                    value="remove"
+                                    name="remove"
+                                    value={null}
                                     onClick={handleClick}
                                 > 
                                         Remove
