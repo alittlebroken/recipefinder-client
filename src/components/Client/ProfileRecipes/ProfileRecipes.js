@@ -52,7 +52,7 @@ const ProfileRecipes = () => {
     }, [])
 
     /* Handle the buttons onClick functionality */
-    const handleClick = (e) => {
+    const handleClick = async (e) => {
 
         e.preventDefault()
 
@@ -64,7 +64,21 @@ const ProfileRecipes = () => {
 
         } else if(e.target.name === "remove"){
 
+            /* Create the params to send to the API call */
+            const params = {
+                auth: {
+                    authenticate: true
+                },
+                id: e.target.value
+            }
+
+            const result = await apiProvider.removeOne('recipes', params)
             
+            if(result.status >= 200 && result.status < 300){
+                setNotifications('Recipe successfully removed.')
+            } else {
+                setNotifications('Unable to remove Recipe.')
+            }
 
         }
 
