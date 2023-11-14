@@ -10,6 +10,8 @@ import {
     selectPages,
     selectRecords,
     selectRecsPerPage,
+    upPage,
+    downPage
 } from '../../../slices/Recipes/Recipes.slice'
 
 import { 
@@ -49,9 +51,7 @@ const ProfileRecipes = () => {
 
     /* State for controlling pagination */
     const [page, setPage] = useState(pagination.page)
-    const [recsPage, setRecsPage] = useState(pagination.recsPerPage)
-
-
+    const [recsPage, setRecsPerPage] = useState(pagination.recsPerPage)
 
     /* Load the data when the component is first mounted */
     useEffect(() => {
