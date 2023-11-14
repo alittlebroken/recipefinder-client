@@ -16,6 +16,8 @@ import {
     selectProfileData,
 } from '../../../slices/Profile/Profile.slice'
 
+import apiProvider from '../../../providers/apiProvider'
+
 import { useNavigate } from 'react-router-dom'
 
 const ProfileRecipes = () => {
@@ -108,7 +110,7 @@ const ProfileRecipes = () => {
                                 <button 
                                     className="btn pr-recipe-btn-remove"
                                     name="remove"
-                                    value={null}
+                                    value={recipe.id}
                                     onClick={handleClick}
                                 > 
                                         Remove
