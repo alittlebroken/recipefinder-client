@@ -20,6 +20,8 @@ import apiProvider from '../../../providers/apiProvider'
 
 import { useNavigate } from 'react-router-dom'
 
+import Pagination from '../../UI/Pagination/Pagination'
+
 const ProfileRecipes = () => {
 
     /* Alias the dispatcher */
@@ -37,6 +39,20 @@ const ProfileRecipes = () => {
     /* Set state for notifications */
     const [notifications, setNotifications] = useState()
 
+    /* pagination options */
+    const pagination = {
+        page: useSelector(selectPage),
+        pages: useSelector(selectPages),
+        recsPerPage: useSelector(selectRecsPerPage),
+        records: useSelector(selectRecords)
+    }
+
+    /* State for controlling pagination */
+    const [page, setPage] = useState(pagination.page)
+    const [recsPage, setRecsPage] = useState(pagination.recsPerPage)
+
+
+
     /* Load the data when the component is first mounted */
     useEffect(() => {
 
@@ -52,7 +68,7 @@ const ProfileRecipes = () => {
         /* Fetch the data */
         fetchData()
 
-    }, [])
+    }, [page, recsPage, dispatch])
 
     /* Handle the buttons onClick functionality */
     const handleClick = async (e) => {
@@ -93,6 +109,27 @@ const ProfileRecipes = () => {
 
     }
 
+     /* Handler for changing how many records to display per
+     * page 
+    */
+     const recsChangeHandler = async (e) => {
+        setRecsPerPage(e.target.value)
+        dispatch(setRecsPerPage(e.target.value))
+    }
+
+    /* Handler for going forward or backward the pages */
+    const pageChangeHandler = async (e) => {
+        if(e.target.value === '-'){
+            setPage(page - 1)
+            dispatch(downPage())
+        } else if(e.target.value === '+'){
+            setPage(page + 1)
+            dispatch(upPage())
+        }
+    }
+
+
+
     return (
         <div aria-label="recipes container" className="pr-container flex">
 
@@ -105,6 +142,16 @@ const ProfileRecipes = () => {
 
 
             </div>
+
+            <Pagination 
+                        totalRecords={pagination.records}
+                        recsPerPage={pagination.recsPerPage}
+                        totalPages={pagination.pages}
+                        currentPage={pagination.page}
+                        handlePageChange={pageChangeHandler}
+                        handleRecsChange={recsChangeHandler}
+                        minified
+            />
 
             <div aria-label="recipes container" className="pr-recipes-container flex">
 
@@ -146,6 +193,15 @@ const ProfileRecipes = () => {
 
             </div>
 
+            <Pagination 
+                        totalRecords={pagination.records}
+                        recsPerPage={pagination.recsPerPage}
+                        totalPages={pagination.pages}
+                        currentPage={pagination.page}
+                        handlePageChange={pageChangeHandler}
+                        handleRecsChange={recsChangeHandler}
+                        minified
+            />
 
             {notifications && (
                 <div aria-label="notifications container" className={notifications.className}>
