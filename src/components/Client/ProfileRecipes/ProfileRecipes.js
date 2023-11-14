@@ -1,6 +1,6 @@
 import './ProfileRecipes.css'
 import { useSelector, useDispatch } from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { 
     fetchRecipes,
     selectHasError,
@@ -33,6 +33,9 @@ const ProfileRecipes = () => {
 
     /* Get the users profile information */
     const profile = useSelector(selectProfileData)
+
+    /* Set state for notifications */
+    const [notifications, setNotifications] = useState()
 
     /* Load the data when the component is first mounted */
     useEffect(() => {
@@ -75,9 +78,15 @@ const ProfileRecipes = () => {
             const result = await apiProvider.removeOne('recipes', params)
             
             if(result.status >= 200 && result.status < 300){
-                setNotifications('Recipe successfully removed.')
+                setNotifications({
+                    className: 'notif-ok',
+                    message: 'Recipe successfully removed.'
+                })
             } else {
-                setNotifications('Unable to remove Recipe.')
+                setNotifications({
+                    className: "notif-error",
+                    message: 'Unable to remove Recipe.'
+                })
             }
 
         }
@@ -137,6 +146,12 @@ const ProfileRecipes = () => {
 
             </div>
 
+
+            {notifications && (
+                <div aria-label="notifications container" className={notifications.className}>
+                    {notifications.message}
+                </div>
+            )}
 
         </div>
     )
