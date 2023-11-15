@@ -129,14 +129,14 @@ const ProfileRecipes = () => {
     }
 
     return (
-        <div aria-label="recipes container" className="pr-container flex">
+        <div aria-label="recipes container" className="prc-container flex">
 
-            <div aria-label="recipes header container" className="pr-header-container">
-                <h2 className="pr-head-2">Recipes</h2>
-                <button className="btn pr-btn-new">New</button>
+            <div aria-label="recipes header container" className="prc-header-container">
+                <h2 className="pcr-head-2">Recipes</h2>
+                <button className="btn prc-btn-new">New</button>
             </div>
 
-            <div aria-label="recipe filter container" className="pr-filter-container">
+            <div aria-label="recipe filter container" className="prc-filter-container">
 
 
             </div>
@@ -151,25 +151,25 @@ const ProfileRecipes = () => {
                         minified
             />
 
-            <div aria-label="recipes container" className="pr-recipes-container flex">
+            <div aria-label="recipes container" className="prc-recipes-container flex">
 
                 {!recipes ? (<h3>You currently have no recipes.</h3>) : 
                     recipes.map((recipe) => {
                     return (
-                        <div aria-label="recipe container" className="pr-recipe-container flex">
+                        <div aria-label="recipe container" className="prc-recipe-container flex">
 
-                            <img src={recipe.src} alt={recipe.alt} title={recipe.title} className="pr-recipe-image" />
+                            <img src={recipe.src} alt={recipe.alt} title={recipe.title} className="prc-recipe-image" />
 
-                            <div aria-label="recipe details container" className="pr-recipe-details flex">
-                                <h3 className="pr-recipe-head-3">{recipe.name}</h3>
-                                <div aria-label="recipe description" className="pr-recipe-description">
+                            <div aria-label="recipe details container" className="prc-recipe-details flex">
+                                <h3 className="prc-recipe-head-3">{recipe.name}</h3>
+                                <div aria-label="recipe description" className="prc-recipe-description">
                                     {recipe.description}
                                 </div>
                             </div>
 
-                            <div aria-label="recipe actions" className="pr-recipe-actions flex">
+                            <div aria-label="recipe actions" className="prc-recipe-actions flex">
                                 <button 
-                                    className="btn pr-recipe-btn-more"
+                                    className="btn prc-recipe-btn-more"
                                     name="more"
                                     value={recipe.id}
                                     onClick={handleClick}
@@ -177,7 +177,7 @@ const ProfileRecipes = () => {
                                         More Info
                                 </button>
                                 <button 
-                                    className="btn pr-recipe-btn-remove"
+                                    className="btn prc-recipe-btn-remove"
                                     name="remove"
                                     value={recipe.id}
                                     onClick={handleClick}
