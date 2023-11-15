@@ -128,8 +128,6 @@ const ProfileRecipes = () => {
         }
     }
 
-
-
     return (
         <div aria-label="recipes container" className="pr-container flex">
 
@@ -155,7 +153,8 @@ const ProfileRecipes = () => {
 
             <div aria-label="recipes container" className="pr-recipes-container flex">
 
-                {recipes.map((recipe) => {
+                {!recipes ? (<h3>You currently have no recipes.</h3>) : 
+                    recipes.map((recipe) => {
                     return (
                         <div aria-label="recipe container" className="pr-recipe-container flex">
 
