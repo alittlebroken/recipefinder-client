@@ -24,6 +24,8 @@ import { useNavigate } from 'react-router-dom'
 
 import Pagination from '../../UI/Pagination/Pagination'
 
+import Modal from '../../UI/Modal/Modal'
+
 const ProfileRecipes = () => {
 
     /* Alias the dispatcher */
