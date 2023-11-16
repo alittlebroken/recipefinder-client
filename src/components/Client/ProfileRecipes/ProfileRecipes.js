@@ -55,6 +55,9 @@ const ProfileRecipes = () => {
     const [page, setPage] = useState(pagination.page)
     const [recsPage, setRecsPerPage] = useState(pagination.recsPerPage)
 
+    /* State for working on the current record the user has selected, for removal etc */
+    const [currentRecipe, setCurrentRecipe] = useState(null)
+
     /* State for controlling the modals */
     const [showRemoveModal, setShowRemoveModal] = useState(false)
 
@@ -77,7 +80,7 @@ const ProfileRecipes = () => {
 
     /* Handle the buttons onClick functionality */
     const handleClick = async (e) => {
-
+        console.log(e.target.value)
         e.preventDefault()
 
         /* Check the button being clicked */
@@ -116,6 +119,7 @@ const ProfileRecipes = () => {
     /* Handlers for closing the modals */
     const handleModalCloseRemove = (e) => {
         e.preventDefault()
+        setCurrentRecipe(null)
         setShowRemoveModal(false)
     }
 
@@ -128,7 +132,7 @@ const ProfileRecipes = () => {
                 auth: {
                     authenticate: true
                 },
-                id: e.target.value
+                id: currentRecipe.id
             }
 
             const result = await apiProvider.removeOne('recipes', params)
@@ -154,6 +158,7 @@ const ProfileRecipes = () => {
 
             <Modal show={showRemoveModal} handleClose={handleModalCloseRemove}>
                 <div aria-label="remove modal container" className="modal-remove-container flex">
+                    <h4>{currentRecipe?.name}</h4>
                     Are you sure you wish to remove this recipe? <br /><br />
                     As soon as you do click Remove, it will be gone forever.
                     <div aria-label="remove modal actions container" className="modal-remove-actions-container flex">
@@ -216,15 +221,22 @@ const ProfileRecipes = () => {
                                     className="btn prc-recipe-btn"
                                     name="more"
                                     value={recipe.id}
-                                    onClick={handleClick}
+                                    onClick={(e => {
+                                        handleClick(e)
+                                    })}
                                 >
                                         More Info
                                 </button>
                                 <button 
                                     className="btn prc-recipe-btn"
                                     name="remove"
-                                    value={recipe.id}
-                                    onClick={handleClick}
+                                    onClick={(e) => {
+                                        setCurrentRecipe({
+                                            id: recipe.id,
+                                            name: recipe.name
+                                        })
+                                        handleClick(e)
+                                    }}
                                 > 
                                         Remove
                                 </button>
