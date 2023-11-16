@@ -51,7 +51,7 @@ describe('ProfileRecipes', () => {
 
         recipes.forEach(recipe => {
 
-            expect(recipe).toHaveClass('cb-container')
+            expect(recipe).toHaveClass('pr-recipe-container')
 
             let img = within(recipe).getByRole('img')
             let header = within(recipe).getByRole('heading', { level: 3})
