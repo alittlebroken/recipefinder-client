@@ -161,9 +161,11 @@ const apiProvider = {
             return {
                 status: response.status,
                 success: response.data.success,
-                message: response.data.message
+                message: response.data.message,
+                data: []
             }
         }
+
 
         return {
             status: response.status,
