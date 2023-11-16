@@ -55,6 +55,9 @@ const ProfileRecipes = () => {
     const [page, setPage] = useState(pagination.page)
     const [recsPage, setRecsPerPage] = useState(pagination.recsPerPage)
 
+    /* State for controlling the modals */
+    const [showRemoveModal, setShowRemoveModal] = useState(false)
+
     /* Load the data when the component is first mounted */
     useEffect(() => {
 
@@ -85,27 +88,7 @@ const ProfileRecipes = () => {
 
         } else if(e.target.name === "remove"){
 
-            /* Create the params to send to the API call */
-            const params = {
-                auth: {
-                    authenticate: true
-                },
-                id: e.target.value
-            }
-
-            const result = await apiProvider.removeOne('recipes', params)
-            
-            if(result.status >= 200 && result.status < 300){
-                setNotifications({
-                    className: 'notif-ok',
-                    message: 'Recipe successfully removed.'
-                })
-            } else {
-                setNotifications({
-                    className: "notif-error",
-                    message: 'Unable to remove Recipe.'
-                })
-            }
+            setShowRemoveModal(true)
 
         }
 
@@ -130,8 +113,67 @@ const ProfileRecipes = () => {
         }
     }
 
+    /* Handlers for closing the modals */
+    const handleModalCloseRemove = (e) => {
+        e.preventDefault()
+        setShowRemoveModal(false)
+    }
+
+    /* Removes the record from the system */
+    const handleRemoveRecipe = async (e) => {
+        e.preventDefault()
+
+        /* Create the params to send to the API call */
+            const params = {
+                auth: {
+                    authenticate: true
+                },
+                id: e.target.value
+            }
+
+            const result = await apiProvider.removeOne('recipes', params)
+            
+            if(result.status >= 200 && result.status < 300){
+                setNotifications({
+                    className: 'notif-ok',
+                    message: 'Recipe successfully removed.'
+                })
+            } else {
+                setNotifications({
+                    className: "notif-error",
+                    message: 'Unable to remove Recipe.'
+                })
+            } 
+
+            setShowRemoveModal(false)
+
+    }
+
     return (
         <div aria-label="recipes container" className="prc-container flex">
+
+            <Modal show={showRemoveModal} handleClose={handleModalCloseRemove}>
+                <div aria-label="remove modal container" className="modal-remove-container flex">
+                    Are you sure you wish to remove this recipe? <br /><br />
+                    As soon as you do click Remove, it will be gone forever.
+                    <div aria-label="remove modal actions container" className="modal-remove-actions-container flex">
+                        <button 
+                            name="remove" 
+                            className="btn btn-action"
+                            onClick={(e) => { handleRemoveRecipe(e)}}
+                        >
+                            Remove
+                        </button>
+                        <button 
+                            name="cancel" 
+                            className="btn btn-action"
+                            onClick={(e) => {setShowRemoveModal(false)}}
+                        >
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            </Modal>
 
             <div aria-label="recipes header container" className="prc-header-container">
                 <h2 className="prc-head-2">Recipes</h2>
