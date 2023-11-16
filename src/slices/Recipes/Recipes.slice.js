@@ -3,7 +3,7 @@ import apiProvider from '../../providers/apiProvider'
 
 /* Initial state of the slice when added to the store */
 const initialState = {
-    recipes: [],
+    data: [],
     hasError: false,
     isLoading: false,
     page: 1,
@@ -20,7 +20,7 @@ export const fetchRecipes = createAsyncThunk(
         try{
 
             /* Extract the payload vars */
-            const { userId, sort } = payload
+            const { sort } = payload
 
             /* Extract the state */
             const { recipes } = thunkAPI.getState()
@@ -36,11 +36,11 @@ export const fetchRecipes = createAsyncThunk(
                     perPage: recipes?.recsPerPage || 10
                 },
                 filter: {
-                    userId: userId
+                    userId: payload.userId
                 }
             }
 
-            await apiProvider.getList('recipes', params)
+            return await apiProvider.getList('recipes', params)
 
         } catch(e) {
             throw e
@@ -90,10 +90,10 @@ const recipesSlice = createSlice({
 
             /* Store the records from the API call */
             const results = action.payload?.data?.results
-            state.recipes = results
-
+            state.data = results
+            
             /* Setup the pagination if we have some results */
-            if(state.cookbooks?.length >= 1){
+            if(state.data?.length >= 1){
                 state.pages = results?.totalPages || 1
                 state.page = results?.currentPage || 1
                 state.records = results?.totalRecords
@@ -117,7 +117,7 @@ export const selectPages = state => state.recipes.pages
 export const selectPage = state => state.recipes.page
 export const selectRecsPerPage = state => state.recipes.recsPerPage
 export const selectRecords = state => state.recipes.records
-export const selectRecipes = state => state.recipes.recipes
+export const selectRecipes = state => state.recipes.data
 
 /* Export the reducer */
 export default recipesSlice.reducer
