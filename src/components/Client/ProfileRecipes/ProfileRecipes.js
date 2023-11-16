@@ -132,7 +132,7 @@ const ProfileRecipes = () => {
         <div aria-label="recipes container" className="prc-container flex">
 
             <div aria-label="recipes header container" className="prc-header-container">
-                <h2 className="pcr-head-2">Recipes</h2>
+                <h2 className="prc-head-2">Recipes</h2>
                 <button className="btn prc-btn-new">New</button>
             </div>
 
@@ -169,7 +169,7 @@ const ProfileRecipes = () => {
 
                             <div aria-label="recipe actions" className="prc-recipe-actions flex">
                                 <button 
-                                    className="btn prc-recipe-btn-more"
+                                    className="btn prc-recipe-btn"
                                     name="more"
                                     value={recipe.id}
                                     onClick={handleClick}
@@ -177,7 +177,7 @@ const ProfileRecipes = () => {
                                         More Info
                                 </button>
                                 <button 
-                                    className="btn prc-recipe-btn-remove"
+                                    className="btn prc-recipe-btn"
                                     name="remove"
                                     value={recipe.id}
                                     onClick={handleClick}
