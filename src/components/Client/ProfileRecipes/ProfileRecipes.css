@@ -88,6 +88,27 @@
     padding: 10px;
 }
 
+.modal-remove-container {
+    flex-direction: column;
+    padding: 10px;
+    gap: 10px;
+}
+
+.modal-remove-actions-container {
+    padding: 10px;
+    justify-content: space-between;
+}
+
+.btn-action {
+    background-color: var(--col-primary);
+    color: white;
+}
+
+.btn-action:hover {
+    background-color: white;
+    color: var(--col-primary);
+}
+
 /* Desktop Styles */
 @media screen and (min-width: 900px){
   
@@ -98,5 +119,13 @@
     .prc-head-2 {
         font-size: 4rem;
     }
-
+    
+    .modal-remove-container {
+        font-size: 1.5rem;
+    }
+    
+    .modal-remove-actions-container {
+        padding: 10px;
+        justify-content: space-between;
+    }
 }
