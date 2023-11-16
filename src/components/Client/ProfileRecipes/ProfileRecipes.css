@@ -79,14 +79,24 @@
 }
 
 .notif-ok {
-
+    color: green;
+    padding: 10px;
 }
 
 .notif-error {
-
+    color: red;
+    padding: 10px;
 }
 
 /* Desktop Styles */
 @media screen and (min-width: 900px){
-    
+  
+    .prc-container {
+        width: 900px;
+    }
+
+    .prc-head-2 {
+        font-size: 4rem;
+    }
+
 }
