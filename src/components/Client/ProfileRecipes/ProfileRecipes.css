@@ -1,4 +1,90 @@
 /* Mobile Styles */
+.prc-container {
+    width: 95%;
+    margin: 0 auto;
+    flex-direction: column;
+}
+
+.prc-header-container {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    align-items: center;
+}
+
+.prc-head-2 {
+    font-size: 2.5rem;
+    width: 90%;
+    text-align: center;
+}
+
+.prc-btn-new {
+    background-color: var(--col-primary);
+    color: white;
+    width: 75px;
+    height: 35px;
+    width: auto;
+}
+
+.prc-btn-new:hover {
+    background-color: white;
+    color: var(--col-primary);
+}
+
+.prc-recipes-container {
+    flex-direction: column;
+    padding: 10px;
+    gap: 20px;
+}
+
+.prc-recipe-container {
+    flex-direction: column;
+    background-color: white;
+    border-radius: 7px;
+    border: 2px solid var(--col-borders);
+    overflow: hidden;
+    width: 300px;
+}
+
+.prc-recipe-image{
+    object-fit: cover;
+}
+
+.prc-recipe-details {
+    padding: 10px;
+}
+
+.prc-recipe-head-3 {
+    font-family: inherit;
+    font-size: 1.5rem;
+}
+
+.prc-recipe-description {
+    
+}
+
+.prc-recipe-actions {
+    padding: 10px;
+    justify-content: space-between;
+}
+
+.prc-recipe-btn {
+    background-color: var(--col-primary);
+    color: white;
+}
+
+.prc-recipe-btn:hover {
+    background-color: white;
+    color: var(--col-primary);
+}
+
+.notif-ok {
+
+}
+
+.notif-error {
+
+}
 
 /* Desktop Styles */
 @media screen and (min-width: 900px){
