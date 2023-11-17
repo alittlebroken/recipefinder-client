@@ -172,3 +172,15 @@ export const maxFileSize = (e, size) => {
     /* Set the default return value */
     return true
 }
+
+/* Ensures that the input is a number */
+export const isNumber = (e) => {
+
+    /* Check to ensure that we have a number */
+    if(isNaN(parseInt(e.target.value))){
+        return 'The supplied value is not a number'
+    } else {
+        return true
+    }
+
+}
