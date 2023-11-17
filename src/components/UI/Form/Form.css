@@ -5,9 +5,10 @@
     border-radius: 7px;
     background-color: white;
     width: 100%;
-    height: auto;
+    max-height: 90vh;
     margin-bottom: 1rem; 
     padding: 10px;
+    overflow: auto;
 }
 
 .Form > button {
