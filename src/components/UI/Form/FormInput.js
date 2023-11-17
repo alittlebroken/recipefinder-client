@@ -6,7 +6,8 @@ import {
     min, 
     max, 
     minLength, 
-    maxLength 
+    maxLength,
+    isNumber
 } from '../../../providers/validationProvider'
 
 import './FormInput.css'
@@ -52,7 +53,7 @@ const FormInput = (props) => {
                     case "minLength":
                         result = minLength(validator.value, e)
                         
-                        /* Check the validation methids return type. If it's a boolean 
+                        /* Check the validation methods return type. If it's a boolean 
                         then it has passed the check, otherwise it is a string and this
                         means the validation failed for some reason */
 
@@ -67,7 +68,7 @@ const FormInput = (props) => {
                     case "maxLength":
                         result = maxLength(validator.value, e)
                         
-                        /* Check the validation methids return type. If it's a boolean 
+                        /* Check the validation methods return type. If it's a boolean 
                         then it has passed the check, otherwise it is a string and this
                         means the validation failed for some reason */
 
@@ -82,7 +83,7 @@ const FormInput = (props) => {
                     case "minValue":
                         result = min(validator.value, e)
                         
-                        /* Check the validation methids return type. If it's a boolean 
+                        /* Check the validation methods return type. If it's a boolean 
                         then it has passed the check, otherwise it is a string and this
                         means the validation failed for some reason */
 
@@ -97,7 +98,7 @@ const FormInput = (props) => {
                     case "maxValue":
                         result = max(validator.value, e)
                         
-                        /* Check the validation methids return type. If it's a boolean 
+                        /* Check the validation methods return type. If it's a boolean 
                         then it has passed the check, otherwise it is a string and this
                         means the validation failed for some reason */
 
@@ -109,6 +110,22 @@ const FormInput = (props) => {
                             setValidationMessage(null)
                         }                        
                         break;
+                    case "isNumber":
+                        const result = isNumber(e)
+
+                        /* Check the validation methods return type. If it's a boolean 
+                        then it has passed the check, otherwise it is a string and this
+                        means the validation failed for some reason */
+
+                        if(typeof result !== 'boolean'){
+                            setValidationMessage(result)
+                            setValidated(false)
+                            setDirty(true)
+                        } else {
+                            setValidationMessage(null)
+                        }                        
+                        break;
+
                     default:
 
                 }
