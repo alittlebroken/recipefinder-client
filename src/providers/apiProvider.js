@@ -100,6 +100,7 @@ const apiProvider = {
         // Pagination
         const { page } = params.pagination || 1
         const { perPage } = params.pagination || 10
+        const { overrideLimit } = params.pagination || false
 
         // Sorting
         const { field } = params.sort || 'id'
@@ -112,10 +113,15 @@ const apiProvider = {
         // Set up the query params
         let queryParams = {
             page: page ? page : 1,
-            limit: perPage ? perPage : 10,
             sort_by: field ? field : 'id',
             sort_direction: order ? order : 'desc',
             filter: JSON.stringify(params.filter)
+        }
+
+        if(overrideLimit){
+            queryParams.limit = null
+        } else {
+            queryParams.limit = perPage ? perPage : 10
         }
 
         // Generate the header and any options to send along with the request
