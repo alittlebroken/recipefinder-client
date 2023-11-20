@@ -27,15 +27,37 @@ const FormList = (props) => {
     const { form, handleFormChange, setDirty } = formContext
 
     /* Set state for a list of ingredients */
-    const [list, setList] = useState([])
+    const [list, setList] = useState([{
+        ingredient: "",
+        amount: 0,
+        amountType: ""
+    }])
 
-    /* Handlers for the component */
-    const handleChange = (e) => {
+    /* Add a new item to the list */
+    const AddToList = (e) => {
+        e.preventDefault()
+
+        setList([...list, { ingredient: "", amount: "", amountType: ""}])
 
     }
 
-    const handleAddToList = (e) => {
-       
+    /* Remove an element from the list */
+    const removeFromList = (index, e) => {
+        e.preventDefault()
+        
+        let listData = list
+        listData.splice(index, 1)
+        setList([...listData])
+
+    }
+
+    /* Handlers for the component */
+    const handleChange = (index, e) => {
+        e.preventDefault()
+
+        let listData = list
+        listData[index][e.target.name] = e.target.value
+        setList([...listData])
     }
 
     return(
@@ -44,7 +66,7 @@ const FormList = (props) => {
                 
                 <div aria-label="selected ingredients" className="FormList-">
                     {list && (
-                        list.map(listItem => {
+                        list.map((item, index) => {
                             return (
                                 <></>
                             )
@@ -62,7 +84,7 @@ const FormList = (props) => {
                     type="submit" 
                     name="addIngredient" 
                     className="btn add-button"
-                    onClick={handleAddToList}
+                    onClick={null}
                     >
                         Add
                     </button>
