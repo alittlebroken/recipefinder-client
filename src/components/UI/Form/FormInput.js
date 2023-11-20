@@ -19,7 +19,8 @@ const FormInput = (props) => {
         name,
         label,
         type = 'text',
-        validators = []
+        validators = [],
+        listHandler = null
     } = props
 
     /* Get the form context to access the values needed */
@@ -146,7 +147,7 @@ const FormInput = (props) => {
                     name={name}
                     type={type}
                     value={form[name]}
-                    onChange={(e) => handleFormChange(e)}
+                    onChange={listHandler ? listHandler : handleFormChange}
                     onBlur={(e) => handleValidation(e)}
                     className="FormInput"
                 />

@@ -28,7 +28,7 @@ const FormSelect = props => {
             <select 
                 id={name}
                 name={name}
-                onChange={handleFormChange}
+                onChange={listHandler ? listHandler : handleFormChange}
             >
                 {items && items.map(item => {
                     return (
