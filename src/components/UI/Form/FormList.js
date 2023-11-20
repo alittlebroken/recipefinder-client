@@ -1,6 +1,6 @@
 import { useContext } from "react"
 import { FormContext } from "./Form"
-import { useState } from "react"
+import { createContext, useState } from "react"
 import { useList } from '../../../hooks/useList'
 
 import { 
@@ -12,6 +12,10 @@ import {
 } from '../../../providers/validationProvider'
 
 import './FormList.css'
+
+export const FormListContext = createContext({
+    formList: {},
+})
 
 const FormList = (props) => {
 
@@ -33,7 +37,7 @@ const FormList = (props) => {
     const [listDirty, setListDirty] = useState(false)
 
     /* Handlers for the component */
-    const handleChange = (e) => {
+    const handleListItemChange = (e) => {
 
         setListDirty(true)
 
@@ -69,19 +73,25 @@ const FormList = (props) => {
 
     return(
         <>
-            <h3 className="add-recipe-head-3">{title}</h3>
-            
-            <div aria-label="selected ingredients" className="FormList-">
-                {list && (
-                    list.map(listItem => {
-                        return (
-                            <></>
-                        )
-                    })
-                )}
-            </div>
+            <FormListContext.Provider value={{
+                list,
+                handleListItemChange,
+                setListDirty
+            }}>
 
-            <div 
+                <h3 className="add-recipe-head-3">{title}</h3>
+                
+                <div aria-label="selected ingredients" className="FormList-">
+                    {list && (
+                        list.map(listItem => {
+                            return (
+                                <></>
+                            )
+                        })
+                    )}
+                </div>
+
+                <div 
                     aria-label="add new recipe ingredient container" 
                     className="add-recipe-ingredient-container flex"
                 >
@@ -99,8 +109,7 @@ const FormList = (props) => {
                 
                 </div>
 
-
-
+            </FormListContext.Provider>
         </>
     )
 
