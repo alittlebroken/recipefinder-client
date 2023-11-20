@@ -1,0 +1,24 @@
+/* Mobile */
+.FormSelectContainer {
+    width: 95%;
+    margin: 0 auto;
+}
+
+.FormLabel {
+    padding: 7px;
+    font-family: inherit;
+    font-size: .9rem;
+}
+
+.FormSelect {
+    font-family: inherit;
+    font-size: .9rem;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--col-borders);
+}
+
+/* Desktop */
+@media screen and (min-width: 900px){
+
+}
