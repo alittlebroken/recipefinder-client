@@ -1,7 +1,6 @@
 import { useContext } from "react"
 import { FormContext } from "./Form"
 import { useState } from "react"
-import { FormListContext } from './FormList'
 
 import { 
     min, 
@@ -21,17 +20,11 @@ const FormInput = (props) => {
         label,
         type = 'text',
         validators = [],
-        inList = false
     } = props
 
     /* Get the form context to access the values needed */
     const formContext = useContext(FormContext)
     const { form, handleFormChange, setDirty } = formContext
-
-    /* Get a list context in vase we need to use it */
-    const formListContext = useContext(FormListContext)
-    const { list, handleListItemChange, setListDirty } = formListContext
-
 
     /* Store the result of validation, by default set the form to be validated and allow the validation
        steps to set if validation failed or not
@@ -153,7 +146,7 @@ const FormInput = (props) => {
                     name={name}
                     type={type}
                     value={form[name]}
-                    onChange={inList ? handleListItemChange : handleFormChange}
+                    onChange={handleFormChange}
                     onBlur={(e) => handleValidation(e)}
                     className="FormInput"
                 />
