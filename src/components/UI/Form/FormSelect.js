@@ -24,7 +24,7 @@ const FormSelect = props => {
     return (
         <div aria-label="select container" className="FormSelectContainer">
 
-            <label htmlFor={name} className="FormLabel">{label}:</label>
+            {label && (<label htmlFor={name} className="FormLabel">{label}:</label>) }
             <select 
                 id={name}
                 name={name}
