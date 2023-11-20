@@ -20,16 +20,12 @@ const FormList = (props) => {
         children,
         initialValues,
         title,
-        resource,
         name
     } = props
 
     /* Get the form context to access the values needed */
     const formContext = useContext(FormContext)
     const { form, handleFormChange, setDirty } = formContext
-
-    /* Get a list of ingredients */
-    const ingredients = useList(resource)
 
     /* Set state for a list of ingredients */
     const [list, setList] = useState([])
@@ -90,36 +86,7 @@ const FormList = (props) => {
                     className="add-recipe-ingredient-container flex"
                 >
 
-                   <select 
-                        id="selectIngredients" 
-                        name="selectIngredients" 
-                        className="add-select"
-                        onChange={handleChange}
-                    >
-                    {ingredients && ingredients.map(ingredient => {
-                        return (
-                            <option value={ingredient.id}>{ingredient.name}</option>
-                        )
-                    })}
-                   </select>
-
-                   <input 
-                        type="number" 
-                        id="amount" 
-                        name="amount" 
-                        placeholder="Quantity" 
-                        className="add-input"
-                        onChange={handleChange}
-                    />
-
-                   <input 
-                        type="text" 
-                        id="amountType" 
-                        name="amountType" 
-                        placeholder="Amount type (I.E grams)" 
-                        className="add-input"
-                        onChange={handleChange}
-                    />
+                   {children}
 
                    <button 
                     type="submit" 
