@@ -153,7 +153,7 @@ const FormInput = (props) => {
                     name={name}
                     type={type}
                     value={form[name]}
-                    onChange={listHandler ? listHandler : handleFormChange}
+                    onChange={inList ? handleListItemChange : handleFormChange}
                     onBlur={(e) => handleValidation(e)}
                     className="FormInput"
                 />
