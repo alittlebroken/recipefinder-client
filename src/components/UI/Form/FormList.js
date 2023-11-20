@@ -34,27 +34,28 @@ const FormList = (props) => {
         amountType: ""
     }])
 
+    /* Extract a list of all ingredients */
+    const ingredients = useList('ingredients')
+
     /* Add a new item to the list */
-    const AddToList = (e) => {
+    const addToList = (e) => {
         e.preventDefault()
 
         setList([...list, { ingredient: "", amount: "", amountType: ""}])
-
+        return false
     }
 
     /* Remove an element from the list */
     const removeFromList = (index, e) => {
-        e.preventDefault()
         
         let listData = list
         listData.splice(index, 1)
         setList([...listData])
-
+        
     }
 
     /* Handlers for the component */
     const handleChange = (index, e) => {
-        e.preventDefault()
 
         let listData = list
         listData[index][e.target.name] = e.target.value
@@ -69,7 +70,53 @@ const FormList = (props) => {
                     {list && (
                         list.map((item, index) => {
                             return (
-                                <></>
+                                <div key={nanoid()} aria-label="container for ingredient in a list" className="FormList-ingredient-container">
+                                    <select
+                                        key={nanoid}
+                                        id="ingredient"
+                                        name="ingredient"
+                                        className="FormList-Select"
+                                        onChange={(index, e) => { handleChange(index, e) }}
+                                    >
+                                        {ingredients && ingredients.map(item => {
+                                            return (
+                                                <option key={nanoid()} value={item.id}>{item.name}</option>
+                                            )
+                                        })}
+                                    </select>
+                                    <input 
+                                        key={nanoid()} 
+                                        type="number" 
+                                        id="amount" 
+                                        name="amount" 
+                                        value={item.amount || ""} 
+                                        placeholder="Amount"
+                                        className="FormList-Input"
+                                        onChange={(index, e) => { handleChange(index, e) }}
+                                    />
+                                    <input 
+                                        key={nanoid()} 
+                                        type="number" 
+                                        id="amountType" 
+                                        name="amountType" 
+                                        value={item.amountType || ""} 
+                                        placeholder="Amount Type"
+                                        className="FormList-Input"
+                                        onChange={(index, e) => { handleChange(index, e) }}
+                                    />
+                                    <button
+                                        key={nanoid()}
+                                        id="removeIngredient"
+                                        name="removeIngredient"
+                                        type="button"
+                                        className="btn add-button"
+                                        onClick={(index, e) => { 
+                                            removeFromList(index, e) 
+                                        }}
+                                    >
+                                        Remove
+                                    </button>
+                                </div>
                             )
                         })
                     )}
@@ -85,7 +132,7 @@ const FormList = (props) => {
                     type="submit" 
                     name="addIngredient" 
                     className="btn add-button"
-                    onClick={null}
+                    onClick={addToList}
                     >
                         Add
                     </button>
