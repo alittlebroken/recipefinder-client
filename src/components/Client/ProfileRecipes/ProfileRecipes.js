@@ -26,6 +26,8 @@ import Pagination from '../../UI/Pagination/Pagination'
 
 import Modal from '../../UI/Modal/Modal'
 
+import ProfileRecipeNew from './ProfileRecipeNew'
+
 const ProfileRecipes = () => {
 
     /* Alias the dispatcher */
@@ -60,6 +62,7 @@ const ProfileRecipes = () => {
 
     /* State for controlling the modals */
     const [showRemoveModal, setShowRemoveModal] = useState(false)
+    const [showModalNewRecipe, setShowModalNewRecipe] = useState(false)
 
     /* Load the data when the component is first mounted */
     useEffect(() => {
@@ -80,7 +83,7 @@ const ProfileRecipes = () => {
 
     /* Handle the buttons onClick functionality */
     const handleClick = async (e) => {
-        console.log(e.target.value)
+        
         e.preventDefault()
 
         /* Check the button being clicked */
@@ -153,6 +156,12 @@ const ProfileRecipes = () => {
 
     }
 
+    /* Opens and closes the Add new Recipe Modal */
+    const handleModalCloseAdd = (e) => {
+        e.preventDefault()
+        setShowModalNewRecipe(false)
+    }
+
     return (
         <div aria-label="recipes container" className="prc-container flex">
 
@@ -180,9 +189,13 @@ const ProfileRecipes = () => {
                 </div>
             </Modal>
 
+            <Modal show={showModalNewRecipe} handleClose={handleModalCloseAdd}>
+                <ProfileRecipeNew />
+            </Modal>
+
             <div aria-label="recipes header container" className="prc-header-container">
                 <h2 className="prc-head-2">Recipes</h2>
-                <button className="btn prc-btn-new">New</button>
+                <button className="btn prc-btn-new" onClick={e => { setShowModalNewRecipe(true)}}>New</button>
             </div>
 
             <div aria-label="recipe filter container" className="prc-filter-container">
