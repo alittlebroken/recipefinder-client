@@ -1,6 +1,6 @@
 import { useContext } from "react"
 import { FormContext } from "./Form"
-import { createContext, useState } from "react"
+import { useState } from "react"
 import { useList } from '../../../hooks/useList'
 
 import { 
@@ -13,16 +13,11 @@ import {
 
 import './FormList.css'
 
-export const FormListContext = createContext({
-    formList: {},
-})
 
 const FormList = (props) => {
 
     /* Destructure the required pass in props */
     const {
-        children,
-        initialValues,
         title,
         name
     } = props
@@ -33,52 +28,18 @@ const FormList = (props) => {
 
     /* Set state for a list of ingredients */
     const [list, setList] = useState([])
-    const [inputs, setInputs] = useState(initialValues)
-    const [listDirty, setListDirty] = useState(false)
 
     /* Handlers for the component */
-    const handleListItemChange = (e) => {
-
-        setListDirty(true)
-
-        /* Destructure the event we will be processing */
-        const { name, value, type, files } = e.target;
-
-        /* Check the type of input currently that has changed on the form */
-        let inputValue
-        if(type === "file"){
-            inputValue = files
-        } else {
-            inputValue = value
-        }
-
-        /* Update the appropriate list Input */
-        setInputs({
-            ...inputs,
-            [name]: inputValue,
-            setDirty: listDirty
-        })
+    const handleChange = (e) => {
 
     }
 
     const handleAddToList = (e) => {
-        e.preventDefault()
-        setList([
-            ...list,
-            inputs
-        ])
-
-        console.log(list)
+       
     }
 
     return(
         <>
-            <FormListContext.Provider value={{
-                list,
-                handleListItemChange,
-                setListDirty
-            }}>
-
                 <h3 className="add-recipe-head-3">{title}</h3>
                 
                 <div aria-label="selected ingredients" className="FormList-">
@@ -96,9 +57,8 @@ const FormList = (props) => {
                     className="add-recipe-ingredient-container flex"
                 >
 
-                   {children}
 
-                   <button 
+                 <button 
                     type="submit" 
                     name="addIngredient" 
                     className="btn add-button"
@@ -109,7 +69,6 @@ const FormList = (props) => {
                 
                 </div>
 
-            </FormListContext.Provider>
         </>
     )
 
