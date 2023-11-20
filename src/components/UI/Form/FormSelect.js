@@ -34,6 +34,7 @@ const FormSelect = props => {
                 id={name}
                 name={name}
                 onChange={inList ? handleListItemChange : handleFormChange}
+                className="FormSelect"
             >
                 {items && items.map(item => {
                     return (
