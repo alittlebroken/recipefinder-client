@@ -13,7 +13,8 @@ const FormSelect = props => {
         items,
         optionDisplay,
         optionValue,
-        defaultSelected
+        defaultSelected,
+        listHandler = null
     } = props
 
     /* Get the form context to access the values needed */
