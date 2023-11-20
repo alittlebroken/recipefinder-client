@@ -19,8 +19,7 @@ const FormList = (props) => {
 
     /* Destructure the required pass in props */
     const {
-        title,
-        name
+        title
     } = props
 
     /* Get the form context to access the values needed */
