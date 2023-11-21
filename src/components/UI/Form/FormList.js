@@ -41,21 +41,19 @@ const FormList = (props) => {
         e.preventDefault()
 
         setList([...list, { ingredient: "", amount: "", amountType: ""}])
-        return false
     }
 
     /* Remove an element from the list */
-    const removeFromList = (index, e) => {
-        
+    const removeFromList = (e, index) => {
+        e.preventDefault()
         let listData = list
         listData.splice(index, 1)
         setList([...listData])
-        
     }
 
     /* Handlers for the component */
-    const handleChange = (index, e) => {
-
+    const handleChange = (e, index) => {
+        e.preventDefault()
         let listData = list
         listData[index][e.target.name] = e.target.value
         setList([...listData])
@@ -65,52 +63,55 @@ const FormList = (props) => {
         <>
                 <h3 className="add-recipe-head-3">{title}</h3>
                 
-                <div aria-label="selected ingredients" className="FormList-">
+                <div aria-label="List of form elements" className="FormList flex">
                     {list && (
-                        list.map((item, index) => {
+                        list.map((item, idx) => {
                             return (
-                                <div key={nanoid()} aria-label="container for ingredient in a list" className="FormList-ingredient-container">
+                                <div 
+                                    aria-label="container for ingredient in a list" 
+                                    className="FormListIngredient flex">
                                     <select
-                                        key={nanoid}
+                                        key={idx + 1}
                                         id="ingredient"
                                         name="ingredient"
-                                        className="FormList-Select"
-                                        onChange={(index, e) => { handleChange(index, e) }}
+                                        className="FormListItem FormListSelect"
+                                        onChange={(e) => { handleChange(e, idx) }}
+                                        value={list[idx]["ingredient"]}
                                     >
                                         {ingredients && ingredients.map(item => {
                                             return (
-                                                <option key={nanoid()} value={item.id}>{item.name}</option>
+                                                <option key={nanoid()} value={item.name}>{item.name}</option>
                                             )
                                         })}
                                     </select>
                                     <input 
-                                        key={nanoid()} 
+                                        key={idx + 2} 
                                         type="number" 
                                         id="amount" 
                                         name="amount" 
                                         value={item.amount || ""} 
                                         placeholder="Amount"
-                                        className="FormList-Input"
-                                        onChange={(index, e) => { handleChange(index, e) }}
+                                        className="FormListItem FormListAmount"
+                                        onChange={(e) => { handleChange(e, idx) }}
                                     />
                                     <input 
-                                        key={nanoid()} 
-                                        type="number" 
+                                        key={idx + 3} 
+                                        type="text" 
                                         id="amountType" 
                                         name="amountType" 
                                         value={item.amountType || ""} 
                                         placeholder="Amount Type"
-                                        className="FormList-Input"
-                                        onChange={(index, e) => { handleChange(index, e) }}
+                                        className="FormListItem FormListAmountType"
+                                        onChange={(e) => { handleChange(e, idx) }}
                                     />
                                     <button
-                                        key={nanoid()}
+                                        key={idx + 4}
                                         id="removeIngredient"
                                         name="removeIngredient"
                                         type="button"
-                                        className="btn add-button"
-                                        onClick={(index, e) => { 
-                                            removeFromList(index, e) 
+                                        className="btn FormListButton"
+                                        onClick={(e) => { 
+                                            removeFromList(e, idx) 
                                         }}
                                     >
                                         Remove
@@ -133,7 +134,7 @@ const FormList = (props) => {
                     className="btn add-button"
                     onClick={addToList}
                     >
-                        Add
+                        Add row
                     </button>
                 
                 </div>
