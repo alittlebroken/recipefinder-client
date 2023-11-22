@@ -9,6 +9,8 @@ export const useList = (resource, multi = false) => {
     /* Here we get the data from the API and store it locally in out state */
     useEffect(() => {
 
+        let resources = {}
+
         /* As we cant use async with useEffect then we first need to create a
          method to gather the data from the API and then we run that method */
         const fetchData = async () => {
@@ -32,12 +34,15 @@ export const useList = (resource, multi = false) => {
                 /* Loop through each resource passed in and extract the
                  require data from the API.
                  Pass it back as an array of objects */
-                resource.forEach( async data => {
-                    let resources = []
+                await resource.forEach( async data => {
                     let results = await apiProvider.getList(data.resource, params)
-                    resources.push({[data.name]: results.data.results})
+                    resources = {
+                        ...resources,
+                        [data.name]: results.data.results
+                    }
                     setList(resources)
                 })
+                
             }
 
         }
