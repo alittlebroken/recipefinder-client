@@ -97,7 +97,18 @@ const FormList = (props) => {
                                             
                     )        
                 })}
-
+                <button
+                    key={itemIndex + 4}
+                    id="removeIngredient"
+                    name="removeIngredient"
+                    type="button"
+                    className="btn FormListButton"
+                    onClick={(e) => { 
+                        removeFromList(e, itemIndex) 
+                    }}
+                >
+                    Remove
+                </button>
             </div>
         )
     }
