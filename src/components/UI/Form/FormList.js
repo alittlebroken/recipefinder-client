@@ -60,7 +60,8 @@ const FormList = (props) => {
                     type={element.type}
                     name={element.name}
                     value={element.value}
-                    className="FormListInput"
+                    className="FormListItem FormListInput"
+                    placeholder={element.placeholder}
                     onChange={(e) => { handleChange(e, index) }}
                 />
             } else if (element.type === "select"){
@@ -69,7 +70,7 @@ const FormList = (props) => {
                     key={id}
                     id={element.name}
                     name={element.name}
-                    className="FormListSelect"
+                    className="FormListItem FormListSelect"
                     value={element.value}
                     onChange={(e) => { handleChange(e, index) }}
                 >
