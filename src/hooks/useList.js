@@ -13,7 +13,6 @@ export const useList = (resource) => {
          method to gather the data from the API and then we run that method */
         const fetchData = async () => {
 
-            console.log('useList')
 
             /* Set the params to send to the API */
             const params = {
