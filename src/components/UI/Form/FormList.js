@@ -83,6 +83,25 @@ const FormList = (props) => {
 
     }
 
+    /* Renders a block of elements */
+    const renderElementBlock = (item, itemIndex, elements, elementsLength) => {
+        return (
+            <div 
+                aria-label="container for ingredient in a list" 
+                className="FormListIngredient flex">
+                
+                {elements.map( (element, index) => {
+                    return ( 
+                                            
+                        renderNewElement(item[element], itemIndex, (itemIndex * elementsLength) + (index + 1))
+                                            
+                    )        
+                })}
+
+            </div>
+        )
+    }
+
     /* Remove an element from the list */
     const removeFromList = (e, index) => {
         e.preventDefault()
@@ -99,30 +118,25 @@ const FormList = (props) => {
         setList([...listData])
     }
 
-    
 
     return(
         <>
                 <h3 className="add-recipe-head-3">{title}</h3>
                 
                 <div aria-label="List of form elements" className="FormList flex">
-                    <div 
-                        aria-label="container for ingredient in a list" 
-                        className="FormListIngredient flex">
+                    
                         {list && 
                             list.map((item, idx) => {
                                 /* Now we need to loop through the item from the list and 
-                                   extrcat out the object keys. Each  key then has an object associated
+                                   extract out the object keys. Each  key then has an object associated
                                    with it which contains the details we need and so we need to create 
                                    a new element for each one.
                                 */
                                    let elementKeys = Object.keys(item)
-                                   return elementKeys.map( (element, index) => {
-                                        return renderNewElement(item[element], idx, (idx * elementKeys.length) + (index + 1)) 
-                                   })   
+                                   return renderElementBlock(item, idx, elementKeys, elementKeys?.length)
                             })
                         }
-                    </div>
+                    
                 </div>
 
                 <div 
