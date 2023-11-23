@@ -22,10 +22,18 @@ const FormList = (props) => {
         title,
         name,
         inputData,
-        inputOptions
+        inputOptions,
     } = props
 
-    //console.log('Options Sent via Props: ', options)
+    console.log(inputData)
+
+    /* Store the result of validation, by default set the form to be validated and allow the validation
+       steps to set if validation failed or not
+    */
+    const [validated, setValidated] = useState(true)
+
+    /* State to hold any validation messages */
+    const [validationMessage, setValidationMessage] = useState([])
 
     /* Get the form context to access the values needed */
     const formContext = useContext(FormContext)
@@ -34,6 +42,118 @@ const FormList = (props) => {
     let initialData = JSON.parse(JSON.stringify(inputData))
     let newData = JSON.parse(JSON.stringify(inputData))
     const [list, setList] = useState([initialData])
+
+    /* const handle validation */
+    const handleValidation = (e, validators) => {
+
+        console.log('Validators: ', validators)
+
+        /* By Default set the form to clean and only set it dirty if validation fails */
+        setDirty(false)
+
+       /* Only perform validation if we have validators to apply */
+       if(validators?.length >= 1){
+
+            /* Contains the result of the validation */
+            let result
+
+            /* Loop through each Validator and apply them */
+            validators.forEach( validator => {
+
+                console.log(validator.type)
+                switch(validator.type){
+                    case "minLength":
+                        
+                        result = minLength(validator.value, e)
+                        
+                        /* Check the validation methods return type. If it's a boolean 
+                        then it has passed the check, otherwise it is a string and this
+                        means the validation failed for some reason */
+
+                        if(typeof result !== 'boolean'){
+                            setValidationMessage(result)
+                            setValidated(false)
+                            setDirty(true)
+                        } else {
+                            setValidationMessage(null)
+                            setDirty(false)
+                        }                   
+                        break;
+                    case "maxLength":
+                        result = maxLength(validator.value, e)
+                        
+                        /* Check the validation methods return type. If it's a boolean 
+                        then it has passed the check, otherwise it is a string and this
+                        means the validation failed for some reason */
+
+                        if(typeof result !== 'boolean'){
+                            setValidationMessage(result)
+                            setValidated(false)
+                            setDirty(true)
+                        } else {
+                            setValidationMessage(null)
+                            setDirty(false)
+                        }                        
+                        break;
+                    case "minValue":
+                        result = min(validator.value, e)
+                        
+                        /* Check the validation methods return type. If it's a boolean 
+                        then it has passed the check, otherwise it is a string and this
+                        means the validation failed for some reason */
+
+                        if(typeof result !== 'boolean'){
+                            setValidationMessage(result)
+                            setValidated(false)
+                            setDirty(true)
+                        } else {
+                            setValidationMessage(null)
+                            setDirty(false)
+                        }                      
+                        break;
+                    case "maxValue":
+                        result = max(validator.value, e)
+                        
+                        /* Check the validation methods return type. If it's a boolean 
+                        then it has passed the check, otherwise it is a string and this
+                        means the validation failed for some reason */
+
+                        if(typeof result !== 'boolean'){
+                            setValidationMessage(result)
+                            setValidated(false)
+                            setDirty(true)
+                        } else {
+                            setValidationMessage(null)
+                            setDirty(false)
+                        }                        
+                        break;
+                    case "isNumber":
+                        result = isNumber(e)
+
+                        /* Check the validation methods return type. If it's a boolean 
+                        then it has passed the check, otherwise it is a string and this
+                        means the validation failed for some reason */
+
+                        if(typeof result !== 'boolean'){
+                            setValidationMessage(result)
+                            setValidated(false)
+                            setDirty(true)
+                        } else {
+                            setValidationMessage(null)
+                            setDirty(false)
+                        }                        
+                        break;
+
+                    default:
+
+                }
+
+            })
+
+
+       }
+
+    }
 
     /* Update the parent form with the values we have */
     const updateParentForm = () => {
@@ -96,6 +216,7 @@ const FormList = (props) => {
                     className="FormListItem FormListInput"
                     placeholder={element.placeholder}
                     onChange={(e) => { handleChange(e, index) }}
+                    onBlur={(e) => handleValidation(e, element.validators)}
                 />
             } else if (element.type === "select"){
 
@@ -190,7 +311,9 @@ const FormList = (props) => {
                         }
                     
                 </div>
-
+                {validated === false ? (
+                    <div aria-label="Form input noticiation container" className="FormNotificationContainer">{validationMessage}</div>
+                ) : null}
                 <div 
                     aria-label="add new recipe ingredient container" 
                     className="add-recipe-ingredient-container flex"
