@@ -31,13 +31,18 @@ const FormList = (props) => {
     const formContext = useContext(FormContext)
     const { form, handleFormChange, setDirty } = formContext
     
-    let initialData = inputData
+    let initialData = JSON.parse(JSON.stringify(inputData))
+    let newData = JSON.parse(JSON.stringify(inputData))
     const [list, setList] = useState([initialData])
+
 
     /* Add a new item to the list */
     const addToList = (e) => {
         e.preventDefault()
-        setList([...list, inputData])
+        
+        const newList = [...list]
+        setList([...newList, newData])
+ 
     }
 
     /* Set state for loading different options for select elements */
@@ -114,11 +119,13 @@ const FormList = (props) => {
     }
 
     /* Remove an element from the list */
-    const removeFromList = (e, index) => {
+    const removeFromList = async (e, index) => {
         e.preventDefault()
+        
         let listData = list
         listData.splice(index, 1)
-        setList([...listData])
+        await setList([...listData])
+        
     }
 
     /* Handlers for the component */
