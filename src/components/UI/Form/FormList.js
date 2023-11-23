@@ -60,8 +60,6 @@ const FormList = (props) => {
         let newForm = JSON.parse(JSON.stringify(form))
         newForm[name] = lines
         setForm(JSON.parse(JSON.stringify(newForm)))
-        console.log(lines)
-        console.log(form)
 
     }
 
