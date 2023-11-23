@@ -215,30 +215,4 @@ const FormList = (props) => {
 
 } 
 
-FormList.Input = props => {
-
-    /* Destructure the props */
-    const {
-        name,
-        type,
-        placheolder = "",
-        index,
-        handleChange,
-        value
-    } = props
-
-    return (
-        <input 
-            key={index}
-            id={name}
-            name={name}
-            type={type || "text"}
-            value={value || ""}
-            className="FormListInput"
-            onChange={(e) => handleChange(e, index) }
-        />
-    )
-
-}
-
 export default FormList
