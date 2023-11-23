@@ -56,7 +56,8 @@ const Form = (props) => {
             <FormContext.Provider value={{
                 form,
                 handleFormChange,
-                setDirty
+                setDirty,
+                setForm
             }}>
                 {children}
                 <button type="submit" className="FormButton">{buttonName}</button>
