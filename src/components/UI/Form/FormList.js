@@ -29,12 +29,41 @@ const FormList = (props) => {
 
     /* Get the form context to access the values needed */
     const formContext = useContext(FormContext)
-    const { form, handleFormChange, setDirty } = formContext
+    const { form, handleFormChange, setDirty, setForm } = formContext
     
     let initialData = JSON.parse(JSON.stringify(inputData))
     let newData = JSON.parse(JSON.stringify(inputData))
     const [list, setList] = useState([initialData])
 
+    /* Update the parent form with the values we have */
+    const updateParentForm = () => {
+
+        /* We need to pass back one row per list entry to save
+         memory used by ther final form */
+        let listKeys
+        let lines = []
+
+        /* Go through each item we have in the list and then iterate through 
+         each items key. 
+         We then take this and generate a new object which contains all the 
+         seperate inputs.
+        */
+
+        list.forEach( item => {
+            listKeys = Object.keys(item)
+            let tmp = {}
+            listKeys.forEach( key => {
+                tmp[item[key].name] = item[key].value
+            })
+            lines.push(tmp) 
+        })
+        let newForm = JSON.parse(JSON.stringify(form))
+        newForm[name] = lines
+        setForm(JSON.parse(JSON.stringify(newForm)))
+        console.log(lines)
+        console.log(form)
+
+    }
 
     /* Add a new item to the list */
     const addToList = (e) => {
@@ -42,6 +71,7 @@ const FormList = (props) => {
         
         const newList = [...list]
         setList([...newList, newData])
+        updateParentForm()
  
     }
 
@@ -76,7 +106,7 @@ const FormList = (props) => {
                     id={element.name}
                     name={element.name}
                     className="FormListItem FormListSelect"
-                    value={element.value}
+                    value={element.value || element.defaultValue}
                     onChange={(e) => { handleChange(e, index) }}
                 >
                    {options && options[element.name].map(option => {
@@ -125,7 +155,7 @@ const FormList = (props) => {
         let listData = list
         listData.splice(index, 1)
         await setList([...listData])
-        
+        updateParentForm()
     }
 
     /* Handlers for the component */
@@ -134,6 +164,10 @@ const FormList = (props) => {
         let listData = list
         listData[index][e.target.name].value = e.target.value
         setList([...listData])
+
+        /* Update the appropriate part of the form for this 
+        list */
+        updateParentForm()
     }
 
 
