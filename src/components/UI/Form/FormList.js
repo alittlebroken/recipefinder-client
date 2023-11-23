@@ -106,7 +106,8 @@ const FormList = (props) => {
                     id={element.name}
                     name={element.name}
                     className="FormListItem FormListSelect"
-                    value={element.value || element.defaultValue}
+                    value={element.value || "Select an item"}
+                    placeholder={element.placeholder}
                     onChange={(e) => { handleChange(e, index) }}
                 >
                    {options && options[element.name].map(option => {
