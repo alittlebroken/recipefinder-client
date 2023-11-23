@@ -111,7 +111,7 @@ const FormInput = (props) => {
                         }                        
                         break;
                     case "isNumber":
-                        const result = isNumber(e)
+                        result = isNumber(e)
 
                         /* Check the validation methods return type. If it's a boolean 
                         then it has passed the check, otherwise it is a string and this
