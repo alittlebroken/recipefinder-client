@@ -399,10 +399,11 @@ const apiProvider = {
 
             /* Generate the payload to send */
             const formData = new FormData()
+            
             formData.append(
                 'images',
-                payload.images,
-                payload.images.name
+                payload?.images,
+                payload?.images?.name
             )
             formData.append('userid',payload.userId)
             formData.append('resourceid', payload.resourceid)
@@ -418,7 +419,7 @@ const apiProvider = {
                 formData,
                 axiosOptions
             )
-
+            
         } else {
             // Access the appropriate API and process the results
             response = await axios.post(url, payload, axiosOptions)
