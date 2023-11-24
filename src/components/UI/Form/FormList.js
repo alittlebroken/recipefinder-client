@@ -25,8 +25,6 @@ const FormList = (props) => {
         inputOptions,
     } = props
 
-    console.log(inputData)
-
     /* Store the result of validation, by default set the form to be validated and allow the validation
        steps to set if validation failed or not
     */
