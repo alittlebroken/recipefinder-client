@@ -64,6 +64,9 @@ const ProfileRecipes = () => {
     const [showRemoveModal, setShowRemoveModal] = useState(false)
     const [showModalNewRecipe, setShowModalNewRecipe] = useState(false)
 
+    /* Sets if the data for this is dirty and needs to be refreshed */
+    const [isDataDirty, setIsDataDirty] = useState(false)
+
     /* Load the data when the component is first mounted */
     useEffect(() => {
 
@@ -157,8 +160,7 @@ const ProfileRecipes = () => {
     }
 
     /* Opens and closes the Add new Recipe Modal */
-    const handleModalCloseAdd = (e) => {
-        e.preventDefault()
+    const handleModalCloseAdd = () => {
         setShowModalNewRecipe(false)
     }
 
@@ -190,7 +192,10 @@ const ProfileRecipes = () => {
             </Modal>
 
             <Modal show={showModalNewRecipe} handleClose={handleModalCloseAdd}>
-                <ProfileRecipeNew />
+                <ProfileRecipeNew 
+                    handleNotifications={setNotifications} 
+                    isDataDirty={setIsDataDirty} 
+                    handleCloseModal={handleModalCloseAdd}/>
             </Modal>
 
             <div aria-label="recipes header container" className="prc-header-container">
