@@ -8,16 +8,18 @@
 .FormLabel {
     font-weight: bold;
     padding: 6px 0;
+    font-size: .9rem;
 }
 
 .FormInput {
     padding: 7px;
     border-radius: 7px;
+    font-size: .9rem;
 }
 
 .FormNotificationContainer {
     padding: 5px;
-    font-size: .9rem;    
+    font-size: .8rem;    
     font-weight: bold;
     color: red;
 }
