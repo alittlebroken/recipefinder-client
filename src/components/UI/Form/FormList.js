@@ -1,7 +1,6 @@
 import { useContext } from "react"
 import { FormContext } from "./Form"
 import { useState } from "react"
-import { nanoid } from "@reduxjs/toolkit"
 import { useList } from '../../../hooks/useList'
 
 import { 
@@ -35,7 +34,7 @@ const FormList = (props) => {
 
     /* Get the form context to access the values needed */
     const formContext = useContext(FormContext)
-    const { form, handleFormChange, setDirty, setForm } = formContext
+    const { form, setDirty, setForm } = formContext
     
     let initialData = JSON.parse(JSON.stringify(inputData))
     let newData = JSON.parse(JSON.stringify(inputData))
