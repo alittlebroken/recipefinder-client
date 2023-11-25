@@ -28,15 +28,18 @@
 @media screen and (min-width: 900px) {
    
     .FormInputContainer {
-        flex-direction: col;
+        flex-direction: column;
     }
 
     .FormInput {
         width: 615px;
+        padding: 10px;
+        font-size: 1.2rem;
     }
 
     .FormLabel {
         margin-right: 15px;
+        font-size: 1.2rem;
     }
 
 }

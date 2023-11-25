@@ -43,4 +43,13 @@
 /* Desktop */
 @media screen and (min-width: 950px){
 
+    .FormListIngredient {
+        width: 100%;
+        flex-wrap: nowrap;
+    }
+    
+    .FormListItem {
+        padding: 10px;
+        font-size: 1rem;
+    }
 }
