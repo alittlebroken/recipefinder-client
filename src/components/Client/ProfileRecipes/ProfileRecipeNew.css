@@ -1,15 +1,17 @@
 /* Mobile styles */
 .add-recipe-head-2 {
     font-family: inherit;
-    font-size: 2rem;
+    font-size: 1.5rem;
     text-align: center;
     margin-bottom: 10px;
 }
 
 .add-recipe-head-3 {
     font-family: inherit;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     margin-bottom: 10px;
+    margin-top: 25px;
+    text-align: center;
 }
 
 .add-recipe-ingredient-container {
