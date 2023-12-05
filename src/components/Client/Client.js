@@ -11,6 +11,7 @@ import Pantry from './Pantry/Pantry'
 import ProfileCookbooks from './ProfileCookbooks/ProfileCookbooks'
 import ProfileCookbook from './ProfileCookbook/ProfileCookbook'
 import ProfileRecipes from './ProfileRecipes/ProfileRecipes'
+import RecipeDetails from './RecipeDetails/RecipeDetails'
 
 import { ProviderContext, useAccessToken } from '../../contexts/providers'
 
@@ -43,6 +44,7 @@ const Client = (props) => {
             <Route path="/login" element={<LoginForm />} />
             <Route path="/signup" element={<SignupForm />} />
             <Route path="/ingredients" element={<Ingredients />} />
+            <Route path="/recipes/:id" element={<RecipeDetails />} />
             {/* Protected Routes will go here */}
             <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
             <Route path="/pantry" element={<ProtectedRoute><Pantry /></ProtectedRoute>} />
