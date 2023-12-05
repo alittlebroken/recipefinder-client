@@ -1,16 +1,20 @@
 import './RecipeDetails.css'
 
+import { useParams } from 'react-router-dom'
+
 import Carousel from '../../UI/Carousel/Carousel'
 import RecipeSteps from './RecipeSteps'
 import RecipeIngredients from './RecipeIngredients'
 import RecipeInformation from './RecipeInformation'
 import RecipeCategories from './RecipeCategories'
 
-import useRecipe from '../../../hooks/useRecipe'
+import { useRecipe } from '../../../hooks/useRecipe'
 
-const RecipeDetails = ({id}) => {
+const RecipeDetails = () => {
 
     /* Extract the details for the recipe */
+    const urlParams = useParams()
+    const id = urlParams.id
     const recipe = useRecipe(id)
 
     return(
