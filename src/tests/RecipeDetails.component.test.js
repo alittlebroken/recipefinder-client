@@ -35,7 +35,7 @@ describe('RecipeDetails', () => {
         const cookbookSelect = screen.getByRole('combobox')
         const container = screen.getByRole('generic', { name: /recipe detail container/i })
         const mainImage = screen.getByRole('img', { name: /main recipe image/i })
-        const recipeDesc = screen.getByRole('generic', { name: /main recipe description/i })
+        const recipeDesc = screen.getByRole('generic', { name: /recipe description/i })
 
         const infoHeader = screen.getByRole('heading', { level: 3, name: /info header/i })
         const infoContainer = screen.getByRole('generic', { name: /recipe information/i })
