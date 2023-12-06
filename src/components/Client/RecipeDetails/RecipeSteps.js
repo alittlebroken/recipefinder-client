@@ -1,4 +1,5 @@
 import './RecipeSteps.css'
+import { nanoid } from '@reduxjs/toolkit'
 
 const RecipeSteps = ({ steps }) => {
     return (
@@ -10,7 +11,7 @@ const RecipeSteps = ({ steps }) => {
 
                 {steps.map(step => {
                     return (
-                        <div aria-label="step for recipe" className="step flex">
+                        <div key={nanoid()} aria-label="step for recipe" className="step flex">
                             <div aria-label="identifier for the step" className="stepNumber">{step.stepNo}</div>
                             <div aria-label="content for this recipes step" className="stepContent">{step.content}</div>
                         </div>

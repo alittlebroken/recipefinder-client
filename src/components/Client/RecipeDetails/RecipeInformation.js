@@ -2,6 +2,7 @@ import './RecipeInformation.css'
 
 const RecipeInformation = ({info}) => {
 
+
     return (
         <div aria-label="container for recipe information" className="recipeInfoContainer flex">
             <h3>Information</h3>

@@ -1,4 +1,5 @@
 import './RecipeIngredients.js'
+import { nanoid } from '@reduxjs/toolkit'
 
 const RecipeIngredients = ({ingredients}) => {
     return (
@@ -9,7 +10,7 @@ const RecipeIngredients = ({ingredients}) => {
 
                 {ingredients.map(ingredient => {
                     return (
-                        <li className="ingredientItem">{ingredient.amount} {ingredient.amountType} of {ingredient.name}</li>
+                        <li key={nanoid()} className="ingredientItem">{ingredient.amount} {ingredient.amountType} of {ingredient.name}</li>
                     )
                 })}
 
