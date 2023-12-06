@@ -1,6 +1,7 @@
 import './Carousel.css'
+import { nanoid } from '@reduxjs/toolkit'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 const Carousel = ({ children, slides }) => {
 
@@ -9,80 +10,100 @@ const Carousel = ({ children, slides }) => {
 
     /* Get how many slides we have */
     const numSlides = slides.length
-    
+
     /* Handlers for paging through the the slides */
     const nextSlide = () => {
-        if(currentIndex === numSlides){
+        if(currentIndex === numSlides - 1){
             setCurrentIndex(0)
         } else {
             setCurrentIndex(currentIndex + 1)
         }
-
-        /* Space out each slide one after the other */
-        slides.forEach((slide, index) => {
-            slide.style.transform = `translateX(${100 * (index - currentIndex)}%)`
-        })
 
     }
 
     const prevSlide = () => {
 
         if(currentIndex === 0){
-            setCurrentIndex(numSlides)
+            setCurrentIndex(numSlides - 1)
         } else {
             setCurrentIndex(currentIndex - 1)
         }
 
-        /* Space out each slide one after the other */
-        slides.forEach((slide, index) => {
-            slide.style.transform = `translateX(${100 * (index - currentIndex)}%)`
-        })
-
     }
 
-    useEffect(() => {
+    /* Styles for component */
+    const sliderStyles = {
+        height: '100%',
+        position: 'relative',
+    }
 
-        /* Ensure all slides are postioned correctly */
-        slides.forEach((slide, index) => {
-            slide.style.transform = `translateX(${100 * index}%)`
-        })
+    const slideStyles = {
+        width: '100%',
+        height: '100%',
+        borderRadius: '10px',
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundImage: `url(${slides[currentIndex].source})`,
+        transition: 'background-image 1s'
+    }
 
-    }, [])
+    const prevButtonStyles = {
+        width: '50px',
+        height: '50px',
+        padding: '5px',
+        borderRadius: '50%',
+        color: '#fff',
+        backgroundColor: 'rgba(0,0,0,0.5)',
+        position: 'absolute',
+        top: '50%',
+        transform: 'translate(0, -50%)',
+        left: '21px',
+        fontSize: '45px',
+        fontWeight: 'bold',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        zIndex: 1,
+        cursor: 'pointer',
+    }
+
+    const nextButtonStyles = {
+        width: '50px',
+        height: '50px',
+        padding: '5px',
+        borderRadius: '50%',
+        color: '#fff',
+        backgroundColor: 'rgba(0,0,0,0.5)',
+        position: 'absolute',
+        top: '50%',
+        transform: 'translate(0, -50%)',
+        right: '21px',
+        fontSize: '45px',
+        fontWeight: 'bold',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        zIndex: 1,
+        cursor: 'pointer',
+    }
 
     return (
-        <div aria-label="container for Carousel" className="slider">
-
-            {slides.map(slide => {
-                return (
-                    <div aria-label="container for slide" className="slide">
-                        {slide.content}
-                    </div>
-                )
-            })}
-
-            <button 
-                class="sliderBtn btn-prev" 
+        <div aria-label="container for Carousel" style={sliderStyles}>
+            <div 
+                aria-label="carousel previous link" 
+                style={prevButtonStyles}
                 onClick={prevSlide}
-            >
-                {'\u003c'}
-            </button>
-            <button 
-                class="sliderBtn btn-next" 
+                >
+                    {`<`}
+            </div>
+            <div 
+                aria-label="carousel next link" 
+                style={nextButtonStyles}
                 onClick={nextSlide}
-            >
-                {'\u003e'}
-            </button>
-
-        </div>
-    )
-
-}
-
-Carousel.slide = ({content}) => {
-
-    return (
-        <div aria-label="content container for carousel slide" className="slide">
-            {content}
+                >
+                    {`>`}
+            </div>
+            <div aria-label="slide for carousel" style={slideStyles}></div>
         </div>
     )
 
