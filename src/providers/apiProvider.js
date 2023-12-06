@@ -30,17 +30,17 @@ const apiProvider = {
             const id = params.id || null
 
             // Pagination
-            const { page } = params.pagination || 1
-            const { perPage } = params.pagination || null
-            const { overrideLimit } = params.pagination || false
+            const { page } = params?.pagination || 1
+            const { perPage } = params?.pagination || {}
+            const { overrideLimit } = params?.pagination || false
 
             // Sorting
-            const { field } = params.sort || 'id'
-            const { order } = params.sort || 'desc' 
+            const { field } = params?.sort || 'id'
+            const { order } = params?.sort || 'desc' 
 
             // Authentication
-            const { authenticate } = params.auth || false
-            const { roles } = params.auth || 'user'
+            const { authenticate } = params?.auth || false
+            const { roles } = params?.auth || 'user'
 
         // Set up the query params
 
