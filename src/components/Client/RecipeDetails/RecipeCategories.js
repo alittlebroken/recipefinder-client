@@ -1,5 +1,6 @@
 import './RecipeCategories'
 import { useNavigate } from 'react-router-dom'
+import { nanoid } from '@reduxjs/toolkit'
 
 const RecipeCategories = ({ categories }) => {
 
@@ -12,7 +13,7 @@ const RecipeCategories = ({ categories }) => {
             {
                 categories.map(category => {
                     return (
-                        <div aria-label="category container" className="categoryContainer" onClick={(e) => {
+                        <div key={nanoid()} aria-label="category container" className="categoryContainer" onClick={(e) => {
                             navigate(`/categories/${category.id}`)
                         }}>
 
