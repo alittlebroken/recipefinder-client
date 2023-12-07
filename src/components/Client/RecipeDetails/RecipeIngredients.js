@@ -1,4 +1,4 @@
-import './RecipeIngredients.js'
+import './RecipeIngredients.css'
 import { nanoid } from '@reduxjs/toolkit'
 
 const RecipeIngredients = ({ingredients}) => {
@@ -10,7 +10,7 @@ const RecipeIngredients = ({ingredients}) => {
 
                 {ingredients.map(ingredient => {
                     return (
-                        <li key={nanoid()} className="ingredientItem">{ingredient.amount} {ingredient.amountType} of {ingredient.name}</li>
+                        <li key={nanoid()} className="ingredientItem">{ingredient.amount} {ingredient.amount_type} of {ingredient.name}</li>
                     )
                 })}
 
