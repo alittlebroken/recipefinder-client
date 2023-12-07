@@ -1,4 +1,4 @@
-import './RecipeCategories'
+import './RecipeCategories.css'
 import { useNavigate } from 'react-router-dom'
 import { nanoid } from '@reduxjs/toolkit'
 
@@ -8,7 +8,7 @@ const RecipeCategories = ({ categories }) => {
     const navigate = useNavigate()
 
     return (
-        <div aria-label="container for categories" className="categorieContainer">
+        <div aria-label="container for categories" className="categoriesContainer flex">
 
             {
                 categories.map(category => {
