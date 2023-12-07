@@ -32,78 +32,29 @@ const Carousel = ({ children, slides }) => {
     }
 
     /* Styles for component */
-    const sliderStyles = {
-        height: '100%',
-        position: 'relative',
-    }
-
+    /* We keep this inline here to allow the functionality of actually 
+       changing the image */
     const slideStyles = {
-        width: '100%',
-        height: '100%',
-        borderRadius: '10px',
-        backgroundPosition: 'center',
-        backgroundSize: 'cover',
         backgroundImage: `url(${slides[currentIndex].source})`,
-        transition: 'background-image 1s'
-    }
-
-    const prevButtonStyles = {
-        width: '50px',
-        height: '50px',
-        padding: '5px',
-        borderRadius: '50%',
-        color: '#fff',
-        backgroundColor: 'rgba(0,0,0,0.5)',
-        position: 'absolute',
-        top: '50%',
-        transform: 'translate(0, -50%)',
-        left: '21px',
-        fontSize: '45px',
-        fontWeight: 'bold',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        zIndex: 1,
-        cursor: 'pointer',
-    }
-
-    const nextButtonStyles = {
-        width: '50px',
-        height: '50px',
-        padding: '5px',
-        borderRadius: '50%',
-        color: '#fff',
-        backgroundColor: 'rgba(0,0,0,0.5)',
-        position: 'absolute',
-        top: '50%',
-        transform: 'translate(0, -50%)',
-        right: '21px',
-        fontSize: '45px',
-        fontWeight: 'bold',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        zIndex: 1,
-        cursor: 'pointer',
     }
 
     return (
-        <div aria-label="container for Carousel" style={sliderStyles}>
+        <div aria-label="container for Carousel" className="slider">
             <div 
                 aria-label="carousel previous link" 
-                style={prevButtonStyles}
+                className="sliderButton prevButton"
                 onClick={prevSlide}
                 >
                     {`<`}
             </div>
             <div 
                 aria-label="carousel next link" 
-                style={nextButtonStyles}
+                className="sliderButton nextButton"
                 onClick={nextSlide}
                 >
                     {`>`}
             </div>
-            <div aria-label="slide for carousel" style={slideStyles}></div>
+            <div aria-label="slide for carousel" className="slide" style={slideStyles}></div>
         </div>
     )
 
