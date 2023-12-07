@@ -22,15 +22,15 @@ const RecipeInformation = ({info}) => {
                 </div>
 
                 <div aria-label="container for individual informational item" className="infoItem flex">
-                   <h4>{info.prepTime}</h4>
+                   <h4>{info.prep_time}</h4>
                    <hr />
-                   Prep time
+                   Prep time ( mins )
                 </div>
 
                 <div aria-label="container for individual informational item" className="infoItem flex">
-                   <h4>{info.cookTime}</h4>
+                   <h4>{info.cook_time}</h4>
                    <hr />
-                   Cook time
+                   Cook time ( mins )
                 </div>
 
             </div>
