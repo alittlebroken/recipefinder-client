@@ -1,0 +1,30 @@
+/* Mobile Styles */
+.ingredientsList {
+    padding: 10px;
+    border-radius: 7px;
+    background-color: hsl(0, 90%, 97%);
+    width: 100%;
+    flex-direction: column;
+}
+
+.ingredientItem::marker {
+    content: '';
+}
+
+.ingredientList {
+    list-style-type: none;
+}
+
+.ingredientItem {
+    padding: 6px;
+    border-bottom: 2px dotted var(--col-borders);
+}
+
+.ingredientItem:last-child {
+    border-bottom: none;
+}
+
+/* Desktop Styles */
+@media screen and (min-width: 964px) {
+
+}
