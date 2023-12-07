@@ -1,0 +1,33 @@
+/* Mobile Styles */
+.stepsContainer {
+  padding: 15px;
+  flex-direction: column;
+  gap: 10px;
+  /*border-right: 2px dotted var(--col-borders);*/
+}
+
+.steps {
+  flex-direction: column;
+  gap: 10px;
+}
+
+.step {
+    border-bottom: 2px dotted var(--col-borders);
+}
+
+.stepNumber {
+    font-weight: bold;
+    font-size: 2rem;
+    margin: 15px 0;
+}
+
+.stepContent {
+    padding-left: 35px;
+    padding-bottom: 25px;
+    margin: 15px 0;
+}
+
+/* Desktop Styles */
+@media screen and (min-width: 964px ){
+
+}
