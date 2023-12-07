@@ -41,6 +41,7 @@
   margin-top: 50px;
   margin: 0 auto;
   border: 2px solid var(--col-borders);
+  border-radius: 7px;
 }
 
 .recipeDetailsContainer {
