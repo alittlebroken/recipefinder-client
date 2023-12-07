@@ -55,9 +55,10 @@
 }
 
 .recipeDetailsLeft {
-    width: 95%;
+    width: 99%;
     flex-direction: column;
     margin: 0 auto;
+    gap: 25px;
 }
 
 .recipeDetailsRight {
