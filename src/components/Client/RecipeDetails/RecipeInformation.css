@@ -1,0 +1,34 @@
+/* Mobile styles */
+.recipeInfoContainer {
+    flex-direction: column;
+    padding: 15px;
+    border-radius: 7px;
+    background-color: hsl(240, 100%, 95%);
+}
+
+.infoItems {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    padding: 5px;
+    gap: 5px;
+}
+
+.infoItem {
+    padding: 3px;
+    gap: 5px;
+}
+
+.infoItem > h4 {
+    width: 30px;
+}
+
+.infoItem > hr {
+    width: 2px;
+    color: var(--col-borders);
+    height: auto;  
+}
+
+/* Desktop Styles */
+@media screen and (min-width: 940px){
+
+}
