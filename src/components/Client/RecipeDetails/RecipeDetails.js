@@ -91,7 +91,7 @@ const RecipeDetails = () => {
 
             <div aria-label="outer carousel container" style={{
                 width: '95%',
-                height: '200px',
+                height: '350px',
                 margin: '0 auto',
             }}>
 
