@@ -159,7 +159,7 @@ const apiProvider = {
         } else if (resource === 'cookbookRecipes'){
 
             /* URL to get the recipes for a cookbook */
-            url = url = `${process.env.REACT_APP_API_URL}/cookbooks/${params.id}/recipes?${queryString.stringify(queryParams)}`
+            url = `${process.env.REACT_APP_API_URL}/cookbooks/${params.id}/recipes?${queryString.stringify(queryParams)}`
 
         } else {
             url = `${process.env.REACT_APP_API_URL}/${resource}?${queryString.stringify(queryParams)}`
@@ -386,6 +386,11 @@ const apiProvider = {
         let url
         if(resource === 'pantry' || resource === 'pantries'){
             url = `${process.env.REACT_APP_API_URL}/${resource}/${params?.payload?.pantryId}`
+        } else if (resource === 'cookbookRecipes'){
+
+            /* URL to get the recipes for a cookbook */
+            url = `${process.env.REACT_APP_API_URL}/cookbooks/${params.id}/recipe`
+
         } else {
             url = `${process.env.REACT_APP_API_URL}/${resource}`
         }
