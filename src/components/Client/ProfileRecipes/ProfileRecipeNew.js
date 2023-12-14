@@ -136,7 +136,7 @@ const ProfileRecipeNew = props => {
                 
                 /* send the request and check the result */
                 const uploadResult = await apiProvider.create('uploads', imageParams)
-                console.log(uploadResult)
+                
                 if(uploadResult.status >= 200 && uploadResult.status < 300){
                     handleNotifications({
                         className: "cc-notif cc-ok",
