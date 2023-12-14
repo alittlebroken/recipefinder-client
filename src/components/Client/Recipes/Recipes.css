@@ -1,0 +1,97 @@
+/* Mobile Styles */
+.recipesContainer {
+    flex-direction: column;
+    width: 95%;
+    margin: 0 auto;
+    padding: 10px;
+    gap: 10px;
+}
+
+.recipesHeading {
+    font-size: 2.5rem;
+    text-align: center;
+    padding: 5px;
+}
+
+.recipesFilter {
+    width: 100%;
+    padding: 5px;
+    gap: 10px;
+}
+
+.recipesFilter > input[type="text"] {
+    width: 80%;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 1rem;
+    padding: 15px;
+}
+
+.recipesFilter > button {
+    width: auto;
+    border-radius: 7px;
+    border: 2px solid var(--col-primary);
+    background-color: var(--col-primary);
+    color: white;
+    font-family: inherit;
+    font-size: 1rem;
+    padding: 10px;
+}
+
+.recipesFilter > button:hover {
+    background-color: white;
+    color: var(--col-primary);
+}
+
+.recipeList {
+    flex-direction: column;
+    padding: 5px;
+}
+
+.recipeContainer {
+    flex-direction: column;
+    gap: 10px;
+    background-color: white;
+    border: 2px solid (--var-borders);
+    border-radius: 7px;
+    overflow: hidden;
+}
+
+.recipeImage {
+    width: 100%;
+    height: 250px;
+}
+
+.recipeHeading {
+    text-align: center;
+    font-family: inherit;
+    font-size: 1.5rem;
+}
+
+.recipeDescription {
+    padding: 5px;
+    border: none;
+}
+
+.recipeActions {
+    padding: 5px;
+    justify-content: space-between;
+}
+
+.recipeActions > button {
+    padding: 10px;
+    width: auto;
+    font-family: inherit;
+    font-size: 1rem;
+    background-color: var(--col-primary);
+    color: white;
+    border: 2px solid var(--col-primary);
+    border-radius: 7px;
+}
+
+.recipeActions > button:hover {
+    background-color: white;
+    color: var(--col-priomary);
+}
+
+/* Desktop Styles */
