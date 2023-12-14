@@ -46,6 +46,7 @@ const Client = (props) => {
             <Route path="/signup" element={<SignupForm />} />
             <Route path="/ingredients" element={<Ingredients />} />
             <Route path="/recipes" element={<Recipes />} />
+            <Route path="/recipes/:category" element={<Recipes />} />
             <Route path="/recipe/:id" element={<RecipeDetails />} />
             {/* Protected Routes will go here */}
             <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />

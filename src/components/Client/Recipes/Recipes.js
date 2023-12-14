@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import './Recipes.css'
 
 import { 
@@ -33,6 +33,9 @@ import { nanoid } from '@reduxjs/toolkit'
 import RecipeList from './RecipeList'
 
 const Recipes = props => {
+
+    /* Extract the query params from the url used to get here */
+    let { category } = useParams()
 
     /* Alias the dispatcher */
     const dispatch = useDispatch()
@@ -81,7 +84,7 @@ const Recipes = props => {
     const [selectedCookbook, setSelectedCookbook] = useState()
 
     /* State for the filter */
-    const [filter, setFilter] = useState(searchTerms)
+    const [filter, setFilter] = useState(category || searchTerms)
     const [options,setOptions] = useState('recipes')
 
     /* Set state for notifications */
