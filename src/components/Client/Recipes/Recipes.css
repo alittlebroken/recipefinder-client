@@ -133,3 +133,26 @@
 }
 
 /* Desktop Styles */
+@media screen and (min-width: 964px) {
+    .recipesContainer {
+        width: 900px;
+    }
+
+    .recipesHeading {
+        padding: 15px;
+        font-size: 3rem;
+    }
+
+    .recipesFilter > input[type="text"] {
+        width: 95%;
+    }
+
+    .recipeList {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .recipeContainer {
+        width: 250px;
+    }
+}
