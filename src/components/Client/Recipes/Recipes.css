@@ -94,4 +94,42 @@
     color: var(--col-priomary);
 }
 
+.selectContainer {
+    gap: 10px;
+}
+
+.selectModalHeading {
+    font-family: inherit;
+    font-size: 2rem;
+    text-align: center;
+    padding: 10px;
+}
+
+.cookbookSelect {
+    width: 100%;
+    padding: 15px;
+    border-radius: 7px;
+    border: 2px solid var(--col-borders);
+    font-family: inherit;
+    font-size: 1rem;  
+}
+
+.selectBtn {
+    background-color: var(--col-primary);
+    color: white;
+    padding: 10px;
+    width: auto;
+}
+
+.selectBtn:hover {
+    background-color: white;
+    color: var(--col-primary);
+}
+
+.recipeListEmpty {
+    justify-content: center;
+    padding: 30px;
+    font-size: 2rem;
+}
+
 /* Desktop Styles */
