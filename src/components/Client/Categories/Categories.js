@@ -62,7 +62,7 @@ const Categories = () => {
         /* Retrieve the data */
         fetchData('categories')
 
-    }, [])
+    }, [page, recsPerPage])
 
     return (
         <div aria-label="container for list of categories" className="categorieContainer flex">
