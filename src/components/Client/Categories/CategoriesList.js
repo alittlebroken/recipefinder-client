@@ -8,7 +8,7 @@ const CategoriesList = ({ data }) => {
 
     if(!data || data?.length < 1){
         return (
-            <div aria-label="container for no records" className="noRecords">
+            <div aria-label="container for no records" className="noRecords flex">
                 No records found
             </div>
         )
