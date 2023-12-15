@@ -1,4 +1,4 @@
-import './NewCookbookForm.css'
+import './NewCookBookForm.css'
 import Form from '../../UI/Form/Form'
 import FormInput from '../../UI/Form/FormInput'
 import FormUpload from '../../UI/Form/FormUpload'

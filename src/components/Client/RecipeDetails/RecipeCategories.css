@@ -1,0 +1,22 @@
+/* Mobile Styles */
+.categoriesContainer {
+    flex-wrap: wrap;
+    width: 95%;
+    margin: 0 auto;
+    gap: 15px;
+    justify-content: space-between;
+}
+
+.categoryContainer {
+    padding: 5px;
+    width: auto;
+    border-radius: 7px;
+    border: 2px solid var(--col-borders);
+    background-color: rgba(255, 255, 255, 1);
+}
+
+
+/* Desktop Styles */
+@media screen and ( min-width: 964px) {
+
+}

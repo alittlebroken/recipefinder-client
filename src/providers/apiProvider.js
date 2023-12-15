@@ -30,26 +30,33 @@ const apiProvider = {
             const id = params.id || null
 
             // Pagination
-            const { page } = params.pagination || 1
-            const { perPage } = params.pagination || 10
+            const { page } = params?.pagination || 1
+            const { perPage } = params?.pagination || {}
+            const { overrideLimit } = params?.pagination || false
 
             // Sorting
-            const { field } = params.sort || 'id'
-            const { order } = params.sort || 'desc' 
+            const { field } = params?.sort || 'id'
+            const { order } = params?.sort || 'desc' 
 
             // Authentication
-            const { authenticate } = params.auth || false
-            const { roles } = params.auth || 'user'
+            const { authenticate } = params?.auth || false
+            const { roles } = params?.auth || 'user'
 
         // Set up the query params
 
             let queryParams = {
                 page: page ? page : 1,
-                limit: perPage ? perPage : 10,
                 sort_by: field ? field : 'id',
                 sort_direction: order ? order : 'desc',
                 filter: JSON.stringify(params.filter)
             }
+
+            if(overrideLimit){
+                queryParams.limit = null
+            } else {
+                queryParams.limit = perPage ? perPage : null
+            }
+    
 
         // Generate the header and any options to send along with the request
 
@@ -99,7 +106,8 @@ const apiProvider = {
 
         // Pagination
         const { page } = params.pagination || 1
-        const { perPage } = params.pagination || 10
+        const { perPage } = params.pagination || null
+        const { overrideLimit } = params.pagination || false
 
         // Sorting
         const { field } = params.sort || 'id'
@@ -112,10 +120,15 @@ const apiProvider = {
         // Set up the query params
         let queryParams = {
             page: page ? page : 1,
-            limit: perPage ? perPage : 10,
             sort_by: field ? field : 'id',
             sort_direction: order ? order : 'desc',
             filter: JSON.stringify(params.filter)
+        }
+
+        if(overrideLimit){
+            queryParams.limit = null
+        } else {
+            queryParams.limit = perPage ? perPage : null
         }
 
         // Generate the header and any options to send along with the request
@@ -146,7 +159,7 @@ const apiProvider = {
         } else if (resource === 'cookbookRecipes'){
 
             /* URL to get the recipes for a cookbook */
-            url = url = `${process.env.REACT_APP_API_URL}/cookbooks/${params.id}/recipes?${queryString.stringify(queryParams)}`
+            url = `${process.env.REACT_APP_API_URL}/cookbooks/${params.id}/recipes?${queryString.stringify(queryParams)}`
 
         } else {
             url = `${process.env.REACT_APP_API_URL}/${resource}?${queryString.stringify(queryParams)}`
@@ -161,9 +174,11 @@ const apiProvider = {
             return {
                 status: response.status,
                 success: response.data.success,
-                message: response.data.message
+                message: response.data.message,
+                data: []
             }
         }
+
 
         return {
             status: response.status,
@@ -371,6 +386,11 @@ const apiProvider = {
         let url
         if(resource === 'pantry' || resource === 'pantries'){
             url = `${process.env.REACT_APP_API_URL}/${resource}/${params?.payload?.pantryId}`
+        } else if (resource === 'cookbookRecipes'){
+
+            /* URL to get the recipes for a cookbook */
+            url = `${process.env.REACT_APP_API_URL}/cookbooks/${params.id}/recipe`
+
         } else {
             url = `${process.env.REACT_APP_API_URL}/${resource}`
         }
@@ -384,10 +404,11 @@ const apiProvider = {
 
             /* Generate the payload to send */
             const formData = new FormData()
+            
             formData.append(
                 'images',
-                payload.images,
-                payload.images.name
+                payload?.images,
+                payload?.images?.name
             )
             formData.append('userid',payload.userId)
             formData.append('resourceid', payload.resourceid)
@@ -403,7 +424,7 @@ const apiProvider = {
                 formData,
                 axiosOptions
             )
-
+            
         } else {
             // Access the appropriate API and process the results
             response = await axios.post(url, payload, axiosOptions)
@@ -592,7 +613,8 @@ const apiProvider = {
 
             // Pagination
             const { page } = params.pagination || 1
-            const { perPage } = params.pagination || 10
+            const { perPage } = params.pagination || null
+            const { overrideLimit } = params.pagination || false
 
             // Sorting
             const { field } = params.sort || 'id'
@@ -601,10 +623,15 @@ const apiProvider = {
             // Set up the query params
             let queryParams = {
                 page: page ? page : 1,
-                limit: perPage ? perPage : 10,
                 sort_by: field ? field : 'id',
                 sort_direction: order ? order : 'desc',
                 filter: JSON.stringify(params.filter)
+            }
+
+            if(overrideLimit){
+                queryParams.limit = null
+            } else {
+                queryParams.limit = perPage ? perPage : null
             }
 
             // Generate the initial header for the request

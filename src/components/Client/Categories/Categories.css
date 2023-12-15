@@ -1,0 +1,70 @@
+/* Mobile Styles */
+.categoriesContainer {
+    width: 95%;
+    margin: 0 auto;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.categoriesHeader {
+    text-align: center;
+    font-size: 2.5rem;
+}
+
+.noRecords {
+   flex-direction: column;
+   justify-content: center;
+   padding: 30px;
+   font-family: inherit;
+   font-size: 2rem; 
+}
+
+.categoriesList {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 15px;
+}
+
+.categoryContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 150px;
+    background-image: url("https://media.istockphoto.com/id/1278745986/photo/culinary-background-with-traditional-ingredients-of-italian-cuisine.webp?b=1&s=170667a&w=0&k=20&c=jct5dpWc9sFrs6g4_u9n1aV7IDBEJ5n3T9lF75sMft8=");
+    background-size: cover;
+}
+
+.categoryLink {
+    border: none;
+    color: white;
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+/* Desktop Styles */
+@media screen and (min-width: 964px) {
+
+    .categoriesContainer {
+        width: 900px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .categoriesHeader {
+        font-size: 3.4rem;
+    }
+
+    .noRecords {
+        font-size: 3rem;
+    }
+
+    .categoryContainer {
+        width: 225px;
+        height: 225px;
+    }
+
+
+}

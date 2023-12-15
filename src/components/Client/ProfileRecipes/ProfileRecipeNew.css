@@ -1,0 +1,49 @@
+/* Mobile styles */
+.add-recipe-head-2 {
+    font-family: inherit;
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.add-recipe-head-3 {
+    font-family: inherit;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    margin-top: 25px;
+    text-align: center;
+}
+
+.add-recipe-ingredient-container {
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 15px;
+}
+
+.add-select, .add-input {
+    font-family: inherit;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 7px;
+}
+
+.add-button {
+    background-color: var(--col-primary);
+    color: white;
+}
+
+.add-button:hover {
+    background-color: white;
+    color: var(--col-primary);
+}
+
+/* Desktop Styles */
+@media screen and (min-width: 900px){
+    .add-recipe-head-2{
+        font-size: 3rem;
+    }
+
+    .add-recipe-head-3 {
+        font-size: 2rem;
+    }
+}

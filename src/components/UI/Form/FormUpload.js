@@ -22,12 +22,13 @@ const FormUpload = (props) => {
         type="file",
         acceptType,
         multiple=false,
-        validators = []
+        validators = [],
     } = props
 
     /* Get the form context to access the values needed */
     const formContext = useContext(FormContext)
     const { form, handleFormChange, setDirty } = formContext
+
 
     /* Store the result of validation, by default set the form to be validated and allow the validation
        steps to set if validation failed or not

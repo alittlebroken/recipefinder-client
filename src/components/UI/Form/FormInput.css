@@ -8,16 +8,18 @@
 .FormLabel {
     font-weight: bold;
     padding: 6px 0;
+    font-size: .9rem;
 }
 
 .FormInput {
-    padding: 7px;
+    padding: 5px;
     border-radius: 7px;
+    font-size: .8rem;
 }
 
 .FormNotificationContainer {
     padding: 5px;
-    font-size: .9rem;    
+    font-size: .8rem;    
     font-weight: bold;
     color: red;
 }
@@ -26,15 +28,18 @@
 @media screen and (min-width: 900px) {
    
     .FormInputContainer {
-        flex-direction: col;
+        flex-direction: column;
     }
 
     .FormInput {
         width: 615px;
+        padding: 10px;
+        font-size: 1.2rem;
     }
 
     .FormLabel {
         margin-right: 15px;
+        font-size: 1.2rem;
     }
 
 }

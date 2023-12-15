@@ -1,0 +1,55 @@
+/* Mobile */
+.FormList {
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+.FormListIngredient {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-bottom: 15px;
+    width: 100%;
+    flex-wrap: wrap;
+    border-bottom: 1px dotted var(--col-borders);
+    padding-bottom: 10px;
+}
+
+.FormListItem {
+    padding: 5px;
+    border-radius: 8px;
+    padding-left: 10px;
+    width: 100%;
+    border: 1px solid var(--col-borders);
+    font-size: .8rem;
+}
+
+.FormListSelect {
+    font-family: inherit;
+    font-size: .8rem;
+}
+
+.FormListButton {
+    color: white;
+    background-color: var(--col-primary);
+}
+
+.FormListButton:hover {
+    color: var(--col-primary);
+    background-color: white;
+}
+
+/* Desktop */
+@media screen and (min-width: 950px){
+
+    .FormListIngredient {
+        width: 100%;
+        flex-wrap: nowrap;
+    }
+    
+    .FormListItem {
+        padding: 10px;
+        font-size: 1rem;
+    }
+}

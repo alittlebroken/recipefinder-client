@@ -10,6 +10,10 @@ import Ingredients from './Ingredients/Ingredients'
 import Pantry from './Pantry/Pantry'
 import ProfileCookbooks from './ProfileCookbooks/ProfileCookbooks'
 import ProfileCookbook from './ProfileCookbook/ProfileCookbook'
+import ProfileRecipes from './ProfileRecipes/ProfileRecipes'
+import RecipeDetails from './RecipeDetails/RecipeDetails'
+import Recipes from './Recipes/Recipes'
+import Categories from './Categories/Categories'
 
 import { ProviderContext, useAccessToken } from '../../contexts/providers'
 
@@ -42,9 +46,14 @@ const Client = (props) => {
             <Route path="/login" element={<LoginForm />} />
             <Route path="/signup" element={<SignupForm />} />
             <Route path="/ingredients" element={<Ingredients />} />
+            <Route path="/recipes" element={<Recipes />} />
+            <Route path="/recipes/:category" element={<Recipes />} />
+            <Route path="/recipe/:id" element={<RecipeDetails />} />
+            <Route path="/categories" element={<Categories />} />
             {/* Protected Routes will go here */}
             <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
             <Route path="/pantry" element={<ProtectedRoute><Pantry /></ProtectedRoute>} />
+            <Route path="/profile/recipes" element={<ProfileRecipes />} />
             <Route path="/profile/cookbooks" element={<ProtectedRoute><ProfileCookbooks /></ProtectedRoute>} />
             <Route path="/profile/cookbook/:id" element={<ProtectedRoute><ProfileCookbook /></ProtectedRoute>} />
           </Routes>
