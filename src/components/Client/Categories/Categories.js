@@ -65,7 +65,7 @@ const Categories = () => {
     }, [page, recsPerPage])
 
     return (
-        <div aria-label="container for list of categories" className="categorieContainer flex">
+        <div aria-label="container for list of categories" className="categoriesContainer flex">
 
             <h2 className="categoriesHeader">Categories</h2>
 
