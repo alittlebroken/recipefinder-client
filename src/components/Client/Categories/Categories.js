@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import apiProvider from '../../../providers/apiProvider'
 import Pagination from '../../UI/Pagination/Pagination'
-
+import CategoriesList from './CategoriesList'
 
 const Categories = () => {
 
@@ -78,7 +78,9 @@ const Categories = () => {
                 handleGoToPage={handleGoToSpecificPage}
                 handleRecsChange={handleRecsPerPageChange}
             />
-            {/* CategoryList component goes here */}
+            
+            <CategoriesList data={categories} />
+            
             <Pagination 
                 totalRecords={totalRecs}
                 currentPage={page}
