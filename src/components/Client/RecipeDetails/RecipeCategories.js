@@ -8,13 +8,13 @@ const RecipeCategories = ({ categories }) => {
     const navigate = useNavigate()
 
     return (
-        <div aria-label="container for categories" className="categoriesContainer flex">
+        <div aria-label="container for categories" className="rc-categoriesContainer flex">
 
             {
                 categories.map(category => {
                     return (
-                        <div key={nanoid()} aria-label="category container" className="categoryContainer" onClick={(e) => {
-                            navigate(`/categories/${category.id}`)
+                        <div key={nanoid()} aria-label="category container" className="rc-categoryContainer" onClick={(e) => {
+                            navigate(`/recipes/${category.name.toLowerCase()}`)
                         }}>
 
                             { category.name }  

@@ -1,13 +1,14 @@
 /* Mobile Styles */
-.categoriesContainer {
+.rc-categoriesContainer {
     flex-wrap: wrap;
     width: 95%;
-    margin: 0 auto;
     gap: 15px;
+    margin: 0 auto;
     justify-content: space-between;
 }
 
-.categoryContainer {
+.rc-categoryContainer {
+    display: table-cell;
     padding: 5px;
     width: auto;
     border-radius: 7px;
