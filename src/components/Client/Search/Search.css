@@ -6,6 +6,10 @@
     background-color: var(--col-primary);
 }
 
+.search-container i {
+    position: absolute;
+}
+
 .searchOptions-container {
     display: flex;
     justify-content: space-between;
