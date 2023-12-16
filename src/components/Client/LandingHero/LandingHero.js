@@ -36,7 +36,7 @@ const LandingHero = (props) => {
         <div aria-label="landing page hero" className="landingHero-container">
             <h3 className="hero-heading">Find your favourite</h3>
             <form className="search-form" id="hero-search">
-                <div className="search-container">
+                <div className="lh-search-container">
                     <i className="fa fa-search icon"></i>
                     <input 
                     type="search" 
