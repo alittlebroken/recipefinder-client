@@ -11,7 +11,7 @@ const Category = (props) => {
 
     return (
         <Card key={record.id} overlay rounded>
-            <a href={`/recipes?cat=${record.id}`}>
+            <a href={`/recipes/${record.name.toLowerCase()}`}>
                 <Card.Container>
                     <Card.Image 
                     rounded 

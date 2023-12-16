@@ -74,7 +74,6 @@ export const getCategories = createAsyncThunk('landingPage/getCategories',
                     page: 1,
                     perPage: 4
                 },
-                filter: { "name": payload.terms }
             }
 
             return await apiProvider.getList('categories', params)
@@ -146,6 +145,7 @@ export const landingpageSlice = createSlice({
         [getCategories.rejected]: (state, action) => {
             state.isLoading = false
             state.hasError = true
+            console.log(action)
         },
         [getCategories.fulfilled]: (state, action) => {
             state.isLoading = false
