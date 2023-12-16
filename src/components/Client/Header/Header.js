@@ -45,10 +45,12 @@ const Header = () => {
 
             <div role="brand" className="brand-container">
                 <div role="presentation" aria-label="brand-contents" className="brand-content">
+                    <Link to="/" style={{ border: "none"}}>
                     <div aria-label="brand-name" className="brand-name">
                         recipeFinder
                     </div>
                     <div aria-label="brand-tagline" className="brand-tagline">Find your favourite recipe</div>
+                    </Link>
                 </div>
                 <div role="presentation" aria-label="nav-menu-icon" className="nav-burger" onClick={handleHamburgerClick}>
                         <i className="fa-solid fa-bars"></i>
