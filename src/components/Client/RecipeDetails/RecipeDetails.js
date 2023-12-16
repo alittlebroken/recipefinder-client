@@ -73,19 +73,19 @@ const RecipeDetails = () => {
     }
 
     return(
-        <div aria-label="recipe detail container" className="recipeContainer flex">
+        <div aria-label="recipe detail container" className="rd-recipeContainer flex">
 
             <div 
                 aria-label="recipe header container" 
-                className="recipeHeaderContainer"
+                className="rd-recipeHeaderContainer"
                 style={headerStyles}
             >
-                <h2 className="recipeTitle">{recipe?.name || null}</h2>
+                <h2 className="rd-recipeTitle">{recipe?.name || null}</h2>
             </div>
 
             <RecipeCategories categories={recipe?.categories} />
 
-            <div aria-label="recipe description" className="recipeDescription">
+            <div aria-label="recipe description" className="rd-recipeDescription">
                 {recipe?.description || null}
             </div>
 
@@ -99,9 +99,9 @@ const RecipeDetails = () => {
 
             </div>
 
-            <div aria-label="recipe details container" className="recipeDetailsContainer flex">
+            <div aria-label="recipe details container" className="rd-recipeDetailsContainer flex">
 
-                <div aria-label="recipe details left container" className="recipeDetailsLeft flex">
+                <div aria-label="recipe details left container" className="rd-recipeDetailsLeft flex">
 
                     <RecipeIngredients ingredients={recipe.ingredients} />
 
@@ -114,7 +114,7 @@ const RecipeDetails = () => {
 
                 </div>
 
-                <div aria-label="recipe details right container" className="recipeDetailsRight">
+                <div aria-label="recipe details right container" className="rd-recipeDetailsRight">
 
                     <RecipeSteps steps={recipe.steps} />
 
