@@ -56,6 +56,7 @@ const Header = () => {
             </div>
             <nav className="nav-container">
                 <ul className="nav-list">
+                    <li className="nav-list-item"><Link to="/" className="nav-item-link">Home</Link></li>
                     <li className="nav-list-item"><Link to="/recipes" className="nav-item-link">Recipes</Link></li>
                     <li className="nav-list-item"><Link to="/categories" className="nav-item-link">Categories</Link></li>
                     <li className="nav-list-item"><Link to="/ingredients" className="nav-item-link">Ingredients</Link></li>
