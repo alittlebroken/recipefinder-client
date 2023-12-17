@@ -80,6 +80,23 @@ const ProfileCookbooks = (props) => {
         fetchData()
     },[dispatch, isDataDirty])
 
+    const renderCookbooksList = (cookbooks) => {
+
+        if(!cookbooks || cookbooks.length < 1){
+            return (
+                <div aria-label="no cookbooks found container" className="noRecords">
+                You currently have no cookbooks.
+            </div>)
+        } else {
+            return (
+                cookbooks.map( cookbook => {
+                    return (
+                        <CookBookCard key={nanoid()} data={cookbook} setIsDirty={setIsDataDirty} handleNotifications={setNotifications} />
+                    )
+                }))
+        }
+
+    }
 
     return(
         <div aria-label="content container" className="cookbooks-container flex">
@@ -101,13 +118,7 @@ const ProfileCookbooks = (props) => {
             </div>
 
             <div aria-label="cookbooks container" className="pc-cookbooks-container flex">
-
-                {cookbooks.map( cookbook => {
-                    return (
-                        <CookBookCard key={nanoid()} data={cookbook} setIsDirty={setIsDataDirty} handleNotifications={setNotifications} />
-                    )
-                })}
-
+                {renderCookbooksList(cookbooks)}
             </div>
 
             <div aria-label="notification container" className="cc-notifications">
@@ -123,6 +134,11 @@ const ProfileCookbooks = (props) => {
 
         </div>
     )
+}
+
+/* Display a list of cookbooks */
+ProfileCookbooks.List = (props) => {
+
 }
 
 export default ProfileCookbooks

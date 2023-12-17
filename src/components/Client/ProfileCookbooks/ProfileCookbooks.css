@@ -32,6 +32,14 @@
     gap: 20px;
 }
 
+.noRecords {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    padding: 30px;
+    font-size: 1rem;
+}
 
 /* Desktop */
 @media screen and ( min-width: 960px){
