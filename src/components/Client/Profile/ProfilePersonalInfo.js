@@ -10,20 +10,16 @@ const ProfilePersonalInfo = (props) => {
     const { resourceid, fileId, userId, user } = props
 
     /* Create state for the form fields and to capture errors */
-    let [forename, setForename] = useState('')
-    forename = user.forename
+    let [forename, setForename] = useState(user.forename)
     const [forenameError, setForenameError] = useState('')
     
-    let [surname, setSurname] = useState('')
-    surname = user.surname
+    let [surname, setSurname] = useState(user.surname)
     const [surnameError, setSurnameError] = useState('')
     
-    let [email, setEmail] = useState('')
-    email = user.email
+    let [email, setEmail] = useState(user.email)
     const [emailError, setEmailError] = useState('')
     
-    let [roles, setRoles] = useState('')
-    roles = user.roles
+    let [roles, setRoles] = useState(user.roles)
     const [rolesError, setRolesError] = useState('')
     
     let [avatar, setAvatar] = useState('')
@@ -38,42 +34,53 @@ const ProfilePersonalInfo = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault()
 
+        /* Reset the form to ensure it is clean each submission */
+        setFormOk(true)
+
         /* Perform validation of the form fileds */
         if(forename === '' || forename === undefined){
+            
             setForenameError("You must provide a forename to update")
             setFormOk(false)
         }
 
         if(forename.length < 2){
+            
             setForenameError("You must provide a forename greater than 2 characters long")
             setFormOk(false)
         }
 
         if(surname === '' || surname === undefined){
+            
             setSurnameError("You must provide a surname to update")
             setFormOk(false)
         }
 
         if(surname.length < 2){
+            
             setSurnameError("You must provide a surname greater than 2 characters long")
             setFormOk(false)
         }
 
         if(email === '' || email === undefined){
+            
             setEmailError("You must provide an email to update")
             setFormOk(false)
         }
 
         if(email.length < 16){
+            
             setEmailError("You must provide an email that is at least 16 characters long")
             setFormOk(false)
         }
 
-        if((avatar !== '' || avatar !== undefined) && title.length < 2){
+        if((avatar?.length > 0 && avatar !== undefined) && title.length < 2){
+           
             setTitleError("If setting a profile picture you must provide a title that is greater than 2 characters long")
             setFormOk(false)
         }
 
+ 
         if(formOk){
 
             /* Generate the params to send to the server */
@@ -94,9 +101,11 @@ const ProfilePersonalInfo = (props) => {
                     roles
                 }
             }
+
+
             apiProvider.update('users', params)
             .then(result => {
-                console.log(result)
+                
                 return true
             })
             .catch(e => {
