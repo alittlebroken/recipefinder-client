@@ -69,7 +69,7 @@ const Header = () => {
                                 { name: 'My Pantry', url: '/pantry', handleClick: null},
                                 { name: 'My Recipes', url: '/profile/recipes', handleClick: null},
                                 { name: 'My Cookbooks', url: '/profile/cookbooks', handleClick: null},
-                                { name: 'Logout', url: '/logout', handleClick: handleLogout }
+                                { name: 'Logout', url: '/', handleClick: handleLogout }
                             ]} />
                         </li>
                         ) : (<li className="nav-list-item"><Link to="/login" className="nav-item-link">Login</Link></li>)}
