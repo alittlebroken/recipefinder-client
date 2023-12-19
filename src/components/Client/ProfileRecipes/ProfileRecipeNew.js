@@ -100,23 +100,19 @@ const ProfileRecipeNew = props => {
             }
         }
 
-        console.log(params)
-
         /* Only submit the form if it is not dirty */ 
         if(!dirty){
 
             /* Send the request */
             const recipeResult = await apiProvider.create('recipes', params)
-            console.log(recipeResult)
+            
 
             if(recipeResult.success === true){
-                console.log('Uploading image for recipe...')
+                
                 /* Now we can try and send the image to upload */
 
                 /* Id of the item just created */
                 let id = recipeResult.results[0].id
-                console.log('Form: ', form)
-                console.log('Form Images: ', form.images)
 
                 /* Create the params for the request */
                 const imageParams = {
@@ -160,7 +156,7 @@ const ProfileRecipeNew = props => {
                 }
 
             } else {
-                console.log('Unable to create recipe...')
+                
                 /* Something went wrong */
                 handleNotifications({
                    className: "cc-notif cc-error",
@@ -171,7 +167,7 @@ const ProfileRecipeNew = props => {
 
         } 
 
-        console.log(form.images)
+        
 
     }
 
