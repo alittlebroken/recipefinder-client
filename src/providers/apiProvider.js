@@ -524,11 +524,11 @@ const apiProvider = {
                             perPage: 10
                         },
                         filter: {
-                          resource: 'avatar',
+                          resource: 'users',
                           resourceid: params.id
                         }
                     })
-
+                    
                     if(picCheck.status === 204){
                         
                         /* Params for POST API request */
@@ -595,7 +595,7 @@ const apiProvider = {
                         formData.append('title', payload.title)
 
                         /* url to upload to */
-                        url = `${process.env.REACT_APP_API_URL}/uploads/${payload.imageId}`
+                        url = `${process.env.REACT_APP_API_URL}/uploads/${picCheck?.data?.results[0]?.id}`
 
                         /* set the correct mimetype for the form */
                         axiosOptions.headers['Content-type'] = "multipart/form-data"
