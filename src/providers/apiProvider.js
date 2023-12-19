@@ -511,45 +511,117 @@ const apiProvider = {
                     reqBody,
                     axiosOptions
                 )
-                
+
                 /* If the response is OK then update the picture, if any */
-                if(res.status === 204 && payload.upload !== ''){
+                if((res.status >= 200 && res.status < 300 ) && payload.upload !== ''){
 
-                    /* Generate the payload to send */
-                    const formData = new FormData()
-                    formData.append(
-                        'images',
-                        payload.upload,
-                        payload.upload.name
-                    )
-                    formData.append('userid',payload.id)
-                    formData.append('resourceid', payload.id)
-                    formData.append('resource', 'users')
-                    formData.append('title', payload.title)
-
-                    /* url to upload to */
-                    url = `${process.env.REACT_APP_API_URL}/uploads/${payload.imageId}`
-
-                    /* Update the Image */
-                    const imageRes = await axios.put(
-                        url,
-                        formData,
-                        axiosOptions
-                    )
-
-                    /* ensure all is ok */
-                    if(imageRes.status === 204){
-                        returnResult = {
-                            status: 204,
-                            success: true,
-                            message: 'Profile updated successfully'
+                    /* Check for any existing images Owned by the user */
+                    const picCheck = await apiProvider.getList('uploads', {
+                        auth: {
+                            authenticate: true
+                        },
+                        pagination: {
+                            perPage: 10
+                        },
+                        filter: {
+                          resource: 'avatar',
+                          resourceid: params.id
                         }
+                    })
+
+                    if(picCheck.status === 204){
+                        
+                        /* Params for POST API request */
+                        const postParams = {
+                            auth: {
+                                authenticate: true
+                            }
+                        }
+
+                        /* From data to send the image(s) and related data */
+                        const formData = new FormData()
+                        formData.append(
+                            'images',
+                            payload.upload,
+                            payload.upload.name
+                        )
+
+                        formData.append('userid',params.id)
+                        formData.append('resourceid', params.id)
+                        formData.append('resource', 'users')
+                        formData.append('title', payload.title)
+
+                        /* url to upload to */
+                        url = `${process.env.REACT_APP_API_URL}/uploads`
+
+                        /* set the correct mimetype for the form */
+                        axiosOptions.headers['Content-type'] = "multipart/form-data"
+
+                        /* Update the Image */
+                        const postRes = await axios.post(
+                            url,
+                            formData,
+                            axiosOptions
+                        )
+
+
+                        /* ensure all is ok */
+                        if(postRes.status >= 200 && postRes.status < 300){
+                            returnResult = {
+                                status: postRes.status,
+                                success: true,
+                                message: 'Profile updated successfully'
+                            }  
+                        } else {
+                            returnResult =  {
+                                status: postRes.status,
+                                success: false,
+                                message: 'Unable to update profile, please try again later'
+                            }
+                        }
+
                     } else {
-                        returnResult =  {
-                            status: 204,
-                            success: true,
-                            message: 'Unable to update profile, please try again later'
+
+                        /* Generate the payload to send */
+                        const formData = new FormData()
+                        formData.append(
+                            'images',
+                            payload.upload,
+                            payload.upload.name
+                        )
+                        formData.append('userid',params.id)
+                        formData.append('resourceid', params.id)
+                        formData.append('resource', 'users')
+                        formData.append('title', payload.title)
+
+                        /* url to upload to */
+                        url = `${process.env.REACT_APP_API_URL}/uploads/${payload.imageId}`
+
+                        /* set the correct mimetype for the form */
+                        axiosOptions.headers['Content-type'] = "multipart/form-data"
+                            
+                        /* Update the Image */
+                        const imageRes = await axios.put(
+                            url,
+                            formData,
+                            axiosOptions
+                        )
+
+                        /* ensure all is ok */
+                        if(imageRes.status === 204){
+                            returnResult = {
+                                status: 204,
+                                success: true,
+                                message: 'Profile updated successfully'
+                            }
+                        } else {
+                            returnResult =  {
+                             status: 204,
+                             success: true,
+                             message: 'Unable to update profile, please try again later'
+                            }
                         }
+
                     }
 
                 } else if(res.status === 204) {
