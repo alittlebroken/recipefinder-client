@@ -30,6 +30,10 @@ const ProfilePersonalInfo = (props) => {
     const [formOk, setFormOk] = useState(true)
     const [dirty, setDirty] = useState(false)
 
+    /* state for notifications */
+    const [notifications, setNotifcations] = useState(null)
+    const [notifType, setNotifType] = useState(null)
+
     /* When the form is submitted we need to update theusers personal information */
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -42,47 +46,94 @@ const ProfilePersonalInfo = (props) => {
             
             setForenameError("You must provide a forename to update")
             setFormOk(false)
+            return false
+        } else {
+            setForenameError(null)
+            setFormOk(true)
         }
 
         if(forename.length < 2){
             
             setForenameError("You must provide a forename greater than 2 characters long")
             setFormOk(false)
+            return false
+        } else {
+            setForenameError(null)
+            setFormOk(true)
         }
 
         if(surname === '' || surname === undefined){
             
             setSurnameError("You must provide a surname to update")
             setFormOk(false)
+            return false
+        } else {
+            setSurnameError(null)
+            setFormOk(true)
         }
+        
 
         if(surname.length < 2){
             
             setSurnameError("You must provide a surname greater than 2 characters long")
             setFormOk(false)
+            return false
+        }
+        else {
+            setSurnameError(null)
+            setFormOk(true)
         }
 
         if(email === '' || email === undefined){
             
             setEmailError("You must provide an email to update")
             setFormOk(false)
+            return false
+        } else {
+            setEmailError(null)
+            setFormOk(true)
         }
 
         if(email.length < 16){
             
             setEmailError("You must provide an email that is at least 16 characters long")
             setFormOk(false)
+            return false
+        }else {
+            setEmailError(null)
+            setFormOk(true)
         }
 
-        if((avatar?.length > 0 && avatar !== undefined) && title.length < 2){
+        console.log(upload)
+        console.log(title.length)
+        console.log(upload && title.length < 2)
+
+        if(upload && title.length < 2){
            
             setTitleError("If setting a profile picture you must provide a title that is greater than 2 characters long")
             setFormOk(false)
+            return false
+
+        } else {
+            setTitleError(null)
+            setFormOk(true)
+        }
+
+        console.log(isNaN(parseInt(title)))
+        if(upload && !isNaN(parseInt(title))){
+
+            setTitleError("Image title must be a string of characters.")
+            setFormOk(false)
+            return false
+
+        } else {
+            setTitleError(null)
+            setFormOk(true)
         }
 
  
         if(formOk){
-
+            console.log("Updating details")
             /* Generate the params to send to the server */
             let params = {
                 id: user.userId, 
@@ -169,6 +220,7 @@ const ProfilePersonalInfo = (props) => {
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="Insert picture title"
                 className="ppi-input" />
+            {titleError && (<p className="ppi-error">{titleError}</p>)}
             <label htmlFor="avatar">New profile image</label>
             <input type="file" id="avatar" name="avatar" onChange={(e) => setUpload(e.target.files[0])} />
             {avatarError && (<p className="ppi-error">{avatarError}</p>)}
