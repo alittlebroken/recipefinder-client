@@ -67,9 +67,9 @@ export const profileSlice = createSlice({
             state.data.email = profile?.email
             state.data.roles = profile?.roles
             state.data.username = profile?.username
-            state.data.avatar_src = profile?.avatar?.url ? profile.avatar.url : '/default_profile_pic.jpg'
-            state.data.avatar_alt = profile?.avatar?.alt ? profile.avatar.alt : 'Default profile picture'
-            state.data.avatar_title = profile?.avatar?.title ? profile.avatar.title : 'Default profile picture'
+            state.data.avatar_src = profile?.avatar_src ? profile.avatar_src : '/default_profile_pic.jpg'
+            state.data.avatar_alt = profile?.avatar_alt ? profile.avatar_alt : 'Default profile picture'
+            state.data.avatar_title = profile?.avatar_title ? profile.avatar_title : 'Default profile picture'
             state.data.pantryId = profile?.pantryId
         }
     }
