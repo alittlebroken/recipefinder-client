@@ -73,6 +73,20 @@ input[type="file"]::file-selector-button:hover {
     background-color: white;
 }
 
+.notifications {
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.notifType_ok {
+    color: green;
+}
+
+.notifType_error {
+    color: red;
+}
+
 /* Desktop Layout */
 @media screen and (min-width: 900px){
 
@@ -94,5 +108,8 @@ input[type="file"]::file-selector-button:hover {
         text-align: center;
     }
 
-
+    .notifications {
+        padding: 30px;
+        font-size: 1.5rem;
+    }
 }
