@@ -136,7 +136,7 @@ const Pantry = (props) => {
                 <PantryFormEdit key={nanoid()} ingredient={ingredientData} modalShow={handleCloseEditModal} handleIsDirty={setIsDirty} />
             </Modal>
 
-            <h3 className="p-head-2">{profileData.username}'s Pantry</h3>
+            <h3 className="p-head-2">{profileData.forename}'s Pantry</h3>
             <Form 
                 initialValues={{
                 findIngredient: ''
