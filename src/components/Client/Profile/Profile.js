@@ -25,6 +25,9 @@ const Profile = (props) => {
     let loading = useSelector(selectLoading)
     let error = useSelector(selectHasError)
 
+    /* State to indicate if profile data is dirty at all */
+    const [profileDirty, setProfileDirty] = useState(false)
+
     /* destructure the props */
     const {
         token
@@ -37,7 +40,7 @@ const Profile = (props) => {
             await dispatch(getUserProfile(token?.user?.id))
         }
         fetchData()
-    },[dispatch])
+    },[dispatch, profileDirty])
 
 
     return (
@@ -53,7 +56,7 @@ const Profile = (props) => {
                 />
             }
             { profileData && <ProfileDataBar /> }
-            { profileData && <ProfilePersonalInfo  user={profileData} /> }
+            { profileData && <ProfilePersonalInfo  user={profileData} handleProfileDirty={setProfileDirty} /> }
             { profileData && <ProfilePasswordReset /> }
 
         </div>
