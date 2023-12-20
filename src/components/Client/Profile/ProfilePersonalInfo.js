@@ -105,7 +105,7 @@ const ProfilePersonalInfo = (props) => {
 
             apiProvider.update('users', params)
             .then(result => {
-                
+                props.handleProfileDirty(true)
                 return true
             })
             .catch(e => {
