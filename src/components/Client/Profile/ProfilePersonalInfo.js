@@ -104,10 +104,6 @@ const ProfilePersonalInfo = (props) => {
             setFormOk(true)
         }
 
-        console.log(upload)
-        console.log(title.length)
-        console.log(upload && title.length < 2)
-
         if(upload && title.length < 2){
            
             setTitleError("If setting a profile picture you must provide a title that is greater than 2 characters long")
@@ -119,7 +115,6 @@ const ProfilePersonalInfo = (props) => {
             setFormOk(true)
         }
 
-        console.log(isNaN(parseInt(title)))
         if(upload && !isNaN(parseInt(title))){
 
             setTitleError("Image title must be a string of characters.")
@@ -131,9 +126,9 @@ const ProfilePersonalInfo = (props) => {
             setFormOk(true)
         }
 
- 
+       
         if(formOk){
-            console.log("Updating details")
+            
             /* Generate the params to send to the server */
             let params = {
                 id: user.userId, 
@@ -156,10 +151,14 @@ const ProfilePersonalInfo = (props) => {
 
             apiProvider.update('users', params)
             .then(result => {
+                setNotifcations('Profile successfully updated')
+                setNotifType('ok')
                 props.handleProfileDirty(true)
                 return true
             })
             .catch(e => {
+                setNotifcations('Unable to update profile, please try again later.')
+                setNotifType('error')
                 console.log(e)
                 return false
             })
@@ -225,7 +224,12 @@ const ProfilePersonalInfo = (props) => {
             <input type="file" id="avatar" name="avatar" onChange={(e) => setUpload(e.target.files[0])} />
             {avatarError && (<p className="ppi-error">{avatarError}</p>)}
 
+            { notifications && (
+                <div aria-label="notifications container" className={`notifications notifType_${notifType}`}>{notifications}</div>
+            )}
+
             <button type="submit" className="ppi-btn">Update</button>
+
 
         </form>
     )
