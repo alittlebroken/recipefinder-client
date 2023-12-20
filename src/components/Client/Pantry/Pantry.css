@@ -3,14 +3,14 @@
 .p-container {
     width: 90%;
     margin: 0 auto;
-    gap: 15px;
+    gap: 25px;
 }
 
 .p-head-2 {
     font-family: inherit;
-    font-size: 2.3rem;
+    font-size: 2rem;
     text-align: center;
-    padding: 10px;
+    padding: 15px;
 }
 
 .pi-list {
@@ -80,11 +80,13 @@
     .p-container {
         width: 900px;
         margin: 0 auto;
+        gap: 35px;
     }
 
     .p-head-2 {
         font-size: 4rem;
-        margin-top: 10px;
+        margin-top: 20px;
+        padding: 30px;
     }
 
     .pi-ingredient {
