@@ -75,6 +75,15 @@
     color: var(--col-primary);
 }
 
+.pp-norecords {
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: inherit;
+}
+
 /* Desktop Styles */
 @media screen and (min-width: 960px) {
     .p-container {
@@ -136,6 +145,10 @@
 
     label.pp-formInputLabel {
         font-size: 1.4rem; 
+    }
+
+    .pp-norecords {
+        font-size: 2rem;
     }
 
 } 

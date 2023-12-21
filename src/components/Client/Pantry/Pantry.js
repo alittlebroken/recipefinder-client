@@ -166,69 +166,77 @@ const Pantry = (props) => {
 
             <div aria-label="ingredient list" className="pi-list">
 
-                {ingredients.map( ingredient => {
+                { ingredients?.length < 1 ? (
+                    <div aria-label="nop records container" className="pp-norecords">
+                        You currently have no ingredients in your Pantry
+                    </div>
+                ) : (
 
-                    return (
-                        <div key={nanoid()} aria-label="ingredient container" className="flex pi-ingredient">
-                            
-                            <img 
-                                src={ingredient?.images[0] ? ingredient.images[0].src : '/no_image.png'}
-                                alt={ingredient?.images[0] ? ingredient.images[0].alt : 'Picture dipicting no image for the ingredient'}
-                                title={ingredient?.images[0] ? ingredient.images[0].title : 'Picture dipicting no image for the ingredient'}
-                            />
-                            <div aria-label="ingredient details container" className="flex pi-detail-container">
-                               
-                               <div aria-label="pantry ingredient details" className="pi-details flex">
-                                    
-                                    <h3>{ingredient.name}</h3>
-                                    <div>
-                                        <div aria-label="pantry ingredient amount" className="pi-amount flex flex-row">
-                                            <label>Amount:</label><p>{ingredient.amount}</p>
+                    ingredients.map( ingredient => {
+
+                        return (
+                            <div key={nanoid()} aria-label="ingredient container" className="flex pi-ingredient">
+                                
+                                <img 
+                                    src={ingredient?.images[0] ? ingredient.images[0].src : '/no_image.png'}
+                                    alt={ingredient?.images[0] ? ingredient.images[0].alt : 'Picture dipicting no image for the ingredient'}
+                                    title={ingredient?.images[0] ? ingredient.images[0].title : 'Picture dipicting no image for the ingredient'}
+                                />
+                                <div aria-label="ingredient details container" className="flex pi-detail-container">
+                                   
+                                   <div aria-label="pantry ingredient details" className="pi-details flex">
+                                        
+                                        <h3>{ingredient.name}</h3>
+                                        <div>
+                                            <div aria-label="pantry ingredient amount" className="pi-amount flex flex-row">
+                                                <label>Amount:</label><p>{ingredient.amount}</p>
+                                            </div>
+                                            <div aria-label="pantry ingredient amount" className="pi-amount flex flex-row">
+                                                <label>Amount Type:</label><p>{ingredient.amount_type}</p>
+                                            </div>
                                         </div>
-                                        <div aria-label="pantry ingredient amount" className="pi-amount flex flex-row">
-                                            <label>Amount Type:</label><p>{ingredient.amount_type}</p>
-                                        </div>
+    
                                     </div>
-
-                                </div>
-
-                                <div aria-label="pantry ingredient actions" className="pi-actions flex">
-                                    <button 
-                                        key={nanoid()}
-                                        className="btn pi-remove" 
-                                        value={ingredient.ingredientId}
-                                        onClick={(event => {
-                                            setId(event.target.value)
-                                            setShowRemoveModal(true)
-                                        })}
-                                    >
-                                        Remove
-                                    </button>
-                                    <button 
-                                        key={nanoid()}
-                                        className="btn pi-edit" 
-                                        value={
-                                            JSON.stringify({
-                                                pantry: parseInt(profileData.pantryId),
-                                                id: ingredient.id,
-                                                ingredientId: ingredient.ingredientId,
-                                                name: ingredient.name,
-                                                amount: ingredient.amount,
-                                                amountType: ingredient.amount_type
-                                            })
-                                        }
-                                        onClick={(event => {
-                                            setIngredientData(event.target.value)
-                                            setShowEditModal(true)
-                                        })}
-                                    >
-                                        Edit
-                                    </button>
+    
+                                    <div aria-label="pantry ingredient actions" className="pi-actions flex">
+                                        <button 
+                                            key={nanoid()}
+                                            className="btn pi-remove" 
+                                            value={ingredient.ingredientId}
+                                            onClick={(event => {
+                                                setId(event.target.value)
+                                                setShowRemoveModal(true)
+                                            })}
+                                        >
+                                            Remove
+                                        </button>
+                                        <button 
+                                            key={nanoid()}
+                                            className="btn pi-edit" 
+                                            value={
+                                                JSON.stringify({
+                                                    pantry: parseInt(profileData.pantryId),
+                                                    id: ingredient.id,
+                                                    ingredientId: ingredient.ingredientId,
+                                                    name: ingredient.name,
+                                                    amount: ingredient.amount,
+                                                    amountType: ingredient.amount_type
+                                                })
+                                            }
+                                            onClick={(event => {
+                                                setIngredientData(event.target.value)
+                                                setShowEditModal(true)
+                                            })}
+                                        >
+                                            Edit
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    )
-                })}
+                        )
+                    })
+
+                )}
 
             </div>
 
