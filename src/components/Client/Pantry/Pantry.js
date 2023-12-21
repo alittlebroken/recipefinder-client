@@ -138,6 +138,7 @@ const Pantry = (props) => {
 
             <h3 className="p-head-2">{profileData.forename}'s Pantry</h3>
             <Form 
+                bordered={false}
                 initialValues={{
                 findIngredient: ''
             }}
