@@ -115,4 +115,27 @@
         flex-direction: column;
         justify-content: space-between;
     }
+
+    /* Custom Form Styles */
+
+    form.pp-formContainer {
+        flex-direction: row;
+        width: 100%;
+    }
+
+    div.pp-formInputContainer {
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+    }
+
+    input.pp-formInput {
+        box-sizing: border-box;
+        width: 75%;
+    }
+
+    label.pp-formInputLabel {
+        font-size: 1.4rem; 
+    }
+
 } 

@@ -144,10 +144,14 @@ const Pantry = (props) => {
             }}
                 
                 onSubmit={submit}
+                formClasses="pp-formContainer"
             >
                 <FormInput 
                     name="findIngredient"
                     label="Find Ingredient"
+                    containerClasses="pp-formInputContainer"
+                    inputClasses="pp-formInput"
+                    labelClasses="pp-formInputLabel"
                 />
             </Form>
             <Pagination 
