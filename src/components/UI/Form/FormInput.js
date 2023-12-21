@@ -20,7 +20,15 @@ const FormInput = (props) => {
         label,
         type = 'text',
         validators = [],
+        containerClasses = null,
+        labelClasses = null,
+        inputClasses = null
     } = props
+
+    /* Setup the styles to apply to the Input, apply the defaults first */
+    const containerClass = "FormInputContainer " + containerClasses
+    const labelClass = "FormLabel " + labelClasses
+    const inputClass = "FormInput " + inputClasses
 
     /* Get the form context to access the values needed */
     const formContext = useContext(FormContext)
@@ -139,8 +147,8 @@ const FormInput = (props) => {
 
     return(
         <>
-            <div aria-label="input container" className="FormInputContainer">
-                {label && (<label htmlFor={name} className="FormLabel">{label}:</label>) }
+            <div aria-label="input container" className={containerClass}>
+                {label && (<label htmlFor={name} className={labelClass}>{label}:</label>) }
                 <input 
                     id={name}
                     name={name}
@@ -148,7 +156,7 @@ const FormInput = (props) => {
                     value={form[name]}
                     onChange={handleFormChange}
                     onBlur={(e) => handleValidation(e)}
-                    className="FormInput"
+                    className={inputClass}
                 />
                 {validated === false ? (
                     <div aria-label="Form input noticiation container" className="FormNotificationContainer">{validationMessage}</div>
