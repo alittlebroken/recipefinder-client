@@ -3,14 +3,14 @@
 .p-container {
     width: 90%;
     margin: 0 auto;
-    gap: 15px;
+    gap: 25px;
 }
 
 .p-head-2 {
     font-family: inherit;
-    font-size: 2.3rem;
+    font-size: 2rem;
     text-align: center;
-    padding: 10px;
+    padding: 15px;
 }
 
 .pi-list {
@@ -75,16 +75,27 @@
     color: var(--col-primary);
 }
 
+.pp-norecords {
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: inherit;
+}
+
 /* Desktop Styles */
 @media screen and (min-width: 960px) {
     .p-container {
         width: 900px;
         margin: 0 auto;
+        gap: 35px;
     }
 
     .p-head-2 {
         font-size: 4rem;
-        margin-top: 10px;
+        margin-top: 20px;
+        padding: 30px;
     }
 
     .pi-ingredient {
@@ -113,4 +124,31 @@
         flex-direction: column;
         justify-content: space-between;
     }
+
+    /* Custom Form Styles */
+
+    form.pp-formContainer {
+        flex-direction: row;
+        width: 100%;
+    }
+
+    div.pp-formInputContainer {
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+    }
+
+    input.pp-formInput {
+        box-sizing: border-box;
+        width: 75%;
+    }
+
+    label.pp-formInputLabel {
+        font-size: 1.4rem; 
+    }
+
+    .pp-norecords {
+        font-size: 2rem;
+    }
+
 } 

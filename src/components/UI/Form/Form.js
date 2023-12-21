@@ -14,13 +14,17 @@ const Form = (props) => {
         initialValues,
         onSubmit = () => {},
         bordered = true,
-        buttonName = "Submit"
+        buttonName = "Submit",
+        formClasses = null,
+        buttonClasses = null
     } = props
 
     /* Sets classes on the form based on passed in props */
     let classes = "Form "
 
     if (bordered) classes += "form-border "
+    if (formClasses) classes += formClasses
+    const btnClass = "FormButton " + buttonClasses
 
     /* The forms current state */
     const [form, setForm] = useState(initialValues)
@@ -60,7 +64,7 @@ const Form = (props) => {
                 setForm
             }}>
                 {children}
-                <button type="submit" className="FormButton">{buttonName}</button>
+                <button type="submit" className={btnClass}>{buttonName}</button>
             </FormContext.Provider>
         </form>
     )
