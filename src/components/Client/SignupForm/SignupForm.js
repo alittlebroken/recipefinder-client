@@ -38,11 +38,16 @@ const SignupForm = () => {
             return false
         }
 
-        if(email.length < 16) {
-            setEmailError('You must supply an email of at least 16 characters')
+        if(email.length < 3) {
+            setEmailError('You must supply an email of at least 3 characters')
             setFormOk(false)
             return false
         } 
+
+        if(email.includes("@")) {
+            setEmailError('The supplied email address must be in the correct format.')
+            setFormOk(false)
+        }
 
         if(forename === undefined || forename === '') { 
             setForenameError('You must supply a forename to register')
