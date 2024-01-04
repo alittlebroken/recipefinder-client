@@ -104,6 +104,7 @@ const apiProvider = {
 
     getList: async (resource, params) => {
 
+
         // Pagination
         const { page } = params.pagination || 1
         const { perPage } = params.pagination || null
@@ -153,22 +154,26 @@ const apiProvider = {
 
         /* Determine which resource to access */
         let url
+        let response
         if(resource === 'pantries' || resource === 'pantry'){
             /* Get the passed in id */
             url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}?${queryString.stringify(queryParams)}`
+            response = await axios.get(url, axiosOptions)
         } else if (resource === 'cookbookRecipes'){
 
             /* URL to get the recipes for a cookbook */
             url = `${process.env.REACT_APP_API_URL}/cookbooks/${params.id}/recipes?${queryString.stringify(queryParams)}`
+            response = await axios.get(url, axiosOptions)
 
+        } else if (resource === 'recipes') {
+            
+            url = `${process.env.REACT_APP_API_URL}/recipes?${queryString.stringify(queryParams)}`
+            response = await axios.get(url, axiosOptions)
         } else {
             url = `${process.env.REACT_APP_API_URL}/${resource}?${queryString.stringify(queryParams)}`
-
+            response = await axios.get(url, axiosOptions)
         }
          
-        // Access the appropriate API and process the results
-        const response = await axios.get(url, axiosOptions)
-
         // Process the response
         if(response.status >= 400){
             return {
