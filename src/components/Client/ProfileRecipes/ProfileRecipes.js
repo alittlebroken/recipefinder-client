@@ -93,7 +93,7 @@ const ProfileRecipes = () => {
         if(e.target.name === "more"){
 
             /* Navigate to the recipe detail page */
-            navigate(`/recipes/${e.target.value}`)
+            navigate(`/recipe/${e.target.value}`)
 
         } else if(e.target.name === "remove"){
 
