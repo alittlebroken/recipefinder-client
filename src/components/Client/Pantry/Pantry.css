@@ -84,6 +84,19 @@
     font-family: inherit;
 }
 
+.pageActions {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.findBtn {
+    background-color: var(--col-primary);
+    color: white;
+    padding: 25px;
+}
+
 /* Desktop Styles */
 @media screen and (min-width: 960px) {
     .p-container {
