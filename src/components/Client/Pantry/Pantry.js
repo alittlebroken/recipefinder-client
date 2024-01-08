@@ -26,11 +26,22 @@ import Modal from '../../UI/Modal/Modal'
 import PantryFormRemoval from './PantryFormRemove'
 import PantryFormEdit from './PantryFormEdit'
 import { nanoid } from '@reduxjs/toolkit'
+import { useList } from '../../../hooks/useList'
+
+import { 
+    setSearchTerms,
+    setSearchOptions,
+ } from '../../../slices/Search/SearchSlice'
+
+import { useNavigate } from 'react-router-dom'
 
 const Pantry = (props) => {
 
     /* Alias the dispatch hook */
     const dispatch = useDispatch()
+
+    /* Alias the naviaget hook */
+    const navigate = useNavigate()
 
     /* destructure the props */
     const {
@@ -97,10 +108,14 @@ const Pantry = (props) => {
             await dispatch(getPantryIngredients({ 
                 pantryId: parseInt(profileData.pantryId)
             }))
+
         }
         fetchData()
         setIsDirty(false)
     }, [page, recsPage, dispatch, isDirty])
+
+    /* Get a full list of ingredients in the pantry */
+    let fullPantryList = useList('pantry', false, profileData.pantryId)
 
     /* Handler for the forms submit function */
     const submit = async (event, form) => {
@@ -122,6 +137,27 @@ const Pantry = (props) => {
     const handleCloseEditModal = () => {
         setId(null)
         setShowEditModal(false)
+    }
+
+    /* Handler for getting list of recipes based on the ingredients we have */
+    const handleGetRecipes = (e) => {
+        e.preventDefault()
+        
+        /* Extract out just the ingredient names we need */
+        const ingredients = fullPantryList[0].ingredients
+        
+        /* Send the data to the search API */
+        let terms = ''
+        // TODO: Replace spaces in ingredient names on front end and remove them on the back end
+        ingredients.forEach(ingredient => {
+            terms += ingredient.name + ' '
+        })
+        
+        dispatch(setSearchTerms(terms))
+        dispatch(setSearchOptions('ingredients'))
+        navigate('/search')
+
+
     }
 
     return (
@@ -154,6 +190,16 @@ const Pantry = (props) => {
                     labelClasses="pp-formInputLabel"
                 />
             </Form>
+
+            <div aria-label="page actions container" className="pageActions flex">
+                <button 
+                    className="btn findBtn"
+                    onClick={handleGetRecipes}
+                >
+                    Find Recipes
+                </button>
+            </div>
+
             <Pagination 
                         totalRecords={pagination.records}
                         recsPerPage={pagination.recsPerPage}
