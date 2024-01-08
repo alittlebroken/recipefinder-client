@@ -145,12 +145,18 @@ const Pantry = (props) => {
         
         /* Extract out just the ingredient names we need */
         const ingredients = fullPantryList[0].ingredients
+        const numIngredients = ingredients.length - 1
         
         /* Send the data to the search API */
         let terms = ''
         // TODO: Replace spaces in ingredient names on front end and remove them on the back end
-        ingredients.forEach(ingredient => {
-            terms += ingredient.name + ' '
+        ingredients.forEach((ingredient, idx) => {
+            if(idx !== numIngredients){
+                terms += ingredient.name + ','
+            } else {
+                terms += ingredient.name
+            }
+            
         })
         
         dispatch(setSearchTerms(terms))
