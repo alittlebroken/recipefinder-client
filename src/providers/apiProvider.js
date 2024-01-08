@@ -157,7 +157,7 @@ const apiProvider = {
         let response
         if(resource === 'pantries' || resource === 'pantry'){
             /* Get the passed in id */
-            url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}?${queryString.stringify(queryParams)}`
+            url = `${process.env.REACT_APP_API_URL}/pantries/${params.id}?${queryString.stringify(queryParams)}`
             response = await axios.get(url, axiosOptions)
         } else if (resource === 'cookbookRecipes'){
 
@@ -731,6 +731,7 @@ const apiProvider = {
             let url = `${process.env.REACT_APP_API_URL}/search?${queryString.stringify(queryParams)}`
 
             // Access the appropriate API and process the results
+            console.log(payload)
             const response = await axios.post(url, payload, axiosOptions)
 
             // Check the status codes returned
