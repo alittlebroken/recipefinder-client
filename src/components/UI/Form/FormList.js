@@ -43,8 +43,6 @@ const FormList = (props) => {
     /* const handle validation */
     const handleValidation = (e, validators) => {
 
-        console.log('Validators: ', validators)
-
         /* By Default set the form to clean and only set it dirty if validation fails */
         setDirty(false)
 
@@ -57,7 +55,6 @@ const FormList = (props) => {
             /* Loop through each Validator and apply them */
             validators.forEach( validator => {
 
-                console.log(validator.type)
                 switch(validator.type){
                     case "minLength":
                         
