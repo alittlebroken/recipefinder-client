@@ -745,7 +745,93 @@ const apiProvider = {
             throw e
         }
 
-    }
+    },
+
+    pantrySearch: async (params) => {
+
+        try{
+
+            // Verify the passed in params we need
+            if(!params || params === undefined){
+                return {
+                    status: 400,
+                    success: false,
+                    message: 'Undefined request parameter'
+                }
+            }
+
+            if(!params.payload || params.payload === undefined){
+                return {
+                    status: 400,
+                    success: false,
+                    message: 'Undefined payload'
+                } 
+            }
+
+            const { payload } = params
+
+            // Authentication
+            const { authenticate } = params.auth || false
+            const { roles } = params.auth || 'user'
+
+            // Pagination
+            const { page } = params.pagination || 1
+            const { perPage } = params.pagination || null
+            const { overrideLimit } = params.pagination || false
+
+            // Sorting
+            const { field } = params.sort || 'id'
+            const { order } = params.sort || 'desc' 
+
+            // Set up the query params
+            let queryParams = {
+                page: page ? page : 1,
+                sort_by: field ? field : 'id',
+                sort_direction: order ? order : 'desc',
+                filter: JSON.stringify(params.filter)
+            }
+
+            if(overrideLimit){
+                queryParams.limit = null
+            } else {
+                queryParams.limit = perPage ? perPage : null
+            }
+
+            // Generate the initial header for the request
+            let headers = { 'Content-type': 'application/json' }
+
+            // Add any further headers as needed
+            if(authenticate === true && authenticate !== undefined){
+                headers.token = inMemoryJWT.getToken()
+            }
+
+            // Generate the initial options
+            let axiosOptions = { headers: headers }
+
+            // Add on any further options
+            if(authenticate === true && authenticate !== undefined){
+                axiosOptions.withCredentials = true
+            }
+
+            // Set the URL to use
+            let url = `${process.env.REACT_APP_API_URL}/search/pantry?${queryString.stringify(queryParams)}`
+
+            // Access the appropriate API and process the results
+            console.log(payload)
+            const response = await axios.post(url, payload, axiosOptions)
+
+            // Check the status codes returned
+            if(response.status >= 400){
+                return response.data
+            }
+
+            return response.data
+
+        } catch(e) {
+            throw e
+        }
+
+    },
 
 }
 
