@@ -16,6 +16,7 @@ import {
     setRecsPerPage,
     setFilter
 } from '../../../slices/Pantry/Pantry.slice'
+import { performPantrySearch } from '../../../slices/Search/SearchSlice'
 import { 
     selectProfileData,
 } from '../../../slices/Profile/Profile.slice'
@@ -149,7 +150,7 @@ const Pantry = (props) => {
         
         /* Send the data to the search API */
         let terms = ''
-        // TODO: Replace spaces in ingredient names on front end and remove them on the back end
+        
         ingredients.forEach((ingredient, idx) => {
             if(idx !== numIngredients){
                 terms += ingredient.name + ','
@@ -161,8 +162,9 @@ const Pantry = (props) => {
         
         dispatch(setSearchTerms(terms))
         dispatch(setSearchOptions('ingredients'))
-        navigate('/search')
-
+        dispatch(performPantrySearch({
+                ingredients: ingredients
+        }))
 
     }
 
