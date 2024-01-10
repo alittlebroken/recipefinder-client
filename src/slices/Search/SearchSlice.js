@@ -46,6 +46,54 @@ export const performSearch = createAsyncThunk('search/performSearch',
     }
 )
 
+// Performs a search against the API wioth pantry ingredients
+export const performPantrySearch = createAsyncThunk('search/performPantrySearch',
+    async (payload, thunkAPI) => {
+
+        try{
+
+            const state = thunkAPI.getState()
+            
+            // Get the search terms
+            const {
+                terms,
+                options,
+                pagination,
+                sort,
+                ingredients
+            } = payload
+
+            // Create the params to send to the API
+            const params = {
+                auth: {
+                    authenticate: true
+                },
+                sort: {
+                    field: sort?.field || 'created_at',
+                    order: sort?.order || 'desc'
+                },
+                pagination: {
+                    page: state?.search?.page || 1,
+                    //perPage: pagination.perPage || 10
+                    perPage: state?.search?.recsPerPage || 5
+                },
+                payload: {
+                    ingredients
+                }
+            }
+
+            console.log(params)
+
+            // Perform the request
+            return await apiProvider.pantrySearch(params)
+
+        } catch(e) {
+            throw e
+        }
+
+    }
+)
+
 // Create the initial state for the store
 const initialState = {
     terms: '',
@@ -122,6 +170,23 @@ export const searchSlice = createSlice({
                 state.totalRecords = action.payload.results?.totalRecords
             }
 
+        },
+        [performPantrySearch.pending]: (state, action) => {
+            state.isLoading = true
+            state.hasError = false
+        },
+        [performPantrySearch.rejected]: (state, action) => {
+            state.isLoading = false
+            state.hasError = true
+            console.log(action)
+        },
+        [performPantrySearch.fulfilled]: (state, action) => {
+            state.isLoading = false
+            state.hasError = false
+
+            /* Store the results */
+            console.log('PerformPantrySearch Results:')
+            console.log(action)
         }
     }
 })
