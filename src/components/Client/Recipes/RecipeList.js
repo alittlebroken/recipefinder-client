@@ -15,9 +15,9 @@ const RecipeList = ({ recipes, showModal, setRecipe, navigateTo, profile }) => {
                     <div key={nanoid()} aria-label="container for recipe" className="recipeContainer flex">
 
                             <img 
-                                src={recipe.images[0].source} 
-                                title={recipe.images[0].title}
-                                alt={recipe.images[0].alt ? recipe.images[0].alt : recipe.images[0].title}
+                                src={recipe?.images[0]?.source} 
+                                title={recipe?.images[0]?.title}
+                                alt={recipe?.images[0]?.alt ? recipe?.images[0]?.alt : recipe?.images[0]?.title}
                                 className="recipeImage"
                             />
 
