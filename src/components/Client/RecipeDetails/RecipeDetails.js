@@ -69,7 +69,7 @@ const RecipeDetails = () => {
 
     /* Styles for header */
     const headerStyles = {
-        backgroundImage: `url(${recipe.images[0].source})`
+        backgroundImage: `url(${recipe?.images[0]?.source})`
     }
 
     return(

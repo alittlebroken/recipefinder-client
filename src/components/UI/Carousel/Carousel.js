@@ -35,7 +35,7 @@ const Carousel = ({ children, slides }) => {
     /* We keep this inline here to allow the functionality of actually 
        changing the image */
     const slideStyles = {
-        backgroundImage: `url(${slides[currentIndex].source})`,
+        backgroundImage: `url(${slides[currentIndex]?.source})`,
     }
 
     return (

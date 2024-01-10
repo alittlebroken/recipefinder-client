@@ -225,7 +225,7 @@ const ProfileRecipes = () => {
                     return (
                         <div aria-label="recipe container" className="prc-recipe-container flex">
 
-                            <img src={recipe.images[0].source} alt={recipe.images[0].alt} title={recipe.images[0].title} className="prc-recipe-image" />
+                            <img src={recipe?.images[0]?.source} alt={recipe?.images[0]?.alt} title={recipe?.images[0]?.title} className="prc-recipe-image" />
 
                             <div aria-label="recipe details container" className="prc-recipe-details flex">
                                 <h3 className="prc-recipe-head-3">{recipe.name}</h3>
