@@ -19,7 +19,6 @@
 
 .modal-main {
     position: fixed;
-    width: 95%;
     border-radius: 10px;
     background-color: white;
     height: auto;
@@ -62,36 +61,42 @@
     align-items: center;
 }
 
+.default-size {
+    width: 95%;
+}
+
 /* different sizes for the modal */
-.modal-sx600 {
+.modal-sz600 {
     width: 600px;
 }
 
-.modal-sx900 {
+.modal-sz900 {
     width: 900px;
 }
 
-.modal-sx1024 {
+.modalsz1024 {
     width: 1024px;
 }
 
-.modal-sx50p {
+.modal-sz50p {
     width: 50%;
 }
 
-.modal-sx75 {
+.modal-sz75 {
     width: 75%;
 }
 
-.modal-sx90 {
+.modal-sz90 {
     width: 90%;
 }
 
 /* Desktop Styles */
 @media screen and (min-width: 960px){
 
-    .modal-main {
+    .default-size {
         width: 700px;
     }
+
+    
 
 }
