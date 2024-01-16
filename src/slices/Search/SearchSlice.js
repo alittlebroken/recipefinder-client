@@ -185,8 +185,23 @@ export const searchSlice = createSlice({
             state.hasError = false
 
             /* Store the results */
-            console.log('PerformPantrySearch Results:')
-            console.log(action)
+            // Extract the data from the API results
+            if(Array.isArray(action.payload.results)){
+                state.results = action.payload.results
+            } else {
+                state.results = action?.payload?.results?.results
+            }
+
+            /* Check if we have some results */
+            if(state.results?.length < 1){
+                state.page = 1
+                state.totalPages = 1
+                state.totalRecords = 0
+            } else {
+                state.page = action.payload.results?.currentPage
+                state.totalPages = action.payload.results?.totalPages
+                state.totalRecords = action.payload.results?.totalRecords
+            }
         }
     }
 })
