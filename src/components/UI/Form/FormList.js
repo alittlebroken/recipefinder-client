@@ -43,8 +43,6 @@ const FormList = (props) => {
     /* const handle validation */
     const handleValidation = (e, validators) => {
 
-        console.log('Validators: ', validators)
-
         /* By Default set the form to clean and only set it dirty if validation fails */
         setDirty(false)
 
@@ -57,7 +55,6 @@ const FormList = (props) => {
             /* Loop through each Validator and apply them */
             validators.forEach( validator => {
 
-                console.log(validator.type)
                 switch(validator.type){
                     case "minLength":
                         
@@ -154,7 +151,7 @@ const FormList = (props) => {
 
     /* Update the parent form with the values we have */
     const updateParentForm = () => {
-
+        
         /* We need to pass back one row per list entry to save
          memory used by ther final form */
         let listKeys
@@ -174,9 +171,20 @@ const FormList = (props) => {
             })
             lines.push(tmp) 
         })
+
+        /* Save the images as the process of stringifying the data to add a new list item removes them */
+        const images = form.images
+       
+        /* We stringify the form here so we can add a sub object to the list */
         let newForm = JSON.parse(JSON.stringify(form))
         newForm[name] = lines
-        setForm(JSON.parse(JSON.stringify(newForm)))
+
+        /* We need to add back the original images and store the whole form object again */
+        let tmp = JSON.parse(JSON.stringify(newForm))
+        setForm({
+            ...tmp,
+            images: images
+        })
 
     }
 
@@ -278,14 +286,18 @@ const FormList = (props) => {
 
     /* Handlers for the component */
     const handleChange = (e, index) => {
+        const files = form.images
+        
         e.preventDefault()
         let listData = list
         listData[index][e.target.name].value = e.target.value
+       
         setList([...listData])
-
+        
         /* Update the appropriate part of the form for this 
         list */
         updateParentForm()
+        
     }
 
 

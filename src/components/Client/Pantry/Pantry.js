@@ -16,6 +16,7 @@ import {
     setRecsPerPage,
     setFilter
 } from '../../../slices/Pantry/Pantry.slice'
+import { performPantrySearch } from '../../../slices/Search/SearchSlice'
 import { 
     selectProfileData,
 } from '../../../slices/Profile/Profile.slice'
@@ -26,11 +27,24 @@ import Modal from '../../UI/Modal/Modal'
 import PantryFormRemoval from './PantryFormRemove'
 import PantryFormEdit from './PantryFormEdit'
 import { nanoid } from '@reduxjs/toolkit'
+import { useList } from '../../../hooks/useList'
+
+import { 
+    setSearchTerms,
+    setSearchOptions,
+    selectSearchResults
+ } from '../../../slices/Search/SearchSlice'
+
+import { useNavigate } from 'react-router-dom'
+import RecipeList from '../Recipes/RecipeList'
 
 const Pantry = (props) => {
 
     /* Alias the dispatch hook */
     const dispatch = useDispatch()
+
+    /* Alias the naviaget hook */
+    const navigate = useNavigate()
 
     /* destructure the props */
     const {
@@ -42,6 +56,9 @@ const Pantry = (props) => {
 
     /* Get the user profile data */
     let profileData = useSelector(selectProfileData)
+
+    /* List of recipes found based on the ingredients we have */
+    let recipesFound = useSelector(selectSearchResults)
 
     /* pagination options */
     const pagination = {
@@ -64,6 +81,12 @@ const Pantry = (props) => {
     const [showRemoveModal, setShowRemoveModal] = useState(false)
     /* edit ingredient state */
     const [showEditModal, setShowEditModal] = useState(false)
+    /* found recipe modal state */
+    const [showFoundRecipes, setShowFoundRecipes] = useState(false)
+    /* Modal for adding a recipe to our cookbooks */
+    const [showModalAdd, setShowModalAdd] = useState(false)
+    /* State for working on the current record the user has selected, for removal etc */
+    const [currentRecipe, setCurrentRecipe] = useState(null)
 
     /* State for controlling if the data is outdated ( dirty ) */
     const [isDirty, setIsDirty] = useState(false)
@@ -97,10 +120,14 @@ const Pantry = (props) => {
             await dispatch(getPantryIngredients({ 
                 pantryId: parseInt(profileData.pantryId)
             }))
+
         }
         fetchData()
         setIsDirty(false)
     }, [page, recsPage, dispatch, isDirty])
+
+    /* Get a full list of ingredients in the pantry */
+    let fullPantryList = useList('pantry', false, profileData.pantryId)
 
     /* Handler for the forms submit function */
     const submit = async (event, form) => {
@@ -124,6 +151,42 @@ const Pantry = (props) => {
         setShowEditModal(false)
     }
 
+    /* Handler for closing the found recipes window */
+    const handleCloseFoundRecipesModal = () => {
+        dispatch(setSearchTerms(''))
+        setShowFoundRecipes(false)
+    }
+
+    /* Handler for getting list of recipes based on the ingredients we have */
+    const handleGetRecipes = (e) => {
+        e.preventDefault()
+        
+        /* Extract out just the ingredient names we need */
+        const ingredients = fullPantryList[0].ingredients
+        const numIngredients = ingredients.length - 1
+        
+        /* Send the data to the search API */
+        let terms = ''
+        
+        ingredients.forEach((ingredient, idx) => {
+            if(idx !== numIngredients){
+                terms += ingredient.name + ','
+            } else {
+                terms += ingredient.name
+            }
+            
+        })
+        
+        dispatch(setSearchTerms(terms))
+        dispatch(setSearchOptions('ingredients'))
+        dispatch(performPantrySearch({
+                ingredients: ingredients
+        }))
+
+        setShowFoundRecipes(true)
+
+    }
+
     return (
         <div className="p-container flex flex-col">
 
@@ -134,6 +197,36 @@ const Pantry = (props) => {
 
             <Modal key={nanoid()} show={showEditModal} handleClose={handleCloseEditModal}>
                 <PantryFormEdit key={nanoid()} ingredient={ingredientData} modalShow={handleCloseEditModal} handleIsDirty={setIsDirty} />
+            </Modal>
+
+            <Modal 
+                key={nanoid()}
+                show={showFoundRecipes}
+                handleClose={handleCloseFoundRecipesModal} 
+                iStyles={{
+                    width: "75%"
+                }}
+            >
+                <div 
+                    aria-label="container for recipes we can make from pantry ingredients"
+                    className="p-foundRecipes-container flex"
+                >
+                    <h3>You can make the following recipes</h3>
+                    <span>
+                        Please be aware that even if a recipe appears in your list below your
+                        still may not be able to make it.
+                        <br/><br/>
+                        This will be because, whilst you may have the correct ingredient(s) you may not
+                        yet have the correct amount needed to make the recipe.
+                    </span>
+                    <RecipeList 
+                    recipes={recipesFound} 
+                    showModal={setShowModalAdd}
+                    setRecipe={setCurrentRecipe}
+                    navigateTo={navigate}
+                    profile={profileData}
+                    />
+                </div>
             </Modal>
 
             <h3 className="p-head-2">{profileData.forename}'s Pantry</h3>
@@ -154,6 +247,16 @@ const Pantry = (props) => {
                     labelClasses="pp-formInputLabel"
                 />
             </Form>
+
+            <div aria-label="page actions container" className="pageActions flex">
+                <button 
+                    className="btn findBtn"
+                    onClick={handleGetRecipes}
+                >
+                    Find Recipes
+                </button>
+            </div>
+
             <Pagination 
                         totalRecords={pagination.records}
                         recsPerPage={pagination.recsPerPage}

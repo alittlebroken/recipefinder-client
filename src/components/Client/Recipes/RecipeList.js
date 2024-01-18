@@ -9,40 +9,43 @@ const RecipeList = ({ recipes, showModal, setRecipe, navigateTo, profile }) => {
             <div aria-label="empty recipe list container" className="recipeListEmpty flex">No recipes found</div>
         )
     } else {
-        return (<>{
+        return (<div aria-aria-label="recipe list container" className="recipeListContainer flex">{
             recipes.map(recipe => {
                 return (
                     <div key={nanoid()} aria-label="container for recipe" className="recipeContainer flex">
 
                             <img 
-                                src={recipe.images[0].source} 
-                                title={recipe.images[0].title}
-                                alt={recipe.images[0].alt ? recipe.images[0].alt : recipe.images[0].title}
+                                src={recipe?.images[0]?.source} 
+                                title={recipe?.images[0]?.title}
+                                alt={recipe?.images[0]?.alt ? recipe?.images[0]?.alt : recipe?.images[0]?.title}
                                 className="recipeImage"
                             />
 
-                            <h3 className="recipeHeading">{recipe.name}</h3>
+                            
+                                <h3 className="recipeHeading">{recipe.name}</h3>
 
-                            <div aria-label="recipe description" className="recipeDescription">
-                             {recipe.description}
-                            </div>
+                                
+                                    <div aria-label="recipe description" className="recipeDescription">
+                                    {recipe.description}
+                                    </div>
 
-                            <div aria-label="recipe actions" className="recipeActions flex">
-                                <button onClick={(e) => {
-                                    navigateTo(`/recipe/${recipe.id}`)
-                                }}>More Info</button>
-                                {profile.userId && (
-                                    <button onClick={(e) => {
-                                        setRecipe(recipe.id)
-                                        showModal(true)
-                                    }}>Add</button>
-                                )}
-                            </div>
-
+                                    <div aria-label="recipe actions" className="recipeActions flex">
+                                        <button onClick={(e) => {
+                                            navigateTo(`/recipe/${recipe.id}`)
+                                        }}>More Info</button>
+                                        {profile.userId && (
+                                            <button onClick={(e) => {
+                                                setRecipe(recipe.id)
+                                                showModal(true)
+                                            }}>Add</button>
+                                        )}
+                                    </div>
+                                
+                            
                         </div>
                 )
             })
-        }</>)
+        }</div>)
     }
     
 }

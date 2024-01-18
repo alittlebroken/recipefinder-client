@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import apiProvider from "../providers/apiProvider";
 
-export const useList = (resource, multi = false) => {
+export const useList = (resource, multi = false, id = undefined) => {
 
     /* State to hold the list items we need */
     const [list, setList] = useState()
@@ -21,6 +21,14 @@ export const useList = (resource, multi = false) => {
                 pagination: {
                     perPage: null,
                     overrideLimit: true
+                }
+            }
+
+            /* If we have an ID to add lets do it here */
+            if(id){
+                params.id = parseInt(id)
+                params.auth = {
+                    authenticate: true
                 }
             }
 
