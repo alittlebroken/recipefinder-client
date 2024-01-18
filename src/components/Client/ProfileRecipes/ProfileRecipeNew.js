@@ -96,7 +96,8 @@ const ProfileRecipeNew = props => {
                 cook_time: form.cookTime,
                 ingredients: ingredients,
                 steps: steps,
-                categories: categories
+                categories: categories,
+                description: form.description
             }
         }
 
