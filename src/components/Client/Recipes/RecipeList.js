@@ -21,25 +21,27 @@ const RecipeList = ({ recipes, showModal, setRecipe, navigateTo, profile }) => {
                                 className="recipeImage"
                             />
 
-                            <h3 className="recipeHeading">{recipe.name}</h3>
+                            
+                                <h3 className="recipeHeading">{recipe.name}</h3>
 
+                                
+                                    <div aria-label="recipe description" className="recipeDescription">
+                                    {recipe.description}
+                                    </div>
 
-                            <div aria-label="recipe description" className="recipeDescription">
-                             {recipe.description}
-                            </div>
-
-                            <div aria-label="recipe actions" className="recipeActions flex">
-                                <button onClick={(e) => {
-                                    navigateTo(`/recipe/${recipe.id}`)
-                                }}>More Info</button>
-                                {profile.userId && (
-                                    <button onClick={(e) => {
-                                        setRecipe(recipe.id)
-                                        showModal(true)
-                                    }}>Add</button>
-                                )}
-                            </div>
-
+                                    <div aria-label="recipe actions" className="recipeActions flex">
+                                        <button onClick={(e) => {
+                                            navigateTo(`/recipe/${recipe.id}`)
+                                        }}>More Info</button>
+                                        {profile.userId && (
+                                            <button onClick={(e) => {
+                                                setRecipe(recipe.id)
+                                                showModal(true)
+                                            }}>Add</button>
+                                        )}
+                                    </div>
+                                
+                            
                         </div>
                 )
             })
