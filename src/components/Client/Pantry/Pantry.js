@@ -153,6 +153,7 @@ const Pantry = (props) => {
 
     /* Handler for closing the found recipes window */
     const handleCloseFoundRecipesModal = () => {
+        dispatch(setSearchTerms(''))
         setShowFoundRecipes(false)
     }
 
