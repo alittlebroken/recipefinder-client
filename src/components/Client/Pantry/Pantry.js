@@ -211,7 +211,14 @@ const Pantry = (props) => {
                     aria-label="container for recipes we can make from pantry ingredients"
                     className="p-foundRecipes-container flex"
                 >
-                    <h3>I can make: </h3>
+                    <h3>You can make the following recipes</h3>
+                    <span>
+                        Please be aware that even if a recipe appears in your list below your
+                        still may not be able to make it.
+                        <br/><br/>
+                        This will be because, whilst you may have the correct ingredient(s) you may not
+                        yet have the correct amount needed to make the recipe.
+                    </span>
                     <RecipeList 
                     recipes={recipesFound} 
                     showModal={setShowModalAdd}
