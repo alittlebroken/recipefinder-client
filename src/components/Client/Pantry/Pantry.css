@@ -97,6 +97,22 @@
     padding: 25px;
 }
 
+.p-foundRecipes-container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    padding: 15px;
+}
+
+.p-foundRecipes-container > h3 {
+    font-family: inherit;
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-align: center;
+    padding: 5px;
+}
+
 /* Desktop Styles */
 @media screen and (min-width: 960px) {
     .p-container {
@@ -162,6 +178,15 @@
 
     .pp-norecords {
         font-size: 2rem;
+    }
+
+    .p-foundRecipes-container {
+        flex-direction: column;
+    }
+    
+    .p-foundRecipes-container > h3 {
+        font-size: 2.5rem;
+        padding: 15px;
     }
 
 } 

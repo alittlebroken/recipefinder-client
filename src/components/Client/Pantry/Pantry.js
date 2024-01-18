@@ -32,9 +32,11 @@ import { useList } from '../../../hooks/useList'
 import { 
     setSearchTerms,
     setSearchOptions,
+    selectSearchResults
  } from '../../../slices/Search/SearchSlice'
 
 import { useNavigate } from 'react-router-dom'
+import RecipeList from '../Recipes/RecipeList'
 
 const Pantry = (props) => {
 
@@ -54,6 +56,9 @@ const Pantry = (props) => {
 
     /* Get the user profile data */
     let profileData = useSelector(selectProfileData)
+
+    /* List of recipes found based on the ingredients we have */
+    let recipesFound = useSelector(selectSearchResults)
 
     /* pagination options */
     const pagination = {
@@ -76,6 +81,12 @@ const Pantry = (props) => {
     const [showRemoveModal, setShowRemoveModal] = useState(false)
     /* edit ingredient state */
     const [showEditModal, setShowEditModal] = useState(false)
+    /* found recipe modal state */
+    const [showFoundRecipes, setShowFoundRecipes] = useState(false)
+    /* Modal for adding a recipe to our cookbooks */
+    const [showModalAdd, setShowModalAdd] = useState(false)
+    /* State for working on the current record the user has selected, for removal etc */
+    const [currentRecipe, setCurrentRecipe] = useState(null)
 
     /* State for controlling if the data is outdated ( dirty ) */
     const [isDirty, setIsDirty] = useState(false)
@@ -140,6 +151,11 @@ const Pantry = (props) => {
         setShowEditModal(false)
     }
 
+    /* Handler for closing the found recipes window */
+    const handleCloseFoundRecipesModal = () => {
+        setShowFoundRecipes(false)
+    }
+
     /* Handler for getting list of recipes based on the ingredients we have */
     const handleGetRecipes = (e) => {
         e.preventDefault()
@@ -166,6 +182,8 @@ const Pantry = (props) => {
                 ingredients: ingredients
         }))
 
+        setShowFoundRecipes(true)
+
     }
 
     return (
@@ -178,6 +196,29 @@ const Pantry = (props) => {
 
             <Modal key={nanoid()} show={showEditModal} handleClose={handleCloseEditModal}>
                 <PantryFormEdit key={nanoid()} ingredient={ingredientData} modalShow={handleCloseEditModal} handleIsDirty={setIsDirty} />
+            </Modal>
+
+            <Modal 
+                key={nanoid()}
+                show={showFoundRecipes}
+                handleClose={handleCloseFoundRecipesModal} 
+                iStyles={{
+                    width: "75%"
+                }}
+            >
+                <div 
+                    aria-label="container for recipes we can make from pantry ingredients"
+                    className="p-foundRecipes-container flex"
+                >
+                    <h3>I can make: </h3>
+                    <RecipeList 
+                    recipes={recipesFound} 
+                    showModal={setShowModalAdd}
+                    setRecipe={setCurrentRecipe}
+                    navigateTo={navigate}
+                    profile={profileData}
+                    />
+                </div>
             </Modal>
 
             <h3 className="p-head-2">{profileData.forename}'s Pantry</h3>
