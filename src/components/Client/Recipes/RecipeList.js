@@ -9,7 +9,7 @@ const RecipeList = ({ recipes, showModal, setRecipe, navigateTo, profile }) => {
             <div aria-label="empty recipe list container" className="recipeListEmpty flex">No recipes found</div>
         )
     } else {
-        return (<>{
+        return (<div aria-aria-label="recipe list container" className="recipeListContainer flex">{
             recipes.map(recipe => {
                 return (
                     <div key={nanoid()} aria-label="container for recipe" className="recipeContainer flex">
@@ -22,6 +22,7 @@ const RecipeList = ({ recipes, showModal, setRecipe, navigateTo, profile }) => {
                             />
 
                             <h3 className="recipeHeading">{recipe.name}</h3>
+
 
                             <div aria-label="recipe description" className="recipeDescription">
                              {recipe.description}
@@ -42,7 +43,7 @@ const RecipeList = ({ recipes, showModal, setRecipe, navigateTo, profile }) => {
                         </div>
                 )
             })
-        }</>)
+        }</div>)
     }
     
 }
