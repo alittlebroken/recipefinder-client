@@ -227,39 +227,40 @@ const ProfileRecipes = () => {
 
                             <img src={recipe?.images[0]?.source} alt={recipe?.images[0]?.alt} title={recipe?.images[0]?.title} className="prc-recipe-image" />
 
-                            <div aria-label="recipe details container" className="prc-recipe-details flex">
-                                <h3 className="prc-recipe-head-3">{recipe.name}</h3>
-                                <div aria-label="recipe description" className="prc-recipe-description">
-                                    {recipe.description}
+                            <div className="prc-info-container flex">
+                                <div aria-label="recipe details container" className="prc-recipe-details flex">
+                                    <h3 className="prc-recipe-head-3">{recipe.name}</h3>
+                                    <div aria-label="recipe description" className="prc-recipe-description">
+                                        {recipe.description}
+                                    </div>
+                                </div>
+
+                                <div aria-label="recipe actions" className="prc-recipe-actions flex">
+                                    <button 
+                                        className="btn prc-recipe-btn"
+                                        name="more"
+                                        value={recipe.id}
+                                        onClick={(e => {
+                                            handleClick(e)
+                                        })}
+                                    >
+                                            More Info
+                                    </button>
+                                    <button 
+                                        className="btn prc-recipe-btn"
+                                        name="remove"
+                                        onClick={(e) => {
+                                            setCurrentRecipe({
+                                                id: recipe.id,
+                                                name: recipe.name
+                                            })
+                                            handleClick(e)
+                                        }}
+                                    > 
+                                            Remove
+                                    </button>
                                 </div>
                             </div>
-
-                            <div aria-label="recipe actions" className="prc-recipe-actions flex">
-                                <button 
-                                    className="btn prc-recipe-btn"
-                                    name="more"
-                                    value={recipe.id}
-                                    onClick={(e => {
-                                        handleClick(e)
-                                    })}
-                                >
-                                        More Info
-                                </button>
-                                <button 
-                                    className="btn prc-recipe-btn"
-                                    name="remove"
-                                    onClick={(e) => {
-                                        setCurrentRecipe({
-                                            id: recipe.id,
-                                            name: recipe.name
-                                        })
-                                        handleClick(e)
-                                    }}
-                                > 
-                                        Remove
-                                </button>
-                            </div>
-
                         </div>
                     )
                 })}
