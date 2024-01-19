@@ -226,6 +226,7 @@ const ProfileCookbook = (props) => {
 
         if(buttonValue === "remove"){
 
+            
             /* Generate the paramns to send along with the API request */
             const params = {
                 auth: {
@@ -237,9 +238,8 @@ const ProfileCookbook = (props) => {
                     cookbookId: id.cookbookId
                 }
             }
-
+            
             const result = await apiProvider.removeOne('cookbookRecipes', params)
-            console.log(result)
             /* check the result of removing the record */
             if(result.status >= 200 && result.status < 300){
                 setNotifications({
@@ -290,7 +290,7 @@ const ProfileCookbook = (props) => {
                             { type: "minLength", value: 4}
                         ]}
                     />
-                    {console.log('Before FormInput component: ', isDirty)}
+                    
                     <FormUpload 
                         name="images"
                         label="Cookbook Image"
@@ -306,7 +306,7 @@ const ProfileCookbook = (props) => {
                             {type: "maxFileSize", value: 1024}
                         ]}
                     />
-                    {console.log('After FormInput component: ', isDirty)}
+                    
                     <FormInput 
                         name="title"
                         label="Image Title"
@@ -432,7 +432,7 @@ const ProfileCookbook = (props) => {
                                     value={recipe.id}
                                     onClick={(event => {
                                         setId({
-                                            recipeId: event.target.value,
+                                            recipeId: parseInt(event.target.value),
                                             cookbookId: cookbook.id
                                         })
                                         setShowRemoveModal(true)
@@ -444,7 +444,7 @@ const ProfileCookbook = (props) => {
                                     name="moreInfo" 
                                     className="btn cb-action-btn flex"
                                     onClick={(e) => {
-                                        navigate(`/recipes/${recipe.id}`)
+                                        navigate(`/recipe/${recipe.id}`)
                                     }}
                                 >
                                     More Info
