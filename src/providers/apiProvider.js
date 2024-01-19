@@ -223,6 +223,9 @@ const apiProvider = {
         const { authenticate } = params.auth || false
         const { roles } = params.auth || 'user'
 
+        // Filter
+        const { cookbookId, recipeId } = params.filter
+
         // Set up the query params
         let queryParams = {
             page: page ? page : 1,
@@ -258,7 +261,7 @@ const apiProvider = {
             url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}/${params.ingredientId}`
             
         } else if (resource === "cookbookRecipes") {
-            url = `${process.env.REACT_APP_API_URL}/cookbooks/${params.id}/recipes?${queryString.stringify(queryParams)}`
+            url = `${process.env.REACT_APP_API_URL}/cookbooks/${params.id}/recipe/${recipeId}`
         } else {
             url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}`
             
