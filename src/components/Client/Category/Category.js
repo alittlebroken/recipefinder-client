@@ -1,4 +1,5 @@
 import "./Category.css"
+import { Link } from "react-router-dom"
 
 import Card from '../../UI/Cards/Card'
 
@@ -11,7 +12,7 @@ const Category = (props) => {
 
     return (
         <Card key={record.id} overlay rounded>
-            <a href={`/recipes/${record.name.toLowerCase()}`}>
+            <Link to={`/recipes/${record.name.toLowerCase()}`}>
                 <Card.Container>
                     <Card.Image 
                     rounded 
@@ -23,7 +24,7 @@ const Category = (props) => {
                         <Card.Title text={record.name} medium />
                     </Card.Overlay>
                 </Card.Container>
-            </a>
+            </Link>
         </Card>
     )
 }
