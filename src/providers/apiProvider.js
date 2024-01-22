@@ -76,6 +76,8 @@ const apiProvider = {
                 axiosOptions.withCredentials = true
             }
 
+            axiosOptions.validateStatus = status => { return true}
+
         // Set the URL to use
         let url = `${process.env.REACT_APP_API_URL}/${resource}/${id}`
 
@@ -149,6 +151,8 @@ const apiProvider = {
         if(authenticate === true && authenticate !== undefined){
             axiosOptions.withCredentials = true
         }
+
+        axiosOptions.validateStatus = status => { return true}
 
         // Set the URL to use
 
@@ -253,7 +257,7 @@ const apiProvider = {
             axiosOptions.withCredentials = true
         }
 
-
+        axiosOptions.validateStatus = status => { return true}
 
         // Set the URL to use
         let url
@@ -309,6 +313,8 @@ const apiProvider = {
         if(authenticate === true && authenticate !== undefined){
             axiosOptions.withCredentials = true
         }
+
+        axiosOptions.validateStatus = status => { return true}
 
         // Set the URL to use
         let url = `${process.env.REACT_APP_API_URL}/${resource}`
@@ -388,6 +394,8 @@ const apiProvider = {
                 axiosOptions.withCredentials = true
             }
 
+            axiosOptions.validateStatus = status => { return true}
+
         // Set the URL to use
 
         // Determine the type of resource we are accessing
@@ -436,6 +444,7 @@ const apiProvider = {
         } else {
             // Access the appropriate API and process the results
             response = await axios.post(url, payload, axiosOptions)
+            
         }
 
         // Check the status codes returned
@@ -493,6 +502,8 @@ const apiProvider = {
             if(authenticate === true && authenticate !== undefined){
                 axiosOptions.withCredentials = true
             }
+
+            axiosOptions.validateStatus = status => { return true}
 
             /* Url to send the request to */
             let url
@@ -730,11 +741,12 @@ const apiProvider = {
                 axiosOptions.withCredentials = true
             }
 
+            axiosOptions.validateStatus = status => { return true}
+
             // Set the URL to use
             let url = `${process.env.REACT_APP_API_URL}/search?${queryString.stringify(queryParams)}`
 
             // Access the appropriate API and process the results
-            console.log(payload)
             const response = await axios.post(url, payload, axiosOptions)
 
             // Check the status codes returned
@@ -815,6 +827,8 @@ const apiProvider = {
             if(authenticate === true && authenticate !== undefined){
                 axiosOptions.withCredentials = true
             }
+
+            axiosOptions.validateStatus = status => { return true}
 
             // Set the URL to use
             let url = `${process.env.REACT_APP_API_URL}/search/pantry?${queryString.stringify(queryParams)}`
