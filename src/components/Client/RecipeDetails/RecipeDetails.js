@@ -104,6 +104,7 @@ const RecipeDetails = () => {
                 show={showModalAdd}
                 handleClose={(e) => {
                     e.preventDefault()
+                    setSelectedCookbook()
                     setShowModalAdd(false)
                 }}
             >
