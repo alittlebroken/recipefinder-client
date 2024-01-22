@@ -187,7 +187,7 @@ const Recipes = props => {
                         value={selectedCookbook}
                     >
                         <option disabled value={null}>Please select a cookbook</option>
-                        {cookbooks && cookbooks.map(cookbook => {
+                        {Array.isArray(cookbooks) > 0 && cookbooks.map(cookbook => {
                             return (
                                 <option value={cookbook.id}>{cookbook.name}</option>
                             )
