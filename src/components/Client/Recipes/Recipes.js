@@ -81,7 +81,7 @@ const Recipes = props => {
     const [showModalAdd, setShowModalAdd] = useState(false)
 
     /* State for which cookbook we need to add the recipe to */
-    const [selectedCookbook, setSelectedCookbook] = useState()
+    const [selectedCookbook, setSelectedCookbook] = useState('Please select a cookbook')
 
     /* State for the filter */
     const [filter, setFilter] = useState(category || searchTerms)
@@ -163,13 +163,14 @@ const Recipes = props => {
         return ('We have encountered an error. Apologies for the inconvinience.')
     }
 
-    return (
+    return ( 
         <div aria-label="container for a list of recipes" className="recipesContainer flex">
 
             <Modal
                 show={showModalAdd}
                 handleClose={(e) => {
                     e.preventDefault()
+                    setSelectedCookbook(undefined)
                     setShowModalAdd(false)
                 }}
             >
@@ -183,7 +184,7 @@ const Recipes = props => {
                             e.preventDefault()
                             setSelectedCookbook(e.target.value)
                         }}
-                        defaultValue="Please select a cookbook"
+                        value={selectedCookbook}
                     >
                         <option disabled value={null}>Please select a cookbook</option>
                         {cookbooks && cookbooks.map(cookbook => {
@@ -274,6 +275,7 @@ const Recipes = props => {
                 setRecipe={setCurrentRecipe}
                 navigateTo={navigate}
                 profile={profile}
+                setCookbook={setSelectedCookbook}
             />
 
            <Pagination 
