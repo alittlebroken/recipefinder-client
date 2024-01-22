@@ -218,6 +218,9 @@ const ProfileCookbook = (props) => {
     /* Handle the removal of a recipe from the cookbook */
     const handleRemove = async e => {
 
+        /* Set the cookbook list of recipes to dirty to indicate it has changed */
+        setIsDirty(false)
+
         /* Prevent the default action when clicking the button*/
         e.preventDefault()
 
@@ -242,6 +245,8 @@ const ProfileCookbook = (props) => {
             const result = await apiProvider.removeOne('cookbookRecipes', params)
             /* check the result of removing the record */
             if(result.status >= 200 && result.status < 300){
+                /* Set that the form is dirty */
+                setIsDirty(true)
                 setNotifications({
                     className: "cc-notif cc-ok",
                     message: "Recipe successfully removed from cookbook."
