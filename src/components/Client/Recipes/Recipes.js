@@ -215,9 +215,8 @@ const Recipes = props => {
 
                             /* Send the request off */
                             const res = await apiProvider.create("cookbookRecipes",params)
-                            
+                            console.log(res)
                             if(res.status >= 200 && res.status < 300){
-                               console.log("recipe added to cookbook")
                                setNotifications({
                                 className: 'notif-ok',
                                 message: 'Recipe successfully added to cookbook.'
@@ -225,6 +224,14 @@ const Recipes = props => {
                                setCurrentRecipe(null)
                                setSelectedCookbook(null)
                                setShowModalAdd(false) 
+                            } else if (res.status === 409) {
+                                setNotifications({
+                                    className: "notif-error",
+                                    message: res.message
+                                    })
+                                   setCurrentRecipe(null)
+                                   setSelectedCookbook(null)
+                                   setShowModalAdd(false)
                             } else {
                                setNotifications({
                                 className: "notif-error",
