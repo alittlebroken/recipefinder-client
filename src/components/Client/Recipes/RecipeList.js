@@ -1,7 +1,7 @@
 import './Recipes.css'
 import { nanoid } from '@reduxjs/toolkit'
 
-const RecipeList = ({ recipes, showModal, setRecipe, navigateTo, profile }) => {
+const RecipeList = ({ recipes, showModal, setRecipe, navigateTo, profile, setCookbook = undefined}) => {
 
     /* Check we have a valid list of recip[es to display */
     if(!recipes || recipes?.length < 1){
@@ -35,6 +35,7 @@ const RecipeList = ({ recipes, showModal, setRecipe, navigateTo, profile }) => {
                                         }}>More Info</button>
                                         {profile.userId && (
                                             <button onClick={(e) => {
+                                                setCookbook('Please select a cookbook')
                                                 setRecipe(recipe.id)
                                                 showModal(true)
                                             }}>Add</button>
