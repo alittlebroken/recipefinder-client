@@ -6,7 +6,7 @@ import FormUpload from '../../UI/Form/FormUpload'
 import FormList from '../../UI/Form/FormList'
 
 import { selectProfileData } from '../../../slices/Profile/Profile.slice'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import apiProvider from '../../../providers/apiProvider'
 
@@ -21,6 +21,7 @@ const ProfileRecipeNew = props => {
 
     /* Get profile data */
     const profile = useSelector(selectProfileData)
+
 
     /* Get a list of ingredients */
     //const ingredients = useList('ingredients')
@@ -182,7 +183,8 @@ const ProfileRecipeNew = props => {
                 name="name"
                 label="Name"
                 validators={[
-                    { type: 'minLength', value: 4 }
+                    { type: 'minLength', value: 4 },
+                    { type: 'isDuplicate', resource: 'recipes', value: null }
                 ]}
             />
 
