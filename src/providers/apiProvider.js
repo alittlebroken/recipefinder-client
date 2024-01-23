@@ -850,6 +850,93 @@ const apiProvider = {
 
     },
 
+    doIExist: async (params) => {
+
+        // Veify the passed in params
+        if(!params || params === undefined){
+            return {
+                status: 400,
+                success: false,
+                message: 'Undefined request parameter'
+            }
+        }
+
+        if(!params.payload || params.payload === undefined){
+            return {
+                status: 400,
+                success: false,
+                message: 'Undefined payload'
+            } 
+        }
+
+        // Payload
+        const payload = params?.payload
+
+        // Pagination
+        const { page } = params?.pagination || 1
+        const { perPage } = params?.pagination || 10
+        const { overrideLimit } = params?.pagination || false
+
+        // Sorting
+        const { field } = params?.sort || 'id'
+        const { order } = params?.sort || 'desc' 
+
+        // Authentication
+        const { authenticate } = params?.auth || false
+        const { roles } = params?.auth || 'user'
+
+        // Set up the query params
+        let queryParams = {
+            page: page ? page : 1,
+            sort_by: field ? field : 'id',
+            sort_direction: order ? order : 'desc',
+            filter: JSON.stringify(params.filter)
+        }
+
+        if(overrideLimit){
+            queryParams.limit = null
+        } else {
+            queryParams.limit = perPage ? perPage : null
+        }
+
+        // Generate the header and any options to send along with the request
+
+        // Generate the initial header for the request
+        let headers = { 'Content-type': 'application/json' }
+
+        // Add any further headers as needed
+        if(authenticate === true && authenticate !== undefined){
+            headers.token = inMemoryJWT.getToken()
+        }
+
+        // Generate the initial options
+        let axiosOptions = { headers: headers }
+
+        // Add on any further options
+        if(authenticate === true && authenticate !== undefined){
+            axiosOptions.withCredentials = true
+        }
+
+        axiosOptions.validateStatus = status => { return true}
+
+        // Generate the URL to use
+        let url = `${process.env.REACT_APP_API_URL}/${payload.resource}?${queryString.stringify(queryParams)}`
+
+        // Pass the data to the API and check if we have a duplicate
+        const response = await axios.get(url, axiosOptions)
+        
+        if(response?.status >= 300){
+            return true
+        } else {
+            if(response?.data?.results?.length > 0){
+                return true
+            } else {
+                return false
+            }
+        }
+
+    }
+
 }
 
 export default apiProvider;
