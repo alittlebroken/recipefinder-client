@@ -11,6 +11,7 @@ import {
 } from '../../../providers/validationProvider'
 
 import './FormInput.css'
+import apiProvider from "../../../providers/apiProvider"
 
 const FormInput = (props) => {
 
@@ -42,8 +43,9 @@ const FormInput = (props) => {
     /* State to hold any validation messages */
     const [validationMessage, setValidationMessage] = useState([])
 
+
     /* const handle validation */
-    const handleValidation = (e) => {
+    const handleValidation = async (e) => {
 
         /* By Default set the form to clean and only set it dirty if validation fails */
         setDirty(false)
@@ -132,6 +134,39 @@ const FormInput = (props) => {
                         } else {
                             setValidationMessage(null)
                         }                        
+                        break;
+                    case "isDuplicate":
+                        
+                        /* create a wrapper to allow us to use async/await on the API call */
+                        const getDuplicates = async () => {
+                            let res = await apiProvider.doIExist({
+                                
+                                    payload: {
+                                        resource: validator.resource,
+                                    },
+                                    filter: {
+                                        name: e.target.value
+                                    }
+                                
+                            })
+                            
+                            return res
+                        }
+
+                        // Assign the result from checking for duplicates and check the return value
+                        getDuplicates()
+                        .then(res => {
+                        
+                            if(res){
+                                setValidationMessage(`You must supply a unique value for this input.`)
+                                setValidated(false)
+                                setDirty(true)
+                            } else {
+                                setValidationMessage(null)
+                            }                  
+
+                        })
+                              
                         break;
 
                     default:
