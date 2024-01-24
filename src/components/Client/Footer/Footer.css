@@ -38,7 +38,6 @@
 .footer-brand-container {
     display: flex;
     flex-direction: column;
-    padding: 15px;
 }
 
 /* Social Media icons */
@@ -120,11 +119,13 @@
 
     .footer-section-container {
         display: flex;
+        width: 900px;
         flex-direction: row;
         gap: 50px;
         margin: 0 auto;
         flex-basis: 100%;
-        align-items: center;
+        padding-top: 35px;
+        justify-content: space-between;
     }
 
 }
