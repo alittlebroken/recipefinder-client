@@ -56,7 +56,7 @@ const Form = (props) => {
     }
 
     return (
-        <form className={classes} onSubmit={ event => props?.submit(event, form, dirty)}>
+        <form className={classes} onSubmit={ event => props?.onSubmit(event, form, dirty)}>
             <FormContext.Provider value={{
                 form,
                 handleFormChange,
