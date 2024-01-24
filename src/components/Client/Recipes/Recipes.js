@@ -85,13 +85,20 @@ const Recipes = props => {
 
     /* State for the filter */
     const [filter, setFilter] = useState(category || searchTerms)
-    const [options,setOptions] = useState('recipes')
+    const [options, setOptions] = useState('recipes')
 
     /* Set state for notifications */
     const [notifications, setNotifications] = useState()
 
     // Update the state as the component mounts
     useEffect(() => {
+
+        /* Update based on if a category has been selected or not */
+        if(category){
+            setFilter(category)
+            dispatch(setSearchOptions('categories'))
+        }
+
         if(filter !== undefined){
             dispatch(performSearch({
                 terms: filter,
@@ -114,7 +121,7 @@ const Recipes = props => {
 
         // Update filter
         dispatch(setSearchTerms(filter))
-        dispatch(setSearchOptions(options))
+        dispatch(setSearchOptions(category ? 'categories' : options))
         dispatch(performSearch({
             terms: filter,
             options: searchOptions,
