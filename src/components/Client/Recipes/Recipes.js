@@ -197,7 +197,7 @@ const Recipes = props => {
                         <option disabled value={null}>Please select a cookbook</option>
                         {Array.isArray(cookbooks) > 0 && cookbooks.map(cookbook => {
                             return (
-                                <option value={cookbook.id}>{cookbook.name}</option>
+                                <option key={nanoid()} value={cookbook.id}>{cookbook.name}</option>
                             )
                         })}
                     </select>
