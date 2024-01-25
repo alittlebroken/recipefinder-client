@@ -72,7 +72,7 @@ const Recipes = props => {
 
     /* State for controlling pagination */
     const [page, setPage] = useState(pagination.page)
-    const [recsPage, setRecsPerPage] = useState(pagination.recsPerPage)
+    const [recsPage, setRecsPage] = useState(pagination.recsPerPage)
 
     /* State for working on the current record the user has selected, for removal etc */
     const [currentRecipe, setCurrentRecipe] = useState(null)
@@ -147,8 +147,9 @@ const Recipes = props => {
     }
 
     const handleRecsPerPageChange = (e) => {
-        setRecsPerPage(parseInt(e.target.value))
-        dispatch(setRecsPerPage(e.target.value))
+        let value = e.target.value
+        setRecsPage(parseInt(value))
+        dispatch(setRecsPerPage(parseInt(value)))
     }
 
     const handleGoToSpecificPage = (e) => {
