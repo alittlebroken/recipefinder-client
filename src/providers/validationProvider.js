@@ -138,7 +138,7 @@ export const allowedFileTypes = (e, types) => {
       type and if a match is found then increase the match count*/
     let matches = 0
     types.forEach( type => {
-        if(type === e.target.files[0].type){
+        if(type === e?.target?.files[0]?.type){
             matches += 1
         }
     })
