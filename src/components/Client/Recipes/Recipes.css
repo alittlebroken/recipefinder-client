@@ -73,6 +73,7 @@
 .recipeDescription {
     padding: 5px;
     border: none;
+    word-break: break-all;
 }
 
 .recipeActions {
