@@ -228,7 +228,8 @@ const apiProvider = {
         const { roles } = params.auth || 'user'
 
         // Filter
-        const { cookbookId, recipeId } = params.filter
+        const cookbookId = params?.filter?.cookbookId || undefined
+        const recipeId = params?.filter?.recipeId || undefined
 
         // Set up the query params
         let queryParams = {
