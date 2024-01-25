@@ -184,3 +184,15 @@ export const isNumber = (e) => {
     }
 
 }
+
+/* Ensures the input is a string */
+export const isString = (e) => {
+    
+    /* Check to ensure that we have a number */
+    if(isNaN(parseInt(e.target.value))){
+        return true
+    } else {
+        return 'The supplied value must be a string'
+    }
+
+} 

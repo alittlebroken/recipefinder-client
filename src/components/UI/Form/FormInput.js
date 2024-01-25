@@ -7,7 +7,8 @@ import {
     max, 
     minLength, 
     maxLength,
-    isNumber
+    isNumber,
+    isString
 } from '../../../providers/validationProvider'
 
 import './FormInput.css'
@@ -125,6 +126,21 @@ const FormInput = (props) => {
 
                         /* Check the validation methods return type. If it's a boolean 
                         then it has passed the check, otherwise it is a string and this
+                        means the validation failed for some reason */
+
+                        if(typeof result !== 'boolean'){
+                            setValidationMessage(result)
+                            setValidated(false)
+                            setDirty(true)
+                        } else {
+                            setValidationMessage(null)
+                        }                        
+                        break;
+                    case "isString":
+                        result = isString(e)
+
+                        /* Check the validation methods return type. If it's a boolean 
+                        then it has passed the check, otherwise it is not a string and this
                         means the validation failed for some reason */
 
                         if(typeof result !== 'boolean'){

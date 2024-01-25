@@ -316,7 +316,8 @@ const ProfileCookbook = (props) => {
                         name="title"
                         label="Image Title"
                         validators={[
-                            { type: "minLength", value: 4}
+                            { type: "minLength", value: 4},
+                            { type: "isString", value: undefined }
                         ]}
                     />
 
