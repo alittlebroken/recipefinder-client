@@ -311,7 +311,7 @@ const Ingredients = () => {
                                     <div aria-label="ingredient name" className="ig-container-text">
                                         {ingredient.name}
                                     </div>
-                                    <button 
+                                    {authProvider.loggedIn() && <button 
                                      className="btn ig-container-btn"
                                      onClick={handleAddIngredient}
                                      value={ingredient.id}
@@ -320,7 +320,7 @@ const Ingredients = () => {
                                      data-image={ingredient.src}
                                      >
                                         +
-                                    </button>
+                                    </button>}
                                 </div>
                             )
                         })
