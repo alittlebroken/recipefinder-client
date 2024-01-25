@@ -19,6 +19,8 @@ import {
 import Modal from '../../UI/Modal/Modal'
 import { useCookbooks } from '../../../hooks/useCookbooks'
 
+import { nanoid } from '@reduxjs/toolkit'
+
 const RecipeDetails = () => {
 
     /* Extract the details for the recipe */
@@ -123,7 +125,7 @@ const RecipeDetails = () => {
                         <option disabled value={null}>Please select a cookbook</option>
                         {Array.isArray(cookbooks) > 0 && cookbooks.map(cookbook => {
                             return (
-                                <option value={cookbook.id}>{cookbook.name}</option>
+                                <option key={nanoid()} value={cookbook.id}>{cookbook.name}</option>
                             )
                         })}
                     </select>
