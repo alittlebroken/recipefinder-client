@@ -28,6 +28,8 @@ import Modal from '../../UI/Modal/Modal'
 
 import ProfileRecipeNew from './ProfileRecipeNew'
 
+import { nanoid } from '@reduxjs/toolkit'
+
 const ProfileRecipes = () => {
 
     /* Alias the dispatcher */
@@ -223,7 +225,7 @@ const ProfileRecipes = () => {
                 {!recipes ? (<h3>You currently have no recipes.</h3>) : 
                     recipes.map((recipe) => {
                     return (
-                        <div aria-label="recipe container" className="prc-recipe-container flex">
+                        <div key={nanoid()} aria-label="recipe container" className="prc-recipe-container flex">
 
                             <img src={recipe?.images[0]?.source} alt={recipe?.images[0]?.alt} title={recipe?.images[0]?.title} className="prc-recipe-image" />
 
