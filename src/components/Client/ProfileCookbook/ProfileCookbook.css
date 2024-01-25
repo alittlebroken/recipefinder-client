@@ -75,8 +75,8 @@
 
 .cb-recipe-list {
     flex-direction: column;
-    padding: 15px;
-    gap: 20px;
+    padding: 5px;
+    align-items: center;
     justify-content: center;
 }
 
@@ -92,6 +92,7 @@
     border: 1px solid var(--col-borders);
     overflow: hidden;
     border-radius: 5px;
+    margin-bottom: 20px;
 }
 
 .cb-recipe-img {
