@@ -9,7 +9,7 @@ const RecipeList = ({ recipes, showModal, setRecipe, navigateTo, profile, setCoo
             <div aria-label="empty recipe list container" className="recipeListEmpty flex">No recipes found</div>
         )
     } else {
-        return (<div aria-aria-label="recipe list container" className="recipeListContainer flex">{
+        return (<div aria-label="recipe list container" className="recipeListContainer flex">{
             recipes.map(recipe => {
                 return (
                     <div key={nanoid()} aria-label="container for recipe" className="recipeContainer flex">
