@@ -165,7 +165,7 @@ export const maxFileSize = (e, size) => {
     const file = e.target.files[0]
 
     /* Check the current file is not larger than the max size */
-    if(file.size / 1024 > size){
+    if(file?.size / 1024 > size){
         return 'The supplied file exceeds the max file size of ' + size + ' kb'
     }
 
