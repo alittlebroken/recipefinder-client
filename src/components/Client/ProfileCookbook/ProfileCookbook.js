@@ -63,7 +63,7 @@ const ProfileCookbook = (props) => {
 
     /* State for controlling pagination */
     const [page, setPage] = useState(pagination.page)
-    const [recsPage, setRecsPerPage] = useState(pagination.recsPerPage)
+    const [recsPage, setRecsPage] = useState(pagination.recsPerPage)
 
     /* State for controlling if the data is outdated ( dirty ) */
     const [isDirty, setIsDirty] = useState(false)
@@ -99,7 +99,7 @@ const ProfileCookbook = (props) => {
      * page 
     */
     const recsChangeHandler = async (e) => {
-        setRecsPerPage(e.target.value)
+        setRecsPage(e.target.value)
         dispatch(setRecsPerPage(e.target.value))
     }
 
