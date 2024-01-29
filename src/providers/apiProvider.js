@@ -108,17 +108,17 @@ const apiProvider = {
 
 
         // Pagination
-        const { page } = params.pagination || 1
-        const { perPage } = params.pagination || null
-        const { overrideLimit } = params.pagination || false
+        const { page } = params?.pagination || 1
+        const { perPage } = params?.pagination || 5
+        const { overrideLimit } = params?.pagination || false
 
         // Sorting
-        const { field } = params.sort || 'id'
-        const { order } = params.sort || 'desc' 
+        const { field } = params?.sort || 'id'
+        const { order } = params?.sort || 'desc' 
 
         // Authentication
-        const { authenticate } = params.auth || false
-        const { roles } = params.auth || 'user'
+        const { authenticate } = params?.auth || false
+        const { roles } = params?.auth || 'user'
 
         // Set up the query params
         let queryParams = {
@@ -480,7 +480,7 @@ const apiProvider = {
             }
 
             // Payload
-            const { payload } = params 
+            let { payload } = params 
 
             // Authentication
             const { authenticate } = params.auth || false
@@ -511,6 +511,9 @@ const apiProvider = {
 
             /* Request Body */
             let reqBody
+
+            /* var for holding form data if we have to upload images */
+            let formData
 
             /* Generate the url and payload based on the resource */
             if(resource === 'users'){
@@ -613,7 +616,7 @@ const apiProvider = {
                         formData.append('resourceid', params.id)
                         formData.append('resource', 'users')
                         formData.append('title', payload.title)
-
+                        
                         /* url to upload to */
                         url = `${process.env.REACT_APP_API_URL}/uploads/${picCheck?.data?.results[0]?.id}`
 
@@ -655,16 +658,54 @@ const apiProvider = {
                 }
                 return returnResult
 
+            } else if(resource === 'uploads') {
+
+                    /* Get the existing image details if any */
+                    const response = await apiProvider.getList('uploads', {
+                        auth: {
+                            authenticate: true,
+                        },
+                        filter: {
+                            resource: 'Cookbook',
+                            resourceid: parseInt(payload.resourceid)
+                        }
+                    })
+
+                    /* Assign the existing cookbook id so we can use that when updating */
+                    const existingId = response?.data?.results[0]?.id
+
+                    /* generate the url for the request */
+                    url = `${process.env.REACT_APP_API_URL}/${resource}/${existingId}`
+
+                    /* Generate the form to send the details through on */
+                    /* Generate the payload to send */
+                    formData = new FormData()
+            
+                    formData.append(
+                        'images',
+                        payload?.images,
+                        payload?.images?.name
+                    )
+                    formData.append('userid',payload.userId)
+                    formData.append('resourceid', payload.resourceid)
+                    formData.append('resource', payload.resource)
+                    formData.append('title', payload.title)
+
+                    /* set the correct mimetype for the form */
+                    axiosOptions.headers['Content-type'] = "multipart/form-data"
+
             } else {
                 /* generic catch all url, should be good for most resources */
                 url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}`
-
             }
 
-            
-
         // Access the appropriate API and process the results
-        const response = await axios.put(url, payload, axiosOptions)
+        let response
+        if(resource === "uploads"){
+            response = await axios.put(url, formData, axiosOptions)
+        } else {
+            response = await axios.put(url, payload, axiosOptions)
+        }
 
         // Check the status codes returned
         if(response.status >= 400){
