@@ -97,7 +97,7 @@ const ProfileCookbook = (props) => {
             await dispatch(getCookBookRecipeList(payload))
             await dispatch(getCookbooks({
                 user: {
-                    userId: 
+                    userId: profile.userId
                 }
             }))
         }
