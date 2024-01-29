@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
 import {
     getCookBookRecipeList,
+    getCookbooks,
     upPage,
     downPage,
     setRecsPerPage,
@@ -40,9 +41,11 @@ const ProfileCookbook = (props) => {
     const urlParams = useParams()
     const cookbookId = urlParams.id
 
+    /* Get profile data */
+    const profile = useSelector(selectProfileData)
+
     /* Get a list of the recipes for this cookbook */
     const recipes = useSelector(selectRecipes)
-
 
     /* Are we still loading data or have we encountered an error */
     const loading = useSelector(selectIsLoading)
@@ -80,6 +83,9 @@ const ProfileCookbook = (props) => {
     /* Load the recipe list */
     useEffect(() => {
 
+        console.group('ProfileCookbook.js useEffect')
+        console.log('Data dirty: ', isDirty)
+
         /* function to fetch the data from the API asynchronously */
         const fetchData = async () => {
 
@@ -89,11 +95,20 @@ const ProfileCookbook = (props) => {
             }
 
             await dispatch(getCookBookRecipeList(payload))
+            await dispatch(getCookbooks({
+                user: {
+                    userId: 
+                }
+            }))
         }
 
         /* Get the data */
         fetchData()
-    }, [page, recsPage, dispatch, isDirty])
+
+        console.log('Data dirty: ', isDirty)
+        console.groupEnd()
+
+    }, [page, recsPage, dispatch, isDirty, cookbook.id])
 
     /* Handler for changing how many records to display per
      * page 
@@ -135,9 +150,6 @@ const ProfileCookbook = (props) => {
         altText: cookbook.alt
     }
 
-    /* Get profile data */
-    const profile = useSelector(selectProfileData)
-
     /* Notifications */
     const [notifications, setNotifications] = useState()
 
@@ -164,6 +176,9 @@ const ProfileCookbook = (props) => {
 
         /* Only update the form if it has been changed */
         if(form.isDirty){
+
+            /* Update the component states dirty mode as well */
+            setIsDirty(true)
 
             /* Update the cookbook */
             const cookbookResult = await apiProvider.update('cookbooks', cookbookParams)
