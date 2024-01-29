@@ -37,3 +37,23 @@
     display: flex;
     padding: 10px;
 }
+
+.modal-width-90 {
+    width: 90%;
+}
+
+.modal-width-80 {
+    width: 80%;
+}
+
+.modal-width-75 {
+    width: 75%;
+}
+
+.modal-width-50 {
+    width: 50%;
+}
+
+.modal-width-35 {
+    width: 35%;
+}
