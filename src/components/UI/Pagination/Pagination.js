@@ -74,6 +74,7 @@ const Pagination = (props) => {
                 }
                 <Select 
                     id={nanoid()}
+                    key={nanoid()}
                     options={selectOptions} 
                     initialOption={'Recs per page'} 
                     selected={recsPerPage || 5} 

@@ -138,7 +138,7 @@ export const allowedFileTypes = (e, types) => {
       type and if a match is found then increase the match count*/
     let matches = 0
     types.forEach( type => {
-        if(type === e.target.files[0].type){
+        if(type === e?.target?.files[0]?.type){
             matches += 1
         }
     })
@@ -165,7 +165,7 @@ export const maxFileSize = (e, size) => {
     const file = e.target.files[0]
 
     /* Check the current file is not larger than the max size */
-    if(file.size / 1024 > size){
+    if(file?.size / 1024 > size){
         return 'The supplied file exceeds the max file size of ' + size + ' kb'
     }
 
@@ -184,3 +184,15 @@ export const isNumber = (e) => {
     }
 
 }
+
+/* Ensures the input is a string */
+export const isString = (e) => {
+    
+    /* Check to ensure that we have a number */
+    if(isNaN(parseInt(e.target.value))){
+        return true
+    } else {
+        return 'The supplied value must be a string'
+    }
+
+} 

@@ -28,6 +28,8 @@ import Modal from '../../UI/Modal/Modal'
 
 import ProfileRecipeNew from './ProfileRecipeNew'
 
+import { nanoid } from '@reduxjs/toolkit'
+
 const ProfileRecipes = () => {
 
     /* Alias the dispatcher */
@@ -167,7 +169,7 @@ const ProfileRecipes = () => {
     return (
         <div aria-label="recipes container" className="prc-container flex">
 
-            <Modal show={showRemoveModal} handleClose={handleModalCloseRemove}>
+            <Modal show={showRemoveModal} handleClose={handleModalCloseRemove} sz50p>
                 <div aria-label="remove modal container" className="modal-remove-container flex">
                     <h4>{currentRecipe?.name}</h4>
                     Are you sure you wish to remove this recipe? <br /><br />
@@ -191,7 +193,7 @@ const ProfileRecipes = () => {
                 </div>
             </Modal>
 
-            <Modal show={showModalNewRecipe} handleClose={handleModalCloseAdd}>
+            <Modal show={showModalNewRecipe} handleClose={handleModalCloseAdd} sz75p >
                 <ProfileRecipeNew 
                     handleNotifications={setNotifications} 
                     isDataDirty={setIsDataDirty} 
@@ -223,7 +225,7 @@ const ProfileRecipes = () => {
                 {!recipes ? (<h3>You currently have no recipes.</h3>) : 
                     recipes.map((recipe) => {
                     return (
-                        <div aria-label="recipe container" className="prc-recipe-container flex">
+                        <div key={nanoid()} aria-label="recipe container" className="prc-recipe-container flex">
 
                             <img src={recipe?.images[0]?.source} alt={recipe?.images[0]?.alt} title={recipe?.images[0]?.title} className="prc-recipe-image" />
 

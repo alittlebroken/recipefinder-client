@@ -1,7 +1,7 @@
 import './Recipes.css'
 import { nanoid } from '@reduxjs/toolkit'
 
-const RecipeList = ({ recipes, showModal, setRecipe, navigateTo, profile }) => {
+const RecipeList = ({ recipes, showModal, setRecipe, navigateTo, profile, setCookbook = undefined}) => {
 
     /* Check we have a valid list of recip[es to display */
     if(!recipes || recipes?.length < 1){
@@ -9,7 +9,7 @@ const RecipeList = ({ recipes, showModal, setRecipe, navigateTo, profile }) => {
             <div aria-label="empty recipe list container" className="recipeListEmpty flex">No recipes found</div>
         )
     } else {
-        return (<div aria-aria-label="recipe list container" className="recipeListContainer flex">{
+        return (<div aria-label="recipe list container" className="recipeListContainer flex">{
             recipes.map(recipe => {
                 return (
                     <div key={nanoid()} aria-label="container for recipe" className="recipeContainer flex">
@@ -35,6 +35,7 @@ const RecipeList = ({ recipes, showModal, setRecipe, navigateTo, profile }) => {
                                         }}>More Info</button>
                                         {profile.userId && (
                                             <button onClick={(e) => {
+                                                setCookbook('Please select a cookbook')
                                                 setRecipe(recipe.id)
                                                 showModal(true)
                                             }}>Add</button>

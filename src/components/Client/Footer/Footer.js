@@ -1,7 +1,19 @@
 /* import Styles */
 import './Footer.css'
 
+import { Link, useNavigate, redirect } from 'react-router-dom';
+import { useDispatch } from "react-redux"
+import { 
+    setSearchTerms,
+    setSearchOptions,
+ } from '../../../slices/Search/SearchSlice'
+
 const Footer = () => {
+
+    /* Alias the various hooks */
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+
     return (
         <footer className="footer-container">
             <div aria-label="footerSection" className="footer-section-container">
@@ -50,23 +62,41 @@ const Footer = () => {
                 <div role="presentation" aria-label="footerSitemap" className="sitemap-container">
                     <h4>Sitemap</h4>
                     <ul>
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/about">About</a></li>
-                        <li><a href="/recipes">Recipes</a></li>
-                        <li><a href="/categories">Categories</a></li>
-                        <li><a href="/ingredients">Ingredients</a></li>
-                        <li><a href="/contact">Contact</a></li>
+                        <li><Link to='/'>Home</Link></li>
+                        <li><Link to='/recipes' >Recipes</Link></li>
+                        <li><Link to='/categories' >Categories</Link></li>
+                        <li><Link to='/ingredients' >Ingredients</Link></li>
                     </ul>
                 </div>
 
                 <div role="presentation" aria-label="footerRecipes" className="sitemap-container">
                     <h4>Recipes</h4>
                     <ul>
-                        <li><a href="/recipes/vegan">Vegan</a></li>
-                        <li><a href="/recipes/dairyfree">Dairy Free</a></li>
-                        <li><a href="/recipes/quick">Quick</a></li>
-                        <li><a href="/recipes/microwave">Microwave</a></li>
-                        <li><a href="/recipes/airfryer">Air Fryer</a></li>
+                        {/*<li><a href="/recipes/vegan">Vegan</a></li>*/}
+                        <li><Link to='/recipes/vegan' onClick={e => {
+                            dispatch(setSearchTerms('vegan'))
+                            dispatch(setSearchOptions('categories'))
+                        }}>Vegan</Link></li>
+                        <li><Link to='/recipes/dairyfree' onClick={e => {
+                            dispatch(setSearchTerms('dairy free'))
+                            dispatch(setSearchOptions('categories'))
+                        }}>Dairy Free</Link></li>
+                        <li><Link to='/recipes/quick' onClick={e => {
+                            dispatch(setSearchTerms('quick'))
+                            dispatch(setSearchOptions('categories'))
+                        }}>Quick</Link></li>
+                        <li><Link to='/recipes/glutenfree' onClick={e => {
+                            dispatch(setSearchTerms('gluten free'))
+                            dispatch(setSearchOptions('categories'))
+                        }}>Gluten Free</Link></li>
+                        <li><Link to='/recipes/lowfodmap' onClick={e => {
+                            dispatch(setSearchTerms('low fodmap'))
+                            dispatch(setSearchOptions('categories'))
+                        }}>Low Fodmap</Link></li>
+                        <li><Link to='/recipes/air fryer' onClick={e => {
+                            dispatch(setSearchTerms('air fryer'))
+                            dispatch(setSearchOptions('categories'))
+                        }}>Air Fryer</Link></li>
                     </ul>
                 </div>
 

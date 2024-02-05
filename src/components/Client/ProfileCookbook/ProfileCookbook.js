@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
 import {
     getCookBookRecipeList,
+    getCookbooks,
     upPage,
     downPage,
     setRecsPerPage,
@@ -40,9 +41,11 @@ const ProfileCookbook = (props) => {
     const urlParams = useParams()
     const cookbookId = urlParams.id
 
+    /* Get profile data */
+    const profile = useSelector(selectProfileData)
+
     /* Get a list of the recipes for this cookbook */
     const recipes = useSelector(selectRecipes)
-
 
     /* Are we still loading data or have we encountered an error */
     const loading = useSelector(selectIsLoading)
@@ -63,7 +66,7 @@ const ProfileCookbook = (props) => {
 
     /* State for controlling pagination */
     const [page, setPage] = useState(pagination.page)
-    const [recsPage, setRecsPerPage] = useState(pagination.recsPerPage)
+    const [recsPage, setRecsPage] = useState(pagination.recsPerPage)
 
     /* State for controlling if the data is outdated ( dirty ) */
     const [isDirty, setIsDirty] = useState(false)
@@ -80,6 +83,9 @@ const ProfileCookbook = (props) => {
     /* Load the recipe list */
     useEffect(() => {
 
+        console.group('ProfileCookbook.js useEffect')
+        console.log('Data dirty: ', isDirty)
+
         /* function to fetch the data from the API asynchronously */
         const fetchData = async () => {
 
@@ -89,17 +95,26 @@ const ProfileCookbook = (props) => {
             }
 
             await dispatch(getCookBookRecipeList(payload))
+            await dispatch(getCookbooks({
+                user: {
+                    userId: profile.userId
+                }
+            }))
         }
 
         /* Get the data */
         fetchData()
-    }, [page, recsPage, dispatch, isDirty])
+
+        console.log('Data dirty: ', isDirty)
+        console.groupEnd()
+
+    }, [page, recsPage, dispatch, isDirty, cookbook.id])
 
     /* Handler for changing how many records to display per
      * page 
     */
     const recsChangeHandler = async (e) => {
-        setRecsPerPage(e.target.value)
+        setRecsPage(e.target.value)
         dispatch(setRecsPerPage(e.target.value))
     }
 
@@ -135,9 +150,6 @@ const ProfileCookbook = (props) => {
         altText: cookbook.alt
     }
 
-    /* Get profile data */
-    const profile = useSelector(selectProfileData)
-
     /* Notifications */
     const [notifications, setNotifications] = useState()
 
@@ -164,6 +176,9 @@ const ProfileCookbook = (props) => {
 
         /* Only update the form if it has been changed */
         if(form.isDirty){
+
+            /* Update the component states dirty mode as well */
+            setIsDirty(true)
 
             /* Update the cookbook */
             const cookbookResult = await apiProvider.update('cookbooks', cookbookParams)
@@ -218,6 +233,9 @@ const ProfileCookbook = (props) => {
     /* Handle the removal of a recipe from the cookbook */
     const handleRemove = async e => {
 
+        /* Set the cookbook list of recipes to dirty to indicate it has changed */
+        setIsDirty(false)
+
         /* Prevent the default action when clicking the button*/
         e.preventDefault()
 
@@ -226,6 +244,7 @@ const ProfileCookbook = (props) => {
 
         if(buttonValue === "remove"){
 
+            
             /* Generate the paramns to send along with the API request */
             const params = {
                 auth: {
@@ -237,11 +256,12 @@ const ProfileCookbook = (props) => {
                     cookbookId: id.cookbookId
                 }
             }
-
+            
             const result = await apiProvider.removeOne('cookbookRecipes', params)
-            console.log(result)
             /* check the result of removing the record */
             if(result.status >= 200 && result.status < 300){
+                /* Set that the form is dirty */
+                setIsDirty(true)
                 setNotifications({
                     className: "cc-notif cc-ok",
                     message: "Recipe successfully removed from cookbook."
@@ -262,7 +282,7 @@ const ProfileCookbook = (props) => {
         
         <div aria-label="cookbook container" className="cb-container flex">
 
-            <Modal key={nanoid()} show={showEditModal} handleClose={handleCloseEditModal}>
+            <Modal key={nanoid()} show={showEditModal} handleClose={handleCloseEditModal} sz75p >
                 <Form 
                     initialValues={formInitialValues}
                     onSubmit={handleSubmit}
@@ -290,7 +310,7 @@ const ProfileCookbook = (props) => {
                             { type: "minLength", value: 4}
                         ]}
                     />
-                    {console.log('Before FormInput component: ', isDirty)}
+                    
                     <FormUpload 
                         name="images"
                         label="Cookbook Image"
@@ -306,12 +326,13 @@ const ProfileCookbook = (props) => {
                             {type: "maxFileSize", value: 1024}
                         ]}
                     />
-                    {console.log('After FormInput component: ', isDirty)}
+                    
                     <FormInput 
                         name="title"
                         label="Image Title"
                         validators={[
-                            { type: "minLength", value: 4}
+                            { type: "minLength", value: 4},
+                            { type: "isString", value: undefined }
                         ]}
                     />
 
@@ -326,7 +347,7 @@ const ProfileCookbook = (props) => {
                 </Form>
             </Modal>
 
-            <Modal key={nanoid()} show={showRemoveModal} handleClose={handleCloseRemovalModal}>
+            <Modal key={nanoid()} show={showRemoveModal} handleClose={handleCloseRemovalModal} sz50p >
                 
                 <div aria-label="recipe remove container" className="cb-recipe-remove-container flex">
                     Are you sure you wish to remove this recipe from the Cookbook?
@@ -432,7 +453,7 @@ const ProfileCookbook = (props) => {
                                     value={recipe.id}
                                     onClick={(event => {
                                         setId({
-                                            recipeId: event.target.value,
+                                            recipeId: parseInt(event.target.value),
                                             cookbookId: cookbook.id
                                         })
                                         setShowRemoveModal(true)
@@ -444,7 +465,7 @@ const ProfileCookbook = (props) => {
                                     name="moreInfo" 
                                     className="btn cb-action-btn flex"
                                     onClick={(e) => {
-                                        navigate(`/recipes/${recipe.id}`)
+                                        navigate(`/recipe/${recipe.id}`)
                                     }}
                                 >
                                     More Info

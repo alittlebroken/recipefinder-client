@@ -1,4 +1,5 @@
 import './Card.css'
+import { Link } from 'react-router-dom'
 
 /* Card base */
 const Card = (props) => {
@@ -156,7 +157,8 @@ Card.Title = (props) => {
     return (
         <>
             <p className={classNames} style={is}>
-                {link ? (<a href={link}>{text}</a>) : text}
+                {/* INSERT navigate link here */}
+                {link ? (<Link to={link}>{text}</Link>) : text}
             </p>
         </>
     )

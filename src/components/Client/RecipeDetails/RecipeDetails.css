@@ -68,6 +68,26 @@
     width: 300px;  
 }
 
+.rd-cookbook-add-container {
+    width: 95%;
+    padding: 5px;
+    justify-content: center;
+    align-items: center;
+}
+
+.rd-add-to-cookbook {
+    color: white;
+    background-color: var(--col-primary);
+    width: auto;
+    font-family: inherit;
+    font-size: .9rem;
+}
+
+.rd-add-to-cookbook:hover {
+    color: var(--col-primary);
+    background-color: white;
+}
+
 /* Dekstop Styles */
 @media screen and (min-width: 960px){
 
@@ -93,6 +113,10 @@
 
     .rd-recipeDetailsRight {
         width: 60%;
+    }
+
+    .rd-add-to-cookbook {
+        font-size: 1.5rem;
     }
 
 }

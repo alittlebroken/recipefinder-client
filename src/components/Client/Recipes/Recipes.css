@@ -43,8 +43,9 @@
     color: var(--col-primary);
 }
 
-.recipeList {
+.recipeListContainer {
     flex-direction: column;
+    gap: 15px;
     padding: 5px;
 }
 
@@ -72,6 +73,7 @@
 .recipeDescription {
     padding: 5px;
     border: none;
+    word-break: break-all;
 }
 
 .recipeActions {
@@ -146,6 +148,8 @@
     }
 
     .recipeListContainer {
+        flex-direction: row;
+        flex-wrap: wrap;
         gap: 25px;
     }
 

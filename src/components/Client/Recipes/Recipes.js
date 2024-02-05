@@ -72,7 +72,7 @@ const Recipes = props => {
 
     /* State for controlling pagination */
     const [page, setPage] = useState(pagination.page)
-    const [recsPage, setRecsPerPage] = useState(pagination.recsPerPage)
+    const [recsPage, setRecsPage] = useState(pagination.recsPerPage)
 
     /* State for working on the current record the user has selected, for removal etc */
     const [currentRecipe, setCurrentRecipe] = useState(null)
@@ -81,17 +81,24 @@ const Recipes = props => {
     const [showModalAdd, setShowModalAdd] = useState(false)
 
     /* State for which cookbook we need to add the recipe to */
-    const [selectedCookbook, setSelectedCookbook] = useState()
+    const [selectedCookbook, setSelectedCookbook] = useState('Please select a cookbook')
 
     /* State for the filter */
     const [filter, setFilter] = useState(category || searchTerms)
-    const [options,setOptions] = useState('recipes')
+    const [options, setOptions] = useState('recipes')
 
     /* Set state for notifications */
     const [notifications, setNotifications] = useState()
 
     // Update the state as the component mounts
     useEffect(() => {
+
+        /* Update based on if a category has been selected or not */
+        if(category){
+            setFilter(category)
+            dispatch(setSearchOptions('categories'))
+        }
+
         if(filter !== undefined){
             dispatch(performSearch({
                 terms: filter,
@@ -114,7 +121,7 @@ const Recipes = props => {
 
         // Update filter
         dispatch(setSearchTerms(filter))
-        dispatch(setSearchOptions(options))
+        dispatch(setSearchOptions(category ? 'categories' : options))
         dispatch(performSearch({
             terms: filter,
             options: searchOptions,
@@ -140,8 +147,9 @@ const Recipes = props => {
     }
 
     const handleRecsPerPageChange = (e) => {
-        setRecsPerPage(parseInt(e.target.value))
-        dispatch(setRecsPerPage(e.target.value))
+        let value = e.target.value
+        setRecsPage(parseInt(value))
+        dispatch(setRecsPerPage(parseInt(value)))
     }
 
     const handleGoToSpecificPage = (e) => {
@@ -163,15 +171,17 @@ const Recipes = props => {
         return ('We have encountered an error. Apologies for the inconvinience.')
     }
 
-    return (
+    return ( 
         <div aria-label="container for a list of recipes" className="recipesContainer flex">
 
             <Modal
                 show={showModalAdd}
                 handleClose={(e) => {
                     e.preventDefault()
+                    setSelectedCookbook(undefined)
                     setShowModalAdd(false)
                 }}
+                sz50p
             >
                 <h3 className="selectModalHeading">Add recipe to cookbook?</h3>
                 <div aria-label="" className="selectContainer flex">
@@ -183,12 +193,12 @@ const Recipes = props => {
                             e.preventDefault()
                             setSelectedCookbook(e.target.value)
                         }}
-                        defaultValue="Please select a cookbook"
+                        value={selectedCookbook}
                     >
                         <option disabled value={null}>Please select a cookbook</option>
-                        {cookbooks && cookbooks.map(cookbook => {
+                        {Array.isArray(cookbooks) > 0 && cookbooks.map(cookbook => {
                             return (
-                                <option value={cookbook.id}>{cookbook.name}</option>
+                                <option key={nanoid()} value={cookbook.id}>{cookbook.name}</option>
                             )
                         })}
                     </select>
@@ -214,9 +224,8 @@ const Recipes = props => {
 
                             /* Send the request off */
                             const res = await apiProvider.create("cookbookRecipes",params)
-                            
+                            console.log(res)
                             if(res.status >= 200 && res.status < 300){
-                               console.log("recipe added to cookbook")
                                setNotifications({
                                 className: 'notif-ok',
                                 message: 'Recipe successfully added to cookbook.'
@@ -224,6 +233,14 @@ const Recipes = props => {
                                setCurrentRecipe(null)
                                setSelectedCookbook(null)
                                setShowModalAdd(false) 
+                            } else if (res.status === 409) {
+                                setNotifications({
+                                    className: "notif-error",
+                                    message: res.message
+                                    })
+                                   setCurrentRecipe(null)
+                                   setSelectedCookbook(null)
+                                   setShowModalAdd(false)
                             } else {
                                setNotifications({
                                 className: "notif-error",
@@ -274,6 +291,7 @@ const Recipes = props => {
                 setRecipe={setCurrentRecipe}
                 navigateTo={navigate}
                 profile={profile}
+                setCookbook={setSelectedCookbook}
             />
 
            <Pagination 

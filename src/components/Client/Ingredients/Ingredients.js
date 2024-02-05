@@ -213,7 +213,9 @@ const Ingredients = () => {
                 setAmountTypeError(null)
                 setFormUpdate(null)
                 setFormUpdateError(null)
-            }}>
+            }}
+                sz50p
+            >
 
                 <form onSubmit={handleSubmitAddIngredient} className="ig-add-form flex flex-col">
 
@@ -311,7 +313,7 @@ const Ingredients = () => {
                                     <div aria-label="ingredient name" className="ig-container-text">
                                         {ingredient.name}
                                     </div>
-                                    <button 
+                                    {authProvider.loggedIn() && <button 
                                      className="btn ig-container-btn"
                                      onClick={handleAddIngredient}
                                      value={ingredient.id}
@@ -320,7 +322,7 @@ const Ingredients = () => {
                                      data-image={ingredient.src}
                                      >
                                         +
-                                    </button>
+                                    </button>}
                                 </div>
                             )
                         })

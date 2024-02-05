@@ -1,6 +1,13 @@
 import "./Category.css"
+import { Link, useNavigate } from "react-router-dom"
+
+import { 
+    setSearchTerms,
+    setSearchOptions,
+ } from '../../../slices/Search/SearchSlice'
 
 import Card from '../../UI/Cards/Card'
+import { useDispatch } from "react-redux"
 
 const Category = (props) => {
 
@@ -9,9 +16,20 @@ const Category = (props) => {
         record
     } = props
 
+    /* Alias the various hooks */
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+
     return (
         <Card key={record.id} overlay rounded>
-            <a href={`/recipes/${record.name.toLowerCase()}`}>
+            <Link 
+                to=''
+                onClick={(e) => {
+                    dispatch(setSearchTerms(record.name.toLowerCase()))
+                    dispatch(setSearchOptions('categories'))
+                    navigate(`/recipes/${record.name.toLowerCase()}`)
+                }}
+            >
                 <Card.Container>
                     <Card.Image 
                     rounded 
@@ -23,7 +41,7 @@ const Category = (props) => {
                         <Card.Title text={record.name} medium />
                     </Card.Overlay>
                 </Card.Container>
-            </a>
+            </Link>
         </Card>
     )
 }

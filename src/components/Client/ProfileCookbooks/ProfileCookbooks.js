@@ -101,7 +101,7 @@ const ProfileCookbooks = (props) => {
     return(
         <div aria-label="content container" className="cookbooks-container flex">
 
-            <Modal show={showNewModal} handleClose={handleNewModalClose}>
+            <Modal show={showNewModal} handleClose={handleNewModalClose} sz75p>
                 <NewCookbookForm handleNotifications={setNotifications} isDataDirty={setIsDataDirty} handleCloseModal={handleNewModalClose} />
             </Modal>
 

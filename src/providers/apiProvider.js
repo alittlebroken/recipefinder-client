@@ -76,6 +76,8 @@ const apiProvider = {
                 axiosOptions.withCredentials = true
             }
 
+            axiosOptions.validateStatus = status => { return true}
+
         // Set the URL to use
         let url = `${process.env.REACT_APP_API_URL}/${resource}/${id}`
 
@@ -106,17 +108,17 @@ const apiProvider = {
 
 
         // Pagination
-        const { page } = params.pagination || 1
-        const { perPage } = params.pagination || null
-        const { overrideLimit } = params.pagination || false
+        const { page } = params?.pagination || 1
+        const { perPage } = params?.pagination || 5
+        const { overrideLimit } = params?.pagination || false
 
         // Sorting
-        const { field } = params.sort || 'id'
-        const { order } = params.sort || 'desc' 
+        const { field } = params?.sort || 'id'
+        const { order } = params?.sort || 'desc' 
 
         // Authentication
-        const { authenticate } = params.auth || false
-        const { roles } = params.auth || 'user'
+        const { authenticate } = params?.auth || false
+        const { roles } = params?.auth || 'user'
 
         // Set up the query params
         let queryParams = {
@@ -149,6 +151,8 @@ const apiProvider = {
         if(authenticate === true && authenticate !== undefined){
             axiosOptions.withCredentials = true
         }
+
+        axiosOptions.validateStatus = status => { return true}
 
         // Set the URL to use
 
@@ -223,6 +227,10 @@ const apiProvider = {
         const { authenticate } = params.auth || false
         const { roles } = params.auth || 'user'
 
+        // Filter
+        const cookbookId = params?.filter?.cookbookId || undefined
+        const recipeId = params?.filter?.recipeId || undefined
+
         // Set up the query params
         let queryParams = {
             page: page ? page : 1,
@@ -250,7 +258,7 @@ const apiProvider = {
             axiosOptions.withCredentials = true
         }
 
-
+        axiosOptions.validateStatus = status => { return true}
 
         // Set the URL to use
         let url
@@ -258,7 +266,7 @@ const apiProvider = {
             url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}/${params.ingredientId}`
             
         } else if (resource === "cookbookRecipes") {
-            url = `${process.env.REACT_APP_API_URL}/cookbooks/${params.id}/recipes?${queryString.stringify(queryParams)}`
+            url = `${process.env.REACT_APP_API_URL}/cookbooks/${params.id}/recipe/${recipeId}`
         } else {
             url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}`
             
@@ -306,6 +314,8 @@ const apiProvider = {
         if(authenticate === true && authenticate !== undefined){
             axiosOptions.withCredentials = true
         }
+
+        axiosOptions.validateStatus = status => { return true}
 
         // Set the URL to use
         let url = `${process.env.REACT_APP_API_URL}/${resource}`
@@ -385,6 +395,8 @@ const apiProvider = {
                 axiosOptions.withCredentials = true
             }
 
+            axiosOptions.validateStatus = status => { return true}
+
         // Set the URL to use
 
         // Determine the type of resource we are accessing
@@ -433,6 +445,7 @@ const apiProvider = {
         } else {
             // Access the appropriate API and process the results
             response = await axios.post(url, payload, axiosOptions)
+            
         }
 
         // Check the status codes returned
@@ -467,7 +480,7 @@ const apiProvider = {
             }
 
             // Payload
-            const { payload } = params 
+            let { payload } = params 
 
             // Authentication
             const { authenticate } = params.auth || false
@@ -491,11 +504,16 @@ const apiProvider = {
                 axiosOptions.withCredentials = true
             }
 
+            axiosOptions.validateStatus = status => { return true}
+
             /* Url to send the request to */
             let url
 
             /* Request Body */
             let reqBody
+
+            /* var for holding form data if we have to upload images */
+            let formData
 
             /* Generate the url and payload based on the resource */
             if(resource === 'users'){
@@ -598,7 +616,7 @@ const apiProvider = {
                         formData.append('resourceid', params.id)
                         formData.append('resource', 'users')
                         formData.append('title', payload.title)
-
+                        
                         /* url to upload to */
                         url = `${process.env.REACT_APP_API_URL}/uploads/${picCheck?.data?.results[0]?.id}`
 
@@ -640,16 +658,54 @@ const apiProvider = {
                 }
                 return returnResult
 
+            } else if(resource === 'uploads') {
+
+                    /* Get the existing image details if any */
+                    const response = await apiProvider.getList('uploads', {
+                        auth: {
+                            authenticate: true,
+                        },
+                        filter: {
+                            resource: 'Cookbook',
+                            resourceid: parseInt(payload.resourceid)
+                        }
+                    })
+
+                    /* Assign the existing cookbook id so we can use that when updating */
+                    const existingId = response?.data?.results[0]?.id
+
+                    /* generate the url for the request */
+                    url = `${process.env.REACT_APP_API_URL}/${resource}/${existingId}`
+
+                    /* Generate the form to send the details through on */
+                    /* Generate the payload to send */
+                    formData = new FormData()
+            
+                    formData.append(
+                        'images',
+                        payload?.images,
+                        payload?.images?.name
+                    )
+                    formData.append('userid',payload.userId)
+                    formData.append('resourceid', payload.resourceid)
+                    formData.append('resource', payload.resource)
+                    formData.append('title', payload.title)
+
+                    /* set the correct mimetype for the form */
+                    axiosOptions.headers['Content-type'] = "multipart/form-data"
+
             } else {
                 /* generic catch all url, should be good for most resources */
                 url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}`
-
             }
 
-            
-
         // Access the appropriate API and process the results
-        const response = await axios.put(url, payload, axiosOptions)
+        let response
+        if(resource === "uploads"){
+            response = await axios.put(url, formData, axiosOptions)
+        } else {
+            response = await axios.put(url, payload, axiosOptions)
+        }
 
         // Check the status codes returned
         if(response.status >= 400){
@@ -727,11 +783,12 @@ const apiProvider = {
                 axiosOptions.withCredentials = true
             }
 
+            axiosOptions.validateStatus = status => { return true}
+
             // Set the URL to use
             let url = `${process.env.REACT_APP_API_URL}/search?${queryString.stringify(queryParams)}`
 
             // Access the appropriate API and process the results
-            console.log(payload)
             const response = await axios.post(url, payload, axiosOptions)
 
             // Check the status codes returned
@@ -813,6 +870,8 @@ const apiProvider = {
                 axiosOptions.withCredentials = true
             }
 
+            axiosOptions.validateStatus = status => { return true}
+
             // Set the URL to use
             let url = `${process.env.REACT_APP_API_URL}/search/pantry?${queryString.stringify(queryParams)}`
 
@@ -832,6 +891,93 @@ const apiProvider = {
         }
 
     },
+
+    doIExist: async (params) => {
+
+        // Veify the passed in params
+        if(!params || params === undefined){
+            return {
+                status: 400,
+                success: false,
+                message: 'Undefined request parameter'
+            }
+        }
+
+        if(!params.payload || params.payload === undefined){
+            return {
+                status: 400,
+                success: false,
+                message: 'Undefined payload'
+            } 
+        }
+
+        // Payload
+        const payload = params?.payload
+
+        // Pagination
+        const { page } = params?.pagination || 1
+        const { perPage } = params?.pagination || 10
+        const { overrideLimit } = params?.pagination || false
+
+        // Sorting
+        const { field } = params?.sort || 'id'
+        const { order } = params?.sort || 'desc' 
+
+        // Authentication
+        const { authenticate } = params?.auth || false
+        const { roles } = params?.auth || 'user'
+
+        // Set up the query params
+        let queryParams = {
+            page: page ? page : 1,
+            sort_by: field ? field : 'id',
+            sort_direction: order ? order : 'desc',
+            filter: JSON.stringify(params.filter)
+        }
+
+        if(overrideLimit){
+            queryParams.limit = null
+        } else {
+            queryParams.limit = perPage ? perPage : null
+        }
+
+        // Generate the header and any options to send along with the request
+
+        // Generate the initial header for the request
+        let headers = { 'Content-type': 'application/json' }
+
+        // Add any further headers as needed
+        if(authenticate === true && authenticate !== undefined){
+            headers.token = inMemoryJWT.getToken()
+        }
+
+        // Generate the initial options
+        let axiosOptions = { headers: headers }
+
+        // Add on any further options
+        if(authenticate === true && authenticate !== undefined){
+            axiosOptions.withCredentials = true
+        }
+
+        axiosOptions.validateStatus = status => { return true}
+
+        // Generate the URL to use
+        let url = `${process.env.REACT_APP_API_URL}/${payload.resource}?${queryString.stringify(queryParams)}`
+
+        // Pass the data to the API and check if we have a duplicate
+        const response = await axios.get(url, axiosOptions)
+        
+        if(response?.status >= 300){
+            return true
+        } else {
+            if(response?.data?.results?.length > 0){
+                return true
+            } else {
+                return false
+            }
+        }
+
+    }
 
 }
 
