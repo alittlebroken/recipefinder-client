@@ -118,6 +118,13 @@ const ingredientsSlice = createSlice({
                 state.pages = Math.ceil(action?.payload?.data?.totalRecords/state.recsPerPage) || 1
                 state.records = action.payload?.data?.totalRecords
 
+            } else {
+
+                /* Set correct pagination for 1 record or less */
+                state.page = 1
+                state.pages = 1
+                state.records = state?.results?.length
+
             }
 
         }
