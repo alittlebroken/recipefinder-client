@@ -82,21 +82,10 @@
     width: 50%;
 }
 
-.modal-sz75 {
+.modal-sz75p {
     width: 75%;
 }
 
-.modal-sz90 {
+.modal-sz90p {
     width: 90%;
-}
-
-/* Desktop Styles */
-@media screen and (min-width: 960px){
-
-    .default-size {
-        width: 700px;
-    }
-
-    
-
 }
