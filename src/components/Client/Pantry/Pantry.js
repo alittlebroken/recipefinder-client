@@ -191,11 +191,11 @@ const Pantry = (props) => {
         <div className="p-container flex flex-col">
 
             {/* Modals */}
-            <Modal show={showRemoveModal} handleClose={handleCloseRemovalModal}>
+            <Modal show={showRemoveModal} handleClose={handleCloseRemovalModal} sz50p>
                 <PantryFormRemoval name="Remove Ingredient" modalShow={handleCloseRemovalModal} id={id} pantry={parseInt(profileData.pantryId)} handleIsDirty={setIsDirty} />
             </Modal>
 
-            <Modal key={nanoid()} show={showEditModal} handleClose={handleCloseEditModal}>
+            <Modal key={nanoid()} show={showEditModal} handleClose={handleCloseEditModal} sz50p>
                 <PantryFormEdit key={nanoid()} ingredient={ingredientData} modalShow={handleCloseEditModal} handleIsDirty={setIsDirty} />
             </Modal>
 
@@ -203,9 +203,7 @@ const Pantry = (props) => {
                 key={nanoid()}
                 show={showFoundRecipes}
                 handleClose={handleCloseFoundRecipesModal} 
-                iStyles={{
-                    width: "75%"
-                }}
+                sz50p
             >
                 <div 
                     aria-label="container for recipes we can make from pantry ingredients"

@@ -282,7 +282,7 @@ const ProfileCookbook = (props) => {
         
         <div aria-label="cookbook container" className="cb-container flex">
 
-            <Modal key={nanoid()} show={showEditModal} handleClose={handleCloseEditModal}>
+            <Modal key={nanoid()} show={showEditModal} handleClose={handleCloseEditModal} sz75p >
                 <Form 
                     initialValues={formInitialValues}
                     onSubmit={handleSubmit}
@@ -347,7 +347,7 @@ const ProfileCookbook = (props) => {
                 </Form>
             </Modal>
 
-            <Modal key={nanoid()} show={showRemoveModal} handleClose={handleCloseRemovalModal}>
+            <Modal key={nanoid()} show={showRemoveModal} handleClose={handleCloseRemovalModal} sz50p >
                 
                 <div aria-label="recipe remove container" className="cb-recipe-remove-container flex">
                     Are you sure you wish to remove this recipe from the Cookbook?

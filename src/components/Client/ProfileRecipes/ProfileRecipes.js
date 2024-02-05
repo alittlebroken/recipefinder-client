@@ -169,7 +169,7 @@ const ProfileRecipes = () => {
     return (
         <div aria-label="recipes container" className="prc-container flex">
 
-            <Modal show={showRemoveModal} handleClose={handleModalCloseRemove}>
+            <Modal show={showRemoveModal} handleClose={handleModalCloseRemove} sz50p>
                 <div aria-label="remove modal container" className="modal-remove-container flex">
                     <h4>{currentRecipe?.name}</h4>
                     Are you sure you wish to remove this recipe? <br /><br />
@@ -193,7 +193,7 @@ const ProfileRecipes = () => {
                 </div>
             </Modal>
 
-            <Modal show={showModalNewRecipe} handleClose={handleModalCloseAdd}>
+            <Modal show={showModalNewRecipe} handleClose={handleModalCloseAdd} sz75p >
                 <ProfileRecipeNew 
                     handleNotifications={setNotifications} 
                     isDataDirty={setIsDataDirty} 

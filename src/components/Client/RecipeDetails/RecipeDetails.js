@@ -109,6 +109,7 @@ const RecipeDetails = () => {
                     setSelectedCookbook()
                     setShowModalAdd(false)
                 }}
+                sz50p
             >
                 <h3 className="selectModalHeading">Add recipe to cookbook?</h3>
                 <div aria-label="" className="selectContainer flex">

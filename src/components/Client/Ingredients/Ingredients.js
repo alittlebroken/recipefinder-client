@@ -213,7 +213,9 @@ const Ingredients = () => {
                 setAmountTypeError(null)
                 setFormUpdate(null)
                 setFormUpdateError(null)
-            }}>
+            }}
+                sz50p
+            >
 
                 <form onSubmit={handleSubmitAddIngredient} className="ig-add-form flex flex-col">
 

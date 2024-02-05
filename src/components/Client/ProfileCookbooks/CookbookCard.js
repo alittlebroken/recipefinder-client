@@ -71,7 +71,7 @@ const CookBookCard = (props) => {
 
         <div aria-label="cookbook container" className="cc-container flex">
 
-            <Modal key={nanoid()} show={showRemoveModal} handleClose={handleRemoveModal}>
+            <Modal key={nanoid()} show={showRemoveModal} handleClose={handleRemoveModal} sz50p>
                 
                 <form id="form-remove" onSubmit={handleSubmit} className="flex form-container">
                     <h3>{data.name}</h3>
