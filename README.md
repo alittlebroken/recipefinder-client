@@ -19,9 +19,9 @@ fridge or freezer and the application can then display a list of recipes you cou
   
 ### Demo
 
-  url: http://comingsoon.net
+  url: https://recipefinder-client.onrender.com
   
-  admin url: http://comingsoon.net/admin
+  admin url: https://recipefinder-client.onrender.com/admin
   
     admin user: admin
     admin pass: not-telling-that-just-yet
