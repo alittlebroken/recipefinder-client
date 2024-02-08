@@ -44,7 +44,7 @@ const SignupForm = () => {
             return false
         } 
 
-        if(email.includes("@")) {
+        if(!email.includes("@")) {
             setEmailError('The supplied email address must be in the correct format.')
             setFormOk(false)
         }
