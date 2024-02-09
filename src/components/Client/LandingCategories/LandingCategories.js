@@ -13,7 +13,7 @@ const LandingCategories = (props) => {
             <div aria-label="landing page categories" className="landingcategories-container">
                 <h3>Categories</h3>
                 <Card.List>
-                    {categories.map((category) => {
+                    {categories && categories?.map((category) => {
                         return <Category key={category.id} record={category} />
                     })}
                 </Card.List>
