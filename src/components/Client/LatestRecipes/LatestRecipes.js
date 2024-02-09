@@ -15,7 +15,7 @@ const LatestRecipes = (props) => {
             <div aria-label="latestRecipes container" className="latestRecipeContainer">
                 <h3>Latest Recipes</h3>
                 <Card.List>
-                    {recipes.map( recipe => {
+                    {recipes && recipes?.map( recipe => {
                         return <Recipe key={recipe.id} record={recipe} />
                     })}
                 </Card.List>
