@@ -11,7 +11,7 @@ const AdminUserIcon = () => {
 
     return (
         <Avatar 
-            alt={profile.forename}
+            alt={profile?.forename}
             sx={{
                 height: 30,
                 width: 30,
