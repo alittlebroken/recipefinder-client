@@ -223,7 +223,7 @@ const ProfileRecipes = () => {
             <div aria-label="recipes container" className="prc-recipes-container flex">
 
                 {!recipes ? (<h3>You currently have no recipes.</h3>) : 
-                    recipes.map((recipe) => {
+                    recipes?.map((recipe) => {
                     return (
                         <div key={nanoid()} aria-label="recipe container" className="prc-recipe-container flex">
 
