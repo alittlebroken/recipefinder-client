@@ -758,7 +758,7 @@ const apiProvider = {
                 page: page ? page : 1,
                 sort_by: field ? field : 'id',
                 sort_direction: order ? order : 'desc',
-                filter: JSON.stringify(params.filter)
+                filter: params.filter ? JSON.stringify(params.filter) : undefined
             }
 
             if(overrideLimit){
