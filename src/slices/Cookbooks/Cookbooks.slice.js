@@ -156,7 +156,7 @@ const cookbooksSlice = createSlice({
             state.isLoading = false
             state.hasError = true
 
-            console.log(action)
+            
         },
         [getCookBookRecipeList.fulfilled]: (state, action) => {
             state.isLoading = false

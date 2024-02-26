@@ -58,8 +58,6 @@ const DashChart = (props) => {
         chartData.push(data)
     })
 
-    console.log(props)
-
     return (
 
             <Card>

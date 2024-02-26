@@ -145,7 +145,7 @@ export const landingpageSlice = createSlice({
         [getCategories.rejected]: (state, action) => {
             state.isLoading = false
             state.hasError = true
-            console.log(action)
+            
         },
         [getCategories.fulfilled]: (state, action) => {
             state.isLoading = false
@@ -162,7 +162,7 @@ export const landingpageSlice = createSlice({
 
 // Export selectors
 export const selectLatestRecipes = state => state.landingPage?.latest
-export const selectLatestCount = state => state.landingPage?.latest.length
+export const selectLatestCount = state => state.landingPage?.latest?.length
 export const selectPopularRecipes = state => state.landingPage?.popular
 export const selectCategories = state => state.landingPage?.categories
 export const selectisLoading = state => state.landingPage?.isLoading

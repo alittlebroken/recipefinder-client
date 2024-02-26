@@ -758,7 +758,7 @@ const apiProvider = {
                 page: page ? page : 1,
                 sort_by: field ? field : 'id',
                 sort_direction: order ? order : 'desc',
-                filter: JSON.stringify(params.filter)
+                filter: params.filter ? JSON.stringify(params.filter) : undefined
             }
 
             if(overrideLimit){
@@ -876,7 +876,7 @@ const apiProvider = {
             let url = `${process.env.REACT_APP_API_URL}/search/pantry?${queryString.stringify(queryParams)}`
 
             // Access the appropriate API and process the results
-            console.log(payload)
+            
             const response = await axios.post(url, payload, axiosOptions)
 
             // Check the status codes returned

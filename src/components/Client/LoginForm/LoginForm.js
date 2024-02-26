@@ -70,7 +70,6 @@ const LoginForm = () => {
                 return navigate("/")
             })
             .catch((err) => {
-                console.log(err)
             })
 
     }

@@ -154,7 +154,7 @@ const RecipeDetails = () => {
                             const res = await apiProvider.create("cookbookRecipes",params)
                             
                             if(res.status >= 200 && res.status < 300){
-                               console.log("recipe added to cookbook")
+                               
                                setNotifications({
                                 className: 'notif-ok',
                                 message: 'Recipe successfully added to cookbook.'

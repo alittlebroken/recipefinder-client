@@ -26,7 +26,7 @@ const authProvider = {
             Connect to the API authentication route
         */
         const response = await axios.post(
-            `http://localhost:5000/auth/login`,
+            `${BASEURL}/auth/login`,
             {
                 username,
                 password

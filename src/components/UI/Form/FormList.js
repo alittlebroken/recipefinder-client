@@ -235,7 +235,7 @@ const FormList = (props) => {
                     onChange={(e) => { handleChange(e, index) }}
                 >
                    <option disabled={true} value="">{element.placeholder}</option>
-                   {options && options[element.name].map(option => {
+                   {options && options[element.name]?.map(option => {
                     return <option value={option.id}>{option.name}</option>
                    })} 
                 </select>
@@ -251,7 +251,7 @@ const FormList = (props) => {
                 aria-label="container for ingredient in a list" 
                 className="FormListIngredient flex">
                 
-                {elements.map( (element, index) => {
+                {elements?.map( (element, index) => {
                     return ( 
                                             
                         renderNewElement(item[element], itemIndex, (itemIndex * elementsLength) + (index + 1))
@@ -308,7 +308,7 @@ const FormList = (props) => {
                 <div aria-label="List of form elements" className="FormList flex">
                     
                         {list && 
-                            list.map((item, idx) => {
+                            list?.map((item, idx) => {
                                 /* Now we need to loop through the item from the list and 
                                    extract out the object keys. Each  key then has an object associated
                                    with it which contains the details we need and so we need to create 

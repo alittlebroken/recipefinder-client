@@ -16,7 +16,7 @@ import {
 const DashTable = (props) => {
 
     const {title, headers, data} = props
-    console.log(data)
+    
     return (
         <Card>
             <CardContent>

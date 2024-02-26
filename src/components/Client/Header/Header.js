@@ -34,7 +34,6 @@ const Header = () => {
             return navigate("/")
         })
         .catch(err => {
-            console.log(err)
             return false
         })
 

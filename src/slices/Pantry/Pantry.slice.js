@@ -105,7 +105,7 @@ const pantrySlice = createSlice({
         [getPantryIngredients.rejected]: (state, action) => {
             state.hasError = true
             state.isLoading = false
-            console.log(action)
+            
         },
         [getPantryIngredients.fulfilled]: (state, action) => {
             state.hasError = false

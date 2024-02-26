@@ -33,7 +33,7 @@ const dataProvider = {
             const queryParams = {
                 page: page ? page : 1,
                 limit: perPage ? perPage : 10,
-                sort_by: field ? field : 'id',
+                sort_by: field ? field : 'created_at',
                 sort_direction: order ? order : 'desc',
                 filter: JSON.stringify(params.filter)
             }
@@ -126,7 +126,6 @@ const dataProvider = {
                     ingredients: response?.data?.results[0].ingredients
                 }
             } else if (resource === 'uploads' ){
-                console.log(response.data.results[0].src)
                 records = response.data.results[0]
             } else {
                 records = response?.data[0]
@@ -163,8 +162,6 @@ const dataProvider = {
             if(pictures?.length >= 1 && resource === "recipes" ){
                 payload.pictures = pictures
             }
-
-            console.log('getOne->payload: ', payload)
 
             return Promise.resolve({
                 data: payload
@@ -265,8 +262,6 @@ const dataProvider = {
     create:   async (resource, params) => {
         try {
 
-            console.log('Create: ', resource, params)
-
             /* Set the headers for the URI */
             let headers = {
                 'token': inMemoryJWT.getToken(),
@@ -325,8 +320,6 @@ const dataProvider = {
                 return Promise.reject(new HttpError((res.data.results.message || statusText), status, res))
             }
 
-            console.log(res)
-
             let successFullUpload = true
             if(uploads){
 
@@ -378,8 +371,6 @@ const dataProvider = {
     update:   async  (resource, params) => {
         try {
 
-            console.log(`Update ${resource}: `, params)
-
             /* Set the headers for the URI */
             let headers = {
                 'token': inMemoryJWT.getToken(),
@@ -398,66 +389,12 @@ const dataProvider = {
 
             let url
             let imageUploadResult = true
+            let uploadId
 
-            /* Add/Update the cookbooks image if we have any to add*/
-            if (params?.data?.images?.rawFile || params?.data?.tests?.rawFile){
-
-                /* If no existing image then we can just add the new one */
-                    console.log(params.data)
-                    console.log('Adding new images')
-                    /* Generate the url we need */
-                    url = `${process.env.REACT_APP_API_URL}/uploads`
-
-                    /* Create the payload to send */
-                    let imagePayload = {
-                        resourceid: parseInt(params?.data?.id),
-                        title: params?.data?.title || params?.data?.name,
-                        userid: parseInt(params?.data?.userId),
-                    }
-
-                    if(resource === "cookbooks"){
-                        imagePayload.resource = 'Cookbook'
-                    } else if( resource === "ingredients"){
-                        imagePayload.resource = 'Ingredients'
-                    } else if( resource === "recipes"){
-                        imagePayload.resource = 'recipe'
-                    }
-
-                    if(params?.data?.tests?.rawFile){
-                        imagePayload.tests = params.data.tests.rawFile
-                    } else if (params?.data?.tests?.length >= 1){
-                        //imagePayload.tests = params.data.tests
-                        imagePayload.images = []
-                        params.data.tests.map(file => {
-                            imagePayload.images.push(file.rawFile)
-                        })
-                    }
-                     
-                    if(params?.data?.images?.rawFile) {
-                        imagePayload.images = params.data.images.rawFile
-                    } else if (params?.data?.images?.length >= 1) {
-                        //imagePayload.images = params.data.images
-                        imagePayload.images = []
-                        params.data.images.map(file => {
-                            imagePayload.images.push(file.rawFile)
-                        })
-                    }
-
-                    /* Send the data to the server */
-                    const res = await axios.post(url, imagePayload, axiosOptions)
-
-                    console.log('Existing Cookbook new image upload result: ', res)
-
-                    /* Check we have no problems */
-                    if(res.status < 200 || res.status >= 300){
-                        imageUploadResult = false
-                    }
-                
-            }
 
             /* generate the url */
             url = `${process.env.REACT_APP_API_URL}/${resource}/${params.id}`
-
+            
             /* Generate the payload */
             let payload = {
                ...params.data 
@@ -474,8 +411,6 @@ const dataProvider = {
             } else if (params?.data?.images?.length >= 1){
                 payload.images = params.data.images
             }
-
-            console.log('Update: ', params.data, payload)
 
             /* send the data to the server */
             let res;
@@ -749,8 +684,6 @@ const dataProvider = {
 
         try {
 
-            console.log(params)
-
             /* Generate the headers for the request */
             const axiosOptions = {
                 withCredentials: true,
@@ -779,8 +712,6 @@ const dataProvider = {
                 axiosOptions
             )
 
-            console.log('Response: ', response)
-
             if(response?.data?.results){
                 return Promise.resolve(response.data.results)
             } else {
@@ -788,7 +719,7 @@ const dataProvider = {
             }
 
         } catch(e) {
-            console.log(e)
+           
             if(e.response.data.message === 'There were no records found'){
                 return Promise.resolve([])
             } else {
