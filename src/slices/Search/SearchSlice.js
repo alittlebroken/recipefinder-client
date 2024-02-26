@@ -9,7 +9,7 @@ export const performSearch = createAsyncThunk('search/performSearch',
 
         try{
 
-            console.log('DEBUG: performSearch')
+            
 
             const state = thunkAPI.getState()
             
@@ -87,8 +87,6 @@ export const performPantrySearch = createAsyncThunk('search/performPantrySearch'
                     ingredients
                 }
             }
-
-            console.log(params)
 
             // Perform the request
             return await apiProvider.pantrySearch(params)
@@ -184,7 +182,7 @@ export const searchSlice = createSlice({
         [performPantrySearch.rejected]: (state, action) => {
             state.isLoading = false
             state.hasError = true
-            console.log(action)
+            
         },
         [performPantrySearch.fulfilled]: (state, action) => {
             state.isLoading = false

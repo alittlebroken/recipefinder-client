@@ -224,7 +224,7 @@ const Recipes = props => {
 
                             /* Send the request off */
                             const res = await apiProvider.create("cookbookRecipes",params)
-                            console.log(res)
+                            
                             if(res.status >= 200 && res.status < 300){
                                setNotifications({
                                 className: 'notif-ok',

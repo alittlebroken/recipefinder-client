@@ -159,7 +159,7 @@ const ProfilePersonalInfo = (props) => {
             .catch(e => {
                 setNotifcations('Unable to update profile, please try again later.')
                 setNotifType('error')
-                console.log(e)
+                
                 return false
             })
             

@@ -145,7 +145,7 @@ export const landingpageSlice = createSlice({
         [getCategories.rejected]: (state, action) => {
             state.isLoading = false
             state.hasError = true
-            console.log(action)
+            
         },
         [getCategories.fulfilled]: (state, action) => {
             state.isLoading = false

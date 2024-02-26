@@ -83,8 +83,7 @@ const ProfileCookbook = (props) => {
     /* Load the recipe list */
     useEffect(() => {
 
-        console.group('ProfileCookbook.js useEffect')
-        console.log('Data dirty: ', isDirty)
+        
 
         /* function to fetch the data from the API asynchronously */
         const fetchData = async () => {
@@ -104,9 +103,6 @@ const ProfileCookbook = (props) => {
 
         /* Get the data */
         fetchData()
-
-        console.log('Data dirty: ', isDirty)
-        console.groupEnd()
 
     }, [page, recsPage, dispatch, isDirty, cookbook.id])
 

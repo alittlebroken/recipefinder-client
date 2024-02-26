@@ -876,7 +876,7 @@ const apiProvider = {
             let url = `${process.env.REACT_APP_API_URL}/search/pantry?${queryString.stringify(queryParams)}`
 
             // Access the appropriate API and process the results
-            console.log(payload)
+            
             const response = await axios.post(url, payload, axiosOptions)
 
             // Check the status codes returned

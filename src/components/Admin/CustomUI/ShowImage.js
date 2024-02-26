@@ -28,7 +28,6 @@ const ShowImage = () => {
         })
     } 
 
-    console.log('Final images list: ', images)
 
     return (
         <span className="imageContainer">

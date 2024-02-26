@@ -192,7 +192,6 @@ describe('ProfileCookbooks', () => {
 
         userEvent.click(moreButton)
        
-        console.log(navigate)
         expect(navigate).toHaveBeenCalled()
 
     })
