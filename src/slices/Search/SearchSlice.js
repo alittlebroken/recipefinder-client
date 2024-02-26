@@ -9,6 +9,8 @@ export const performSearch = createAsyncThunk('search/performSearch',
 
         try{
 
+            console.log('DEBUG: performSearch')
+
             const state = thunkAPI.getState()
             
             // Get the search terms
@@ -18,6 +20,8 @@ export const performSearch = createAsyncThunk('search/performSearch',
                 pagination,
                 sort
             } = payload
+
+            console.table(payload)
 
             // Create the params to send to the API
             const params = {
@@ -35,6 +39,8 @@ export const performSearch = createAsyncThunk('search/performSearch',
                     typeOfSearch: state.search.searchOptions ? state.search.searchOptions : 'recipes'
                 }
             }
+
+            console.table(params)
 
             // Perform the request
             return await apiProvider.search(params)
