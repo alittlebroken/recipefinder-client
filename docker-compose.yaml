@@ -1,0 +1,15 @@
+name: recipe-finder
+
+services:
+  client:
+    build: .
+    command: npm run start
+    ports: 
+     - 3000:3000
+    volumes:
+     - ./:/code
+     - /code/node_modules
+    environment:
+    - REACT_API_URL=localhost:3000
+    - REACT_APP_TOKEN_REFRESH_RATE=300
+    - REACT_APP_ENV=development
