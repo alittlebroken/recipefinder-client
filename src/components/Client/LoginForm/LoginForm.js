@@ -30,6 +30,7 @@ const LoginForm = () => {
     const [emailErrors, setEmailErrors] = useState('')
     const [passwordErrors, setPasswordErrors] = useState('')
     const [password, setPassword] = useState('')
+    const [loginErrors, setLoginErrors] = useState()
 
     /* Handlers for updating the form inputs */
     const handleEmailChange = (e) => {
@@ -58,7 +59,7 @@ const LoginForm = () => {
             providers.authProvider.login(email, password)
             .then((result) => {
                 setAccessToken(result)
-
+                console.log(result)
                 /* Set the users profile data, get the ID from the token just sent back
                  * and then pass it to the profile slice */
                 const token = jwt_decode(result)
@@ -70,6 +71,13 @@ const LoginForm = () => {
                 return navigate("/")
             })
             .catch((err) => {
+                if (err.response.statusText == "Not Found") {
+                    setLoginErrors("There is no account associated with the supplied email.");
+                } else if (err.response.statusText == "Conflict") {
+                    setLoginErrors("The password for the supplied account is incorrect.");
+                } else {
+                    setLoginErrors(err.response.statusText);
+                }
             })
 
     }
@@ -90,6 +98,7 @@ const LoginForm = () => {
             <div aria-label="signup-container" className="flex flex-row signup-container">
                 Need an account? &nbsp; Then &nbsp; <Link to="/signup" className="">Signup</Link>
             </div>
+            {loginErrors && <div class="loginErrors">{loginErrors}</div>}
         </form>
     )
 
